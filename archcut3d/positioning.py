@@ -142,13 +142,10 @@ def rodrigues_matrix(axis, angle_rad):
     return np.eye(3) + np.sin(angle_rad) * k + (1.0 - np.cos(angle_rad)) * (k @ k)
 
 
-def compute_normal_alignment_axis_angle(points, faces):
-    """Return (axis, angle_degrees) of the rotation that aligns the mesh's
-    dominant area-weighted surface-normal direction with +Z.
-
-    points: (N, 3) float array of vertex coordinates.
-    faces:  (M, 3) int array of triangle vertex indices.
-    """
+def face_normals_and_areas(points, faces):
+    """Per-face unit normal and area for a triangle mesh. Degenerate
+    (zero-area) faces get a zero normal so they contribute nothing when
+    used as tensor weights downstream."""
     p1 = points[faces[:, 0]]
     p2 = points[faces[:, 1]]
     p3 = points[faces[:, 2]]
@@ -161,14 +158,38 @@ def compute_normal_alignment_axis_angle(points, faces):
     normals = np.zeros_like(cross)
     normals[valid] = cross[valid] / cross_norm[valid, None]
 
-    total_area = areas.sum()
-    if total_area <= 0:
+    return normals, areas
+
+
+def dominant_direction_axis_angle(normals, weights, target=None):
+    """Given per-face normals and per-face weights, return (axis,
+    angle_degrees) of the rotation that aligns the weight-dominant normal
+    direction with `target` (default +Z). This is the weighted normal
+    covariance tensor + largest-eigenvalue-eigenvector step shared by both
+    the whole-mesh alignment (normal_positioning.m) and the local
+    curvature-weighted tangent-plane fit."""
+    if target is None:
+        target = np.array([0.0, 0.0, 1.0])
+
+    total_weight = weights.sum()
+    if total_weight <= 0:
         return np.array([0.0, 0.0, 1.0]), 0.0
 
-    weighted = normals * areas[:, None]
-    tensor = (weighted.T @ normals) / total_area
+    weighted = normals * weights[:, None]
+    tensor = (weighted.T @ normals) / total_weight
 
     eigvals, eigvecs = np.linalg.eigh(tensor)
     dominant_direction = eigvecs[:, np.argmax(eigvals)]
 
-    return _axis_angle_between(dominant_direction, np.array([0.0, 0.0, 1.0]))
+    return _axis_angle_between(dominant_direction, target)
+
+
+def compute_normal_alignment_axis_angle(points, faces):
+    """Return (axis, angle_degrees) of the rotation that aligns the mesh's
+    dominant area-weighted surface-normal direction with +Z.
+
+    points: (N, 3) float array of vertex coordinates.
+    faces:  (M, 3) int array of triangle vertex indices.
+    """
+    normals, areas = face_normals_and_areas(points, faces)
+    return dominant_direction_axis_angle(normals, areas)
