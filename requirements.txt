@@ -3,3 +3,4 @@ vtk==9.6.1
 pymeshlab==2025.7.post1
 numpy==2.4.4
 matplotlib==3.10.9
+scipy==1.18.1
