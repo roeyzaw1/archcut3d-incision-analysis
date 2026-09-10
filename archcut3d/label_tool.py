@@ -3,8 +3,12 @@ Incision labeling tool (experiment/ml-feature-detection branch).
 
 Step 2a: view the 2.5D grid for the loaded model, one channel at a time.
 Step 2b: trace incision centerlines on it (polylines in grid/pixel coords).
-Save/load of labeled examples (2c) comes next.
+Step 2c: save/load a labeled example -- a self-contained .npz holding the
+grid channels, mask, calibration, and the traced centerlines, so it can be
+consumed directly for training later.
 """
+
+import os
 
 import matplotlib
 matplotlib.use('Qt5Agg')
@@ -17,9 +21,11 @@ CHANNEL_NAMES = ['height', 'local_relief', 'curvature']
 
 
 class LabelToolDialog(QtWidgets.QDialog):
-    def __init__(self, grid, source_name, parent=None):
+    def __init__(self, grid, source_path, parent=None):
         super().__init__(parent)
         self.grid = grid
+        self.source_path = source_path or ''
+        self.source_name = os.path.basename(self.source_path) if self.source_path else 'model'
         self._cbar = None
         self.channel_index = 1  # local_relief -- usually the clearest for incisions
 
@@ -30,8 +36,8 @@ class LabelToolDialog(QtWidgets.QDialog):
         self.current_trace = []
         self._trace_artists = []
 
-        self.setWindowTitle(f"Label Incisions -- {source_name}")
-        self.resize(760, 800)
+        self.setWindowTitle(f"Label Incisions -- {self.source_name}")
+        self.resize(760, 820)
 
         layout = QtWidgets.QVBoxLayout(self)
 
@@ -77,6 +83,16 @@ class LabelToolDialog(QtWidgets.QDialog):
             trace_controls.addWidget(b)
         layout.addLayout(trace_controls)
 
+        io_controls = QtWidgets.QHBoxLayout()
+        io_controls.addStretch()
+        saveBtn = QtWidgets.QPushButton("Save Labeled Example...")
+        saveBtn.clicked.connect(self._save_labeled_example)
+        loadBtn = QtWidgets.QPushButton("Load Traces...")
+        loadBtn.clicked.connect(self._load_traces)
+        io_controls.addWidget(saveBtn)
+        io_controls.addWidget(loadBtn)
+        layout.addLayout(io_controls)
+
         self.statusLabel = QtWidgets.QLabel()
         layout.addWidget(self.statusLabel)
         self._update_status()
@@ -121,7 +137,6 @@ class LabelToolDialog(QtWidgets.QDialog):
         if self.current_trace:
             self.current_trace.pop()
         elif self.traces:
-            # nothing in-progress: reopen the last finished curve to edit it
             self.current_trace = self.traces.pop()
             self.current_trace.pop()
         self._redraw_traces()
@@ -164,3 +179,81 @@ class LabelToolDialog(QtWidgets.QDialog):
     def _update_status(self):
         self.statusLabel.setText(
             f"Curves: {len(self.traces)}   |   current curve: {len(self.current_trace)} point(s)")
+
+    # --- save / load ---
+
+    def _all_finished_traces(self):
+        """Finished traces + the in-progress one if it has >= 2 points."""
+        traces = list(self.traces)
+        if len(self.current_trace) >= 2:
+            traces.append(self.current_trace)
+        return traces
+
+    def _default_label_path(self):
+        if self.source_path:
+            base, _ = os.path.splitext(self.source_path)
+            return base + '.label.npz'
+        return 'model.label.npz'
+
+    def _save_labeled_example(self):
+        traces = self._all_finished_traces()
+        if not traces:
+            QtWidgets.QMessageBox.warning(self, 'Nothing to Save', 'Trace at least one curve first.')
+            return
+
+        fileName, _ = QtWidgets.QFileDialog.getSaveFileName(
+            self, 'Save Labeled Example', self._default_label_path(), 'Labeled Example (*.label.npz)')
+        if not fileName:
+            return
+        if not fileName.lower().endswith('.npz'):
+            fileName += '.label.npz'
+
+        # Ragged trace list -> one (total_points, 2) array + a lengths array,
+        # so no pickle is needed.
+        trace_lengths = np.array([len(t) for t in traces], dtype=np.int64)
+        traces_xy = np.concatenate([np.asarray(t, dtype=np.float64) for t in traces], axis=0)
+
+        np.savez_compressed(
+            fileName,
+            channels=self.grid.channels.astype(np.float32),
+            mask=self.grid.mask,
+            channel_names=np.array(CHANNEL_NAMES),
+            pixel_size=np.float64(self.grid.pixel_size),
+            origin=np.asarray(self.grid.origin, dtype=np.float64),
+            source_file=np.array(self.source_name),
+            traces_xy=traces_xy,
+            trace_lengths=trace_lengths,
+        )
+        self.statusLabel.setText(f"Saved {len(traces)} curve(s) to {os.path.basename(fileName)}")
+
+    def _load_traces(self):
+        fileName, _ = QtWidgets.QFileDialog.getOpenFileName(
+            self, 'Load Traces', self._default_label_path(),
+            'Labeled Example (*.label.npz);;All npz (*.npz)')
+        if not fileName:
+            return
+
+        try:
+            data = np.load(fileName, allow_pickle=False)
+            traces_xy = data['traces_xy']
+            trace_lengths = data['trace_lengths']
+            saved_source = str(data['source_file']) if 'source_file' in data else ''
+        except (OSError, KeyError, ValueError) as e:
+            QtWidgets.QMessageBox.warning(self, 'Load Failed', f'Could not read the file:\n{e}')
+            return
+
+        if saved_source and saved_source != self.source_name:
+            proceed = QtWidgets.QMessageBox.question(
+                self, 'Different Model',
+                f'This file was labeled on "{saved_source}", but the tool is open on '
+                f'"{self.source_name}". The traces are in pixel coordinates and may not '
+                f'line up. Load anyway?',
+                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
+            if proceed != QtWidgets.QMessageBox.Yes:
+                return
+
+        splits = np.cumsum(trace_lengths)[:-1]
+        self.traces = [chunk.tolist() for chunk in np.split(traces_xy, splits)]
+        self.current_trace = []
+        self._redraw_traces()
+        self._update_status()

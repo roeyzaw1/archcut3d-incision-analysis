@@ -572,8 +572,7 @@ class MainWindow(QtWidgets.QMainWindow):
             return
         self.statusBar().clearMessage()
 
-        source_name = os.path.basename(self.current_model_path) if self.current_model_path else 'model'
-        self.label_tool_dialog = LabelToolDialog(grid, source_name, self)
+        self.label_tool_dialog = LabelToolDialog(grid, self.current_model_path, self)
         self.label_tool_dialog.show()
         self.label_tool_dialog.raise_()
         self.label_tool_dialog.activateWindow()
