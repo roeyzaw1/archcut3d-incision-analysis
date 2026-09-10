@@ -67,10 +67,16 @@ class _CameraInteractorStyle(vtk.vtkInteractorStyleTrackballCamera):
     def __init__(self, window):
         super().__init__()
         self.window = window
+        self._tracing = False
         self.AddObserver('LeftButtonPressEvent', self._on_left_button_press)
         self.AddObserver('LeftButtonReleaseEvent', self._on_left_button_release)
+        self.AddObserver('MouseMoveEvent', self._on_mouse_move)
 
     def _on_left_button_press(self, obj, event):
+        if getattr(self.window, 'path_draw_mode', False):
+            self._tracing = True
+            self.window.start_path_trace()
+            return
         if self.window.try_select_marker_at_current_position():
             return  # clicked an existing point marker -> just highlight it in the table
         if getattr(self.window, 'point_select_mode', False):
@@ -81,7 +87,17 @@ class _CameraInteractorStyle(vtk.vtkInteractorStyleTrackballCamera):
         else:
             self.OnLeftButtonDown()
 
+    def _on_mouse_move(self, obj, event):
+        if self._tracing:
+            self.window.add_path_trace_point()
+            return  # don't also rotate/pan while tracing a path
+        self.OnMouseMove()
+
     def _on_left_button_release(self, obj, event):
+        if self._tracing:
+            self._tracing = False
+            self.window.finish_path_trace()
+            return
         if self.GetState() == vtk.VTKIS_PAN:
             self.EndPan()
         else:
@@ -135,6 +151,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.slices = None              # list of (K, 2) arrays from compute_slices
         self.slice_visualization_actors = []
         self.slice_viewer_dialog = None
+
+        self.path_draw_mode = False     # curved-model workflow: mouse-traced path instead of two points
+        self.raw_traced_path = []       # points picked while dragging, before resampling
+        self.traced_path = None         # (num_steps, 3) after resample_path_by_arc_length
+        self.trace_preview_actor = None
 
         fileMenu = self.menuBar().addMenu('&File')
         openAction = fileMenu.addAction('Open...')
