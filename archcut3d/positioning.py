@@ -28,7 +28,6 @@ def compute_initial_orientation(vertices, faces):
     # Center twice, matching the MATLAB source exactly (the second pass is
     # a no-op numerically but that's what the original does).
     v = v - v.mean(axis=0)
-    v = v - v.mean(axis=0)
 
     normal = _get_normal(v, faces)
     v = _repositioningxyz(v, normal)
