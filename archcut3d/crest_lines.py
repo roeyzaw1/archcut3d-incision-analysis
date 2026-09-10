@@ -15,6 +15,7 @@ _read_crest_file); only the subprocess orchestration is duplicated here
 
 import os
 import subprocess
+from collections import defaultdict, deque
 
 import numpy as np
 import vtk
@@ -91,3 +92,79 @@ def detect_crest_lines(vertices, faces,
         'ridges': CrestDetector._read_crest_file(ridges_txt),
         'ravines': CrestDetector._read_crest_file(ravines_txt),
     }
+
+
+def _polyline_length(arr):
+    if len(arr) < 2:
+        return 0.0
+    return float(np.linalg.norm(np.diff(arr, axis=0), axis=1).sum())
+
+
+def _longest_path_through_component(edges, points):
+    """Turn one component's unordered edge list into an ordered (N,3)
+    polyline: the path between the two farthest-apart nodes (graph
+    diameter). Exact for tree-like components; for ones with cycles it
+    still returns a valid simple path. Branches off the main path are
+    dropped -- fine for a labeling seed the expert then edits."""
+    adj = defaultdict(set)
+    nodes = set()
+    for p1, p2 in edges:
+        adj[p1].add(p2)
+        adj[p2].add(p1)
+        nodes.add(p1)
+        nodes.add(p2)
+
+    def bfs(start):
+        parent = {start: None}
+        q = deque([start])
+        last = start
+        while q:
+            u = q.popleft()
+            last = u
+            for w in adj[u]:
+                if w not in parent:
+                    parent[w] = u
+                    q.append(w)
+        return last, parent
+
+    a, _ = bfs(next(iter(nodes)))
+    b, parent = bfs(a)
+
+    path = []
+    cur = b
+    while cur is not None:
+        path.append(cur)
+        cur = parent[cur]
+    path.reverse()
+    return np.array([points[i] for i in path], dtype=np.float64)
+
+
+def crest_lines_as_polylines(detection_result, min_edges=10, which='both'):
+    """Convert a detect_crest_lines() result into a list of ordered (N,3)
+    polylines, one per connected component with at least `min_edges` edges,
+    sorted longest (by arc length) first.
+
+    which: 'both' | 'ridges' | 'ravines'.
+    """
+    kinds = {'both': ('ridges', 'ravines'),
+             'ridges': ('ridges',),
+             'ravines': ('ravines',)}[which]
+
+    polylines = []
+    for kind in kinds:
+        data = detection_result.get(kind)
+        if not data or not data.get('edges_with_comp'):
+            continue
+        pts = data['points']
+        by_comp = defaultdict(list)
+        for p1, p2, comp in data['edges_with_comp']:
+            by_comp[comp].append((p1, p2))
+        for comp_edges in by_comp.values():
+            if len(comp_edges) < min_edges:
+                continue
+            polyline = _longest_path_through_component(comp_edges, pts)
+            if len(polyline) >= 2:
+                polylines.append(polyline)
+
+    polylines.sort(key=lambda a: -_polyline_length(a))
+    return polylines
