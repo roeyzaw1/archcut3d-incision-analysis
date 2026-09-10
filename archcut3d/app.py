@@ -71,8 +71,12 @@ class _CameraInteractorStyle(vtk.vtkInteractorStyleTrackballCamera):
         self.window = window
         self.AddObserver('LeftButtonPressEvent', self._on_left_button_press)
         self.AddObserver('LeftButtonReleaseEvent', self._on_left_button_release)
+        self.AddObserver('RightButtonPressEvent', self._on_right_button_press)
 
     def _on_left_button_press(self, obj, event):
+        if getattr(self.window, 'trace_mode', False):
+            self.window.add_trace_point()
+            return
         if self.window.try_select_marker_at_current_position():
             return  # clicked an existing point marker -> just highlight it in the table
         if getattr(self.window, 'point_select_mode', False):
@@ -82,6 +86,12 @@ class _CameraInteractorStyle(vtk.vtkInteractorStyleTrackballCamera):
             self.StartPan()
         else:
             self.OnLeftButtonDown()
+
+    def _on_right_button_press(self, obj, event):
+        if getattr(self.window, 'trace_mode', False):
+            self.window.finish_current_trace_3d()
+            return
+        self.OnRightButtonDown()
 
     def _on_left_button_release(self, obj, event):
         if self.GetState() == vtk.VTKIS_PAN:
@@ -139,6 +149,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.slice_viewer_dialog = None
         self.label_tool_dialog = None   # experimental: 2.5D grid labeling tool
 
+        # experimental: trace incision centerlines directly on the 3D model
+        self.trace_mode = False
+        self.traces_3d = []             # finished polylines, each a list of (3,) world points
+        self.current_trace_3d = []      # in-progress polyline
+        self.trace_3d_actors = []       # VTK actors for the trace visualization, rebuilt on change
+
         fileMenu = self.menuBar().addMenu('&File')
         openAction = fileMenu.addAction('Open...')
         openAction.triggered.connect(self.open_file)
@@ -149,6 +165,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self._build_rotation_toolbar()
         self._build_points_dock()
+        self._build_trace_dock()
 
         self.statusBar().addWidget(QtWidgets.QLabel(
             "  Reminder: a correctly positioned model lies flat, aligned with the XY plane, as seen in Main View.  "))
@@ -305,9 +322,169 @@ class MainWindow(QtWidgets.QMainWindow):
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock)
         dock.setEnabled(False)
 
+    def _build_trace_dock(self):
+        """Experimental: trace incision centerlines directly on the 3D model
+        (rotate/zoom/light it while you do). Left-click adds a point,
+        right-click / Finish Curve ends the polyline. These 3D traces get
+        projected onto the 2.5D grid for training later."""
+        dock = QtWidgets.QDockWidget("Incision Tracing (experimental)", self)
+        self.trace_dock = dock
+        panel = QtWidgets.QWidget()
+        layout = QtWidgets.QVBoxLayout(panel)
+
+        self.traceModeButton = QtWidgets.QPushButton("Trace Incisions")
+        self.traceModeButton.setCheckable(True)
+        self.traceModeButton.setToolTip("While on, left-click the model to add centerline points; right-click finishes a curve")
+        self.traceModeButton.toggled.connect(self.toggle_trace_mode)
+        layout.addWidget(self.traceModeButton)
+
+        row = QtWidgets.QHBoxLayout()
+        finishBtn = QtWidgets.QPushButton("Finish Curve")
+        finishBtn.clicked.connect(self.finish_current_trace_3d)
+        undoBtn = QtWidgets.QPushButton("Undo Point")
+        undoBtn.clicked.connect(self.undo_trace_point)
+        for b in (finishBtn, undoBtn):
+            row.addWidget(b)
+        layout.addLayout(row)
+
+        row2 = QtWidgets.QHBoxLayout()
+        delBtn = QtWidgets.QPushButton("Delete Last Curve")
+        delBtn.clicked.connect(self.delete_last_trace_3d)
+        clearBtn = QtWidgets.QPushButton("Clear All")
+        clearBtn.clicked.connect(self.clear_traces_3d)
+        for b in (delBtn, clearBtn):
+            row2.addWidget(b)
+        layout.addLayout(row2)
+
+        self.traceStatusLabel = QtWidgets.QLabel()
+        layout.addWidget(self.traceStatusLabel)
+
+        dock.setWidget(panel)
+        self.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock)
+        dock.setEnabled(False)
+        self._update_trace_status()
+
+    def toggle_trace_mode(self, checked):
+        self.trace_mode = checked
+        self.traceModeButton.setText("Trace Incisions: ON (click the model)" if checked else "Trace Incisions")
+        if checked and getattr(self, 'selectPointsButton', None) is not None:
+            self.selectPointsButton.setChecked(False)  # mutually exclusive click modes
+        if checked:
+            self.statusBar().showMessage("Trace mode ON -- left-click to add points, right-click to finish a curve.", 4000)
+
+    def add_trace_point(self):
+        if self.current_vertices is None:
+            return
+        click_pos = self.iren.GetEventPosition()
+        picker = vtk.vtkCellPicker()
+        picker.SetTolerance(0.005)
+        picker.Pick(click_pos[0], click_pos[1], 0, self.ren)
+        if picker.GetActor() is not self.current_actor:
+            self.statusBar().showMessage("No point added: click didn't land on the model.", 3000)
+            return
+        self.current_trace_3d.append(np.array(picker.GetPickPosition(), dtype=np.float64))
+        self._redraw_traces_3d()
+        self._update_trace_status()
+
+    def finish_current_trace_3d(self):
+        if len(self.current_trace_3d) >= 2:
+            self.traces_3d.append(self.current_trace_3d)
+            self.current_trace_3d = []
+            self._redraw_traces_3d()
+            self._update_trace_status()
+
+    def undo_trace_point(self):
+        if self.current_trace_3d:
+            self.current_trace_3d.pop()
+        elif self.traces_3d:
+            self.current_trace_3d = self.traces_3d.pop()
+            self.current_trace_3d.pop()
+        self._redraw_traces_3d()
+        self._update_trace_status()
+
+    def delete_last_trace_3d(self):
+        if self.current_trace_3d:
+            self.current_trace_3d = []
+        elif self.traces_3d:
+            self.traces_3d.pop()
+        self._redraw_traces_3d()
+        self._update_trace_status()
+
+    def clear_traces_3d(self):
+        self.traces_3d = []
+        self.current_trace_3d = []
+        self._redraw_traces_3d()
+        self._update_trace_status()
+
+    def _trace_marker_radius(self):
+        if self.grid_bounds is not None:
+            return max((self.grid_bounds[1] - self.grid_bounds[0]) * 0.002, 1e-3)
+        return 0.05
+
+    def _polyline_actor(self, points, color, width):
+        vpoints = vtk.vtkPoints()
+        for p in points:
+            vpoints.InsertNextPoint(p)
+        polyline = vtk.vtkPolyLine()
+        polyline.GetPointIds().SetNumberOfIds(len(points))
+        for i in range(len(points)):
+            polyline.GetPointIds().SetId(i, i)
+        cells = vtk.vtkCellArray()
+        cells.InsertNextCell(polyline)
+        pd = vtk.vtkPolyData()
+        pd.SetPoints(vpoints)
+        pd.SetLines(cells)
+        mapper = vtk.vtkPolyDataMapper()
+        mapper.SetInputData(pd)
+        actor = vtk.vtkActor()
+        actor.SetMapper(mapper)
+        actor.GetProperty().SetColor(*color)
+        actor.GetProperty().SetLineWidth(width)
+        return actor
+
+    def _marker_actor(self, coord, color, radius):
+        sphere = vtk.vtkSphereSource()
+        sphere.SetCenter(coord)
+        sphere.SetRadius(radius)
+        sphere.SetThetaResolution(12)
+        sphere.SetPhiResolution(12)
+        mapper = vtk.vtkPolyDataMapper()
+        mapper.SetInputConnection(sphere.GetOutputPort())
+        actor = vtk.vtkActor()
+        actor.SetMapper(mapper)
+        actor.GetProperty().SetColor(*color)
+        return actor
+
+    def _redraw_traces_3d(self):
+        for actor in self.trace_3d_actors:
+            self.ren.RemoveActor(actor)
+        self.trace_3d_actors = []
+
+        radius = self._trace_marker_radius()
+        for trace in self.traces_3d:
+            if len(trace) >= 2:
+                self.trace_3d_actors.append(self._polyline_actor(trace, (1.0, 0.0, 0.0), 3))
+            for p in trace:
+                self.trace_3d_actors.append(self._marker_actor(p, (1.0, 0.0, 0.0), radius))
+        if self.current_trace_3d:
+            if len(self.current_trace_3d) >= 2:
+                self.trace_3d_actors.append(self._polyline_actor(self.current_trace_3d, (1.0, 0.85, 0.0), 3))
+            for p in self.current_trace_3d:
+                self.trace_3d_actors.append(self._marker_actor(p, (1.0, 0.85, 0.0), radius))
+
+        for actor in self.trace_3d_actors:
+            self.ren.AddActor(actor)
+        self.vtkWidget.GetRenderWindow().Render()
+
+    def _update_trace_status(self):
+        self.traceStatusLabel.setText(
+            f"Curves: {len(self.traces_3d)}   |   current curve: {len(self.current_trace_3d)} point(s)")
+
     def toggle_point_select_mode(self, checked):
         self.point_select_mode = checked
         self.selectPointsButton.setText("Select Points: ON (click the model)" if checked else "Select Points")
+        if checked and getattr(self, 'traceModeButton', None) is not None:
+            self.traceModeButton.setChecked(False)  # mutually exclusive click modes
         if checked:
             self.statusBar().showMessage("Point-select mode ON -- click on the model to add a point.", 4000)
 
@@ -665,6 +842,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.slices = None
         self.slice_visualization_actors = []
         self._reset_slicing_endpoints()
+        self.traces_3d = []
+        self.current_trace_3d = []
+        self.trace_3d_actors = []
+        self._update_trace_status()
 
         if fileName.lower().endswith('.wrl'):
             # Cut3-D's own load pipeline (harutot.m pushbutton_loadfile_Callback):
@@ -706,6 +887,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.add_grid_axes(self.grid_bounds)
         self.rotation_toolbar.setEnabled(True)
         self.points_dock.setEnabled(True)
+        self.trace_dock.setEnabled(True)
         self.vtkWidget.GetRenderWindow().Render()
 
     def rotate_model(self, axis, sign):
