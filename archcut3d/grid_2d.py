@@ -52,6 +52,18 @@ class MeshGrid:
         y = self.origin[1] + (n_rows - 1 - rows) * self.pixel_size
         return np.stack([x, y], axis=-1)
 
+    def world_xy_to_grid(self, x, y):
+        """Map world (x, y) to fractional (col, row) -- the inverse of
+        grid_to_world_xy, in the [col, row] ordering the labeling tool uses.
+        Points off the grid come back with out-of-range indices, not
+        clamped."""
+        x = np.asarray(x)
+        y = np.asarray(y)
+        n_rows = self.channels.shape[0]
+        col = (x - self.origin[0]) / self.pixel_size
+        row = (n_rows - 1) - (y - self.origin[1]) / self.pixel_size
+        return np.stack([col, row], axis=-1)
+
 
 def _median_vertex_spacing(xy):
     tree = cKDTree(xy)

@@ -735,7 +735,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def open_label_tool(self):
         """Experimental: compute the 2.5D grid for the loaded model (from the
         auto-positioned base_vertices, so it's deterministic per file) and
-        open the labeling dialog. Step 2a -- viewing only for now."""
+        open the labeling dialog, seeded with any incisions traced on the 3D
+        model (projected onto the grid)."""
         if self.base_vertices is None:
             QtWidgets.QMessageBox.warning(self, 'No Model Loaded', 'Load a model first.')
             return
@@ -749,10 +750,33 @@ class MainWindow(QtWidgets.QMainWindow):
             return
         self.statusBar().clearMessage()
 
-        self.label_tool_dialog = LabelToolDialog(grid, self.current_model_path, self)
+        initial_traces = self._project_3d_traces_to_grid(grid)
+        self.label_tool_dialog = LabelToolDialog(
+            grid, self.current_model_path, self, initial_traces=initial_traces)
         self.label_tool_dialog.show()
         self.label_tool_dialog.raise_()
         self.label_tool_dialog.activateWindow()
+
+    def _project_3d_traces_to_grid(self, grid):
+        """Convert the 3D incision traces (world coords, current display
+        frame) into [col, row] polylines on `grid`. The grid is built from
+        base_vertices, so undo any manual rotation first: current_vertices =
+        base_vertices @ R.T, hence base = current @ R (R = cumulative_rotation,
+        orthogonal)."""
+        traces = list(self.traces_3d)
+        if len(self.current_trace_3d) >= 2:
+            traces.append(self.current_trace_3d)
+        if not traces:
+            return []
+
+        R = self.cumulative_rotation if self.cumulative_rotation is not None else np.eye(3)
+        grid_traces = []
+        for trace in traces:
+            arr = np.asarray(trace, dtype=np.float64)          # (n, 3), current frame
+            base = arr @ R                                     # -> base_vertices frame
+            colrow = grid.world_xy_to_grid(base[:, 0], base[:, 1])
+            grid_traces.append(colrow.tolist())
+        return grid_traces
 
     def _clear_slice_visualization(self):
         for actor in self.slice_visualization_actors:

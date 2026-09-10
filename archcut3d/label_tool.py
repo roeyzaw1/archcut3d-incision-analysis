@@ -12,7 +12,7 @@ import os
 
 import matplotlib
 matplotlib.use('Qt5Agg')
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT
 from matplotlib.figure import Figure
 import numpy as np
 from PyQt5 import QtWidgets
@@ -21,7 +21,7 @@ CHANNEL_NAMES = ['height', 'local_relief', 'curvature']
 
 
 class LabelToolDialog(QtWidgets.QDialog):
-    def __init__(self, grid, source_path, parent=None):
+    def __init__(self, grid, source_path, parent=None, initial_traces=None):
         super().__init__(parent)
         self.grid = grid
         self.source_path = source_path or ''
@@ -31,8 +31,9 @@ class LabelToolDialog(QtWidgets.QDialog):
 
         # Traces are polylines in grid/pixel coordinates: [col, row] (= imshow
         # data coords). `traces` holds finished curves; `current_trace` is the
-        # one being drawn.
-        self.traces = []
+        # one being drawn. `initial_traces` seeds it -- e.g. curves traced on
+        # the 3D model and projected onto this grid.
+        self.traces = [list(map(list, t)) for t in (initial_traces or [])]
         self.current_trace = []
         self._trace_artists = []
 
@@ -56,6 +57,9 @@ class LabelToolDialog(QtWidgets.QDialog):
         self.figure = Figure(figsize=(6, 6))
         self.canvas = FigureCanvasQTAgg(self.figure)
         self.ax = self.figure.add_subplot(111)
+        # Standard matplotlib nav bar: pan, zoom-to-rectangle, home (reset view).
+        self.toolbar = NavigationToolbar2QT(self.canvas, self)
+        layout.addWidget(self.toolbar)
         layout.addWidget(self.canvas)
 
         data = self._channel_data()
@@ -67,6 +71,7 @@ class LabelToolDialog(QtWidgets.QDialog):
         self.canvas.draw()
 
         self.canvas.mpl_connect('button_press_event', self._on_click)
+        self.canvas.mpl_connect('scroll_event', self._on_scroll)
 
         trace_controls = QtWidgets.QHBoxLayout()
         trace_controls.addWidget(QtWidgets.QLabel("Left-click: add point   ·   Right-click: finish curve"))
@@ -95,6 +100,7 @@ class LabelToolDialog(QtWidgets.QDialog):
 
         self.statusLabel = QtWidgets.QLabel()
         layout.addWidget(self.statusLabel)
+        self._redraw_traces()   # draw any seeded initial_traces
         self._update_status()
 
     # --- grid display ---
@@ -115,8 +121,23 @@ class LabelToolDialog(QtWidgets.QDialog):
 
     # --- tracing ---
 
+    def _on_scroll(self, event):
+        """Scroll wheel zooms, centered on the cursor -- smoother than the
+        toolbar's zoom-rect for the trace-a-bit / move / trace-a-bit loop."""
+        if event.inaxes is not self.ax or event.xdata is None:
+            return
+        scale = (1 / 1.2) if event.button == 'up' else 1.2  # 'up' = zoom in
+        x, y = event.xdata, event.ydata
+        xlim = self.ax.get_xlim()
+        ylim = self.ax.get_ylim()
+        self.ax.set_xlim(x - (x - xlim[0]) * scale, x + (xlim[1] - x) * scale)
+        self.ax.set_ylim(y - (y - ylim[0]) * scale, y + (ylim[1] - y) * scale)
+        self.canvas.draw_idle()
+
     def _on_click(self, event):
         if event.inaxes is not self.ax or event.xdata is None:
+            return
+        if self.toolbar.mode:            # pan or zoom-rect active -> let the toolbar handle it
             return
         point = [float(event.xdata), float(event.ydata)]
         if event.button == 1:            # left: add a point to the current curve
