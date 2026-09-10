@@ -79,6 +79,12 @@ class _CameraInteractorStyle(vtk.vtkInteractorStyleTrackballCamera):
         if getattr(self.window, 'trace_mode', False):
             self.window.add_trace_point()
             return
+        if getattr(self.window, 'edit_trace_mode', False):
+            if self.GetInteractor().GetShiftKey():
+                self.window.extend_selected_crest_line()   # Shift = grow the line
+            else:
+                self.window.select_trace_at_current_position()
+            return
         if self.window.try_select_marker_at_current_position():
             return  # clicked an existing point marker -> just highlight it in the table
         if getattr(self.window, 'point_select_mode', False):
@@ -156,6 +162,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.traces_3d = []             # finished polylines, each a list of (3,) world points
         self.current_trace_3d = []      # in-progress polyline
         self.trace_3d_actors = []       # VTK actors for the trace visualization, rebuilt on change
+        # Edit-Traces mode: click a finished curve to select it (and its
+        # nearest point) for trimming / vertex delete / extend.
+        self.edit_trace_mode = False
+        self.selected_trace_index = None
+        self.selected_vertex_index = None
 
         fileMenu = self.menuBar().addMenu('&File')
         openAction = fileMenu.addAction('Open...')
@@ -325,23 +336,23 @@ class MainWindow(QtWidgets.QMainWindow):
         dock.setEnabled(False)
 
     def _build_trace_dock(self):
-        """Experimental: trace incision centerlines directly on the 3D model
-        (rotate/zoom/light it while you do). Left-click adds a point,
-        right-click / Finish Curve ends the polyline. These 3D traces get
-        projected onto the 2.5D grid for training later."""
-        dock = QtWidgets.QDockWidget("Incision Tracing (experimental)", self)
+        """Crest Lines: incision centerlines, either drawn by hand on the 3D
+        model or seeded from Yoshizawa crest detection, then pruned/edited.
+        Whatever survives here is what gets projected onto the 2.5D grid and
+        saved as training labels."""
+        dock = QtWidgets.QDockWidget("Crest Lines (experimental)", self)
         self.trace_dock = dock
         panel = QtWidgets.QWidget()
         layout = QtWidgets.QVBoxLayout(panel)
 
-        self.traceModeButton = QtWidgets.QPushButton("Trace Incisions")
+        self.traceModeButton = QtWidgets.QPushButton("Draw Crest Line")
         self.traceModeButton.setCheckable(True)
-        self.traceModeButton.setToolTip("While on, left-click the model to add centerline points; right-click finishes a curve")
+        self.traceModeButton.setToolTip("While on, left-click the model to add centerline points; right-click finishes the line")
         self.traceModeButton.toggled.connect(self.toggle_trace_mode)
         layout.addWidget(self.traceModeButton)
 
         row = QtWidgets.QHBoxLayout()
-        finishBtn = QtWidgets.QPushButton("Finish Curve")
+        finishBtn = QtWidgets.QPushButton("Finish Line")
         finishBtn.clicked.connect(self.finish_current_trace_3d)
         undoBtn = QtWidgets.QPushButton("Undo Point")
         undoBtn.clicked.connect(self.undo_trace_point)
@@ -350,13 +361,40 @@ class MainWindow(QtWidgets.QMainWindow):
         layout.addLayout(row)
 
         row2 = QtWidgets.QHBoxLayout()
-        delBtn = QtWidgets.QPushButton("Delete Last Curve")
+        delBtn = QtWidgets.QPushButton("Delete Last Line")
         delBtn.clicked.connect(self.delete_last_trace_3d)
         clearBtn = QtWidgets.QPushButton("Clear All")
         clearBtn.clicked.connect(self.clear_traces_3d)
         for b in (delBtn, clearBtn):
             row2.addWidget(b)
         layout.addLayout(row2)
+
+        self.editTraceButton = QtWidgets.QPushButton("Edit Crest Lines")
+        self.editTraceButton.setCheckable(True)
+        self.editTraceButton.setToolTip(
+            "While on: left-click a line to select it + its nearest point; Shift+click the model to extend "
+            "the selected line from the near end; then use the buttons below")
+        self.editTraceButton.toggled.connect(self.toggle_edit_trace_mode)
+        layout.addWidget(self.editTraceButton)
+
+        editRow = QtWidgets.QHBoxLayout()
+        self.deletePointBtn = QtWidgets.QPushButton("Delete Point")
+        self.deletePointBtn.setToolTip("Remove the highlighted (cyan) point from the selected line")
+        self.deletePointBtn.clicked.connect(self.delete_crest_point)
+        self.trimStartBtn = QtWidgets.QPushButton("Trim to Start")
+        self.trimStartBtn.setToolTip("Drop every point BEFORE the highlighted point")
+        self.trimStartBtn.clicked.connect(self.trim_crest_to_start)
+        self.trimEndBtn = QtWidgets.QPushButton("Trim to End")
+        self.trimEndBtn.setToolTip("Drop every point AFTER the highlighted point")
+        self.trimEndBtn.clicked.connect(self.trim_crest_to_end)
+        for b in (self.deletePointBtn, self.trimStartBtn, self.trimEndBtn):
+            editRow.addWidget(b)
+        layout.addLayout(editRow)
+
+        self.deleteLineBtn = QtWidgets.QPushButton("Delete Selected Line")
+        self.deleteLineBtn.setToolTip("Remove the whole selected line -- use this to prune non-incisions")
+        self.deleteLineBtn.clicked.connect(self.delete_selected_crest_line)
+        layout.addWidget(self.deleteLineBtn)
 
         crestRow = QtWidgets.QHBoxLayout()
         self.crestWhichCombo = QtWidgets.QComboBox()
@@ -369,8 +407,8 @@ class MainWindow(QtWidgets.QMainWindow):
         crestRow.addWidget(self.crestMinEdgesSpin)
         layout.addLayout(crestRow)
 
-        crestBtn = QtWidgets.QPushButton("Detect Crests → Traces")
-        crestBtn.setToolTip("Run Yoshizawa crest detection and add the crest lines as editable traces to prune/extend")
+        crestBtn = QtWidgets.QPushButton("Detect Crest Lines")
+        crestBtn.setToolTip("Run Yoshizawa crest detection and add the crest lines as editable lines to prune/extend")
         crestBtn.clicked.connect(self.detect_crests_as_traces)
         layout.addWidget(crestBtn)
 
@@ -380,6 +418,7 @@ class MainWindow(QtWidgets.QMainWindow):
         dock.setWidget(panel)
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock)
         dock.setEnabled(False)
+        self._update_edit_buttons_enabled()
         self._update_trace_status()
 
     def detect_crests_as_traces(self):
@@ -419,11 +458,200 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def toggle_trace_mode(self, checked):
         self.trace_mode = checked
-        self.traceModeButton.setText("Trace Incisions: ON (click the model)" if checked else "Trace Incisions")
-        if checked and getattr(self, 'selectPointsButton', None) is not None:
-            self.selectPointsButton.setChecked(False)  # mutually exclusive click modes
+        self.traceModeButton.setText("Draw Crest Line: ON (click the model)" if checked else "Draw Crest Line")
         if checked:
-            self.statusBar().showMessage("Trace mode ON -- left-click to add points, right-click to finish a curve.", 4000)
+            for other in ('selectPointsButton', 'editTraceButton'):
+                btn = getattr(self, other, None)
+                if btn is not None:
+                    btn.setChecked(False)  # mutually exclusive click modes
+            self.statusBar().showMessage("Draw mode ON -- left-click to add points, right-click to finish the line.", 4000)
+
+    def toggle_edit_trace_mode(self, checked):
+        self.edit_trace_mode = checked
+        self.editTraceButton.setText("Edit Crest Lines: ON (click a line)" if checked else "Edit Crest Lines")
+        if checked:
+            for other in ('traceModeButton', 'selectPointsButton'):
+                btn = getattr(self, other, None)
+                if btn is not None:
+                    btn.setChecked(False)  # mutually exclusive click modes
+            self.statusBar().showMessage(
+                "Edit mode ON -- left-click a line to select it; Shift+click the model to extend it.", 5000)
+        else:
+            self._clear_trace_selection()
+            self._redraw_traces_3d()
+        self._update_trace_status()
+
+    def _clear_trace_selection(self):
+        self.selected_trace_index = None
+        self.selected_vertex_index = None
+
+    def _selected_trace(self):
+        i = self.selected_trace_index
+        if i is None or not (0 <= i < len(self.traces_3d)):
+            return None
+        return self.traces_3d[i]
+
+    def select_trace_at_current_position(self):
+        """Edit mode: pick the model point under the cursor, then hand it to
+        _select_trace_near_point (which does the nearest-curve math)."""
+        if self.current_vertices is None or not self.traces_3d:
+            return
+        click_pos = self.iren.GetEventPosition()
+        picker = vtk.vtkCellPicker()
+        picker.SetTolerance(0.005)
+        # In Edit mode you're aiming AT the drawn curves, so the cell picker
+        # usually returns a trace line/marker actor (they sit on the surface)
+        # rather than the mesh. Accept a hit on the mesh or on any of our own
+        # trace actors -- the pick position is on the surface either way.
+        picker.InitializePickList()
+        picker.AddPickList(self.current_actor)
+        for a in self.trace_3d_actors:
+            picker.AddPickList(a)
+        picker.SetPickFromList(True)
+        picker.Pick(click_pos[0], click_pos[1], 0, self.ren)
+        if picker.GetActor() is None:
+            self.statusBar().showMessage("Click didn't land on the model or a curve.", 3000)
+            return
+        self._select_trace_near_point(np.array(picker.GetPickPosition(), dtype=np.float64))
+
+    def _select_trace_near_point(self, target):
+        """Select the finished trace whose nearest vertex is closest to
+        `target` (world coords), and remember that vertex as the one trims /
+        deletes act on. A target far from every trace clears the selection."""
+        if not self.traces_3d:
+            return
+        best_ti, best_vi, best_dist = None, None, None
+        for ti, trace in enumerate(self.traces_3d):
+            arr = np.asarray(trace, dtype=np.float64)
+            d = np.linalg.norm(arr - target, axis=1)
+            vi = int(np.argmin(d))
+            if best_dist is None or d[vi] < best_dist:
+                best_ti, best_vi, best_dist = ti, vi, float(d[vi])
+
+        max_pick = None
+        if self.grid_bounds is not None:
+            max_pick = (self.grid_bounds[1] - self.grid_bounds[0]) * 0.03
+        if max_pick is not None and best_dist > max_pick:
+            self._clear_trace_selection()
+            self.statusBar().showMessage("No curve near that click.", 3000)
+        else:
+            self.selected_trace_index = best_ti
+            self.selected_vertex_index = best_vi
+            self.statusBar().showMessage(
+                f"Selected curve {best_ti + 1}/{len(self.traces_3d)} "
+                f"({len(self.traces_3d[best_ti])} pts) -- point {best_vi + 1}.", 4000)
+        self._redraw_traces_3d()
+        self._update_trace_status()
+
+    def _update_edit_buttons_enabled(self):
+        """The per-line edit buttons only do anything with a line selected."""
+        has_sel = self._selected_trace() is not None
+        for name in ('deletePointBtn', 'trimStartBtn', 'trimEndBtn', 'deleteLineBtn'):
+            btn = getattr(self, name, None)
+            if btn is not None:
+                btn.setEnabled(has_sel)
+
+    def _after_line_edit(self, trace_gone):
+        """Shared cleanup after an edit op: fix up the active-point index (or
+        drop the selection if the line is gone), then redraw + refresh UI."""
+        if trace_gone:
+            self._clear_trace_selection()
+        else:
+            sel = self._selected_trace()
+            n = len(sel)
+            if self.selected_vertex_index is None or self.selected_vertex_index >= n:
+                self.selected_vertex_index = max(0, n - 1)
+        self._redraw_traces_3d()
+        self._update_trace_status()
+
+    def delete_crest_point(self):
+        sel = self._selected_trace()
+        if sel is None or self.selected_vertex_index is None:
+            return
+        del sel[self.selected_vertex_index]
+        if len(sel) < 2:
+            # a line needs >= 2 points; if this emptied it, drop the whole line
+            del self.traces_3d[self.selected_trace_index]
+            self.statusBar().showMessage("Point removed -- line had < 2 points left, so it was deleted.", 4000)
+            self._after_line_edit(trace_gone=True)
+        else:
+            self.statusBar().showMessage(f"Point removed -- {len(sel)} left.", 3000)
+            self._after_line_edit(trace_gone=False)
+
+    def trim_crest_to_start(self):
+        """Keep the highlighted point and everything after it."""
+        sel = self._selected_trace()
+        if sel is None or self.selected_vertex_index is None:
+            return
+        cut = self.selected_vertex_index
+        if cut == 0:
+            return
+        if len(sel) - cut < 2:
+            self.statusBar().showMessage("Can't trim: fewer than 2 points would remain.", 3000)
+            return
+        del sel[:cut]
+        self.selected_vertex_index = 0
+        self.statusBar().showMessage(f"Trimmed {cut} point(s) off the start -- {len(sel)} left.", 3000)
+        self._after_line_edit(trace_gone=False)
+
+    def trim_crest_to_end(self):
+        """Keep the highlighted point and everything before it."""
+        sel = self._selected_trace()
+        if sel is None or self.selected_vertex_index is None:
+            return
+        keep = self.selected_vertex_index + 1
+        dropped = len(sel) - keep
+        if dropped == 0:
+            return
+        if keep < 2:
+            self.statusBar().showMessage("Can't trim: fewer than 2 points would remain.", 3000)
+            return
+        del sel[keep:]
+        self.selected_vertex_index = len(sel) - 1
+        self.statusBar().showMessage(f"Trimmed {dropped} point(s) off the end -- {len(sel)} left.", 3000)
+        self._after_line_edit(trace_gone=False)
+
+    def delete_selected_crest_line(self):
+        if self._selected_trace() is None:
+            return
+        del self.traces_3d[self.selected_trace_index]
+        self.statusBar().showMessage(f"Line deleted -- {len(self.traces_3d)} left.", 3000)
+        self._after_line_edit(trace_gone=True)
+
+    def extend_selected_crest_line(self):
+        """Shift+left-click in Edit mode: add the picked model point to the
+        end of the selected line nearer the highlighted point, then move the
+        highlight onto the new point so repeated Shift+clicks keep growing
+        that same end."""
+        if self._selected_trace() is None or self.selected_vertex_index is None:
+            self.statusBar().showMessage("Select a line first, then Shift+click to extend it.", 3000)
+            return
+        click_pos = self.iren.GetEventPosition()
+        picker = vtk.vtkCellPicker()
+        picker.SetTolerance(0.005)
+        picker.Pick(click_pos[0], click_pos[1], 0, self.ren)
+        if picker.GetActor() is not self.current_actor:
+            self.statusBar().showMessage("Nothing added: Shift+click didn't land on the model.", 3000)
+            return
+        self._extend_selected_crest_line_with_point(
+            np.array(picker.GetPickPosition(), dtype=np.float64))
+
+    def _extend_selected_crest_line_with_point(self, new_pt):
+        sel = self._selected_trace()
+        if sel is None or self.selected_vertex_index is None:
+            return
+        dist_to_start = self.selected_vertex_index
+        dist_to_end = len(sel) - 1 - self.selected_vertex_index
+        if dist_to_start <= dist_to_end:
+            sel.insert(0, new_pt)
+            self.selected_vertex_index = 0
+            end = "start"
+        else:
+            sel.append(new_pt)
+            self.selected_vertex_index = len(sel) - 1
+            end = "end"
+        self.statusBar().showMessage(f"Point added at the {end} -- {len(sel)} points.", 3000)
+        self._after_line_edit(trace_gone=False)
 
     def add_trace_point(self):
         if self.current_vertices is None:
@@ -452,6 +680,7 @@ class MainWindow(QtWidgets.QMainWindow):
         elif self.traces_3d:
             self.current_trace_3d = self.traces_3d.pop()
             self.current_trace_3d.pop()
+        self._clear_trace_selection()
         self._redraw_traces_3d()
         self._update_trace_status()
 
@@ -460,12 +689,14 @@ class MainWindow(QtWidgets.QMainWindow):
             self.current_trace_3d = []
         elif self.traces_3d:
             self.traces_3d.pop()
+        self._clear_trace_selection()
         self._redraw_traces_3d()
         self._update_trace_status()
 
     def clear_traces_3d(self):
         self.traces_3d = []
         self.current_trace_3d = []
+        self._clear_trace_selection()
         self._redraw_traces_3d()
         self._update_trace_status()
 
@@ -545,20 +776,40 @@ class MainWindow(QtWidgets.QMainWindow):
             self.trace_3d_actors.append(
                 self._glyph_markers_actor(self.current_trace_3d, (1.0, 0.85, 0.0), self._trace_marker_radius()))
 
+        # Selected trace (Edit mode): draw it highlighted, with a marker on
+        # every vertex and a bigger one on the active point, so it's clear
+        # what a trim / vertex-delete will act on.
+        sel = self._selected_trace()
+        if sel is not None:
+            self.trace_3d_actors.append(self._multiline_actor([sel], (0.1, 1.0, 0.3), 5))
+            self.trace_3d_actors.append(
+                self._glyph_markers_actor(sel, (0.1, 1.0, 0.3), self._trace_marker_radius()))
+            vi = self.selected_vertex_index
+            if vi is not None and 0 <= vi < len(sel):
+                self.trace_3d_actors.append(
+                    self._glyph_markers_actor([sel[vi]], (0.0, 0.8, 1.0), self._trace_marker_radius() * 2.2))
+
         for actor in self.trace_3d_actors:
             self.ren.AddActor(actor)
         self.vtkWidget.GetRenderWindow().Render()
 
     def _update_trace_status(self):
-        self.traceStatusLabel.setText(
-            f"Curves: {len(self.traces_3d)}   |   current curve: {len(self.current_trace_3d)} point(s)")
+        txt = f"Lines: {len(self.traces_3d)}   |   drawing: {len(self.current_trace_3d)} point(s)"
+        sel = self._selected_trace()
+        if sel is not None:
+            txt += (f"   |   selected line {self.selected_trace_index + 1} "
+                    f"({len(sel)} pts), point {(self.selected_vertex_index or 0) + 1}")
+        self.traceStatusLabel.setText(txt)
+        self._update_edit_buttons_enabled()
 
     def toggle_point_select_mode(self, checked):
         self.point_select_mode = checked
         self.selectPointsButton.setText("Select Points: ON (click the model)" if checked else "Select Points")
-        if checked and getattr(self, 'traceModeButton', None) is not None:
-            self.traceModeButton.setChecked(False)  # mutually exclusive click modes
         if checked:
+            for other in ('traceModeButton', 'editTraceButton'):
+                btn = getattr(self, other, None)
+                if btn is not None:
+                    btn.setChecked(False)  # mutually exclusive click modes
             self.statusBar().showMessage("Point-select mode ON -- click on the model to add a point.", 4000)
 
     def try_select_marker_at_current_position(self):
@@ -942,6 +1193,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.traces_3d = []
         self.current_trace_3d = []
         self.trace_3d_actors = []
+        self._clear_trace_selection()
+        if getattr(self, 'editTraceButton', None) is not None:
+            self.editTraceButton.setChecked(False)
         self._update_trace_status()
 
         if fileName.lower().endswith('.wrl'):
