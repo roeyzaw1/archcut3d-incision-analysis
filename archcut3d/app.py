@@ -37,6 +37,8 @@ from .wrl_io import read_wrl
 from .positioning import compute_initial_orientation, compute_normal_alignment_axis_angle, rodrigues_matrix
 from .slicing import compute_slice_path, compute_slices
 from .slice_viewer import SliceViewerDialog
+from .grid_2d import rasterize_to_grid
+from .label_tool import LabelToolDialog
 
 APP_NAME = "ArchCut 3-D"
 
@@ -135,10 +137,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.slices = None              # list of (K, 2) arrays from compute_slices
         self.slice_visualization_actors = []
         self.slice_viewer_dialog = None
+        self.label_tool_dialog = None   # experimental: 2.5D grid labeling tool
 
         fileMenu = self.menuBar().addMenu('&File')
         openAction = fileMenu.addAction('Open...')
         openAction.triggered.connect(self.open_file)
+
+        mlMenu = self.menuBar().addMenu('ML (experimental)')
+        labelAction = mlMenu.addAction('Label Incisions...')
+        labelAction.triggered.connect(self.open_label_tool)
 
         self._build_rotation_toolbar()
         self._build_points_dock()
@@ -547,6 +554,29 @@ class MainWindow(QtWidgets.QMainWindow):
         self.slice_viewer_dialog.show()
         self.slice_viewer_dialog.raise_()
         self.slice_viewer_dialog.activateWindow()
+
+    def open_label_tool(self):
+        """Experimental: compute the 2.5D grid for the loaded model (from the
+        auto-positioned base_vertices, so it's deterministic per file) and
+        open the labeling dialog. Step 2a -- viewing only for now."""
+        if self.base_vertices is None:
+            QtWidgets.QMessageBox.warning(self, 'No Model Loaded', 'Load a model first.')
+            return
+        self.statusBar().showMessage("Computing 2.5D grid (curvature can take a moment)...")
+        QtWidgets.QApplication.processEvents()
+        try:
+            grid = rasterize_to_grid(self.base_vertices, self.current_faces)
+        except Exception as e:
+            self.statusBar().clearMessage()
+            QtWidgets.QMessageBox.warning(self, 'Grid Failed', f'Could not build the 2.5D grid:\n{e}')
+            return
+        self.statusBar().clearMessage()
+
+        source_name = os.path.basename(self.current_model_path) if self.current_model_path else 'model'
+        self.label_tool_dialog = LabelToolDialog(grid, source_name, self)
+        self.label_tool_dialog.show()
+        self.label_tool_dialog.raise_()
+        self.label_tool_dialog.activateWindow()
 
     def _clear_slice_visualization(self):
         for actor in self.slice_visualization_actors:
