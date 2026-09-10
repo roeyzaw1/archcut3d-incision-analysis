@@ -22,6 +22,7 @@ detection and mesh smoothing aren't wired in yet.
 
 import json
 import os
+import subprocess
 import sys
 
 import numpy as np
@@ -39,6 +40,7 @@ from .slicing import compute_slice_path, compute_slices
 from .slice_viewer import SliceViewerDialog
 from .grid_2d import rasterize_to_grid
 from .label_tool import LabelToolDialog
+from .crest_lines import detect_crest_lines, crest_lines_as_polylines
 
 APP_NAME = "ArchCut 3-D"
 
@@ -356,6 +358,22 @@ class MainWindow(QtWidgets.QMainWindow):
             row2.addWidget(b)
         layout.addLayout(row2)
 
+        crestRow = QtWidgets.QHBoxLayout()
+        self.crestWhichCombo = QtWidgets.QComboBox()
+        self.crestWhichCombo.addItems(['Both', 'Ridges', 'Ravines'])
+        crestRow.addWidget(self.crestWhichCombo)
+        crestRow.addWidget(QtWidgets.QLabel("min edges:"))
+        self.crestMinEdgesSpin = QtWidgets.QSpinBox()
+        self.crestMinEdgesSpin.setRange(2, 500)
+        self.crestMinEdgesSpin.setValue(30)
+        crestRow.addWidget(self.crestMinEdgesSpin)
+        layout.addLayout(crestRow)
+
+        crestBtn = QtWidgets.QPushButton("Detect Crests → Traces")
+        crestBtn.setToolTip("Run Yoshizawa crest detection and add the crest lines as editable traces to prune/extend")
+        crestBtn.clicked.connect(self.detect_crests_as_traces)
+        layout.addWidget(crestBtn)
+
         self.traceStatusLabel = QtWidgets.QLabel()
         layout.addWidget(self.traceStatusLabel)
 
@@ -363,6 +381,41 @@ class MainWindow(QtWidgets.QMainWindow):
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock)
         dock.setEnabled(False)
         self._update_trace_status()
+
+    def detect_crests_as_traces(self):
+        """Run Yoshizawa crest detection on the current (displayed) mesh and
+        add the crest lines as traces_3d for the expert to prune/extend --
+        a labeling accelerator. Crest lines come out in the current display
+        frame (detection is on current_vertices), matching how the trace
+        edit/projection code expects traces_3d."""
+        if self.current_vertices is None:
+            return
+        which = {'Both': 'both', 'Ridges': 'ridges', 'Ravines': 'ravines'}[self.crestWhichCombo.currentText()]
+        min_edges = self.crestMinEdgesSpin.value()
+
+        self.statusBar().showMessage("Detecting crest lines (setCurvature)...")
+        QtWidgets.QApplication.processEvents()
+        try:
+            result = detect_crest_lines(self.current_vertices, self.current_faces)
+        except FileNotFoundError:
+            self.statusBar().clearMessage()
+            QtWidgets.QMessageBox.warning(
+                self, 'setCurvature Not Found',
+                "The setCurvature binary is missing from bin/. Can't detect crest lines.")
+            return
+        except (RuntimeError, subprocess.TimeoutExpired) as e:
+            self.statusBar().clearMessage()
+            QtWidgets.QMessageBox.warning(self, 'Crest Detection Failed', str(e))
+            return
+        self.statusBar().clearMessage()
+
+        polylines = crest_lines_as_polylines(result, min_edges=min_edges, which=which)
+        for pl in polylines:
+            self.traces_3d.append([np.asarray(p, dtype=np.float64) for p in pl])
+        self._redraw_traces_3d()
+        self._update_trace_status()
+        self.statusBar().showMessage(
+            f"Added {len(polylines)} crest line(s) as traces -- prune the ones that aren't incisions.", 5000)
 
     def toggle_trace_mode(self, checked):
         self.trace_mode = checked
@@ -421,16 +474,25 @@ class MainWindow(QtWidgets.QMainWindow):
             return max((self.grid_bounds[1] - self.grid_bounds[0]) * 0.002, 1e-3)
         return 0.05
 
-    def _polyline_actor(self, points, color, width):
+    def _multiline_actor(self, polylines, color, width):
+        """One actor for many polylines: all their points in one vtkPoints,
+        one vtkPolyLine cell each. Keeps the actor/draw-call count constant
+        no matter how many (or how long) the traces are -- crest detection
+        can add dozens of 100+ point lines."""
         vpoints = vtk.vtkPoints()
-        for p in points:
-            vpoints.InsertNextPoint(p)
-        polyline = vtk.vtkPolyLine()
-        polyline.GetPointIds().SetNumberOfIds(len(points))
-        for i in range(len(points)):
-            polyline.GetPointIds().SetId(i, i)
         cells = vtk.vtkCellArray()
-        cells.InsertNextCell(polyline)
+        for pl in polylines:
+            n = len(pl)
+            if n < 2:
+                continue
+            start = vpoints.GetNumberOfPoints()
+            for p in pl:
+                vpoints.InsertNextPoint(p)
+            line = vtk.vtkPolyLine()
+            line.GetPointIds().SetNumberOfIds(n)
+            for i in range(n):
+                line.GetPointIds().SetId(i, start + i)
+            cells.InsertNextCell(line)
         pd = vtk.vtkPolyData()
         pd.SetPoints(vpoints)
         pd.SetLines(cells)
@@ -442,14 +504,23 @@ class MainWindow(QtWidgets.QMainWindow):
         actor.GetProperty().SetLineWidth(width)
         return actor
 
-    def _marker_actor(self, coord, color, radius):
+    def _glyph_markers_actor(self, points, color, radius):
+        """One actor for all the point markers of a trace, via vtkGlyph3D --
+        again constant actor count regardless of point count."""
+        vpoints = vtk.vtkPoints()
+        for p in points:
+            vpoints.InsertNextPoint(p)
+        pd = vtk.vtkPolyData()
+        pd.SetPoints(vpoints)
         sphere = vtk.vtkSphereSource()
-        sphere.SetCenter(coord)
         sphere.SetRadius(radius)
-        sphere.SetThetaResolution(12)
-        sphere.SetPhiResolution(12)
+        sphere.SetThetaResolution(8)
+        sphere.SetPhiResolution(8)
+        glyph = vtk.vtkGlyph3D()
+        glyph.SetInputData(pd)
+        glyph.SetSourceConnection(sphere.GetOutputPort())
         mapper = vtk.vtkPolyDataMapper()
-        mapper.SetInputConnection(sphere.GetOutputPort())
+        mapper.SetInputConnection(glyph.GetOutputPort())
         actor = vtk.vtkActor()
         actor.SetMapper(mapper)
         actor.GetProperty().SetColor(*color)
@@ -460,17 +531,19 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ren.RemoveActor(actor)
         self.trace_3d_actors = []
 
-        radius = self._trace_marker_radius()
-        for trace in self.traces_3d:
-            if len(trace) >= 2:
-                self.trace_3d_actors.append(self._polyline_actor(trace, (1.0, 0.0, 0.0), 3))
-            for p in trace:
-                self.trace_3d_actors.append(self._marker_actor(p, (1.0, 0.0, 0.0), radius))
+        # Finished traces: just the lines, one actor for all of them, no
+        # per-point markers (there's no interaction that needs them).
+        if self.traces_3d:
+            self.trace_3d_actors.append(self._multiline_actor(self.traces_3d, (1.0, 0.0, 0.0), 3))
+
+        # In-progress trace: line + markers (you're actively editing it, and
+        # it's short), each still just one actor.
         if self.current_trace_3d:
             if len(self.current_trace_3d) >= 2:
-                self.trace_3d_actors.append(self._polyline_actor(self.current_trace_3d, (1.0, 0.85, 0.0), 3))
-            for p in self.current_trace_3d:
-                self.trace_3d_actors.append(self._marker_actor(p, (1.0, 0.85, 0.0), radius))
+                self.trace_3d_actors.append(
+                    self._multiline_actor([self.current_trace_3d], (1.0, 0.85, 0.0), 3))
+            self.trace_3d_actors.append(
+                self._glyph_markers_actor(self.current_trace_3d, (1.0, 0.85, 0.0), self._trace_marker_radius()))
 
         for actor in self.trace_3d_actors:
             self.ren.AddActor(actor)
