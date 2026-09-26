@@ -534,16 +534,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self._visualize_slice_path(width)
         self.viewSlicesButton.setEnabled(True)
         if self.slice_viewer_dialog is not None and self.slice_viewer_dialog.isVisible():
-            self.slice_viewer_dialog.set_slices(self.slices)
+            self.slice_viewer_dialog.set_slices(self.slices, source_model_path=self.current_model_path)
         self.statusBar().showMessage(f"{len(self.slices)} slices created.", 4000)
 
     def view_slices(self):
         if not self.slices:
             return
         if self.slice_viewer_dialog is None:
-            self.slice_viewer_dialog = SliceViewerDialog(self.slices, self)
+            self.slice_viewer_dialog = SliceViewerDialog(self.slices, self, source_model_path=self.current_model_path)
         else:
-            self.slice_viewer_dialog.set_slices(self.slices)
+            self.slice_viewer_dialog.set_slices(self.slices, source_model_path=self.current_model_path)
         self.slice_viewer_dialog.show()
         self.slice_viewer_dialog.raise_()
         self.slice_viewer_dialog.activateWindow()
