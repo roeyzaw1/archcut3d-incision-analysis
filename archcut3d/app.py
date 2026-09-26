@@ -37,6 +37,7 @@ from .wrl_io import read_wrl
 from .positioning import compute_initial_orientation, compute_normal_alignment_axis_angle, rodrigues_matrix
 from .slicing import compute_slice_path, compute_slices
 from .slice_viewer import SliceViewerDialog
+from .slices_3d_view import Slices3DViewDialog, slice_color
 
 APP_NAME = "ArchCut 3-D"
 
@@ -133,8 +134,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.point2_row = None          # row index into selected_points, slicing endpoint 2
         self.slice_path = None          # (numSlices, 3) path from compute_slice_path
         self.slices = None              # list of (K, 2) arrays from compute_slices
+        self.slice_tolerance = None     # tolerance used for the current self.slices
         self.slice_visualization_actors = []
         self.slice_viewer_dialog = None
+        self.slices_3d_dialog = None
 
         fileMenu = self.menuBar().addMenu('&File')
         openAction = fileMenu.addAction('Open...')
@@ -293,6 +296,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.viewSlicesButton.setEnabled(False)
         self.viewSlicesButton.clicked.connect(self.view_slices)
         layout.addWidget(self.viewSlicesButton)
+
+        self.view3DButton = QtWidgets.QPushButton("View Slices in 3D")
+        self.view3DButton.setToolTip("See every slice at once, stacked along the cut path")
+        self.view3DButton.setEnabled(False)
+        self.view3DButton.clicked.connect(self.view_slices_3d)
+        layout.addWidget(self.view3DButton)
 
         dock.setWidget(panel)
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock)
@@ -531,10 +540,14 @@ class MainWindow(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.warning(self, 'Slicing Failed', str(e))
             return
 
+        self.slice_tolerance = tolerance
         self._visualize_slice_path(width)
         self.viewSlicesButton.setEnabled(True)
+        self.view3DButton.setEnabled(True)
         if self.slice_viewer_dialog is not None and self.slice_viewer_dialog.isVisible():
             self.slice_viewer_dialog.set_slices(self.slices, source_model_path=self.current_model_path)
+        if self.slices_3d_dialog is not None and self.slices_3d_dialog.isVisible():
+            self.slices_3d_dialog.set_slices(self.slices, self.slice_tolerance)
         self.statusBar().showMessage(f"{len(self.slices)} slices created.", 4000)
 
     def view_slices(self):
@@ -547,6 +560,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.slice_viewer_dialog.show()
         self.slice_viewer_dialog.raise_()
         self.slice_viewer_dialog.activateWindow()
+
+    def view_slices_3d(self):
+        if not self.slices:
+            return
+        if self.slices_3d_dialog is None:
+            self.slices_3d_dialog = Slices3DViewDialog(self.slices, self.slice_tolerance, self)
+        else:
+            self.slices_3d_dialog.set_slices(self.slices, self.slice_tolerance)
+        self.slices_3d_dialog.show()
+        self.slices_3d_dialog.raise_()
+        self.slices_3d_dialog.activateWindow()
 
     def _clear_slice_visualization(self):
         for actor in self.slice_visualization_actors:
@@ -585,33 +609,58 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ren.AddActor(path_actor)
         self.slice_visualization_actors.append(path_actor)
 
-        # Perpendicular tick marks showing the width band at each slice.
+        # Perpendicular tick marks showing the width band at each slice,
+        # colored with the same red(first)->blue(last) gradient as the 3D
+        # slice overview -- one actor for all ticks (batched, see the
+        # trace-actor lag fix elsewhere in this file), colored per-cell via
+        # a cell-data scalar array rather than per-actor color.
+        # Lift the ticks slightly above the surface (+Z -- the app positions
+        # every model to be viewed from above, surface facing +Z) so they
+        # sit visibly on top of the mesh instead of coincident with it,
+        # where they'd otherwise flicker/disappear via z-fighting or get
+        # swallowed by the surface's own shading depending on view angle.
+        z_lift = 0.0
+        if self.grid_bounds is not None:
+            z_lift = (self.grid_bounds[1] - self.grid_bounds[0]) * 0.01
+
         tick_points = vtk.vtkPoints()
         tick_lines = vtk.vtkCellArray()
-        for i in range(len(path) - 1):
+        n_ticks = len(path) - 1
+        colors = np.zeros((n_ticks, 3), dtype=np.uint8)
+        cell_i = 0
+        for i in range(n_ticks):
             direction = path[i + 1, :2] - path[i, :2]
             norm = np.linalg.norm(direction)
             if norm == 0:
                 continue
             perp = np.array([-direction[1], direction[0]]) / norm
             center = path[i]
-            p_start = center + np.array([perp[0], perp[1], 0.0]) * (width / 2)
-            p_end = center - np.array([perp[0], perp[1], 0.0]) * (width / 2)
+            lift = np.array([0.0, 0.0, z_lift])
+            p_start = center + np.array([perp[0], perp[1], 0.0]) * (width / 2) + lift
+            p_end = center - np.array([perp[0], perp[1], 0.0]) * (width / 2) + lift
             idx0 = tick_points.InsertNextPoint(p_start)
             idx1 = tick_points.InsertNextPoint(p_end)
             tick_line = vtk.vtkLine()
             tick_line.GetPointIds().SetId(0, idx0)
             tick_line.GetPointIds().SetId(1, idx1)
             tick_lines.InsertNextCell(tick_line)
+            r, g, b = slice_color(i, n_ticks)
+            colors[cell_i] = (round(r * 255), round(g * 255), round(b * 255))
+            cell_i += 1
 
         tick_polydata = vtk.vtkPolyData()
         tick_polydata.SetPoints(tick_points)
         tick_polydata.SetLines(tick_lines)
+        color_array = numpy_to_vtk(colors[:cell_i], deep=True, array_type=vtk.VTK_UNSIGNED_CHAR)
+        color_array.SetName("slice_colors")
+        tick_polydata.GetCellData().SetScalars(color_array)
         tick_mapper = vtk.vtkPolyDataMapper()
         tick_mapper.SetInputData(tick_polydata)
+        tick_mapper.SetScalarModeToUseCellData()
         tick_actor = vtk.vtkActor()
         tick_actor.SetMapper(tick_mapper)
-        tick_actor.GetProperty().SetColor(1.0, 0.6, 0.0)
+        tick_actor.GetProperty().SetLineWidth(6)
+        tick_actor.GetProperty().SetRenderLinesAsTubes(True)   # thick, lit, rounded -- reads as "bold"
         self.ren.AddActor(tick_actor)
         self.slice_visualization_actors.append(tick_actor)
 
