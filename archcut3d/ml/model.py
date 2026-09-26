@@ -1,0 +1,86 @@
+"""The tracer model: heading-canonicalized patch -> (step vector, stop prob).
+
+A small conv encoder (~300k params -- a scaled-down ResNet-18 *shape*, sized
+for a training set of thousands of samples rather than millions, so it
+doesn't overfit before it learns anything) feeding two heads: step
+regression and stop probability. Dropout stays active at inference time on
+purpose (MC dropout) -- running several stochastic forward passes and
+looking at the spread is the planned uncertainty signal for later
+active-learning (not wired up yet).
+
+Input:  (B, 4, R, R) -- see torch_data.normalize_patches for the 4 channels
+        (height, local_relief, curvature, mask) and what R (patch
+        resolution) currently is.
+Output: step (B, 2) forward/right in step_mm units, stop_logit (B,) --
+        apply sigmoid for a 0..1 probability.
+"""
+
+from __future__ import annotations
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+IN_CHANNELS = 4   # height, local_relief, curvature, mask
+
+
+def _conv_block(in_ch: int, out_ch: int, stride: int, dropout_p: float = 0.0) -> nn.Sequential:
+    layers = [
+        nn.Conv2d(in_ch, out_ch, kernel_size=3, stride=stride, padding=1, bias=False),
+        nn.BatchNorm2d(out_ch),
+        nn.ReLU(inplace=True),
+    ]
+    if dropout_p > 0:
+        layers.append(nn.Dropout2d(dropout_p))
+    return nn.Sequential(*layers)
+
+
+class TracerNet(nn.Module):
+    def __init__(self, in_channels: int = IN_CHANNELS, base_width: int = 32,
+                dropout_p: float = 0.1, head_dropout_p: float = 0.2):
+        super().__init__()
+        w = base_width
+        # 3 stride-2 stages -> spatial dim shrinks by 8x (48 -> 6 at the
+        # default patch resolution); channel width doubles each stage.
+        self.encoder = nn.Sequential(
+            _conv_block(in_channels, w, stride=1),
+            _conv_block(w, w, stride=2),
+            _conv_block(w, w * 2, stride=1),
+            _conv_block(w * 2, w * 2, stride=2),
+            _conv_block(w * 2, w * 4, stride=1, dropout_p=dropout_p),
+            _conv_block(w * 4, w * 4, stride=2),
+        )
+        self.pool = nn.AdaptiveAvgPool2d(1)
+        feat = w * 4
+
+        self.step_head = nn.Sequential(
+            nn.Linear(feat, feat // 2), nn.ReLU(inplace=True), nn.Dropout(head_dropout_p),
+            nn.Linear(feat // 2, 2),
+        )
+        self.stop_head = nn.Sequential(
+            nn.Linear(feat, feat // 2), nn.ReLU(inplace=True), nn.Dropout(head_dropout_p),
+            nn.Linear(feat // 2, 1),
+        )
+
+    def forward(self, x: torch.Tensor):
+        z = self.encoder(x)
+        z = self.pool(z).flatten(1)
+        step = self.step_head(z)
+        stop_logit = self.stop_head(z).squeeze(-1)
+        return step, stop_logit
+
+    def num_params(self) -> int:
+        return sum(p.numel() for p in self.parameters())
+
+
+def tracer_loss(step_pred: torch.Tensor, stop_logit_pred: torch.Tensor,
+                step_target: torch.Tensor, stop_target: torch.Tensor,
+                stop_weight: float = 0.2):
+    """smooth-L1 on the step vector + a lightly-weighted BCE on the stop
+    logit. stop_weight defaults small: step-direction accuracy matters more
+    than stop detection, since the user can always stop/trim a trace by
+    hand in the app -- see the feedback-ml-priorities memory."""
+    step_loss = F.smooth_l1_loss(step_pred, step_target)
+    stop_loss = F.binary_cross_entropy_with_logits(stop_logit_pred, stop_target)
+    total = step_loss + stop_weight * stop_loss
+    return total, {"step_loss": step_loss.detach(), "stop_loss": stop_loss.detach(), "total": total.detach()}
