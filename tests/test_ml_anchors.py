@@ -51,3 +51,17 @@ def test_flat_surface_points_are_departures_by_depth():
     label_departures([t_groove, t_flat], depth_percentile=50.0)
     assert t_flat.departure.all() and not t_groove.departure.any()
     assert thr > 0
+
+
+def test_depth_threshold_ignores_band_edge_minima():
+    from archcut3d.ml.anchors import AnchorTable
+    n = 10
+    z = np.zeros((n, 2))
+    base = dict(source_file="x", trace=np.zeros(n, int), point=np.arange(n), pos=z, heading=z, next_pos=z,
+                geo_pos=z, pixel_size=0.05, half_width_mm=0.5)
+    # 5 edge minima (depth 0) and 5 interior dips of depth 0.1..0.5
+    t = AnchorTable(geo_offset_mm=np.array([0.5] * 5 + [0.0] * 5),
+                    geo_depth=np.array([0.0] * 5 + [0.1, 0.2, 0.3, 0.4, 0.5]), **base)
+    assert abs(depth_threshold([t], 0.0) - 0.1) < 1e-12 and abs(depth_threshold([t], 100.0) - 0.5) < 1e-12
+    thr = label_departures([t], depth_percentile=0.0)
+    assert t.departure[:5].all() and not t.departure[5:].any() and thr == 0.1

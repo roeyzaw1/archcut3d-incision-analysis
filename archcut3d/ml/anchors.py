@@ -37,6 +37,7 @@ class AnchorTable:
     geo_depth: np.ndarray        # (K,) tilt-corrected dip depth; NaN if off-mesh
     geo_pos: np.ndarray          # (K, 2) [col, row] of the geometric minimum
     pixel_size: float
+    half_width_mm: float = 0.5    # half width of the perpendicular band searched for the minimum
     departure: np.ndarray = None  # (K,) bool, filled by label_departures
 
     def __len__(self):
@@ -79,21 +80,31 @@ def build_anchor_table(example, step_mm: float = DEFAULT_STEP_MM, half_width_mm:
                        trace=np.array(rows["trace"], dtype=int), point=np.array(rows["point"], dtype=int),
                        pos=arr("pos", (2,)), heading=arr("heading", (2,)), next_pos=arr("next_pos", (2,)),
                        geo_offset_mm=arr("off"), geo_depth=arr("depth"), geo_pos=arr("geo_pos", (2,)),
-                       pixel_size=px)
+                       pixel_size=px, half_width_mm=half_width_mm)
+
+
+EDGE_FRACTION = 0.9
 
 
 def depth_threshold(tables, percentile: float = DEPARTURE_DEPTH_PERCENTILE) -> float:
-    """The given percentile of dip depth pooled over all points of all tables."""
-    depths = np.concatenate([t.geo_depth[np.isfinite(t.geo_depth)] for t in tables])
-    return float(np.percentile(depths, percentile))
+    """The given percentile of dip depth, pooled over all tables, among points
+    whose minimum is interior to the searched band (|offset| < 0.9 of its
+    half width). A minimum at the band edge is not a dip -- its depth is 0
+    by construction, and such points are already departures through the
+    offset criterion -- so including them would pull the "noise floor" to 0."""
+    depths = []
+    for t in tables:
+        interior = np.isfinite(t.geo_depth) & (np.abs(t.geo_offset_mm) < EDGE_FRACTION * t.half_width_mm)
+        depths.append(t.geo_depth[interior])
+    return float(np.percentile(np.concatenate(depths), percentile))
 
 
 def label_departures(tables, offset_mm: float = DEPARTURE_OFFSET_MM,
                      depth_percentile: float = DEPARTURE_DEPTH_PERCENTILE) -> float:
     """Set `.departure` on every table: a point is a departure if the hand
     line is more than `offset_mm` from the geometric minimum, or the dip
-    there is shallower than the pooled `depth_percentile` of dip depths (no
-    clear minimum to follow). Points with no profile on the mesh count as
+    there is shallower than the pooled `depth_percentile` of interior dip
+    depths (see depth_threshold: no clear minimum to follow). Points with no profile on the mesh count as
     departures. Returns the depth threshold used (same units as the
     local_relief channel)."""
     thr = depth_threshold(tables, depth_percentile)
