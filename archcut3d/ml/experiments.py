@@ -16,6 +16,8 @@ or something closer to the hand-drawn line where the two differ?
   E3   Representation analysis of the E0 network and the E1 random encoder:
        PCA dimensionality of the pooled features and layer-wise linear
        probes (needs the checkpoints written by E0 and E1).
+  E4   (optional, not in the default set) Pooling: flatten the final feature
+       map instead of averaging it, and/or add CoordConv input channels.
   E5   Geometry-only labels: train on crest-line ravines generated
        automatically on the other scans (no hand traces), test on the
        hand traces of the held-out model.
@@ -52,6 +54,7 @@ from .train import train_one_split
 
 MACHINE_SPACING_PX = 2.0     # median spacing between consecutive points below this => machine-generated
 ALL_EXPERIMENTS = ["E0", "E0b", "E1", "E2", "E3", "E5"]
+OPTIONAL_EXPERIMENTS = ["E4"]
 CHANNELS = {"height": (0,), "local_relief": (1,), "curvature": (2,)}
 
 
@@ -94,7 +97,8 @@ def save_fold(path: str, fold, variant: str, test_model: str):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     torch.save({"state_dict": {k: v.cpu() for k, v in fold.net.state_dict().items()},
                 "stats": fold.stats.to_dict(), "keep_channels": tuple(fold.keep_channels),
-                "freeze_encoder": fold.freeze_encoder, "seed": fold.seed, "variant": variant,
+                "freeze_encoder": fold.freeze_encoder, "model_kwargs": fold.model_kwargs,
+                "seed": fold.seed, "variant": variant,
                 "test_model": test_model, "val_group": fold.val_group, "train_groups": fold.train_groups},
                path)
 
@@ -104,7 +108,7 @@ def load_fold(path: str, device: str = "cpu"):
     from .model import TracerNet
     from .torch_data import NormStats
     ck = torch.load(path, map_location=device, weights_only=False)
-    net = TracerNet()
+    net = TracerNet(**ck.get("model_kwargs", {}))
     net.load_state_dict(ck["state_dict"])
     return net.to(device).eval(), NormStats.from_dict(ck["stats"]), ck
 
@@ -197,6 +201,8 @@ def fold_extra(fold) -> dict:
     return {"test_angle_err_clean_deg": t.angle_err_clean_deg, "test_angle_err_jittered_deg": t.angle_err_jittered_deg,
             "stop_auroc": t.stop_auroc, "stop_precision": t.stop_precision, "stop_recall": t.stop_recall,
             "stop_base_rate": t.stop_base_rate, "stop_accuracy": t.stop_accuracy,
+            "fwd_err_clean": t.fwd_err_clean, "fwd_err_jittered": t.fwd_err_jittered,
+            "right_err_clean": t.right_err_clean, "right_err_jittered": t.right_err_jittered,
             "best_val_loss": fold.best_val_loss, "epochs_run": len(fold.history), "n_test_samples": t.n}
 
 
@@ -398,7 +404,8 @@ def write_config(ctx: Context, started: float, experiments):
     if os.path.exists(path):                       # partial re-runs accumulate into one config
         with open(path) as f:
             prev = json.load(f)
-        cfg["experiments"] = [e for e in ALL_EXPERIMENTS if e in set(prev.get("experiments", [])) | set(experiments)]
+        cfg["experiments"] = [e for e in ALL_EXPERIMENTS + OPTIONAL_EXPERIMENTS
+                              if e in set(prev.get("experiments", [])) | set(experiments)]
         cfg["wall_time_s"] = round(prev.get("wall_time_s", 0) + cfg["wall_time_s"], 1)
         cfg["commands"] = prev.get("commands", [prev.get("command")]) + [cfg["command"]]
     else:
@@ -424,9 +431,9 @@ def parse_args(argv=None):
     p.add_argument("--departure-offset-mm", type=float, default=DEPARTURE_OFFSET_MM)
     args = p.parse_args(argv)
     args.experiments = [e.strip() for e in args.experiments.split(",") if e.strip()]
-    unknown = [e for e in args.experiments if e not in ALL_EXPERIMENTS]
+    unknown = [e for e in args.experiments if e not in ALL_EXPERIMENTS + OPTIONAL_EXPERIMENTS]
     if unknown:
-        p.error(f"unknown experiment(s): {unknown}; available: {ALL_EXPERIMENTS}")
+        p.error(f"unknown experiment(s): {unknown}; available: {ALL_EXPERIMENTS + OPTIONAL_EXPERIMENTS}")
     return args
 
 
@@ -453,6 +460,10 @@ def main(argv=None):
         print("E2: channel ablation", flush=True)
         for cname, keep in CHANNELS.items():
             run_trained(ctx, "E2", f"only_{cname}", keep_channels=keep)
+    if "E4" in ex:
+        print("E4: pooling variants", flush=True)
+        run_trained(ctx, "E4", "flatten_pool", model_kwargs={"pool": "flatten"})
+        run_trained(ctx, "E4", "coordconv", model_kwargs={"coord_channels": True})
     if "E3" in ex:
         print("E3: representation analysis", flush=True)
         run_e3(ctx)

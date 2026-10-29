@@ -38,33 +38,55 @@ def _conv_block(in_ch: int, out_ch: int, stride: int, dropout_p: float = 0.0) ->
 
 
 class TracerNet(nn.Module):
+    """pool="avg" (default) averages the final feature map over space before
+    the heads. pool="flatten" feeds the heads the whole map instead (the
+    first head layer grows to (4 * base_width) * (in_res / 8)^2 inputs, the
+    hidden widths are unchanged), so the position of features inside the
+    patch is kept. coord_channels=True appends two input channels holding the
+    normalised row and column coordinates of every pixel (CoordConv). The
+    defaults reproduce the original network exactly."""
+
     def __init__(self, in_channels: int = IN_CHANNELS, base_width: int = 32,
-                dropout_p: float = 0.1, head_dropout_p: float = 0.2):
+                dropout_p: float = 0.1, head_dropout_p: float = 0.2,
+                pool: str = "avg", coord_channels: bool = False, in_res: int = 48):
         super().__init__()
+        if pool not in ("avg", "flatten"):
+            raise ValueError("pool must be 'avg' or 'flatten'")
+        self.coord_channels = coord_channels
         w = base_width
         # 3 stride-2 stages -> spatial dim shrinks by 8x (48 -> 6 at the
         # default patch resolution); channel width doubles each stage.
         self.encoder = nn.Sequential(
-            _conv_block(in_channels, w, stride=1),
+            _conv_block(in_channels + (2 if coord_channels else 0), w, stride=1),
             _conv_block(w, w, stride=2),
             _conv_block(w, w * 2, stride=1),
             _conv_block(w * 2, w * 2, stride=2),
             _conv_block(w * 2, w * 4, stride=1, dropout_p=dropout_p),
             _conv_block(w * 4, w * 4, stride=2),
         )
-        self.pool = nn.AdaptiveAvgPool2d(1)
         feat = w * 4
+        if pool == "avg":
+            self.pool = nn.AdaptiveAvgPool2d(1)
+            head_in = feat
+        else:
+            self.pool = nn.Flatten()
+            head_in = feat * (in_res // 8) ** 2
 
         self.step_head = nn.Sequential(
-            nn.Linear(feat, feat // 2), nn.ReLU(inplace=True), nn.Dropout(head_dropout_p),
+            nn.Linear(head_in, feat // 2), nn.ReLU(inplace=True), nn.Dropout(head_dropout_p),
             nn.Linear(feat // 2, 2),
         )
         self.stop_head = nn.Sequential(
-            nn.Linear(feat, feat // 2), nn.ReLU(inplace=True), nn.Dropout(head_dropout_p),
+            nn.Linear(head_in, feat // 2), nn.ReLU(inplace=True), nn.Dropout(head_dropout_p),
             nn.Linear(feat // 2, 1),
         )
 
     def forward(self, x: torch.Tensor):
+        if self.coord_channels:
+            b, _, h, w = x.shape
+            rows = torch.linspace(-1.0, 1.0, h, device=x.device, dtype=x.dtype).view(1, 1, h, 1).expand(b, 1, h, w)
+            cols = torch.linspace(-1.0, 1.0, w, device=x.device, dtype=x.dtype).view(1, 1, 1, w).expand(b, 1, h, w)
+            x = torch.cat([x, rows, cols], dim=1)
         z = self.encoder(x)
         z = self.pool(z).flatten(1)
         step = self.step_head(z)

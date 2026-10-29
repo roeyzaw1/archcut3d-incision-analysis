@@ -11,7 +11,7 @@ Normalization statistics are fit on the training models only.
 from __future__ import annotations
 
 import copy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
 import torch
@@ -74,6 +74,11 @@ class EvalResult:
     stop_base_rate: float = float("nan")
     angle_err_clean_deg: float = float("nan")       # clean anchors, stop=0
     angle_err_jittered_deg: float = float("nan")    # jittered anchors, stop=0
+    # mean |predicted - target| of each step component, in step units, stop=0 anchors
+    fwd_err_clean: float = float("nan")
+    fwd_err_jittered: float = float("nan")
+    right_err_clean: float = float("nan")
+    right_err_jittered: float = float("nan")
 
 
 @torch.no_grad()
@@ -106,6 +111,7 @@ def evaluate(net: TracerNet, loader, device: str) -> EvalResult:
 
     kinds = getattr(loader.dataset, "kinds", None)
     err_clean = err_jit = float("nan")
+    comp_vals = {}
     if kinds is not None:
         for kind, name in ((0, "clean"), (1, "jit")):
             sel = interior & (kinds == kind)
@@ -114,13 +120,23 @@ def evaluate(net: TracerNet, loader, device: str) -> EvalResult:
                 err_clean = val
             else:
                 err_jit = val
+            comp = {}
+            if sel.any():
+                diff = np.abs(pred_step[sel] - tgt_step[sel])
+                comp = {"fwd": float(diff[:, 0].mean()), "right": float(diff[:, 1].mean())}
+            for c in ("fwd", "right"):
+                comp_vals[f"{c}_{name}"] = comp.get(c, float("nan"))
 
     return EvalResult(loss=float(np.mean(losses)), step_loss=float(np.mean(step_losses)),
                       stop_loss=float(np.mean(stop_losses)), mean_angle_err_deg=mean_ang,
                       stop_accuracy=sm["accuracy"], n=len(tgt_stop),
                       stop_auroc=sm["auroc"], stop_precision=sm["precision"],
                       stop_recall=sm["recall"], stop_base_rate=sm["base_rate"],
-                      angle_err_clean_deg=err_clean, angle_err_jittered_deg=err_jit)
+                      angle_err_clean_deg=err_clean, angle_err_jittered_deg=err_jit,
+                      fwd_err_clean=comp_vals.get("fwd_clean", float("nan")),
+                      fwd_err_jittered=comp_vals.get("fwd_jit", float("nan")),
+                      right_err_clean=comp_vals.get("right_clean", float("nan")),
+                      right_err_jittered=comp_vals.get("right_jit", float("nan")))
 
 
 @dataclass
@@ -137,12 +153,13 @@ class FoldResult:
     seed: int
     keep_channels: tuple = (0, 1, 2)
     freeze_encoder: bool = False
+    model_kwargs: dict = field(default_factory=dict)
 
 
 def train_one_split(samples: TracerSamples, test_group: int, epochs: int = 150, patience: int = 20,
                     lr: float = 1e-3, batch_size: int = 64, device: str = "cpu", seed: int = 0,
                     verbose: bool = True, keep_channels=(0, 1, 2),
-                    freeze_encoder: bool = False) -> FoldResult:
+                    freeze_encoder: bool = False, model_kwargs=None) -> FoldResult:
     """Train on the training models, early-stop on the validation model, and
     report metrics on the held-out test model (see module docstring).
 
@@ -151,14 +168,15 @@ def train_one_split(samples: TracerSamples, test_group: int, epochs: int = 150, 
     freeze_encoder : keep the encoder at its random initialisation and train
                      only the two heads. BatchNorm running statistics still
                      update in train mode, and the encoder's dropout stays
-                     active during training."""
+                     active during training.
+    model_kwargs   : extra arguments for TracerNet (pooling / CoordConv variants)"""
     split = nested_split(samples, test_group)
     stats = compute_norm_stats(_subset(samples, split.train_idx))   # fit on train only
     train_loader, val_loader, test_loader = make_nested_dataloaders(
         samples, stats, split, batch_size=batch_size, seed=seed, keep_channels=keep_channels)
 
     torch.manual_seed(seed)          # weight init and dropout masks
-    net = TracerNet().to(device)
+    net = TracerNet(**(model_kwargs or {})).to(device)
     if freeze_encoder:
         for p in net.encoder.parameters():
             p.requires_grad = False
@@ -210,4 +228,5 @@ def train_one_split(samples: TracerSamples, test_group: int, epochs: int = 150, 
     return FoldResult(net=net, stats=stats, history=history, best_val_loss=best_val,
                       val=val_final, test=test_final, test_group=split.test_group,
                       val_group=split.val_group, train_groups=train_groups, seed=seed,
-                      keep_channels=tuple(keep_channels), freeze_encoder=freeze_encoder)
+                      keep_channels=tuple(keep_channels), freeze_encoder=freeze_encoder,
+                      model_kwargs=dict(model_kwargs or {}))

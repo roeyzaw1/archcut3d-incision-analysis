@@ -179,3 +179,51 @@ def test_subsample_groups_caps_every_group_except_the_exempt_one():
     assert sub.group_names == ds.group_names and len(sub.meta) == len(sub)
     again = subsample_groups(ds, cap, seed=0, exempt=(1,))
     assert np.array_equal(sub.steps, again.steps)
+
+
+def test_default_network_is_unchanged_and_variants_work():
+    import torch
+    from archcut3d.ml.model import TracerNet
+    assert TracerNet().num_params() == 304_451                       # the original architecture, exactly
+    x = torch.randn(3, 4, 48, 48)
+    for kw in ({"pool": "flatten"}, {"coord_channels": True}, {"pool": "flatten", "coord_channels": True}):
+        net = TracerNet(**kw).eval()
+        step, stop = net(x)
+        assert step.shape == (3, 2) and stop.shape == (3,)
+    assert TracerNet(pool="flatten").num_params() > TracerNet().num_params() + 4000 * 64 // 2
+    assert TracerNet(coord_channels=True).encoder[0][0].in_channels == 6
+
+
+def test_coordconv_adds_normalised_row_and_column_channels():
+    import torch
+    from archcut3d.ml.model import TracerNet
+    net = TracerNet(coord_channels=True).eval()
+    seen = {}
+    net.encoder[0].register_forward_hook(lambda m, inp, out: seen.update(x=inp[0]))
+    net(torch.zeros(2, 4, 48, 48))
+    x = seen["x"]
+    assert x.shape == (2, 6, 48, 48)
+    assert x[0, 4, 0, 0] == -1 and x[0, 4, -1, 0] == 1 and x[0, 5, 0, 0] == -1 and x[0, 5, 0, -1] == 1
+    assert torch.all(x[:, 4, :, 0] == x[:, 4, :, -1])                    # row channel varies down the rows only
+
+
+def test_variant_training_and_component_errors():
+    from archcut3d.ml.train import train_one_split
+    ds = _three_model_dataset()
+    res = train_one_split(ds, test_group=0, epochs=2, patience=99, batch_size=16, verbose=False,
+                          model_kwargs={"pool": "flatten"})
+    assert res.model_kwargs == {"pool": "flatten"}
+    t = res.test
+    assert all(np.isfinite([t.fwd_err_clean, t.fwd_err_jittered, t.right_err_clean, t.right_err_jittered]))
+
+
+def test_checkpoint_keeps_model_kwargs(tmp_path):
+    from archcut3d.ml.experiments import fold_path, load_fold, save_fold
+    from archcut3d.ml.train import train_one_split
+    ds = _three_model_dataset()
+    fold = train_one_split(ds, test_group=0, epochs=1, patience=99, batch_size=16, verbose=False,
+                           model_kwargs={"coord_channels": True})
+    path = fold_path(str(tmp_path), "coordconv", "A.wrl", 0)
+    save_fold(path, fold, "coordconv", "A.wrl")
+    net, _, meta = load_fold(path)
+    assert net.coord_channels and meta["model_kwargs"] == {"coord_channels": True}
