@@ -99,7 +99,7 @@ class GeometricMinimumPolicy:
             denom = y0 - 2 * y1 + y2
             if denom > 1e-15:
                 offset = s[k] + float(np.clip(0.5 * (y0 - y2) / denom, -1.0, 1.0)) * (s[1] - s[0])
-        return float(offset), float(-corrected[k])
+        return float(offset), max(0.0, float(-corrected[k]))
 
     def lateral_offset_mm(self, patch: np.ndarray, mask: np.ndarray):
         """Lateral position (mm, positive = right) of the profile minimum one

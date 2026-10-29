@@ -9,6 +9,12 @@ with the next hand point:
     step_dist_mm        mean distance between predicted and hand next point
     step_angle_deg      mean angle between predicted and hand step vectors
     step_lateral_abs_mm mean |sideways error| in the heading frame
+    step_to_geo_mm      mean distance between the predicted next point and the
+                        geometric tracer's next point from the same pose
+    frac_step_closer_to_hand
+                        fraction of points where the predicted next point is
+                        closer to the hand's next point than to the geometric
+                        tracer's (no closed-loop drift involved)
 
 Closed loop: trace from the start of every hand line (rollout.trace_hand_line)
 and measure, per hand point, the distance to the predicted path:
@@ -18,7 +24,11 @@ On departure points, also:
                         (at that hand point) to the predicted path
     frac_closer_to_hand fraction of departure points where the predicted
                         path is closer to the hand point than to the
-                        geometric-minimum position
+                        geometric-minimum position, counting only points
+                        where the path passes within NEARBY_MM of either
+                        (once it has drifted further away the comparison says
+                        nothing about which one it was following);
+                        n_path_nearby is the number of points counted
 Path-level metrics (segment "all" only, hand-length weighted over traces):
 chamfer, both one-way distances, coverage, length ratio, endpoint error.
 """
@@ -31,8 +41,11 @@ import numpy as np
 
 from .anchors import AnchorTable
 from .dataset import DEFAULT_PATCH_MM, DEFAULT_PATCH_RES, DEFAULT_STEP_MM, sample_patch
+from .policies import GeometricMinimumPolicy
 from .rollout import (COVERAGE_THRESHOLDS_MM, hand_point_distances, points_to_polyline_distance,
                       polyline_length_mm, trace_hand_line)
+
+NEARBY_MM = 0.5
 
 PATH_METRICS = ["pred_to_hand_mm", "hand_to_pred_mm", "chamfer_mm"] + \
                [f"coverage_{t:g}" for t in COVERAGE_THRESHOLDS_MM] + ["length_ratio", "endpoint_error_mm"]
@@ -47,25 +60,35 @@ def _angle_deg(a: np.ndarray, b: np.ndarray) -> np.ndarray:
 
 
 def one_step_errors(policy, example, table: AnchorTable, step_mm: float = DEFAULT_STEP_MM,
-                    patch_mm: float = DEFAULT_PATCH_MM, out_res: int = DEFAULT_PATCH_RES):
-    """Per-hand-point one-step errors; returns dict of (K,) arrays."""
+                    patch_mm: float = DEFAULT_PATCH_MM, out_res: int = DEFAULT_PATCH_RES,
+                    geo_ref=None):
+    """Per-hand-point one-step errors; returns dict of (K,) arrays.
+    `geo_ref` is the geometric tracer whose step is the reference for
+    step_to_geo_mm (default: GeometricMinimumPolicy with its default band)."""
+    if geo_ref is None:
+        geo_ref = GeometricMinimumPolicy(step_mm=step_mm, patch_mm=patch_mm, out_res=out_res)
     px = example.pixel_size
     step_px = step_mm / px
     K = len(table)
-    dist, ang, lat = np.full(K, np.nan), np.full(K, np.nan), np.full(K, np.nan)
+    dist, lat, to_geo, closer = (np.full(K, np.nan) for _ in range(4))
     pred_step_vec = np.zeros((K, 2))
     for k in range(K):
         h = table.heading[k]
         patch, mask = sample_patch(example.channels, example.mask, px, table.pos[k], h, patch_mm, out_res)
-        (fwd, right), _ = policy(patch, mask)
         rvec = np.array([-h[1], h[0]])
+        (fwd, right), _ = policy(patch, mask)
         pred_vec = (fwd * h + right * rvec) * step_px
+        (gf, gr), _ = geo_ref(patch, mask)
+        geo_vec = (gf * h + gr * rvec) * step_px
         pred_step_vec[k] = pred_vec
         err = (table.pos[k] + pred_vec) - table.next_pos[k]
         dist[k] = np.linalg.norm(err) * px
         lat[k] = abs(float(err @ rvec)) * px
+        to_geo[k] = np.linalg.norm(pred_vec - geo_vec) * px
+        closer[k] = float(dist[k] < to_geo[k])
     ang = _angle_deg(pred_step_vec, table.next_pos - table.pos)
-    return {"step_dist_mm": dist, "step_angle_deg": ang, "step_lateral_abs_mm": lat}
+    return {"step_dist_mm": dist, "step_angle_deg": ang, "step_lateral_abs_mm": lat,
+            "step_to_geo_mm": to_geo, "step_closer_to_hand": closer}
 
 
 def _nanmean(x):
@@ -112,11 +135,14 @@ def evaluate_policy(policy, example, table: AnchorTable, can_stop: bool,
                "step_dist_mm": _nanmean(one["step_dist_mm"][sel]),
                "step_angle_deg": _nanmean(one["step_angle_deg"][sel]),
                "step_lateral_abs_mm": _nanmean(one["step_lateral_abs_mm"][sel]),
+               "step_to_geo_mm": _nanmean(one["step_to_geo_mm"][sel]),
+               "frac_step_closer_to_hand": _nanmean(one["step_closer_to_hand"][sel]),
                "cl_hand_to_pred_mm": _nanmean(d_hand[sel])}
         if name == "departure":
             row["geo_to_pred_mm"] = _nanmean(d_geo[sel])
-            both = sel & np.isfinite(d_hand) & np.isfinite(d_geo)
-            row["frac_closer_to_hand"] = float((d_hand[both] < d_geo[both]).mean()) if both.any() else float("nan")
+            near = sel & np.isfinite(d_hand) & np.isfinite(d_geo) & (np.fmin(d_hand, d_geo) <= NEARBY_MM)
+            row["n_path_nearby"] = int(near.sum())
+            row["frac_closer_to_hand"] = float((d_hand[near] < d_geo[near]).mean()) if near.any() else float("nan")
         if name == "all" and traces:
             w = np.array(weights)
             for k in PATH_METRICS:

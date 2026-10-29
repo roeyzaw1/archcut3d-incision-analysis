@@ -39,6 +39,26 @@ def test_hand_line_beside_the_groove_splits_the_policies_on_departure_points():
     assert geo["departure"]["cl_hand_to_pred_mm"] > 0.2 and geo["departure"]["frac_closer_to_hand"] < 0.2
     assert geo["departure"]["geo_to_pred_mm"] < 0.05 and straight["departure"]["geo_to_pred_mm"] > 0.2
     assert geo["departure"]["step_lateral_abs_mm"] > 0.2 > straight["departure"]["step_lateral_abs_mm"]
+    # one-step view, no closed-loop drift: the geometric tracer is by definition at the geometric
+    # tracer's step; straight-ahead is at the hand's next point, 0.3 mm from it
+    assert geo["departure"]["step_to_geo_mm"] < 1e-9 and geo["departure"]["frac_step_closer_to_hand"] == 0.0
+    assert abs(straight["departure"]["step_to_geo_mm"] - 0.3) < 0.05 and straight["departure"]["frac_step_closer_to_hand"] == 1.0
+    assert straight["departure"]["n_path_nearby"] == straight["departure"]["n_points"]
     # normal segment is empty here
     assert geo["normal"]["n_points"] == 0 and np.isnan(geo["normal"]["step_dist_mm"])
     assert "max_steps" in geo["all"]["stop_reasons"]
+
+
+def test_closer_to_hand_is_only_counted_where_the_path_is_nearby():
+    # a path 2 mm from both the hand line and the groove says nothing about which it follows
+    ex, table = _setup(0.3)
+    label_departures([table], depth_percentile=1.0)
+
+    class Veer:                      # steers steadily away from everything
+        can_stop = False
+
+        def __call__(self, patch, mask):
+            return np.array([1.0, 0.8]), 0.0
+
+    seg, _, _ = evaluate_policy(Veer(), ex, table, can_stop=False)
+    assert seg["departure"]["n_path_nearby"] < seg["departure"]["n_points"]
