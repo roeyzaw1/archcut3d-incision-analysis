@@ -97,3 +97,22 @@ def test_test_model_is_evaluated_only_once_after_training(monkeypatch):
     assert sizes.count(n_test) == 1 and sizes[-1] == n_test      # test model: once, last
     assert sizes.count(n_val) == 3 + 1                           # validation: per epoch + final
     assert res.test_group == 0 and res.val_group == 1 and res.train_groups == [2]
+
+
+def test_anchor_kinds_and_pose_are_recorded():
+    ds = make_dataset([FakeExample("A.wrl", [straight_trace(100, 40, 140)])], n_jitter=2, seed=0)
+    kinds = ds.kinds
+    assert set(kinds.tolist()) == {0, 1, 2}
+    n_clean = int((kinds == 0).sum())
+    assert int((kinds == 1).sum()) == 2 * n_clean
+    for m, k in zip(ds.meta, kinds):
+        assert m["center"].shape == (2,) and abs(np.linalg.norm(m["heading"]) - 1.0) < 1e-9
+        if k == 0:
+            assert abs(m["center"][1] - 100.0) < 1e-9       # clean anchors lie on the hand line
+
+
+def test_evaluate_splits_angle_error_by_anchor_kind():
+    from archcut3d.ml.train import train_one_split
+    ds = _three_model_dataset()
+    res = train_one_split(ds, test_group=0, epochs=2, patience=99, batch_size=16, verbose=False)
+    assert np.isfinite(res.test.angle_err_clean_deg) and np.isfinite(res.test.angle_err_jittered_deg)

@@ -78,6 +78,8 @@ class EvalResult:
     stop_precision: float = float("nan")
     stop_recall: float = float("nan")
     stop_base_rate: float = float("nan")
+    angle_err_clean_deg: float = float("nan")       # clean anchors, stop=0
+    angle_err_jittered_deg: float = float("nan")    # jittered anchors, stop=0
 
 
 @torch.no_grad()
@@ -108,11 +110,23 @@ def evaluate(net: TracerNet, loader, device: str) -> EvalResult:
     mean_ang = float(np.nanmean(ang[interior])) if interior.any() else float("nan")
     sm = stop_metrics(stop_prob, tgt_stop)
 
+    kinds = getattr(loader.dataset, "kinds", None)
+    err_clean = err_jit = float("nan")
+    if kinds is not None:
+        for kind, name in ((0, "clean"), (1, "jit")):
+            sel = interior & (kinds == kind)
+            val = float(np.nanmean(ang[sel])) if sel.any() else float("nan")
+            if name == "clean":
+                err_clean = val
+            else:
+                err_jit = val
+
     return EvalResult(loss=float(np.mean(losses)), step_loss=float(np.mean(step_losses)),
                       stop_loss=float(np.mean(stop_losses)), mean_angle_err_deg=mean_ang,
                       stop_accuracy=sm["accuracy"], n=len(tgt_stop),
                       stop_auroc=sm["auroc"], stop_precision=sm["precision"],
-                      stop_recall=sm["recall"], stop_base_rate=sm["base_rate"])
+                      stop_recall=sm["recall"], stop_base_rate=sm["base_rate"],
+                      angle_err_clean_deg=err_clean, angle_err_jittered_deg=err_jit)
 
 
 @dataclass

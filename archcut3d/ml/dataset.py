@@ -268,12 +268,18 @@ class TracerSamples:
     steps: np.ndarray        # (N, 2) float32  (forward, right) in step_mm units
     stops: np.ndarray        # (N,) float32    0 / 1
     groups: np.ndarray       # (N,) int        index into group_names (scanned model) for splitting
-    meta: list               # length N: dicts {source_file, trace, point, jitter}
+    meta: list               # length N: dicts {source_file, trace, point, jitter, center, heading}
     group_names: list = field(default_factory=list)   # distinct source_file values, sorted; group g = group_names[g]
     seed: object = None      # int seed the jitter draws came from (None if unseeded or a Generator was passed)
 
     def __len__(self):
         return len(self.stops)
+
+    @property
+    def kinds(self) -> np.ndarray:
+        """Per-sample anchor kind: 0 clean, 1 jittered, 2 past-the-end."""
+        j = np.array([m["jitter"] for m in self.meta])
+        return np.where(j == 0, 0, np.where(j > 0, 1, 2))
 
 
 def make_samples(example: "LabeledExample",
@@ -339,7 +345,8 @@ def make_samples(example: "LabeledExample",
 
             for center, heading, jid in variants:
                 emit(center, heading, np.asarray(ahead) - center, stop,
-                     {"source_file": example.source_file, "trace": ti, "point": i, "jitter": jid})
+                     {"source_file": example.source_file, "trace": ti, "point": i, "jitter": jid,
+                      "center": np.array(center, dtype=np.float64), "heading": np.array(heading, dtype=np.float64)})
 
         # a few anchors stepping past the endpoint, all stop=1, so the tracer
         # learns to halt rather than run off the mesh
@@ -349,7 +356,8 @@ def make_samples(example: "LabeledExample",
                 center = np.asarray(line[end_idx], float) + h * step_px * k
                 emit(center, h, h * step_px, 1.0,
                      {"source_file": example.source_file, "trace": ti,
-                      "point": end_idx, "jitter": -1})
+                      "point": end_idx, "jitter": -1,
+                      "center": np.array(center, dtype=np.float64), "heading": np.array(h, dtype=np.float64)})
 
     n = len(stops)
     return TracerSamples(

@@ -104,6 +104,7 @@ class TracerTorchDataset(Dataset):
         self.steps = samples.steps.astype(np.float32)
         self.stops = samples.stops.astype(np.float32)
         self.indices = np.arange(len(samples)) if indices is None else np.asarray(indices, dtype=int)
+        self.kinds = samples.kinds[self.indices]     # 0 clean, 1 jittered, 2 past-the-end
 
     def __len__(self):
         return len(self.indices)
