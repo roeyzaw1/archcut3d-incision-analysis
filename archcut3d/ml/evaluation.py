@@ -14,7 +14,29 @@ with the next hand point:
     frac_step_closer_to_hand
                         fraction of points where the predicted next point is
                         closer to the hand's next point than to the geometric
-                        tracer's (no closed-loop drift involved)
+                        tracer's (no closed-loop drift involved). Note that a
+                        straight-ahead step scores 1 here: poses are aligned
+                        with the hand tangent, so "no lateral move" is
+                        already close to the hand. Use the next two instead.
+    lat_corr_geo, lat_slope_geo
+                        correlation and least-squares slope of the policy's
+                        sideways step against the geometric tracer's sideways
+                        step over the points (0 slope: ignores the local
+                        minimum; 1: reproduces it); NaN where one of them
+                        does not vary
+    jit_*               the same one-step comparison from deliberately
+                        displaced poses (JIT_PER_POINT per hand point, fixed
+                        seed, position up to 0.25 mm and heading up to 15
+                        degrees off the hand line), where "straight on" is no
+                        longer the hand's direction and the policy has to
+                        choose between steering back to the hand line and
+                        steering to the geometric minimum:
+                        jit_start_to_line_mm   displacement of the pose from the hand line
+                        jit_pred_to_line_mm    distance of the predicted next point from the hand line
+                        jit_to_hand_next_mm    ... from the hand's next point
+                        jit_to_geo_next_mm     ... from the geometric tracer's next point
+                        jit_frac_closer_to_hand fraction of poses where the
+                                               prediction is nearer the hand's next point
 
 Closed loop: trace from the start of every hand line (rollout.trace_hand_line)
 and measure, per hand point, the distance to the predicted path:
@@ -70,7 +92,7 @@ def one_step_errors(policy, example, table: AnchorTable, step_mm: float = DEFAUL
     px = example.pixel_size
     step_px = step_mm / px
     K = len(table)
-    dist, lat, to_geo, closer = (np.full(K, np.nan) for _ in range(4))
+    dist, lat, to_geo, closer, pred_lat, geo_lat, hand_lat = (np.full(K, np.nan) for _ in range(7))
     pred_step_vec = np.zeros((K, 2))
     for k in range(K):
         h = table.heading[k]
@@ -86,9 +108,79 @@ def one_step_errors(policy, example, table: AnchorTable, step_mm: float = DEFAUL
         lat[k] = abs(float(err @ rvec)) * px
         to_geo[k] = np.linalg.norm(pred_vec - geo_vec) * px
         closer[k] = float(dist[k] < to_geo[k])
+        pred_lat[k] = float(pred_vec @ rvec) * px
+        geo_lat[k] = float(geo_vec @ rvec) * px
+        hand_lat[k] = float((table.next_pos[k] - table.pos[k]) @ rvec) * px
     ang = _angle_deg(pred_step_vec, table.next_pos - table.pos)
     return {"step_dist_mm": dist, "step_angle_deg": ang, "step_lateral_abs_mm": lat,
-            "step_to_geo_mm": to_geo, "step_closer_to_hand": closer}
+            "step_to_geo_mm": to_geo, "step_closer_to_hand": closer,
+            "pred_lat_mm": pred_lat, "geo_lat_mm": geo_lat, "hand_lat_mm": hand_lat}
+
+
+JIT_PER_POINT = 4
+JIT_POS_MM = 0.25
+JIT_DEG = 15.0
+JIT_SEED = 20240611
+
+
+def jittered_one_step(policy, example, table: AnchorTable, step_mm: float = DEFAULT_STEP_MM,
+                      patch_mm: float = DEFAULT_PATCH_MM, out_res: int = DEFAULT_PATCH_RES,
+                      geo_ref=None, n_jit: int = JIT_PER_POINT, seed: int = JIT_SEED):
+    """One-step comparison from displaced poses (see the module docstring).
+    The poses depend only on the table and the seed, so every policy is
+    evaluated from the same ones. Returns dict of (K,) arrays (means over the
+    n_jit poses of each hand point)."""
+    if geo_ref is None:
+        geo_ref = GeometricMinimumPolicy(step_mm=step_mm, patch_mm=patch_mm, out_res=out_res)
+    px = example.pixel_size
+    step_px = step_mm / px
+    K = len(table)
+    rng = np.random.default_rng(seed)
+    names = ("jit_start_to_line_mm", "jit_pred_to_line_mm", "jit_to_hand_next_mm", "jit_to_geo_next_mm",
+             "jit_frac_closer_to_hand")
+    out = {n: np.full(K, np.nan) for n in names}
+    lines = {}
+    for k in range(K):
+        ti = int(table.trace[k])
+        if ti not in lines:
+            rows = np.flatnonzero(table.trace == ti)
+            lines[ti] = np.vstack([table.pos[rows], table.next_pos[rows[-1]][None, :]])
+        acc = {n: [] for n in names}
+        for _ in range(n_jit):
+            ang = np.radians(rng.uniform(-JIT_DEG, JIT_DEG))
+            c, sn = np.cos(ang), np.sin(ang)
+            h0 = table.heading[k]
+            h = np.array([c * h0[0] - sn * h0[1], sn * h0[0] + c * h0[1]])
+            r = (JIT_POS_MM / px) * np.sqrt(rng.random())
+            phi = rng.uniform(0, 2 * np.pi)
+            pos = table.pos[k] + r * np.array([np.cos(phi), np.sin(phi)])
+            patch, mask = sample_patch(example.channels, example.mask, px, pos, h, patch_mm, out_res)
+            rvec = np.array([-h[1], h[0]])
+            (fwd, right), _ = policy(patch, mask)
+            (gf, gr), _ = geo_ref(patch, mask)
+            pred_next = pos + (fwd * h + right * rvec) * step_px
+            geo_next = pos + (gf * h + gr * rvec) * step_px
+            d_hand = np.linalg.norm(pred_next - table.next_pos[k]) * px
+            d_geo = np.linalg.norm(pred_next - geo_next) * px
+            acc["jit_start_to_line_mm"].append(points_to_polyline_distance(pos[None, :], lines[ti])[0] * px)
+            acc["jit_pred_to_line_mm"].append(points_to_polyline_distance(pred_next[None, :], lines[ti])[0] * px)
+            acc["jit_to_hand_next_mm"].append(d_hand)
+            acc["jit_to_geo_next_mm"].append(d_geo)
+            acc["jit_frac_closer_to_hand"].append(float(d_hand < d_geo))
+        for n in names:
+            out[n][k] = float(np.mean(acc[n]))
+    return out
+
+
+def _corr_slope(y, x):
+    """(Pearson r, least-squares slope of y on x) over finite pairs; NaN if
+    x or y does not vary or there are fewer than 5 pairs."""
+    y, x = np.asarray(y, float), np.asarray(x, float)
+    ok = np.isfinite(x) & np.isfinite(y)
+    if ok.sum() < 5 or np.std(x[ok]) < 1e-9 or np.std(y[ok]) < 1e-9:
+        return float("nan"), float("nan")
+    x, y = x[ok], y[ok]
+    return float(np.corrcoef(x, y)[0, 1]), float(np.cov(x, y, ddof=0)[0, 1] / np.var(x))
 
 
 def _nanmean(x):
@@ -107,6 +199,7 @@ def evaluate_policy(policy, example, table: AnchorTable, can_stop: bool,
     px = example.pixel_size
     K = len(table)
     one = one_step_errors(policy, example, table, step_mm)
+    jit = jittered_one_step(policy, example, table, step_mm)
 
     d_hand = np.full(K, np.nan)
     d_geo = np.full(K, np.nan)
@@ -138,6 +231,10 @@ def evaluate_policy(policy, example, table: AnchorTable, can_stop: bool,
                "step_to_geo_mm": _nanmean(one["step_to_geo_mm"][sel]),
                "frac_step_closer_to_hand": _nanmean(one["step_closer_to_hand"][sel]),
                "cl_hand_to_pred_mm": _nanmean(d_hand[sel])}
+        row["lat_corr_geo"], row["lat_slope_geo"] = _corr_slope(one["pred_lat_mm"][sel], one["geo_lat_mm"][sel])
+        row["lat_corr_hand"], _ = _corr_slope(one["pred_lat_mm"][sel], one["hand_lat_mm"][sel])
+        for n, v in jit.items():
+            row[n] = _nanmean(v[sel])
         if name == "departure":
             row["geo_to_pred_mm"] = _nanmean(d_geo[sel])
             near = sel & np.isfinite(d_hand) & np.isfinite(d_geo) & (np.fmin(d_hand, d_geo) <= NEARBY_MM)

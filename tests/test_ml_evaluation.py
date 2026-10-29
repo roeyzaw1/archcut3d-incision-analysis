@@ -62,3 +62,27 @@ def test_closer_to_hand_is_only_counted_where_the_path_is_nearby():
 
     seg, _, _ = evaluate_policy(Veer(), ex, table, can_stop=False)
     assert seg["departure"]["n_path_nearby"] < seg["departure"]["n_points"]
+
+
+def test_corr_slope_helper():
+    from archcut3d.ml.evaluation import _corr_slope
+    x = np.linspace(-1, 1, 20)
+    r, slope = _corr_slope(0.5 * x + 0.1, x)
+    assert abs(r - 1.0) < 1e-9 and abs(slope - 0.5) < 1e-9
+    assert np.isnan(_corr_slope(np.zeros(20), x)[0])                 # no variation in the policy
+    assert np.isnan(_corr_slope(x[:3], x[:3])[0])                    # too few points
+
+
+def test_jittered_poses_separate_geometry_seeking_from_straight_on():
+    ex, table = _setup(0.3)                       # hand line 0.3 mm beside the groove
+    label_departures([table], depth_percentile=1.0)
+    geo, _, _ = evaluate_policy(GeometricMinimumPolicy(), ex, table, can_stop=False)
+    straight, _, _ = evaluate_policy(StraightAheadPolicy(), ex, table, can_stop=False)
+    g, s = geo["departure"], straight["departure"]
+    assert g["jit_frac_closer_to_hand"] == 0.0 and g["jit_to_geo_next_mm"] < 1e-9
+    assert s["jit_frac_closer_to_hand"] > 0.5      # a displaced pose stepping on stays nearer the hand line
+    assert g["jit_pred_to_line_mm"] > 0.15         # the geometric tracer heads for the groove, 0.3 mm from the hand line
+    assert s["jit_start_to_line_mm"] > 0.0 and abs(s["jit_start_to_line_mm"] - g["jit_start_to_line_mm"]) < 1e-9
+    # both views are identical for every policy: same poses
+    again, _, _ = evaluate_policy(StraightAheadPolicy(), ex, table, can_stop=False)
+    assert again["departure"]["jit_pred_to_line_mm"] == s["jit_pred_to_line_mm"]
