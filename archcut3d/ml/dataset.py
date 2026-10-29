@@ -135,9 +135,12 @@ def resample_polyline(pts_colrow: np.ndarray, spacing_mm: float, pixel_size: flo
 #
 # A training/inference step looks at a small square window of the grid,
 # rotated so "forward" (the current heading) points up. Cropping at a fixed
-# PHYSICAL size and resampling to a fixed pixel resolution makes the 4.6x
-# pixel-size spread across the labeled models irrelevant -- an incision of a
-# given real width fills the same fraction of every patch.
+# PHYSICAL size and resampling to a fixed pixel resolution puts every model
+# on the same physical scale: an incision of a given real width fills the
+# same fraction of every patch. The labeled models span 0.027-0.125 mm/px
+# (4.6x); the full collection of scans spans 0.011-0.359 mm/px (about 33x).
+# Coarse scans are upsampled to the patch resolution (less real detail per
+# patch) and fine scans are downsampled.
 # --------------------------------------------------------------------------
 
 DEFAULT_PATCH_MM = 2.0

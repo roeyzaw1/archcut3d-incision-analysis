@@ -1,12 +1,14 @@
 """The tracer model: heading-canonicalized patch -> (step vector, stop prob).
 
-A small conv encoder (~300k params -- a scaled-down ResNet-18 *shape*, sized
-for a training set of thousands of samples rather than millions, so it
-doesn't overfit before it learns anything) feeding two heads: step
-regression and stop probability. Dropout stays active at inference time on
-purpose (MC dropout) -- running several stochastic forward passes and
-looking at the spread is the planned uncertainty signal for later
-active-learning (not wired up yet).
+A small conv encoder (~300k parameters, much smaller than ResNet-18, chosen
+for a training set of a few thousand samples) feeding two heads: step
+regression and stop probability.
+
+Dropout layers exist (spatial dropout in one encoder block, ordinary dropout
+in the heads), but evaluation runs the network in eval mode, so dropout is
+inactive at inference. Monte-Carlo dropout (keeping dropout on and using the
+spread of several stochastic passes as an uncertainty estimate) is planned,
+not implemented.
 
 Input:  (B, 4, R, R) -- see torch_data.normalize_patches for the 4 channels
         (height, local_relief, curvature, mask) and what R (patch
@@ -76,10 +78,11 @@ class TracerNet(nn.Module):
 def tracer_loss(step_pred: torch.Tensor, stop_logit_pred: torch.Tensor,
                 step_target: torch.Tensor, stop_target: torch.Tensor,
                 stop_weight: float = 0.2):
-    """smooth-L1 on the step vector + a lightly-weighted BCE on the stop
-    logit. stop_weight defaults small: step-direction accuracy matters more
-    than stop detection, since the user can always stop/trim a trace by
-    hand in the app -- see the feedback-ml-priorities memory."""
+    """smooth-L1 on the step vector + a lightly weighted BCE on the stop
+    logit. stop_weight defaults to 0.2 so the step term dominates: a wrong
+    step moves the trace off the incision, whereas a missed or spurious stop
+    only changes where the trace ends, which can be corrected afterwards by
+    trimming or extending the trace."""
     step_loss = F.smooth_l1_loss(step_pred, step_target)
     stop_loss = F.binary_cross_entropy_with_logits(stop_logit_pred, stop_target)
     total = step_loss + stop_weight * stop_loss
