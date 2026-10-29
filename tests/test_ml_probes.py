@@ -105,3 +105,16 @@ def test_pearson_survives_a_scale_shift_between_models_where_r2_does_not():
     Xt, yt, _ = _two_model_data(rng, w, "regression")
     r2, _, r = fit_probe(X, y, g, Xt, 5.0 * yt + 30.0, "regression")      # test model has another scale and offset
     assert r2 < 0.0 and r > 0.99
+
+
+def test_zscore_by_group_standardises_within_each_model():
+    from archcut3d.ml.experiments import zscore_by_group
+    y = np.concatenate([np.arange(10.0), 1000.0 + 50.0 * np.arange(10.0), np.full(5, 3.0)])
+    g = np.repeat([0, 1, 2], [10, 10, 5])
+    y[2] = np.nan
+    z = zscore_by_group(y, g)
+    for k in (0, 1):
+        v = z[g == k]
+        v = v[np.isfinite(v)]
+        assert abs(v.mean()) < 1e-9 and abs(v.std() - 1.0) < 1e-9
+    assert np.isnan(z[2]) and np.all(np.isnan(z[g == 2]))               # NaN stays NaN; no spread -> NaN

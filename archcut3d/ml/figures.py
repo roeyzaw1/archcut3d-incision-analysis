@@ -110,10 +110,10 @@ def plot_pca_cumvar(cum_rows, out_path: str):
     plt.close(fig)
 
 
-def plot_probe_lines(probe_rows, target: str, out_path: str):
+def plot_probe_lines(probe_rows, target: str, out_path: str, metric: str = None):
     """Probe score per encoder block, trained vs random encoder (mean and
-    std over folds and seeds)."""
-    rows = [r for r in probe_rows if r["target"] == target]
+    std over folds and seeds). `metric` selects R2, R2_z or AUROC rows."""
+    rows = [r for r in probe_rows if r["target"] == target and (metric is None or r["metric"] == metric)]
     stats = _group_stats(rows, ("encoder", "block"), "score")
     fig, ax = plt.subplots(figsize=(5.5, 3.8))
     metric = rows[0]["metric"] if rows else ""
@@ -127,7 +127,7 @@ def plot_probe_lines(probe_rows, target: str, out_path: str):
     ax.set_xlabel("encoder block")
     ax.set_ylabel(f"{metric} on the test model")
     ax.set_title(target.replace("_", " "))
-    ax.axhline(0.0 if metric == "R2" else 0.5, color="gray", lw=0.5, ls=":")
+    ax.axhline(0.5 if metric == "AUROC" else 0.0, color="gray", lw=0.5, ls=":")
     ax.legend()
     fig.tight_layout()
     fig.savefig(out_path, dpi=120)

@@ -201,17 +201,22 @@ def build(out):
             targets = sorted({r["target"] for r in probes})
             body = []
             for t in targets:
-                for enc in ("trained", "random"):
-                    cells = []
-                    for b in (1, 3, 6):
-                        v = [r["score"] for r in probes if r["target"] == t and r["encoder"] == enc and r["block"] == b and r["score"] == r["score"]]
-                        cells.append(f"{np.mean(v):.2f}" if v else "n/a")
-                    pr = [r["pearson_r"] for r in probes if r["target"] == t and r["encoder"] == enc and r["block"] == 6 and r["pearson_r"] == r["pearson_r"]]
-                    metric = next(r["metric"] for r in probes if r["target"] == t)
-                    body.append([t.replace("_", " "), metric, enc] + cells + [f"{np.mean(pr):.2f}" if pr else "–"])
-            parts.append("Linear probes on the global-average-pooled output of encoder blocks (mean over folds and seeds; "
-                         "R² can be strongly negative when a probe trained on other scans meets a different relief scale, so the "
-                         "scale-free correlation of block 6 is shown too):\n\n" +
+                metrics = sorted({r["metric"] for r in probes if r["target"] == t})
+                for metric in metrics:
+                    for enc in ("trained", "random"):
+                        cells = []
+                        for b in (1, 3, 6):
+                            v = [r["score"] for r in probes if r["target"] == t and r["metric"] == metric and r["encoder"] == enc
+                                 and r["block"] == b and r["score"] == r["score"]]
+                            cells.append(f"{np.mean(v):.2f}" if v else "n/a")
+                        pr = [r["pearson_r"] for r in probes if r["target"] == t and r["metric"] == metric and r["encoder"] == enc
+                              and r["block"] == 6 and r["pearson_r"] == r["pearson_r"]]
+                        body.append([t.replace("_", " "), metric, enc] + cells + [f"{np.mean(pr):.2f}" if pr else "–"])
+            parts.append("Linear probes on the global-average-pooled output of encoder blocks, trained on the other models' anchors and "
+                         "scored on the test model (mean over folds and seeds). `R2` is in the target's own units and goes strongly "
+                         "negative when a probe trained on other scans meets a different scale (dip depth differs by orders of magnitude "
+                         "between scans); `R2_z` standardises each target within each model first; Pearson r (block 6) ignores scale "
+                         "and offset altogether. `AUROC` is for the departure label (0.5 = chance).\n\n" +
                          md_table(["target", "metric", "encoder", "block 1", "block 3", "block 6", "block 6 Pearson r"], body))
             parts.append("\n" + "\n".join(f"![{t}](figures/e3_probe_{t}.png)" for t in targets) + "\n")
 

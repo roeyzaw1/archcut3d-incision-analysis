@@ -276,6 +276,17 @@ def departure_outputs(ctx: Context):
                                  os.path.join(ctx.out, "figures", f"e0b_example_{i + 1}.png"))
 
 
+def zscore_by_group(y: np.ndarray, groups: np.ndarray) -> np.ndarray:
+    """Standardise y to zero mean and unit variance within each group (model);
+    NaN stays NaN and a group with no spread becomes NaN."""
+    out = np.full(len(y), np.nan)
+    for g in np.unique(groups):
+        sel = (groups == g) & np.isfinite(y)
+        if sel.sum() > 1 and np.std(y[sel]) > 0:
+            out[sel] = (y[sel] - y[sel].mean()) / y[sel].std()
+    return out
+
+
 def run_e3(ctx: Context):
     """PCA and layer-wise probes for the trained network (E0) and the random
     encoder (E1) of every fold. Probes are trained on the anchors (clean and
@@ -289,6 +300,10 @@ def run_e3(ctx: Context):
         idx = np.flatnonzero(ds.kinds < 2)                 # clean + jittered anchors
         targets = probe_targets(ds, idx, ctx.by_name, ctx.tables, geo)
         groups, clean = ds.groups[idx], ds.kinds[idx] == 0
+        # regression targets standardised within each model: removes the
+        # scale and offset differences between scans (dip depth differs by
+        # orders of magnitude), so a probe is scored on the relative variation only
+        targets_z = {t: zscore_by_group(targets[t], groups) for t, k in TARGETS.items() if k == "regression"}
         for g in ctx.test_groups:
             test_name = ds.group_names[g]
             is_test = groups == g
@@ -305,19 +320,23 @@ def run_e3(ctx: Context):
                     cum_rows.append({**base, "k": k, "cumulative_variance": float(cv)})
                 for b, F in enumerate(feats, 1):
                     for tname, kind in TARGETS.items():
-                        y = targets[tname]
-                        score, param, pearson = fit_probe(F[~is_test], y[~is_test], groups[~is_test],
-                                                          F[is_test], y[is_test], kind)
-                        probe_rows.append({**base, "block": b, "n_features": F.shape[1], "target": tname,
-                                           "metric": "R2" if kind == "regression" else "AUROC",
-                                           "score": score, "pearson_r": pearson, "regularisation": param})
+                        variants = [("R2" if kind == "regression" else "AUROC", targets[tname])]
+                        if kind == "regression":
+                            variants.append(("R2_z", targets_z[tname]))
+                        for metric, y in variants:
+                            score, param, pearson = fit_probe(F[~is_test], y[~is_test], groups[~is_test],
+                                                              F[is_test], y[is_test], kind)
+                            probe_rows.append({**base, "block": b, "n_features": F.shape[1], "target": tname,
+                                               "metric": metric, "score": score, "pearson_r": pearson,
+                                               "regularisation": param})
             print(f"  [E3] test={test_name[:20]:20s} seed={seed} done", flush=True)
     write_csv(os.path.join(ctx.out, "e3_pca.csv"), pca_rows)
     write_csv(os.path.join(ctx.out, "e3_pca_cumvar.csv"), cum_rows)
     write_csv(os.path.join(ctx.out, "e3_probes.csv"), probe_rows)
     plot_pca_cumvar(cum_rows, os.path.join(ctx.out, "figures", "e3_pca.png"))
-    for tname in TARGETS:
-        plot_probe_lines(probe_rows, tname, os.path.join(ctx.out, "figures", f"e3_probe_{tname}.png"))
+    for tname, kind in TARGETS.items():
+        plot_probe_lines(probe_rows, tname, os.path.join(ctx.out, "figures", f"e3_probe_{tname}.png"),
+                         metric="R2_z" if kind == "regression" else "AUROC")
 
 
 def crest_examples(ctx: Context):
@@ -356,6 +375,7 @@ def run_e5(ctx: Context):
     are never used; the validation model (early stopping) is the next scan in
     cyclic order and carries crest labels too."""
     crest, _ = crest_examples(ctx)
+    crest = {n: e for n, e in crest.items() if e.traces}       # a scan with no crest line >= 3 mm gives no labels
     max_samples = 400 if ctx.args.quick else ctx.args.e5_max_samples
     for seed in ctx.seeds:
         for g in ctx.test_groups:
