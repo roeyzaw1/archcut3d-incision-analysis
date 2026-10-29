@@ -5,3 +5,5 @@ __pycache__/
 _grid_previews/
 *.label.npz
 results/models/
+results/cache/
+results_run_log.txt

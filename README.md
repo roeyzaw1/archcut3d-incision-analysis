@@ -52,3 +52,48 @@ Crest line (ridge/ravine) detection shells out to the `setCurvature` binary in
 `bin/`, implementing Yoshizawa, Belyaev & Seidel (2005). The correct binary
 for the current OS is picked up automatically by
 `archcut3d.resources.get_setcurvature_path()`.
+
+## ML experiments (branch `experiment/ml-feature-detection`)
+
+`archcut3d/ml/` contains an iterative incision tracer (`TracerNet`: a small
+CNN that, from a heading-aligned patch of a 2.5D relief grid, predicts the
+next step along an incision and a stop probability) and a study of what it
+learns: does it follow the local geometric minimum of the surface, or the
+hand-drawn line where the two differ?
+
+Inputs are `.label.npz` files written by the Label Incisions tool (grid
+channels, calibration and hand-traced lines). Experiments, all
+leave-one-scanned-model-out with a separate validation model for early
+stopping:
+
+| id | question |
+|---|---|
+| E0 | TracerNet vs a straight-ahead baseline and a geometric (local-relief minimum) tracer |
+| E0b | where the hand line departs from the geometric minimum, and how each tracer behaves there |
+| E1 | encoder frozen at random initialisation, heads trained |
+| E2 | height / local_relief / curvature as the only input channel |
+| E3 | PCA dimensionality and layer-wise linear probes of the encoder (trained vs random) |
+| E4 | (optional) flatten instead of average pooling, CoordConv |
+| E5 | train on geometry-only crest-line labels generated on the other scans, test on hand traces |
+
+```bash
+pip install -r requirements.txt
+python -m archcut3d.ml.experiments --data <dir with .label.npz and .wrl> --out results/   # E0-E3, E5
+python -m archcut3d.ml.experiments --data <dir> --out results/ --experiments E4          # optional E4
+python -m archcut3d.ml.experiments --data <dir> --out results/ --quick                   # smoke test: 1 fold, 1 seed
+python -m archcut3d.ml.report results/                                                    # writes results/RESULTS.md
+python -m pytest tests                                                                    # fast unit tests
+```
+
+Options: `--seeds N` (default 3), `--device auto|cpu|mps`, `--exclude FILE...`,
+`--include-machine`, `--scans DIR` (location of the `.wrl` files for E5,
+default `--data`). Label files whose points are closer together than 2 pixels
+(machine-generated crest-line output rather than hand clicks) are excluded
+automatically and listed in `results/dataset_files.csv`.
+
+Outputs in `--out`: `config.json` (arguments, hyperparameters, seeds, git
+commit, library versions), one CSV per experiment (one row per test model x
+seed x variant x segment), `figures/`, `RESULTS.md`. Trained checkpoints go to
+`results/models/` and crest-label caches to `results/cache/` (both git-ignored).
+A full run takes roughly an hour on an Apple-silicon laptop. Runs on `mps`
+are not bit-reproducible; on `cpu` a seed reproduces a run exactly.
