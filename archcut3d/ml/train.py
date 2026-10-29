@@ -15,6 +15,7 @@ from dataclasses import dataclass
 
 import numpy as np
 import torch
+from sklearn.metrics import roc_auc_score
 
 from .dataset import TracerSamples
 from .model import TracerNet, tracer_loss
@@ -43,6 +44,28 @@ def angular_error_deg(step_pred: np.ndarray, step_target: np.ndarray) -> np.ndar
     return np.degrees(np.arccos(cos))
 
 
+def stop_metrics(prob: np.ndarray, target: np.ndarray, threshold: float = 0.5) -> dict:
+    """Stop-detection metrics for stop=1 as the positive class.
+
+    Accuracy alone is misleading here (stop=1 is a few percent of samples,
+    so predicting "never stop" scores well), hence AUROC, precision, recall
+    and the base rate. Quantities that are undefined (no positives, or no
+    predicted positives) are NaN."""
+    target = np.asarray(target) > 0.5
+    pred = np.asarray(prob) > threshold
+    n_pos = int(target.sum())
+    tp = int((pred & target).sum())
+    fp = int((pred & ~target).sum())
+    both_classes = 0 < n_pos < len(target)
+    return {
+        "accuracy": float((pred == target).mean()) if len(target) else float("nan"),
+        "auroc": float(roc_auc_score(target, prob)) if both_classes else float("nan"),
+        "precision": tp / (tp + fp) if (tp + fp) else float("nan"),
+        "recall": tp / n_pos if n_pos else float("nan"),
+        "base_rate": float(target.mean()) if len(target) else float("nan"),
+    }
+
+
 @dataclass
 class EvalResult:
     loss: float
@@ -51,6 +74,10 @@ class EvalResult:
     mean_angle_err_deg: float
     stop_accuracy: float
     n: int
+    stop_auroc: float = float("nan")
+    stop_precision: float = float("nan")
+    stop_recall: float = float("nan")
+    stop_base_rate: float = float("nan")
 
 
 @torch.no_grad()
@@ -67,23 +94,25 @@ def evaluate(net: TracerNet, loader, device: str) -> EvalResult:
         stop_losses.append(parts["stop_loss"].item())
         all_pred_step.append(sp.cpu().numpy())
         all_tgt_step.append(yb.cpu().numpy())
-        all_pred_stop.append((torch.sigmoid(lg) > 0.5).float().cpu().numpy())
+        all_pred_stop.append(torch.sigmoid(lg).cpu().numpy())
         all_tgt_stop.append(zb.cpu().numpy())
 
     pred_step = np.concatenate(all_pred_step)
     tgt_step = np.concatenate(all_tgt_step)
-    pred_stop = np.concatenate(all_pred_stop)
+    stop_prob = np.concatenate(all_pred_stop)
     tgt_stop = np.concatenate(all_tgt_stop)
 
     ang = angular_error_deg(pred_step, tgt_step)
     # angle is only meaningful where the model is meant to be moving forward
     interior = tgt_stop < 0.5
     mean_ang = float(np.nanmean(ang[interior])) if interior.any() else float("nan")
-    stop_acc = float((pred_stop == tgt_stop).mean())
+    sm = stop_metrics(stop_prob, tgt_stop)
 
     return EvalResult(loss=float(np.mean(losses)), step_loss=float(np.mean(step_losses)),
                       stop_loss=float(np.mean(stop_losses)), mean_angle_err_deg=mean_ang,
-                      stop_accuracy=stop_acc, n=len(tgt_stop))
+                      stop_accuracy=sm["accuracy"], n=len(tgt_stop),
+                      stop_auroc=sm["auroc"], stop_precision=sm["precision"],
+                      stop_recall=sm["recall"], stop_base_rate=sm["base_rate"])
 
 
 @dataclass
