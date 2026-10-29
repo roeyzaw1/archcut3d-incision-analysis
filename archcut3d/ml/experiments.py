@@ -18,6 +18,9 @@ or something closer to the hand-drawn line where the two differ?
        probes (needs the checkpoints written by E0 and E1).
   E4   (optional, not in the default set) Pooling: flatten the final feature
        map instead of averaging it, and/or add CoordConv input channels.
+  E5b  (optional) Same-distribution check for E5: score each E5 network on the
+       crest-line labels of its validation scan, i.e. can it reproduce the
+       geometric labels it was trained on? Needs the E5 checkpoints.
   E5   Geometry-only labels: train on crest-line ravines generated
        automatically on the other scans (no hand traces), test on the
        hand traces of the held-out model.
@@ -54,7 +57,7 @@ from .train import train_one_split
 
 MACHINE_SPACING_PX = 2.0     # median spacing between consecutive points below this => machine-generated
 ALL_EXPERIMENTS = ["E0", "E0b", "E1", "E2", "E3", "E5"]
-OPTIONAL_EXPERIMENTS = ["E4"]
+OPTIONAL_EXPERIMENTS = ["E4", "E5b"]
 CHANNELS = {"height": (0,), "local_relief": (1,), "curvature": (2,)}
 
 
@@ -404,6 +407,40 @@ def run_e5(ctx: Context):
             ctx.save("E5")
 
 
+def run_e5b(ctx: Context):
+    """Score every E5 checkpoint on the crest labels of its validation scan
+    (a scan it was not trained on, labelled by the same geometric procedure),
+    next to the straight-ahead baseline and the geometric tracer, using the
+    one-step and displaced-pose metrics of evaluation.py."""
+    from .anchors import AnchorTable  # noqa: F401
+    crest, _ = crest_examples(ctx)
+    crest = {n: e for n, e in crest.items() if e.traces}
+    rows = []
+    baselines = {"straight": StraightAheadPolicy(), "geometric": GeometricMinimumPolicy()}
+    for seed in ctx.seeds:
+        for g in ctx.test_groups:
+            name = ctx.names[g]
+            path = fold_path(ctx.out, "geo_labels", name, seed)
+            if not os.path.exists(path):
+                raise SystemExit(f"E5b needs the checkpoint {path}; run E5 first")
+            net, stats, meta = load_fold(path)
+            others = sorted(n for n in crest if n != name)
+            names_in_ds = sorted([name] + others)
+            val_name = names_in_ds[meta["val_group"]]
+            ex = crest[val_name]
+            table = build_anchor_table(ex)
+            table.departure = np.zeros(len(table), dtype=bool)
+            for variant, policy in {"geo_labels": TracerPolicy(net, stats, "cpu"), **baselines}.items():
+                seg, _, _ = evaluate_policy(policy, ex, table, can_stop=variant == "geo_labels")
+                r = {"experiment": "E5b", "variant": variant, "fold_test_model": name, "scored_on_crest_labels_of": val_name,
+                     "seed": seed, "n_points": len(table)}
+                r.update({k: v for k, v in seg["all"].items() if k not in ("n_points", "stop_reasons", "n_traces")})
+                rows.append(r)
+            print(f"  [E5b] fold test={name[:20]:20s} seed={seed} scored on {val_name[:20]}", flush=True)
+    ctx.rows["E5b"] = rows
+    ctx.save("E5b")
+
+
 def write_config(ctx: Context, started: float, experiments):
     a = ctx.args
     cfg = {
@@ -490,6 +527,9 @@ def main(argv=None):
     if "E5" in ex:
         print("E5: geometry-only labels", flush=True)
         run_e5(ctx)
+    if "E5b" in ex:
+        print("E5b: E5 networks on held-out crest labels", flush=True)
+        run_e5b(ctx)
     write_config(ctx, started, args.experiments)
     print(f"done in {time.time() - started:.0f}s -> {ctx.out}", flush=True)
 
