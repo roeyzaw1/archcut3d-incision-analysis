@@ -1,7 +1,11 @@
-"""Train TracerNet with a leave-one-model-out split and early stopping.
+"""Train TracerNet with a nested leave-one-model-out protocol.
 
-Normalization stats are fit on the TRAINING split only (never on the held-
-out model) to avoid leaking any information about it, however small.
+For each fold one model is the test model; among the remaining models one
+validation model (see torch_data.nested_split) is used only for early
+stopping; the rest train. Metrics are reported on the test model, which is
+evaluated once, after training, with the best-validation weights.
+
+Normalization statistics are fit on the training models only.
 """
 
 from __future__ import annotations
@@ -14,7 +18,7 @@ import torch
 
 from .dataset import TracerSamples
 from .model import TracerNet, tracer_loss
-from .torch_data import NormStats, compute_norm_stats, leave_one_group_out_split, make_dataloaders
+from .torch_data import NormStats, compute_norm_stats, make_nested_dataloaders, nested_split
 
 
 def _subset(samples: TracerSamples, idx: np.ndarray) -> TracerSamples:
@@ -82,17 +86,32 @@ def evaluate(net: TracerNet, loader, device: str) -> EvalResult:
                       stop_accuracy=stop_acc, n=len(tgt_stop))
 
 
-def train_one_split(samples: TracerSamples, val_group: int, epochs: int = 150, patience: int = 20,
+@dataclass
+class FoldResult:
+    net: TracerNet
+    stats: NormStats
+    history: list
+    best_val_loss: float
+    val: EvalResult           # validation model, best-validation weights
+    test: EvalResult          # test model, evaluated once after training
+    test_group: int
+    val_group: int
+    train_groups: list
+    seed: int
+
+
+def train_one_split(samples: TracerSamples, test_group: int, epochs: int = 150, patience: int = 20,
                     lr: float = 1e-3, batch_size: int = 64, device: str = "cpu", seed: int = 0,
-                    verbose: bool = True):
-    """Leave one model (`val_group`) out, train on the rest, early-stop on
-    validation loss. Returns (net, stats, history, best_val_loss, final_eval)."""
+                    verbose: bool = True) -> FoldResult:
+    """Train on the training models, early-stop on the validation model, and
+    report metrics on the held-out test model (see module docstring)."""
     torch.manual_seed(seed)
     np.random.seed(seed)
 
-    train_idx, val_idx = leave_one_group_out_split(samples, val_group)
-    stats = compute_norm_stats(_subset(samples, train_idx))   # fit on train only
-    train_loader, val_loader = make_dataloaders(samples, stats, val_group, batch_size=batch_size)
+    split = nested_split(samples, test_group)
+    stats = compute_norm_stats(_subset(samples, split.train_idx))   # fit on train only
+    train_loader, val_loader, test_loader = make_nested_dataloaders(
+        samples, stats, split, batch_size=batch_size)
 
     net = TracerNet().to(device)
     opt = torch.optim.Adam(net.parameters(), lr=lr)
@@ -128,9 +147,8 @@ def train_one_split(samples: TracerSamples, val_group: int, epochs: int = 150, p
 
         if verbose and (epoch % 10 == 0 or bad_epochs == 0):
             print(f"  epoch {epoch:3d}  train {tr:.4f}  val {val_eval.loss:.4f}  "
-                 f"angle_err {val_eval.mean_angle_err_deg:5.1f} deg  "
-                 f"stop_acc {val_eval.stop_accuracy:.2f}"
-                 f"{'  *' if bad_epochs == 0 else ''}")
+                  f"val_angle_err {val_eval.mean_angle_err_deg:5.1f} deg"
+                  f"{'  *' if bad_epochs == 0 else ''}")
 
         if bad_epochs >= patience:
             if verbose:
@@ -138,5 +156,9 @@ def train_one_split(samples: TracerSamples, val_group: int, epochs: int = 150, p
             break
 
     net.load_state_dict(best_state)
-    final_eval = evaluate(net, val_loader, device)
-    return net, stats, history, best_val, final_eval
+    val_final = evaluate(net, val_loader, device)
+    test_final = evaluate(net, test_loader, device)   # the only time the test model is evaluated
+    train_groups = sorted(set(samples.groups[split.train_idx].tolist()))
+    return FoldResult(net=net, stats=stats, history=history, best_val_loss=best_val,
+                      val=val_final, test=test_final, test_group=split.test_group,
+                      val_group=split.val_group, train_groups=train_groups, seed=seed)

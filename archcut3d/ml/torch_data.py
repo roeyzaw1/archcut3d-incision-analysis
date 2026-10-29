@@ -24,6 +24,7 @@ All four are zeroed outside the mask.
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
+from typing import NamedTuple
 
 import numpy as np
 import torch
@@ -117,9 +118,11 @@ class TracerTorchDataset(Dataset):
 
 def leave_one_group_out_split(samples: TracerSamples, val_group: int):
     """groups == val_group -> validation; everything else -> train. `groups`
-    indexes the LabeledExample a sample came from (see dataset.make_dataset),
+    indexes the scanned model a sample came from (see dataset.make_dataset),
     so this holds out one whole model rather than random individual steps
-    (which would leak -- adjacent steps on the same line are near-duplicates)."""
+    (which would leak -- adjacent steps on the same line are near-duplicates).
+    There is no separate test set here; see nested_split for the protocol
+    used by train.train_one_split."""
     train_idx = np.where(samples.groups != val_group)[0]
     val_idx = np.where(samples.groups == val_group)[0]
     return train_idx, val_idx
@@ -156,3 +159,48 @@ def make_dataloaders(samples: TracerSamples, stats: NormStats, val_group: int,
         train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_workers)
     val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
     return train_loader, val_loader
+
+
+class NestedSplit(NamedTuple):
+    train_idx: np.ndarray
+    val_idx: np.ndarray       # early stopping only
+    test_idx: np.ndarray      # reported metrics only
+    test_group: int
+    val_group: int
+
+
+def nested_split(samples: TracerSamples, test_group: int) -> NestedSplit:
+    """Leave-one-model-out with a separate validation model.
+
+    `test_group` is the held-out test model. The validation model, used only
+    for early stopping, is the next group id after `test_group` in cyclic
+    order (deterministic). All remaining groups are training data. Needs at
+    least 3 distinct groups."""
+    groups = np.unique(samples.groups).tolist()
+    if test_group not in groups:
+        raise ValueError(f"test_group {test_group} not in {groups}")
+    if len(groups) < 3:
+        raise ValueError(f"nested split needs >= 3 groups (train, validation, test); got {len(groups)}")
+    i = groups.index(test_group)
+    val_group = groups[(i + 1) % len(groups)]
+    train_idx = np.where((samples.groups != test_group) & (samples.groups != val_group))[0]
+    val_idx = np.where(samples.groups == val_group)[0]
+    test_idx = np.where(samples.groups == test_group)[0]
+    return NestedSplit(train_idx, val_idx, test_idx, test_group, val_group)
+
+
+def make_nested_dataloaders(samples: TracerSamples, stats: NormStats, split: NestedSplit,
+                            batch_size: int = 64, balance_groups: bool = True, num_workers: int = 0):
+    """Train / validation / test DataLoaders for a NestedSplit."""
+    train_ds = TracerTorchDataset(samples, stats, split.train_idx)
+    val_ds = TracerTorchDataset(samples, stats, split.val_idx)
+    test_ds = TracerTorchDataset(samples, stats, split.test_idx)
+
+    if balance_groups:
+        sampler = group_balanced_sampler(samples.groups, split.train_idx)
+        train_loader = DataLoader(train_ds, batch_size=batch_size, sampler=sampler, num_workers=num_workers)
+    else:
+        train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+    val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
+    test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
+    return train_loader, val_loader, test_loader
