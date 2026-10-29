@@ -23,6 +23,7 @@ def _subset(samples: TracerSamples, idx: np.ndarray) -> TracerSamples:
         patches=samples.patches[idx], masks=samples.masks[idx],
         steps=samples.steps[idx], stops=samples.stops[idx],
         groups=samples.groups[idx], meta=[samples.meta[i] for i in idx],
+        group_names=samples.group_names,
     )
 
 

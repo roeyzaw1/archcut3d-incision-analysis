@@ -21,7 +21,7 @@ from __future__ import annotations
 
 import glob
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
 from scipy.ndimage import map_coordinates
@@ -264,8 +264,9 @@ class TracerSamples:
     masks: np.ndarray        # (N, R, R) bool
     steps: np.ndarray        # (N, 2) float32  (forward, right) in step_mm units
     stops: np.ndarray        # (N,) float32    0 / 1
-    groups: np.ndarray       # (N,) int        index of the source example (for split)
+    groups: np.ndarray       # (N,) int        index into group_names (scanned model) for splitting
     meta: list               # length N: dicts {source_file, trace, point, jitter}
+    group_names: list = field(default_factory=list)   # distinct source_file values, sorted; group g = group_names[g]
 
     def __len__(self):
         return len(self.stops)
@@ -357,11 +358,17 @@ def make_samples(example: "LabeledExample",
 
 
 def make_dataset(examples, rng=None, **kw) -> TracerSamples:
-    """make_samples over several LabeledExamples, concatenated, with `groups`
-    identifying which example each sample came from (use it for a
-    leave-one-model-out train/val split)."""
+    """make_samples over several LabeledExamples, concatenated.
+
+    `groups` indexes distinct scanned models (`source_file`), not label
+    files: several label files of the same artifact share one group, so a
+    group-based split can never put the same model on both sides. Group ids
+    follow the sorted order of distinct `source_file` values, so they do not
+    depend on the order of `examples`."""
     rng = np.random.default_rng(rng)
-    parts = [make_samples(e, examples_group=g, rng=rng, **kw) for g, e in enumerate(examples)]
+    names = sorted({e.source_file for e in examples})
+    group_of = {name: g for g, name in enumerate(names)}
+    parts = [make_samples(e, examples_group=group_of[e.source_file], rng=rng, **kw) for e in examples]
     parts = [p for p in parts if len(p)]
     if not parts:
         raise ValueError("no usable traces in the given examples")
@@ -372,4 +379,5 @@ def make_dataset(examples, rng=None, **kw) -> TracerSamples:
         stops=np.concatenate([p.stops for p in parts]),
         groups=np.concatenate([p.groups for p in parts]),
         meta=[m for p in parts for m in p.meta],
+        group_names=names,
     )
