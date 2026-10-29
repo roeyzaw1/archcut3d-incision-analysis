@@ -275,6 +275,12 @@ class TracerSamples:
     def __len__(self):
         return len(self.stops)
 
+    def subset(self, idx) -> "TracerSamples":
+        idx = np.asarray(idx)
+        return TracerSamples(patches=self.patches[idx], masks=self.masks[idx], steps=self.steps[idx],
+                             stops=self.stops[idx], groups=self.groups[idx],
+                             meta=[self.meta[i] for i in idx], group_names=self.group_names, seed=self.seed)
+
     @property
     def kinds(self) -> np.ndarray:
         """Per-sample anchor kind: 0 clean, 1 jittered, 2 past-the-end."""
@@ -395,3 +401,17 @@ def make_dataset(examples, seed=None, **kw) -> TracerSamples:
         group_names=names,
         seed=seed if isinstance(seed, (int, np.integer)) else None,
     )
+
+
+def subsample_groups(samples: TracerSamples, max_per_group: int, seed=None, exempt=()) -> TracerSamples:
+    """Randomly keep at most `max_per_group` samples of every group except
+    those in `exempt` (kept whole). Bounds the training cost when some
+    scans contribute far more samples than others."""
+    rng = np.random.default_rng(seed)
+    keep = []
+    for g in np.unique(samples.groups):
+        idx = np.flatnonzero(samples.groups == g)
+        if g not in exempt and len(idx) > max_per_group:
+            idx = np.sort(rng.choice(idx, size=max_per_group, replace=False))
+        keep.append(idx)
+    return samples.subset(np.concatenate(keep))

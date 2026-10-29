@@ -13,6 +13,12 @@ or something closer to the hand-drawn line where the two differ?
   E1   Random-encoder baseline: encoder frozen at its random initialisation,
        only the heads are trained.
   E2   Input-channel ablation: height / local_relief / curvature alone.
+  E3   Representation analysis of the E0 network and the E1 random encoder:
+       PCA dimensionality of the pooled features and layer-wise linear
+       probes (needs the checkpoints written by E0 and E1).
+  E5   Geometry-only labels: train on crest-line ravines generated
+       automatically on the other scans (no hand traces), test on the
+       hand traces of the held-out model.
 
 Protocol: leave-one-scanned-model-out, with a separate validation model for
 early stopping (train.py). Hand traces drawn by machine (crest-line output,
@@ -37,14 +43,15 @@ import torch
 from .anchors import (DEPARTURE_DEPTH_PERCENTILE, DEPARTURE_OFFSET_MM, build_anchor_table,
                       depth_threshold, label_departures)
 from .dataset import (DEFAULT_PATCH_MM, DEFAULT_PATCH_RES, DEFAULT_STEP_MM, load_dataset,
-                      make_dataset)
+                      make_dataset, subsample_groups)
 from .evaluation import evaluate_policy
-from .figures import departure_example_figure, pick_departure_examples
+from .figures import departure_example_figure, pick_departure_examples, plot_pca_cumvar, plot_probe_lines
 from .policies import GeometricMinimumPolicy, StraightAheadPolicy, TracerPolicy
+from .probes import TARGETS, block_features, fit_probe, pca_summary, probe_targets
 from .train import train_one_split
 
 MACHINE_SPACING_PX = 2.0     # median spacing between consecutive points below this => machine-generated
-ALL_EXPERIMENTS = ["E0", "E0b", "E1", "E2"]
+ALL_EXPERIMENTS = ["E0", "E0b", "E1", "E2", "E3", "E5"]
 CHANNELS = {"height": (0,), "local_relief": (1,), "curvature": (2,)}
 
 
@@ -57,7 +64,7 @@ def click_spacing_px(example) -> float:
 
 def load_models(data_dir: str, exclude=(), include_machine: bool = False):
     """Load label files; split into usable hand-traced examples and excluded
-    ones. Returns (examples, summary_rows)."""
+    ones. Returns (usable examples, summary_rows, all examples)."""
     all_ex = load_dataset(data_dir)
     rows, used = [], []
     for e in all_ex:
@@ -78,7 +85,7 @@ def load_models(data_dir: str, exclude=(), include_machine: bool = False):
         })
         if keep:
             used.append(e)
-    return used, rows
+    return used, rows, all_ex
 
 
 def save_fold(path: str, fold, variant: str, test_model: str):
@@ -149,7 +156,7 @@ class Context:
         self.epochs = 3 if args.quick else args.epochs
         self.patience = 2 if args.quick else args.patience
 
-        self.examples, self.file_rows = load_models(args.data, exclude=set(args.exclude), include_machine=args.include_machine)
+        self.examples, self.file_rows, self.all_label_examples = load_models(args.data, exclude=set(args.exclude), include_machine=args.include_machine)
         if len(self.examples) < 3:
             raise SystemExit(f"need >= 3 usable models for the nested split, found {len(self.examples)}")
         self.by_name = {e.source_file: e for e in self.examples}
@@ -263,6 +270,114 @@ def departure_outputs(ctx: Context):
                                  os.path.join(ctx.out, "figures", f"e0b_example_{i + 1}.png"))
 
 
+def run_e3(ctx: Context):
+    """PCA and layer-wise probes for the trained network (E0) and the random
+    encoder (E1) of every fold. Probes are trained on the anchors (clean and
+    jittered) of all models except the test model -- the training and the
+    validation model of the fold -- and scored on the test model; PCA uses
+    the test model's clean anchors."""
+    geo = GeometricMinimumPolicy()
+    pca_rows, cum_rows, probe_rows = [], [], []
+    for seed in ctx.seeds:
+        ds = ctx.dataset(seed)
+        idx = np.flatnonzero(ds.kinds < 2)                 # clean + jittered anchors
+        targets = probe_targets(ds, idx, ctx.by_name, ctx.tables, geo)
+        groups, clean = ds.groups[idx], ds.kinds[idx] == 0
+        for g in ctx.test_groups:
+            test_name = ds.group_names[g]
+            is_test = groups == g
+            for enc, variant in (("trained", "tracernet"), ("random", "random_encoder")):
+                path = fold_path(ctx.out, variant, test_name, seed)
+                if not os.path.exists(path):
+                    raise SystemExit(f"E3 needs the checkpoint {path}; run E0 and E1 first")
+                net, stats, meta = load_fold(path)
+                feats = block_features(net, ds.patches[idx], ds.masks[idx], stats, meta["keep_channels"])
+                pca = pca_summary(feats[-1][is_test & clean])
+                base = {"test_model": test_name, "seed": seed, "encoder": enc}
+                pca_rows.append({**base, **{k: v for k, v in pca.items() if k != "cumulative_variance"}})
+                for k, cv in enumerate(pca["cumulative_variance"], 1):
+                    cum_rows.append({**base, "k": k, "cumulative_variance": float(cv)})
+                for b, F in enumerate(feats, 1):
+                    for tname, kind in TARGETS.items():
+                        y = targets[tname]
+                        score, param, pearson = fit_probe(F[~is_test], y[~is_test], groups[~is_test],
+                                                          F[is_test], y[is_test], kind)
+                        probe_rows.append({**base, "block": b, "n_features": F.shape[1], "target": tname,
+                                           "metric": "R2" if kind == "regression" else "AUROC",
+                                           "score": score, "pearson_r": pearson, "regularisation": param})
+            print(f"  [E3] test={test_name[:20]:20s} seed={seed} done", flush=True)
+    write_csv(os.path.join(ctx.out, "e3_pca.csv"), pca_rows)
+    write_csv(os.path.join(ctx.out, "e3_pca_cumvar.csv"), cum_rows)
+    write_csv(os.path.join(ctx.out, "e3_probes.csv"), probe_rows)
+    plot_pca_cumvar(cum_rows, os.path.join(ctx.out, "figures", "e3_pca.png"))
+    for tname in TARGETS:
+        plot_probe_lines(probe_rows, tname, os.path.join(ctx.out, "figures", f"e3_probe_{tname}.png"))
+
+
+def crest_examples(ctx: Context):
+    """Crest-line (geometry-only) examples for every scan with at least
+    MIN_VERTICES vertices, cached under <out>/cache. Returns
+    (examples by source_file, info rows)."""
+    from .geo_labels import MIN_VERTICES, build_crest_example, load_crest_example, save_crest_example
+    scan_dir = ctx.args.scans or ctx.args.data
+    grids = {e.source_file: e for e in ctx.all_label_examples}
+    examples, infos = {}, []
+    for fname in sorted(f for f in os.listdir(scan_dir) if f.lower().endswith(".wrl")):
+        cache = os.path.join(ctx.out, "cache", f"crest__{os.path.splitext(fname)[0].replace(' ', '_')}.npz")
+        if os.path.exists(cache):
+            ex = load_crest_example(cache)
+            info = {"source_file": fname, "n_traces": len(ex.traces), "pixel_size_mm": ex.pixel_size,
+                    "traced_mm": round(sum(ex.trace_length_mm(t) for t in ex.traces), 1), "cached": True}
+        else:
+            try:
+                ex, info = build_crest_example(os.path.join(scan_dir, fname), hand_example=grids.get(fname))
+            except ValueError as e:
+                infos.append({"source_file": fname, "skipped": str(e)})
+                print(f"  [E5] skipping {fname}: {e}", flush=True)
+                continue
+            save_crest_example(cache, ex, info)
+            info["cached"] = False
+        examples[fname] = ex
+        infos.append(info)
+        print(f"  [E5] crest labels {fname}: {info['n_traces']} traces, {info['traced_mm']} mm", flush=True)
+    write_csv(os.path.join(ctx.out, "e5_labels.csv"), infos)
+    return examples, infos
+
+
+def run_e5(ctx: Context):
+    """Train on geometry-only crest labels from every other scan, test on the
+    hand traces of the held-out model. The held-out model's own crest labels
+    are never used; the validation model (early stopping) is the next scan in
+    cyclic order and carries crest labels too."""
+    crest, _ = crest_examples(ctx)
+    max_samples = 400 if ctx.args.quick else ctx.args.e5_max_samples
+    for seed in ctx.seeds:
+        for g in ctx.test_groups:
+            name = ctx.names[g]
+            others = [ex for n, ex in crest.items() if n != name]
+            if len(others) < 2:
+                raise SystemExit("E5 needs crest labels for at least 2 scans besides the test model")
+            ds = make_dataset([ctx.by_name[name]] + others, seed=seed)
+            tg = ds.group_names.index(name)
+            ds = subsample_groups(ds, max_samples, seed=seed, exempt=(tg,))
+            t0 = time.time()
+            fold = train_one_split(ds, test_group=tg, epochs=ctx.epochs, patience=ctx.patience,
+                                   device=ctx.device, seed=seed, verbose=False)
+            policy = TracerPolicy(fold.net, fold.stats, ctx.device)
+            seg, traces, paths = evaluate_policy(policy, ctx.by_name[name], ctx.tables[name], can_stop=True)
+            extra = fold_extra(fold)
+            extra["val_model"] = ds.group_names[fold.val_group]
+            extra["train_models"] = ";".join(ds.group_names[x] for x in fold.train_groups)
+            extra["n_train_samples"] = int(np.isin(ds.groups, fold.train_groups).sum())
+            ctx.rows.setdefault("E5", []).extend(segment_rows("E5", "geo_labels", name, seed, seg, extra))
+            save_fold(fold_path(ctx.out, "geo_labels", name, seed), fold, "geo_labels", name)
+            if seed == ctx.seeds[0]:
+                ctx.paths[("geo_labels", name)] = paths
+            print(f"  [E5/geo_labels] test={name[:20]:20s} seed={seed}  epochs={len(fold.history):3d}  "
+                  f"chamfer={seg['all'].get('chamfer_mm', float('nan')):.3f} mm  ({time.time() - t0:.0f}s)", flush=True)
+            ctx.save("E5")
+
+
 def write_config(ctx: Context, started: float, experiments):
     a = ctx.args
     cfg = {
@@ -279,7 +394,16 @@ def write_config(ctx: Context, started: float, experiments):
         "git": git_info(), "torch": torch.__version__, "numpy": np.__version__, "python": platform.python_version(),
         "platform": platform.platform(), "wall_time_s": round(time.time() - started, 1),
     }
-    with open(os.path.join(ctx.out, "config.json"), "w") as f:
+    path = os.path.join(ctx.out, "config.json")
+    if os.path.exists(path):                       # partial re-runs accumulate into one config
+        with open(path) as f:
+            prev = json.load(f)
+        cfg["experiments"] = [e for e in ALL_EXPERIMENTS if e in set(prev.get("experiments", [])) | set(experiments)]
+        cfg["wall_time_s"] = round(prev.get("wall_time_s", 0) + cfg["wall_time_s"], 1)
+        cfg["commands"] = prev.get("commands", [prev.get("command")]) + [cfg["command"]]
+    else:
+        cfg["commands"] = [cfg["command"]]
+    with open(path, "w") as f:
         json.dump(cfg, f, indent=2)
 
 
@@ -295,6 +419,8 @@ def parse_args(argv=None):
     p.add_argument("--patience", type=int, default=20)
     p.add_argument("--exclude", nargs="*", default=[], help="label files / source files to leave out")
     p.add_argument("--include-machine", action="store_true", help="keep machine-generated (crest-line) label files")
+    p.add_argument("--scans", default=None, help="directory with the .wrl scans for E5 (default: --data)")
+    p.add_argument("--e5-max-samples", type=int, default=3000, help="cap on training samples per scan in E5")
     p.add_argument("--departure-offset-mm", type=float, default=DEPARTURE_OFFSET_MM)
     args = p.parse_args(argv)
     args.experiments = [e.strip() for e in args.experiments.split(",") if e.strip()]
@@ -327,6 +453,12 @@ def main(argv=None):
         print("E2: channel ablation", flush=True)
         for cname, keep in CHANNELS.items():
             run_trained(ctx, "E2", f"only_{cname}", keep_channels=keep)
+    if "E3" in ex:
+        print("E3: representation analysis", flush=True)
+        run_e3(ctx)
+    if "E5" in ex:
+        print("E5: geometry-only labels", flush=True)
+        run_e5(ctx)
     write_config(ctx, started, args.experiments)
     print(f"done in {time.time() - started:.0f}s -> {ctx.out}", flush=True)
 

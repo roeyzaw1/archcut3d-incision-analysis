@@ -73,3 +73,62 @@ def departure_example_figure(example, table, k: int, paths: dict, out_path: str,
     fig.tight_layout()
     fig.savefig(out_path, dpi=120)
     plt.close(fig)
+
+
+def _group_stats(rows, key_fields, value):
+    """Mean and std of rows[value] over the other fields, grouped by key_fields."""
+    groups = {}
+    for r in rows:
+        v = r[value]
+        if v == v:      # not NaN
+            groups.setdefault(tuple(r[k] for k in key_fields), []).append(v)
+    return {k: (float(np.mean(v)), float(np.std(v))) for k, v in groups.items()}
+
+
+def plot_pca_cumvar(cum_rows, out_path: str):
+    """Cumulative explained variance of the pooled features, trained vs
+    random encoder (mean and std over folds and seeds). `cum_rows` has
+    'encoder', 'k' and 'cumulative_variance'."""
+    stats = _group_stats(cum_rows, ("encoder", "k"), "cumulative_variance")
+    fig, ax = plt.subplots(figsize=(6, 4))
+    for enc, color in (("trained", "tab:red"), ("random", "tab:blue")):
+        ks = sorted(k for (e, k) in stats if e == enc)
+        if not ks:
+            continue
+        m = np.array([stats[(enc, k)][0] for k in ks])
+        sd = np.array([stats[(enc, k)][1] for k in ks])
+        ax.plot(ks, m, color=color, label=f"{enc} encoder")
+        ax.fill_between(ks, m - sd, m + sd, color=color, alpha=0.2)
+    for y in (0.8, 0.9, 0.95):
+        ax.axhline(y, color="gray", lw=0.5, ls=":")
+    ax.set_xlabel("number of principal components")
+    ax.set_ylabel("cumulative explained variance")
+    ax.set_title("Pooled 128-d features, test-model clean anchors")
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(out_path, dpi=120)
+    plt.close(fig)
+
+
+def plot_probe_lines(probe_rows, target: str, out_path: str):
+    """Probe score per encoder block, trained vs random encoder (mean and
+    std over folds and seeds)."""
+    rows = [r for r in probe_rows if r["target"] == target]
+    stats = _group_stats(rows, ("encoder", "block"), "score")
+    fig, ax = plt.subplots(figsize=(5.5, 3.8))
+    metric = rows[0]["metric"] if rows else ""
+    for enc, color in (("trained", "tab:red"), ("random", "tab:blue")):
+        bs = sorted(b for (e, b) in stats if e == enc)
+        if not bs:
+            continue
+        m = np.array([stats[(enc, b)][0] for b in bs])
+        sd = np.array([stats[(enc, b)][1] for b in bs])
+        ax.errorbar(bs, m, yerr=sd, marker="o", color=color, capsize=3, label=f"{enc} encoder")
+    ax.set_xlabel("encoder block")
+    ax.set_ylabel(f"{metric} on the test model")
+    ax.set_title(target.replace("_", " "))
+    ax.axhline(0.0 if metric == "R2" else 0.5, color="gray", lw=0.5, ls=":")
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(out_path, dpi=120)
+    plt.close(fig)

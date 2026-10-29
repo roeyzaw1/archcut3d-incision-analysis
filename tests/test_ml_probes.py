@@ -58,9 +58,9 @@ def test_ridge_probe_reads_out_a_linear_target_and_not_noise():
     w = rng.normal(size=10)
     X, y, g = _two_model_data(rng, w, "regression")
     Xt, yt, _ = _two_model_data(rng, w, "regression")
-    r2, alpha = fit_probe(X, y, g, Xt, yt, "regression")
-    assert r2 > 0.99
-    r2_noise, _ = fit_probe(X, rng.normal(size=400), g, Xt, rng.normal(size=400), "regression")
+    r2, alpha, r = fit_probe(X, y, g, Xt, yt, "regression")
+    assert r2 > 0.99 and r > 0.99
+    r2_noise, _, _ = fit_probe(X, rng.normal(size=400), g, Xt, rng.normal(size=400), "regression")
     assert r2_noise < 0.05
 
 
@@ -69,8 +69,8 @@ def test_logistic_probe_and_undefined_cases():
     w = rng.normal(size=10)
     X, y, g = _two_model_data(rng, w, "classification")
     Xt, yt, _ = _two_model_data(rng, w, "classification")
-    auc, c = fit_probe(X, y, g, Xt, yt, "classification")
-    assert auc > 0.99
+    auc, c, r = fit_probe(X, y, g, Xt, yt, "classification")
+    assert auc > 0.99 and np.isnan(r)
     assert np.isnan(fit_probe(X, y, g, Xt, np.zeros_like(yt), "classification")[0])     # single class in test
     assert np.isnan(fit_probe(X, np.full_like(y, np.nan), g, Xt, yt, "regression")[0])    # target undefined
 
@@ -96,3 +96,12 @@ def test_probe_targets_on_a_synthetic_groove():
     clean = ds.kinds == 0
     assert np.all(t["lateral_offset_of_hand_line"][clean] < 1e-9) and np.all(np.abs(t["lateral_offset_of_hand_line"][clean]) < 1e-9)
     assert np.nanmean(t["departure"]) > 0.9 and np.nanmin(t["geometric_depth"]) >= 0.0
+
+
+def test_pearson_survives_a_scale_shift_between_models_where_r2_does_not():
+    rng = np.random.default_rng(2)
+    w = rng.normal(size=10)
+    X, y, g = _two_model_data(rng, w, "regression")
+    Xt, yt, _ = _two_model_data(rng, w, "regression")
+    r2, _, r = fit_probe(X, y, g, Xt, 5.0 * yt + 30.0, "regression")      # test model has another scale and offset
+    assert r2 < 0.0 and r > 0.99

@@ -23,13 +23,7 @@ from .torch_data import NormStats, compute_norm_stats, make_nested_dataloaders, 
 
 
 def _subset(samples: TracerSamples, idx: np.ndarray) -> TracerSamples:
-    idx = np.asarray(idx)
-    return TracerSamples(
-        patches=samples.patches[idx], masks=samples.masks[idx],
-        steps=samples.steps[idx], stops=samples.stops[idx],
-        groups=samples.groups[idx], meta=[samples.meta[i] for i in idx],
-        group_names=samples.group_names, seed=samples.seed,
-    )
+    return samples.subset(idx)
 
 
 def angular_error_deg(step_pred: np.ndarray, step_target: np.ndarray) -> np.ndarray:

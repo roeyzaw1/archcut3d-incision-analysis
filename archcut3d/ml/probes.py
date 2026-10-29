@@ -149,14 +149,18 @@ def fit_probe(X_train, y_train, groups_train, X_test, y_test, kind: str):
     regression; score = AUROC. The regularisation strength is chosen by
     cross-validation with whole models held out (`groups_train`); features
     are standardised using the training anchors only. Returns
-    (score, chosen_parameter) or (nan, nan) if the target is undefined."""
+    (score, chosen_parameter, pearson_r): pearson_r is the correlation of
+    prediction and target on the test anchors (regression only; it ignores
+    differences in scale and offset between models, which can make R^2
+    strongly negative). All NaN if the target is undefined."""
     ok_tr, ok_te = np.isfinite(y_train), np.isfinite(y_test)
     X_train, y_train, groups_train = X_train[ok_tr], y_train[ok_tr], groups_train[ok_tr]
     X_test, y_test = X_test[ok_te], y_test[ok_te]
+    nan3 = (float("nan"), float("nan"), float("nan"))
     if len(y_train) < 10 or len(y_test) < 10:
-        return float("nan"), float("nan")
+        return nan3
     if kind == "classification" and (len(np.unique(y_train)) < 2 or len(np.unique(y_test)) < 2):
-        return float("nan"), float("nan")
+        return nan3
 
     scaler = StandardScaler().fit(X_train)
     Xtr, Xte = scaler.transform(X_train), scaler.transform(X_test)
@@ -182,4 +186,9 @@ def fit_probe(X_train, y_train, groups_train, X_test, y_test, kind: str):
             if scores and np.mean(scores) > best_s:
                 best_p, best_s = p, float(np.mean(scores))
     model = make(best_p).fit(Xtr, y_train)
-    return float(score(model, Xte, y_test)), float(best_p)
+    r = float("nan")
+    if kind == "regression":
+        pred = model.predict(Xte)
+        if np.std(pred) > 0 and np.std(y_test) > 0:
+            r = float(np.corrcoef(pred, y_test)[0, 1])
+    return float(score(model, Xte, y_test)), float(best_p), r

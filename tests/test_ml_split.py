@@ -166,3 +166,16 @@ def test_fold_checkpoint_round_trips(tmp_path):
     with torch.no_grad():
         a, b = fold.net(x.to(next(fold.net.parameters()).device)), net(x)
     assert torch.allclose(a[0].cpu(), b[0], atol=1e-6)
+
+
+def test_subsample_groups_caps_every_group_except_the_exempt_one():
+    from archcut3d.ml.dataset import subsample_groups
+    ds = _three_model_dataset()
+    counts = np.bincount(ds.groups)
+    cap = int(counts.min()) // 2
+    sub = subsample_groups(ds, cap, seed=0, exempt=(1,))
+    sc = np.bincount(sub.groups)
+    assert sc[0] == cap and sc[2] == cap and sc[1] == counts[1]
+    assert sub.group_names == ds.group_names and len(sub.meta) == len(sub)
+    again = subsample_groups(ds, cap, seed=0, exempt=(1,))
+    assert np.array_equal(sub.steps, again.steps)
