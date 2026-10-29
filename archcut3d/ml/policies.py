@@ -65,15 +65,17 @@ class GeometricMinimumPolicy:
         self.n_samples = n_samples
         self.relief_channel = relief_channel
 
-    def lateral_offset_mm(self, patch: np.ndarray, mask: np.ndarray):
-        """Lateral position (mm, positive = right) of the tilt-corrected
-        minimum on the profile one step ahead; None if the profile is not
-        on the mesh."""
+    def profile_minimum(self, patch: np.ndarray, mask: np.ndarray, forward_mm: float):
+        """Tilt-corrected minimum of the local_relief profile on the line
+        perpendicular to the heading, `forward_mm` ahead of the patch
+        centre. Returns (lateral_offset_mm, depth) -- offset positive to the
+        right of the heading, depth = how far the corrected profile dips
+        below its baseline -- or None if the profile is not on the mesh."""
         R = self.out_res
         c = (R - 1) / 2.0
         per_px = self.patch_mm / R
         s = np.linspace(-self.half_width_mm, self.half_width_mm, self.n_samples)
-        rows = np.full_like(s, c - self.step_mm / per_px)
+        rows = np.full_like(s, c - forward_mm / per_px)
         cols = c + s / per_px
 
         relief = map_coordinates(patch[:, :, self.relief_channel].astype(np.float64),
@@ -97,7 +99,13 @@ class GeometricMinimumPolicy:
             denom = y0 - 2 * y1 + y2
             if denom > 1e-15:
                 offset = s[k] + float(np.clip(0.5 * (y0 - y2) / denom, -1.0, 1.0)) * (s[1] - s[0])
-        return float(offset)
+        return float(offset), float(-corrected[k])
+
+    def lateral_offset_mm(self, patch: np.ndarray, mask: np.ndarray):
+        """Lateral position (mm, positive = right) of the profile minimum one
+        step ahead; None if the profile is not on the mesh."""
+        res = self.profile_minimum(patch, mask, self.step_mm)
+        return None if res is None else res[0]
 
     def __call__(self, patch, mask):
         offset = self.lateral_offset_mm(patch, mask)
