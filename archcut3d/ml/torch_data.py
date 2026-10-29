@@ -75,10 +75,16 @@ def compute_norm_stats(samples: TracerSamples, eps: float = 1e-6) -> NormStats:
     return NormStats(height_std=height_std, local_relief_std=relief_std, curvature_log_std=curv_log_std)
 
 
-def normalize_patches(patches: np.ndarray, masks: np.ndarray, stats: NormStats) -> np.ndarray:
+def normalize_patches(patches: np.ndarray, masks: np.ndarray, stats: NormStats,
+                      keep_channels=(0, 1, 2)) -> np.ndarray:
     """(N,R,R,3) + (N,R,R) bool -> (N,R,R,4) float32: [height, local_relief,
     curvature, mask], normalized per the module docstring and zeroed
-    everywhere the mask is False."""
+    everywhere the mask is False.
+
+    keep_channels lists which of the three data channels (0 height, 1
+    local_relief, 2 curvature) carry information; the others are set to zero
+    so the array shape, and therefore the network, is unchanged. The mask
+    channel is always kept."""
     n, r, _, _ = patches.shape
     mask_f = masks.astype(np.float32)
 
@@ -90,6 +96,9 @@ def normalize_patches(patches: np.ndarray, masks: np.ndarray, stats: NormStats) 
     curv_n = np.log1p(np.clip(patches[..., 2], 0, None)) / stats.curvature_log_std
 
     out = np.stack([height_n, relief_n, curv_n, mask_f], axis=-1).astype(np.float32)
+    for c in range(3):
+        if c not in keep_channels:
+            out[..., c] = 0.0
     out *= mask_f[..., None]   # off-mesh -> exactly 0 in every channel (mask channel included)
     return out
 
@@ -99,8 +108,8 @@ class TracerTorchDataset(Dataset):
     restricts it to a subset (e.g. one side of a leave-one-model-out split);
     omit for the whole thing."""
 
-    def __init__(self, samples: TracerSamples, stats: NormStats, indices=None):
-        self.normed = normalize_patches(samples.patches, samples.masks, stats)   # (N,R,R,4)
+    def __init__(self, samples: TracerSamples, stats: NormStats, indices=None, keep_channels=(0, 1, 2)):
+        self.normed = normalize_patches(samples.patches, samples.masks, stats, keep_channels)   # (N,R,R,4)
         self.steps = samples.steps.astype(np.float32)
         self.stops = samples.stops.astype(np.float32)
         self.indices = np.arange(len(samples)) if indices is None else np.asarray(indices, dtype=int)
@@ -152,15 +161,15 @@ def group_balanced_sampler(groups: np.ndarray, indices: np.ndarray, seed=None) -
 
 def make_dataloaders(samples: TracerSamples, stats: NormStats, val_group: int,
                      batch_size: int = 64, balance_groups: bool = True, num_workers: int = 0,
-                     seed=None):
+                     seed=None, keep_channels=(0, 1, 2)):
     """Leave-one-model-out train/val DataLoaders."""
     train_idx, val_idx = leave_one_group_out_split(samples, val_group)
     if len(train_idx) == 0 or len(val_idx) == 0:
         raise ValueError(f"val_group {val_group} leaves an empty split "
                          f"(train={len(train_idx)}, val={len(val_idx)})")
 
-    train_ds = TracerTorchDataset(samples, stats, train_idx)
-    val_ds = TracerTorchDataset(samples, stats, val_idx)
+    train_ds = TracerTorchDataset(samples, stats, train_idx, keep_channels)
+    val_ds = TracerTorchDataset(samples, stats, val_idx, keep_channels)
 
     if balance_groups:
         sampler = group_balanced_sampler(samples.groups, train_idx, seed=seed)
@@ -202,11 +211,11 @@ def nested_split(samples: TracerSamples, test_group: int) -> NestedSplit:
 
 def make_nested_dataloaders(samples: TracerSamples, stats: NormStats, split: NestedSplit,
                             batch_size: int = 64, balance_groups: bool = True, num_workers: int = 0,
-                            seed=None):
+                            seed=None, keep_channels=(0, 1, 2)):
     """Train / validation / test DataLoaders for a NestedSplit."""
-    train_ds = TracerTorchDataset(samples, stats, split.train_idx)
-    val_ds = TracerTorchDataset(samples, stats, split.val_idx)
-    test_ds = TracerTorchDataset(samples, stats, split.test_idx)
+    train_ds = TracerTorchDataset(samples, stats, split.train_idx, keep_channels)
+    val_ds = TracerTorchDataset(samples, stats, split.val_idx, keep_channels)
+    test_ds = TracerTorchDataset(samples, stats, split.test_idx, keep_channels)
 
     if balance_groups:
         sampler = group_balanced_sampler(samples.groups, split.train_idx, seed=seed)

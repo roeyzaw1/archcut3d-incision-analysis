@@ -141,21 +141,34 @@ class FoldResult:
     val_group: int
     train_groups: list
     seed: int
+    keep_channels: tuple = (0, 1, 2)
+    freeze_encoder: bool = False
 
 
 def train_one_split(samples: TracerSamples, test_group: int, epochs: int = 150, patience: int = 20,
                     lr: float = 1e-3, batch_size: int = 64, device: str = "cpu", seed: int = 0,
-                    verbose: bool = True) -> FoldResult:
+                    verbose: bool = True, keep_channels=(0, 1, 2),
+                    freeze_encoder: bool = False) -> FoldResult:
     """Train on the training models, early-stop on the validation model, and
-    report metrics on the held-out test model (see module docstring)."""
+    report metrics on the held-out test model (see module docstring).
+
+    keep_channels  : data channels fed to the network (see
+                     torch_data.normalize_patches); the rest are zeroed
+    freeze_encoder : keep the encoder at its random initialisation and train
+                     only the two heads. BatchNorm running statistics still
+                     update in train mode, and the encoder's dropout stays
+                     active during training."""
     split = nested_split(samples, test_group)
     stats = compute_norm_stats(_subset(samples, split.train_idx))   # fit on train only
     train_loader, val_loader, test_loader = make_nested_dataloaders(
-        samples, stats, split, batch_size=batch_size, seed=seed)
+        samples, stats, split, batch_size=batch_size, seed=seed, keep_channels=keep_channels)
 
     torch.manual_seed(seed)          # weight init and dropout masks
     net = TracerNet().to(device)
-    opt = torch.optim.Adam(net.parameters(), lr=lr)
+    if freeze_encoder:
+        for p in net.encoder.parameters():
+            p.requires_grad = False
+    opt = torch.optim.Adam([p for p in net.parameters() if p.requires_grad], lr=lr)
 
     best_val = float("inf")
     best_state = None
@@ -202,4 +215,5 @@ def train_one_split(samples: TracerSamples, test_group: int, epochs: int = 150, 
     train_groups = sorted(set(samples.groups[split.train_idx].tolist()))
     return FoldResult(net=net, stats=stats, history=history, best_val_loss=best_val,
                       val=val_final, test=test_final, test_group=split.test_group,
-                      val_group=split.val_group, train_groups=train_groups, seed=seed)
+                      val_group=split.val_group, train_groups=train_groups, seed=seed,
+                      keep_channels=tuple(keep_channels), freeze_encoder=freeze_encoder)

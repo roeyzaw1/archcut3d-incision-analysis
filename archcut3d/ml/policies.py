@@ -113,14 +113,15 @@ class TracerPolicy:
 
     can_stop = True
 
-    def __init__(self, net: TracerNet, stats: NormStats, device: str = "cpu"):
+    def __init__(self, net: TracerNet, stats: NormStats, device: str = "cpu", keep_channels=(0, 1, 2)):
         self.net = net.to(device).eval()
         self.stats = stats
         self.device = device
+        self.keep_channels = keep_channels
 
     @torch.no_grad()
     def __call__(self, patch, mask):
-        x = normalize_patches(patch[None], mask[None], self.stats)          # (1, R, R, 4)
+        x = normalize_patches(patch[None], mask[None], self.stats, self.keep_channels)   # (1, R, R, 4)
         x = torch.from_numpy(x).permute(0, 3, 1, 2).contiguous().to(self.device)
         step, stop_logit = self.net(x)
         return step[0].cpu().numpy().astype(np.float64), float(torch.sigmoid(stop_logit[0]).item())

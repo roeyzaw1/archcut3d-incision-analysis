@@ -116,3 +116,36 @@ def test_evaluate_splits_angle_error_by_anchor_kind():
     ds = _three_model_dataset()
     res = train_one_split(ds, test_group=0, epochs=2, patience=99, batch_size=16, verbose=False)
     assert np.isfinite(res.test.angle_err_clean_deg) and np.isfinite(res.test.angle_err_jittered_deg)
+
+
+def test_keep_channels_zeroes_excluded_channels_but_keeps_shape_and_mask():
+    from archcut3d.ml.torch_data import NormStats, normalize_patches
+    rng = np.random.default_rng(0)
+    patches = rng.normal(size=(5, 12, 12, 3)).astype(np.float32) + 2.0
+    patches[..., 2] = np.abs(patches[..., 2])
+    masks = np.ones((5, 12, 12), bool)
+    stats = NormStats(1.0, 1.0, 1.0)
+    full = normalize_patches(patches, masks, stats)
+    only_relief = normalize_patches(patches, masks, stats, keep_channels=(1,))
+    assert only_relief.shape == full.shape == (5, 12, 12, 4)
+    assert np.all(only_relief[..., 0] == 0) and np.all(only_relief[..., 2] == 0)
+    assert np.array_equal(only_relief[..., 1], full[..., 1])
+    assert np.array_equal(only_relief[..., 3], full[..., 3]) and only_relief[..., 3].all()
+
+
+def test_frozen_encoder_does_not_change_but_heads_do():
+    import copy
+    import torch
+    from archcut3d.ml.model import TracerNet
+    from archcut3d.ml.train import train_one_split
+    ds = _three_model_dataset()
+    torch.manual_seed(5)
+    init = copy.deepcopy(TracerNet().state_dict())            # same init train_one_split draws for seed=5
+    res = train_one_split(ds, test_group=0, epochs=3, patience=99, batch_size=16, verbose=False,
+                          seed=5, freeze_encoder=True)
+    sd = res.net.state_dict()
+    for k in init:
+        if k.startswith("encoder.") and k.endswith(("weight", "bias")) and "num_batches" not in k:
+            assert torch.equal(init[k], sd[k].cpu()), k
+    assert any(not torch.equal(init[k], sd[k].cpu()) for k in init if k.startswith(("step_head", "stop_head")))
+    assert res.freeze_encoder
