@@ -81,12 +81,19 @@ def dataset_section(out):
              r["median_point_spacing_mm"], "yes" if r["used"] else f"no: {r['reason_excluded']}"] for r in files]
     used = [r for r in files if r["used"]]
     px = [r["pixel_size_mm"] for r in used]
+    samples = read_csv(os.path.join(out, "dataset_samples.csv"))
+    sample_txt = ""
+    if samples:
+        sample_txt = ("\n\nTraining samples with the default sampling (0.3 mm steps, 4 jittered copies per anchor, 2 past-the-end anchors per line end):\n\n" +
+                      md_table(["model", "samples", "clean", "jittered", "past the end", "stop = 1", "stop base rate"],
+                               [[r["model"], int(r["samples"]), int(r["clean"]), int(r["jittered"]), int(r["past_the_end"]),
+                                 int(r["stop_1"]), f"{r['stop_base_rate'] * 100:.1f}%"] for r in samples]))
     txt = ["## Dataset", "",
            md_table(["label file", "traces", "points", "traced mm", "mm/px", "median point spacing (mm)", "used"], body), "",
            f"{len(files)} label files, {len({r['source_file'] for r in files})} distinct scanned models; "
            f"{len(used)} used. Pixel size of the used models: {min(px):.4f}–{max(px):.4f} mm/px "
            f"({max(px) / min(px):.1f}x). Across all 7 scans of the collection the range is 0.011–0.359 mm/px (about 33x). "
-           f"Models: {', '.join(cfg['models'])}."]
+           f"Models: {', '.join(cfg['models'])}." + sample_txt]
     return "\n".join(txt)
 
 
@@ -204,12 +211,14 @@ def build(out):
         parts.append("## E5: trained on geometry-only (crest-line) labels\n")
         labels = read_csv(os.path.join(out, "e5_labels.csv"))
         if labels:
+            def cell(r, k, as_int=False):
+                v = r.get(k, float("nan"))
+                if isinstance(v, str) or v != v:
+                    return "–"
+                return int(v) if as_int else v
             parts.append(md_table(["scan", "vertices", "crest lines kept", "total mm", "note"],
-                                  [[r["source_file"], int(r["n_vertices"]) if r.get("n_vertices") == r.get("n_vertices") else "–",
-                                    int(r["n_traces"]) if r.get("n_traces") == r.get("n_traces") else "–",
-                                    r["traced_mm"] if r.get("traced_mm") == r.get("traced_mm") else "–",
+                                  [[r["source_file"], cell(r, "n_vertices", True), cell(r, "n_traces", True), cell(r, "traced_mm"),
                                     r["skipped"] if isinstance(r.get("skipped"), str) else ""] for r in labels]) + "\n")
-        parts.append(key_metric_table(e0 + e5, ["tracernet", "geo_labels"], ["all"], one_cols[:3] + path_cols[:1] + path_cols[3:4], "Metrics, all points"))
 
     pca = read_csv(os.path.join(out, "e3_pca.csv"))
     if pca:

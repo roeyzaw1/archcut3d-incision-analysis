@@ -1,0 +1,5 @@
+label_file,source_file,n_traces,n_points,traced_mm,pixel_size_mm,median_point_spacing_px,median_point_spacing_mm,machine_generated,used,reason_excluded
+A0047_Open_nose.label.npz,A0047_Open_nose.wrl,2,23,24.85,0.02734,41.39,1.132,False,True,
+HLT_Figurine_Open.label.npz,HLT_Figurine_Open.wrl,1,13,39.88,0.04331,76.84,3.328,False,True,
+Hatzor Seal Open.label.npz,Hatzor Seal Open.wrl,323,22057,741.82,0.05567,0.53,0.03,True,False,machine-generated (point spacing < 2.0 px)
+NEGII_Frida open full front.label.npz,NEGII_Frida open full front.wrl,4,49,106.58,0.12541,19.07,2.392,False,True,

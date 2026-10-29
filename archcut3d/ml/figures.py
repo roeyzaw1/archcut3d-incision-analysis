@@ -110,13 +110,16 @@ def plot_pca_cumvar(cum_rows, out_path: str):
     plt.close(fig)
 
 
-def plot_probe_lines(probe_rows, target: str, out_path: str, metric: str = None):
-    """Probe score per encoder block, trained vs random encoder (mean and
-    std over folds and seeds). `metric` selects R2, R2_z or AUROC rows."""
+def plot_probe_lines(probe_rows, target: str, out_path: str, metric: str = None, value: str = "score"):
+    """Probe result per encoder block, trained vs random encoder (mean and
+    std over folds and seeds). `metric` selects R2, R2_z or AUROC rows;
+    `value` is the column plotted: "score" (R2 / R2_z / AUROC) or
+    "pearson_r", which is bounded and ignores scale differences between
+    models, so it stays readable where R2 reaches large negative values."""
     rows = [r for r in probe_rows if r["target"] == target and (metric is None or r["metric"] == metric)]
-    stats = _group_stats(rows, ("encoder", "block"), "score")
+    stats = _group_stats(rows, ("encoder", "block"), value)
     fig, ax = plt.subplots(figsize=(5.5, 3.8))
-    metric = rows[0]["metric"] if rows else ""
+    metric = "Pearson r" if value == "pearson_r" else (rows[0]["metric"] if rows else "")
     for enc, color in (("trained", "tab:red"), ("random", "tab:blue")):
         bs = sorted(b for (e, b) in stats if e == enc)
         if not bs:
@@ -126,6 +129,8 @@ def plot_probe_lines(probe_rows, target: str, out_path: str, metric: str = None)
         ax.errorbar(bs, m, yerr=sd, marker="o", color=color, capsize=3, label=f"{enc} encoder")
     ax.set_xlabel("encoder block")
     ax.set_ylabel(f"{metric} on the test model")
+    if value == "pearson_r":
+        ax.set_ylim(-1, 1)
     ax.set_title(target.replace("_", " "))
     ax.axhline(0.5 if metric == "AUROC" else 0.0, color="gray", lw=0.5, ls=":")
     ax.legend()

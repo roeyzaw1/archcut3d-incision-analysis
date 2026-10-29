@@ -339,7 +339,8 @@ def run_e3(ctx: Context):
     plot_pca_cumvar(cum_rows, os.path.join(ctx.out, "figures", "e3_pca.png"))
     for tname, kind in TARGETS.items():
         plot_probe_lines(probe_rows, tname, os.path.join(ctx.out, "figures", f"e3_probe_{tname}.png"),
-                         metric="R2_z" if kind == "regression" else "AUROC")
+                         metric="R2_z" if kind == "regression" else "AUROC",
+                         value="pearson_r" if kind == "regression" else "score")
 
 
 def crest_examples(ctx: Context):
@@ -441,6 +442,22 @@ def run_e5b(ctx: Context):
     ctx.save("E5b")
 
 
+def write_dataset_samples(ctx: Context):
+    """Training-sample counts per model for the default sampling settings
+    (clean anchors, jittered copies, past-the-end anchors, stop=1)."""
+    ds = ctx.dataset(ctx.seeds[0])
+    kinds = ds.kinds
+    rows = []
+    for g, name in enumerate(ds.group_names):
+        sel = ds.groups == g
+        rows.append({"model": name, "samples": int(sel.sum()), "clean": int((sel & (kinds == 0)).sum()),
+                     "jittered": int((sel & (kinds == 1)).sum()), "past_the_end": int((sel & (kinds == 2)).sum()),
+                     "stop_1": int(ds.stops[sel].sum()), "stop_base_rate": float(ds.stops[sel].mean())})
+    rows.append({"model": "all", "samples": len(ds), "clean": int((kinds == 0).sum()), "jittered": int((kinds == 1).sum()),
+                 "past_the_end": int((kinds == 2).sum()), "stop_1": int(ds.stops.sum()), "stop_base_rate": float(ds.stops.mean())})
+    write_csv(os.path.join(ctx.out, "dataset_samples.csv"), rows)
+
+
 def write_config(ctx: Context, started: float, experiments):
     a = ctx.args
     cfg = {
@@ -501,6 +518,7 @@ def main(argv=None):
     print(f"device={ctx.device} models={ctx.names} seeds={ctx.seeds} folds={ctx.test_groups} "
           f"epochs<={ctx.epochs}; depth threshold {ctx.depth_thr:.5f}", flush=True)
     write_csv(os.path.join(ctx.out, "dataset_files.csv"), ctx.file_rows)
+    write_dataset_samples(ctx)
 
     ex = set(args.experiments)
     if ex & {"E0", "E0b"}:

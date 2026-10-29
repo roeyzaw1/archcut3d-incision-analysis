@@ -1,0 +1,19 @@
+test_model,seed,encoder,n_components_80,n_components_90,n_components_95,participation_ratio,n_features,n_anchors
+A0047_Open_nose.wrl,0,trained,3,4,6,3.182947327359611,128,86
+A0047_Open_nose.wrl,0,random,11,21,34,5.651406426356232,128,86
+HLT_Figurine_Open.wrl,0,trained,1,1,2,1.1117010627715957,128,134
+HLT_Figurine_Open.wrl,0,random,4,8,16,4.235479473499742,128,134
+NEGII_Frida open full front.wrl,0,trained,1,2,3,1.3947888726111934,128,360
+NEGII_Frida open full front.wrl,0,random,1,1,2,1.1084290760313302,128,360
+A0047_Open_nose.wrl,1,trained,2,3,5,2.331228429264561,128,86
+A0047_Open_nose.wrl,1,random,3,12,23,1.9188542397756432,128,86
+HLT_Figurine_Open.wrl,1,trained,1,2,2,1.4726062363197037,128,134
+HLT_Figurine_Open.wrl,1,random,3,6,13,2.5030143309312343,128,134
+NEGII_Frida open full front.wrl,1,trained,2,3,3,1.7094109354195408,128,360
+NEGII_Frida open full front.wrl,1,random,1,1,3,1.2083700392280277,128,360
+A0047_Open_nose.wrl,2,trained,1,2,4,1.3017086412673495,128,86
+A0047_Open_nose.wrl,2,random,12,24,36,5.210446622621459,128,86
+HLT_Figurine_Open.wrl,2,trained,1,2,3,1.3639431026602407,128,134
+HLT_Figurine_Open.wrl,2,random,5,10,19,3.700461079421402,128,134
+NEGII_Frida open full front.wrl,2,trained,1,1,1,1.0646688292082978,128,360
+NEGII_Frida open full front.wrl,2,random,1,1,1,1.078736012636996,128,360

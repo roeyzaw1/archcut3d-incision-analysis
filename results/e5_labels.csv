@@ -1,0 +1,8 @@
+source_file,n_traces,pixel_size_mm,traced_mm,cached,skipped
+A0047_Open_nose.wrl,1,0.02734157430279552,0.0,True,
+HLT_Figurine_Open.wrl,14,0.04331431767106423,77.0,True,
+Hatzor Seal Open.wrl,67,0.05566792739483245,285.6,True,
+KHH J56a open.wrl,4,0.07767373108800305,17.8,True,
+L10636_B116316_handle_open.wrl,,,,,"L10636_B116316_handle_open.wrl: 1995 vertices, too coarse (< 5000)"
+Liron PatchC.wrl,1,0.01081123323462781,0.0,True,
+NEGII_Frida open full front.wrl,80,0.12541437413604503,337.3,True,

@@ -1,0 +1,2053 @@
+test_model,seed,encoder,k,cumulative_variance
+A0047_Open_nose.wrl,0,trained,1,0.4657626748085022
+A0047_Open_nose.wrl,0,trained,2,0.7473442554473877
+A0047_Open_nose.wrl,0,trained,3,0.8647264838218689
+A0047_Open_nose.wrl,0,trained,4,0.9211681485176086
+A0047_Open_nose.wrl,0,trained,5,0.944050133228302
+A0047_Open_nose.wrl,0,trained,6,0.9600129723548889
+A0047_Open_nose.wrl,0,trained,7,0.9706133008003235
+A0047_Open_nose.wrl,0,trained,8,0.9767297506332397
+A0047_Open_nose.wrl,0,trained,9,0.9823777675628662
+A0047_Open_nose.wrl,0,trained,10,0.98512864112854
+A0047_Open_nose.wrl,0,trained,11,0.9877170324325562
+A0047_Open_nose.wrl,0,trained,12,0.9898982048034668
+A0047_Open_nose.wrl,0,trained,13,0.9916552305221558
+A0047_Open_nose.wrl,0,trained,14,0.9927768111228943
+A0047_Open_nose.wrl,0,trained,15,0.9937294721603394
+A0047_Open_nose.wrl,0,trained,16,0.9945449829101562
+A0047_Open_nose.wrl,0,trained,17,0.9952791929244995
+A0047_Open_nose.wrl,0,trained,18,0.9958083629608154
+A0047_Open_nose.wrl,0,trained,19,0.9962860941886902
+A0047_Open_nose.wrl,0,trained,20,0.9967366456985474
+A0047_Open_nose.wrl,0,trained,21,0.9971321225166321
+A0047_Open_nose.wrl,0,trained,22,0.9974758625030518
+A0047_Open_nose.wrl,0,trained,23,0.9977511167526245
+A0047_Open_nose.wrl,0,trained,24,0.9980182647705078
+A0047_Open_nose.wrl,0,trained,25,0.99824458360672
+A0047_Open_nose.wrl,0,trained,26,0.9984341263771057
+A0047_Open_nose.wrl,0,trained,27,0.998583197593689
+A0047_Open_nose.wrl,0,trained,28,0.9987207651138306
+A0047_Open_nose.wrl,0,trained,29,0.9988487958908081
+A0047_Open_nose.wrl,0,trained,30,0.9989517331123352
+A0047_Open_nose.wrl,0,trained,31,0.9990483522415161
+A0047_Open_nose.wrl,0,trained,32,0.9991260170936584
+A0047_Open_nose.wrl,0,trained,33,0.9991996884346008
+A0047_Open_nose.wrl,0,trained,34,0.9992697238922119
+A0047_Open_nose.wrl,0,trained,35,0.9993367791175842
+A0047_Open_nose.wrl,0,trained,36,0.9993992447853088
+A0047_Open_nose.wrl,0,trained,37,0.9994545578956604
+A0047_Open_nose.wrl,0,trained,38,0.9995050430297852
+A0047_Open_nose.wrl,0,trained,39,0.9995508193969727
+A0047_Open_nose.wrl,0,trained,40,0.9995894432067871
+A0047_Open_nose.wrl,0,trained,41,0.9996269345283508
+A0047_Open_nose.wrl,0,trained,42,0.9996620416641235
+A0047_Open_nose.wrl,0,trained,43,0.999690592288971
+A0047_Open_nose.wrl,0,trained,44,0.9997175335884094
+A0047_Open_nose.wrl,0,trained,45,0.9997413158416748
+A0047_Open_nose.wrl,0,trained,46,0.9997637271881104
+A0047_Open_nose.wrl,0,trained,47,0.9997835755348206
+A0047_Open_nose.wrl,0,trained,48,0.9998025298118591
+A0047_Open_nose.wrl,0,trained,49,0.9998184442520142
+A0047_Open_nose.wrl,0,trained,50,0.999833881855011
+A0047_Open_nose.wrl,0,trained,51,0.9998480081558228
+A0047_Open_nose.wrl,0,trained,52,0.9998613595962524
+A0047_Open_nose.wrl,0,trained,53,0.9998736381530762
+A0047_Open_nose.wrl,0,trained,54,0.999885082244873
+A0047_Open_nose.wrl,0,trained,55,0.9998961091041565
+A0047_Open_nose.wrl,0,trained,56,0.9999058246612549
+A0047_Open_nose.wrl,0,trained,57,0.9999140501022339
+A0047_Open_nose.wrl,0,trained,58,0.9999221563339233
+A0047_Open_nose.wrl,0,trained,59,0.9999294877052307
+A0047_Open_nose.wrl,0,trained,60,0.9999364018440247
+A0047_Open_nose.wrl,0,trained,61,0.9999427795410156
+A0047_Open_nose.wrl,0,trained,62,0.9999486207962036
+A0047_Open_nose.wrl,0,trained,63,0.9999539256095886
+A0047_Open_nose.wrl,0,trained,64,0.9999590516090393
+A0047_Open_nose.wrl,0,trained,65,0.9999634623527527
+A0047_Open_nose.wrl,0,trained,66,0.9999674558639526
+A0047_Open_nose.wrl,0,trained,67,0.9999714493751526
+A0047_Open_nose.wrl,0,trained,68,0.9999750852584839
+A0047_Open_nose.wrl,0,trained,69,0.9999783635139465
+A0047_Open_nose.wrl,0,trained,70,0.9999810457229614
+A0047_Open_nose.wrl,0,trained,71,0.999983549118042
+A0047_Open_nose.wrl,0,trained,72,0.9999855756759644
+A0047_Open_nose.wrl,0,trained,73,0.9999874234199524
+A0047_Open_nose.wrl,0,trained,74,0.9999892115592957
+A0047_Open_nose.wrl,0,trained,75,0.9999908804893494
+A0047_Open_nose.wrl,0,trained,76,0.9999924898147583
+A0047_Open_nose.wrl,0,trained,77,0.9999939203262329
+A0047_Open_nose.wrl,0,trained,78,0.9999952912330627
+A0047_Open_nose.wrl,0,trained,79,0.9999964833259583
+A0047_Open_nose.wrl,0,trained,80,0.9999975562095642
+A0047_Open_nose.wrl,0,trained,81,0.9999983310699463
+A0047_Open_nose.wrl,0,trained,82,0.9999989867210388
+A0047_Open_nose.wrl,0,trained,83,0.9999995231628418
+A0047_Open_nose.wrl,0,trained,84,0.9999999403953552
+A0047_Open_nose.wrl,0,trained,85,1.0000001192092896
+A0047_Open_nose.wrl,0,trained,86,1.0000001192092896
+A0047_Open_nose.wrl,0,random,1,0.3459557592868805
+A0047_Open_nose.wrl,0,random,2,0.5646089911460876
+A0047_Open_nose.wrl,0,random,3,0.6176875233650208
+A0047_Open_nose.wrl,0,random,4,0.6634620428085327
+A0047_Open_nose.wrl,0,random,5,0.6950056552886963
+A0047_Open_nose.wrl,0,random,6,0.7242067456245422
+A0047_Open_nose.wrl,0,random,7,0.7484146356582642
+A0047_Open_nose.wrl,0,random,8,0.7654004096984863
+A0047_Open_nose.wrl,0,random,9,0.7813413739204407
+A0047_Open_nose.wrl,0,random,10,0.7961408495903015
+A0047_Open_nose.wrl,0,random,11,0.8096391558647156
+A0047_Open_nose.wrl,0,random,12,0.8223552703857422
+A0047_Open_nose.wrl,0,random,13,0.8343053460121155
+A0047_Open_nose.wrl,0,random,14,0.8452835083007812
+A0047_Open_nose.wrl,0,random,15,0.8553969860076904
+A0047_Open_nose.wrl,0,random,16,0.8645281195640564
+A0047_Open_nose.wrl,0,random,17,0.8731503486633301
+A0047_Open_nose.wrl,0,random,18,0.8808353543281555
+A0047_Open_nose.wrl,0,random,19,0.8878591656684875
+A0047_Open_nose.wrl,0,random,20,0.894180953502655
+A0047_Open_nose.wrl,0,random,21,0.900323212146759
+A0047_Open_nose.wrl,0,random,22,0.9057967662811279
+A0047_Open_nose.wrl,0,random,23,0.9111643433570862
+A0047_Open_nose.wrl,0,random,24,0.9161331653594971
+A0047_Open_nose.wrl,0,random,25,0.9206467866897583
+A0047_Open_nose.wrl,0,random,26,0.9250757694244385
+A0047_Open_nose.wrl,0,random,27,0.9291427135467529
+A0047_Open_nose.wrl,0,random,28,0.9331290125846863
+A0047_Open_nose.wrl,0,random,29,0.9367918372154236
+A0047_Open_nose.wrl,0,random,30,0.9401749968528748
+A0047_Open_nose.wrl,0,random,31,0.9435051679611206
+A0047_Open_nose.wrl,0,random,32,0.9466317892074585
+A0047_Open_nose.wrl,0,random,33,0.9494616389274597
+A0047_Open_nose.wrl,0,random,34,0.9522445201873779
+A0047_Open_nose.wrl,0,random,35,0.9548743963241577
+A0047_Open_nose.wrl,0,random,36,0.9574224948883057
+A0047_Open_nose.wrl,0,random,37,0.9598826169967651
+A0047_Open_nose.wrl,0,random,38,0.9622368216514587
+A0047_Open_nose.wrl,0,random,39,0.9644712209701538
+A0047_Open_nose.wrl,0,random,40,0.9665570259094238
+A0047_Open_nose.wrl,0,random,41,0.9685838222503662
+A0047_Open_nose.wrl,0,random,42,0.9705244898796082
+A0047_Open_nose.wrl,0,random,43,0.9723652005195618
+A0047_Open_nose.wrl,0,random,44,0.9741286635398865
+A0047_Open_nose.wrl,0,random,45,0.9757862687110901
+A0047_Open_nose.wrl,0,random,46,0.977314829826355
+A0047_Open_nose.wrl,0,random,47,0.9787910580635071
+A0047_Open_nose.wrl,0,random,48,0.9802551865577698
+A0047_Open_nose.wrl,0,random,49,0.9816303253173828
+A0047_Open_nose.wrl,0,random,50,0.9828601479530334
+A0047_Open_nose.wrl,0,random,51,0.9840452671051025
+A0047_Open_nose.wrl,0,random,52,0.9852088689804077
+A0047_Open_nose.wrl,0,random,53,0.9862961769104004
+A0047_Open_nose.wrl,0,random,54,0.9872581362724304
+A0047_Open_nose.wrl,0,random,55,0.9881951212882996
+A0047_Open_nose.wrl,0,random,56,0.9891042709350586
+A0047_Open_nose.wrl,0,random,57,0.9899251461029053
+A0047_Open_nose.wrl,0,random,58,0.9907282590866089
+A0047_Open_nose.wrl,0,random,59,0.9914976358413696
+A0047_Open_nose.wrl,0,random,60,0.9922314286231995
+A0047_Open_nose.wrl,0,random,61,0.992910623550415
+A0047_Open_nose.wrl,0,random,62,0.9935611486434937
+A0047_Open_nose.wrl,0,random,63,0.9941661357879639
+A0047_Open_nose.wrl,0,random,64,0.994717001914978
+A0047_Open_nose.wrl,0,random,65,0.9952449798583984
+A0047_Open_nose.wrl,0,random,66,0.9957197308540344
+A0047_Open_nose.wrl,0,random,67,0.9961408376693726
+A0047_Open_nose.wrl,0,random,68,0.9965521693229675
+A0047_Open_nose.wrl,0,random,69,0.9969215393066406
+A0047_Open_nose.wrl,0,random,70,0.99724942445755
+A0047_Open_nose.wrl,0,random,71,0.9975671172142029
+A0047_Open_nose.wrl,0,random,72,0.9978678226470947
+A0047_Open_nose.wrl,0,random,73,0.9981352686882019
+A0047_Open_nose.wrl,0,random,74,0.9983935952186584
+A0047_Open_nose.wrl,0,random,75,0.9986431002616882
+A0047_Open_nose.wrl,0,random,76,0.9988688826560974
+A0047_Open_nose.wrl,0,random,77,0.9990768432617188
+A0047_Open_nose.wrl,0,random,78,0.9992586374282837
+A0047_Open_nose.wrl,0,random,79,0.9994144439697266
+A0047_Open_nose.wrl,0,random,80,0.999563455581665
+A0047_Open_nose.wrl,0,random,81,0.9996945261955261
+A0047_Open_nose.wrl,0,random,82,0.9997944235801697
+A0047_Open_nose.wrl,0,random,83,0.9998707175254822
+A0047_Open_nose.wrl,0,random,84,0.9999417066574097
+A0047_Open_nose.wrl,0,random,85,1.000000238418579
+A0047_Open_nose.wrl,0,random,86,1.000000238418579
+HLT_Figurine_Open.wrl,0,trained,1,0.948136031627655
+HLT_Figurine_Open.wrl,0,trained,2,0.9638960361480713
+HLT_Figurine_Open.wrl,0,trained,3,0.9786572456359863
+HLT_Figurine_Open.wrl,0,trained,4,0.9865731000900269
+HLT_Figurine_Open.wrl,0,trained,5,0.9912852644920349
+HLT_Figurine_Open.wrl,0,trained,6,0.9931269884109497
+HLT_Figurine_Open.wrl,0,trained,7,0.9948309063911438
+HLT_Figurine_Open.wrl,0,trained,8,0.9960399866104126
+HLT_Figurine_Open.wrl,0,trained,9,0.9968717694282532
+HLT_Figurine_Open.wrl,0,trained,10,0.9973964095115662
+HLT_Figurine_Open.wrl,0,trained,11,0.9978029727935791
+HLT_Figurine_Open.wrl,0,trained,12,0.9981195330619812
+HLT_Figurine_Open.wrl,0,trained,13,0.9983522891998291
+HLT_Figurine_Open.wrl,0,trained,14,0.9985726475715637
+HLT_Figurine_Open.wrl,0,trained,15,0.9987858533859253
+HLT_Figurine_Open.wrl,0,trained,16,0.9989264607429504
+HLT_Figurine_Open.wrl,0,trained,17,0.9990479350090027
+HLT_Figurine_Open.wrl,0,trained,18,0.9991432428359985
+HLT_Figurine_Open.wrl,0,trained,19,0.9992326498031616
+HLT_Figurine_Open.wrl,0,trained,20,0.9993066191673279
+HLT_Figurine_Open.wrl,0,trained,21,0.9993755221366882
+HLT_Figurine_Open.wrl,0,trained,22,0.9994326233863831
+HLT_Figurine_Open.wrl,0,trained,23,0.9994821548461914
+HLT_Figurine_Open.wrl,0,trained,24,0.9995229244232178
+HLT_Figurine_Open.wrl,0,trained,25,0.9995604157447815
+HLT_Figurine_Open.wrl,0,trained,26,0.9995949864387512
+HLT_Figurine_Open.wrl,0,trained,27,0.9996265172958374
+HLT_Figurine_Open.wrl,0,trained,28,0.999652624130249
+HLT_Figurine_Open.wrl,0,trained,29,0.9996781945228577
+HLT_Figurine_Open.wrl,0,trained,30,0.9997001886367798
+HLT_Figurine_Open.wrl,0,trained,31,0.9997210502624512
+HLT_Figurine_Open.wrl,0,trained,32,0.9997396469116211
+HLT_Figurine_Open.wrl,0,trained,33,0.9997569918632507
+HLT_Figurine_Open.wrl,0,trained,34,0.9997738003730774
+HLT_Figurine_Open.wrl,0,trained,35,0.9997892379760742
+HLT_Figurine_Open.wrl,0,trained,36,0.9998021125793457
+HLT_Figurine_Open.wrl,0,trained,37,0.9998147487640381
+HLT_Figurine_Open.wrl,0,trained,38,0.999825656414032
+HLT_Figurine_Open.wrl,0,trained,39,0.9998365044593811
+HLT_Figurine_Open.wrl,0,trained,40,0.9998464584350586
+HLT_Figurine_Open.wrl,0,trained,41,0.999855637550354
+HLT_Figurine_Open.wrl,0,trained,42,0.9998641610145569
+HLT_Figurine_Open.wrl,0,trained,43,0.9998721480369568
+HLT_Figurine_Open.wrl,0,trained,44,0.9998793601989746
+HLT_Figurine_Open.wrl,0,trained,45,0.9998862743377686
+HLT_Figurine_Open.wrl,0,trained,46,0.9998925924301147
+HLT_Figurine_Open.wrl,0,trained,47,0.9998985528945923
+HLT_Figurine_Open.wrl,0,trained,48,0.999904453754425
+HLT_Figurine_Open.wrl,0,trained,49,0.9999096989631653
+HLT_Figurine_Open.wrl,0,trained,50,0.9999144673347473
+HLT_Figurine_Open.wrl,0,trained,51,0.9999189972877502
+HLT_Figurine_Open.wrl,0,trained,52,0.9999233484268188
+HLT_Figurine_Open.wrl,0,trained,53,0.9999275207519531
+HLT_Figurine_Open.wrl,0,trained,54,0.9999316334724426
+HLT_Figurine_Open.wrl,0,trained,55,0.999935507774353
+HLT_Figurine_Open.wrl,0,trained,56,0.99993896484375
+HLT_Figurine_Open.wrl,0,trained,57,0.9999423027038574
+HLT_Figurine_Open.wrl,0,trained,58,0.9999455213546753
+HLT_Figurine_Open.wrl,0,trained,59,0.9999485611915588
+HLT_Figurine_Open.wrl,0,trained,60,0.9999514818191528
+HLT_Figurine_Open.wrl,0,trained,61,0.999954104423523
+HLT_Figurine_Open.wrl,0,trained,62,0.9999566674232483
+HLT_Figurine_Open.wrl,0,trained,63,0.9999592304229736
+HLT_Figurine_Open.wrl,0,trained,64,0.9999616146087646
+HLT_Figurine_Open.wrl,0,trained,65,0.9999638199806213
+HLT_Figurine_Open.wrl,0,trained,66,0.9999659657478333
+HLT_Figurine_Open.wrl,0,trained,67,0.9999679327011108
+HLT_Figurine_Open.wrl,0,trained,68,0.9999697208404541
+HLT_Figurine_Open.wrl,0,trained,69,0.9999714493751526
+HLT_Figurine_Open.wrl,0,trained,70,0.9999730587005615
+HLT_Figurine_Open.wrl,0,trained,71,0.9999747276306152
+HLT_Figurine_Open.wrl,0,trained,72,0.9999762177467346
+HLT_Figurine_Open.wrl,0,trained,73,0.9999775886535645
+HLT_Figurine_Open.wrl,0,trained,74,0.9999790191650391
+HLT_Figurine_Open.wrl,0,trained,75,0.9999803304672241
+HLT_Figurine_Open.wrl,0,trained,76,0.9999815225601196
+HLT_Figurine_Open.wrl,0,trained,77,0.9999826550483704
+HLT_Figurine_Open.wrl,0,trained,78,0.9999838471412659
+HLT_Figurine_Open.wrl,0,trained,79,0.9999849200248718
+HLT_Figurine_Open.wrl,0,trained,80,0.9999858736991882
+HLT_Figurine_Open.wrl,0,trained,81,0.9999868869781494
+HLT_Figurine_Open.wrl,0,trained,82,0.9999876618385315
+HLT_Figurine_Open.wrl,0,trained,83,0.9999884963035583
+HLT_Figurine_Open.wrl,0,trained,84,0.9999893307685852
+HLT_Figurine_Open.wrl,0,trained,85,0.9999900460243225
+HLT_Figurine_Open.wrl,0,trained,86,0.9999908208847046
+HLT_Figurine_Open.wrl,0,trained,87,0.9999914765357971
+HLT_Figurine_Open.wrl,0,trained,88,0.9999920129776001
+HLT_Figurine_Open.wrl,0,trained,89,0.9999926090240479
+HLT_Figurine_Open.wrl,0,trained,90,0.9999932050704956
+HLT_Figurine_Open.wrl,0,trained,91,0.9999936819076538
+HLT_Figurine_Open.wrl,0,trained,92,0.999994158744812
+HLT_Figurine_Open.wrl,0,trained,93,0.9999945759773254
+HLT_Figurine_Open.wrl,0,trained,94,0.9999949932098389
+HLT_Figurine_Open.wrl,0,trained,95,0.9999954104423523
+HLT_Figurine_Open.wrl,0,trained,96,0.9999957084655762
+HLT_Figurine_Open.wrl,0,trained,97,0.9999960660934448
+HLT_Figurine_Open.wrl,0,trained,98,0.9999963641166687
+HLT_Figurine_Open.wrl,0,trained,99,0.9999967217445374
+HLT_Figurine_Open.wrl,0,trained,100,0.9999970197677612
+HLT_Figurine_Open.wrl,0,trained,101,0.9999973177909851
+HLT_Figurine_Open.wrl,0,trained,102,0.9999975562095642
+HLT_Figurine_Open.wrl,0,trained,103,0.9999977946281433
+HLT_Figurine_Open.wrl,0,trained,104,0.9999980330467224
+HLT_Figurine_Open.wrl,0,trained,105,0.9999982118606567
+HLT_Figurine_Open.wrl,0,trained,106,0.9999983310699463
+HLT_Figurine_Open.wrl,0,trained,107,0.9999985098838806
+HLT_Figurine_Open.wrl,0,trained,108,0.9999986886978149
+HLT_Figurine_Open.wrl,0,trained,109,0.9999988675117493
+HLT_Figurine_Open.wrl,0,trained,110,0.9999989867210388
+HLT_Figurine_Open.wrl,0,trained,111,0.9999991059303284
+HLT_Figurine_Open.wrl,0,trained,112,0.9999991655349731
+HLT_Figurine_Open.wrl,0,trained,113,0.9999992847442627
+HLT_Figurine_Open.wrl,0,trained,114,0.9999993443489075
+HLT_Figurine_Open.wrl,0,trained,115,0.9999994039535522
+HLT_Figurine_Open.wrl,0,trained,116,0.9999995231628418
+HLT_Figurine_Open.wrl,0,trained,117,0.9999995827674866
+HLT_Figurine_Open.wrl,0,trained,118,0.9999996423721313
+HLT_Figurine_Open.wrl,0,trained,119,0.9999996423721313
+HLT_Figurine_Open.wrl,0,trained,120,0.9999996423721313
+HLT_Figurine_Open.wrl,0,trained,121,0.9999996423721313
+HLT_Figurine_Open.wrl,0,trained,122,0.9999996423721313
+HLT_Figurine_Open.wrl,0,trained,123,0.9999996423721313
+HLT_Figurine_Open.wrl,0,trained,124,0.9999996423721313
+HLT_Figurine_Open.wrl,0,trained,125,0.9999996423721313
+HLT_Figurine_Open.wrl,0,trained,126,0.9999996423721313
+HLT_Figurine_Open.wrl,0,trained,127,0.9999996423721313
+HLT_Figurine_Open.wrl,0,trained,128,0.9999996423721313
+HLT_Figurine_Open.wrl,0,random,1,0.3859400749206543
+HLT_Figurine_Open.wrl,0,random,2,0.6223630309104919
+HLT_Figurine_Open.wrl,0,random,3,0.7885530591011047
+HLT_Figurine_Open.wrl,0,random,4,0.8256232142448425
+HLT_Figurine_Open.wrl,0,random,5,0.8587735295295715
+HLT_Figurine_Open.wrl,0,random,6,0.8795107007026672
+HLT_Figurine_Open.wrl,0,random,7,0.8942228555679321
+HLT_Figurine_Open.wrl,0,random,8,0.9057410359382629
+HLT_Figurine_Open.wrl,0,random,9,0.9150426387786865
+HLT_Figurine_Open.wrl,0,random,10,0.9235597252845764
+HLT_Figurine_Open.wrl,0,random,11,0.9306569695472717
+HLT_Figurine_Open.wrl,0,random,12,0.9369882941246033
+HLT_Figurine_Open.wrl,0,random,13,0.9416832327842712
+HLT_Figurine_Open.wrl,0,random,14,0.9459174275398254
+HLT_Figurine_Open.wrl,0,random,15,0.9498480558395386
+HLT_Figurine_Open.wrl,0,random,16,0.9535397887229919
+HLT_Figurine_Open.wrl,0,random,17,0.9567570686340332
+HLT_Figurine_Open.wrl,0,random,18,0.9592013359069824
+HLT_Figurine_Open.wrl,0,random,19,0.9616045951843262
+HLT_Figurine_Open.wrl,0,random,20,0.9639771580696106
+HLT_Figurine_Open.wrl,0,random,21,0.966236412525177
+HLT_Figurine_Open.wrl,0,random,22,0.9682610630989075
+HLT_Figurine_Open.wrl,0,random,23,0.9701101183891296
+HLT_Figurine_Open.wrl,0,random,24,0.9718441963195801
+HLT_Figurine_Open.wrl,0,random,25,0.9734261631965637
+HLT_Figurine_Open.wrl,0,random,26,0.9749014973640442
+HLT_Figurine_Open.wrl,0,random,27,0.9762625694274902
+HLT_Figurine_Open.wrl,0,random,28,0.9775477051734924
+HLT_Figurine_Open.wrl,0,random,29,0.9787473678588867
+HLT_Figurine_Open.wrl,0,random,30,0.9799347519874573
+HLT_Figurine_Open.wrl,0,random,31,0.9809982776641846
+HLT_Figurine_Open.wrl,0,random,32,0.9819998741149902
+HLT_Figurine_Open.wrl,0,random,33,0.9829847812652588
+HLT_Figurine_Open.wrl,0,random,34,0.9839332699775696
+HLT_Figurine_Open.wrl,0,random,35,0.9848092794418335
+HLT_Figurine_Open.wrl,0,random,36,0.985638439655304
+HLT_Figurine_Open.wrl,0,random,37,0.9863749742507935
+HLT_Figurine_Open.wrl,0,random,38,0.9871004819869995
+HLT_Figurine_Open.wrl,0,random,39,0.9877442717552185
+HLT_Figurine_Open.wrl,0,random,40,0.9883519411087036
+HLT_Figurine_Open.wrl,0,random,41,0.988917350769043
+HLT_Figurine_Open.wrl,0,random,42,0.9894688725471497
+HLT_Figurine_Open.wrl,0,random,43,0.9899925589561462
+HLT_Figurine_Open.wrl,0,random,44,0.9904957413673401
+HLT_Figurine_Open.wrl,0,random,45,0.9909633994102478
+HLT_Figurine_Open.wrl,0,random,46,0.991422712802887
+HLT_Figurine_Open.wrl,0,random,47,0.9918520450592041
+HLT_Figurine_Open.wrl,0,random,48,0.9922647476196289
+HLT_Figurine_Open.wrl,0,random,49,0.992649257183075
+HLT_Figurine_Open.wrl,0,random,50,0.9930241703987122
+HLT_Figurine_Open.wrl,0,random,51,0.993374764919281
+HLT_Figurine_Open.wrl,0,random,52,0.9937135577201843
+HLT_Figurine_Open.wrl,0,random,53,0.9940338134765625
+HLT_Figurine_Open.wrl,0,random,54,0.9943289756774902
+HLT_Figurine_Open.wrl,0,random,55,0.9946203827857971
+HLT_Figurine_Open.wrl,0,random,56,0.9948982000350952
+HLT_Figurine_Open.wrl,0,random,57,0.9951646327972412
+HLT_Figurine_Open.wrl,0,random,58,0.9954187273979187
+HLT_Figurine_Open.wrl,0,random,59,0.9956614375114441
+HLT_Figurine_Open.wrl,0,random,60,0.9958969950675964
+HLT_Figurine_Open.wrl,0,random,61,0.9961211085319519
+HLT_Figurine_Open.wrl,0,random,62,0.9963328242301941
+HLT_Figurine_Open.wrl,0,random,63,0.996536910533905
+HLT_Figurine_Open.wrl,0,random,64,0.9967107772827148
+HLT_Figurine_Open.wrl,0,random,65,0.9968804717063904
+HLT_Figurine_Open.wrl,0,random,66,0.9970436096191406
+HLT_Figurine_Open.wrl,0,random,67,0.9972057938575745
+HLT_Figurine_Open.wrl,0,random,68,0.9973620176315308
+HLT_Figurine_Open.wrl,0,random,69,0.9975078105926514
+HLT_Figurine_Open.wrl,0,random,70,0.9976476430892944
+HLT_Figurine_Open.wrl,0,random,71,0.9977777004241943
+HLT_Figurine_Open.wrl,0,random,72,0.997905969619751
+HLT_Figurine_Open.wrl,0,random,73,0.9980280995368958
+HLT_Figurine_Open.wrl,0,random,74,0.998140275478363
+HLT_Figurine_Open.wrl,0,random,75,0.9982494115829468
+HLT_Figurine_Open.wrl,0,random,76,0.9983564019203186
+HLT_Figurine_Open.wrl,0,random,77,0.9984573721885681
+HLT_Figurine_Open.wrl,0,random,78,0.9985527396202087
+HLT_Figurine_Open.wrl,0,random,79,0.9986416101455688
+HLT_Figurine_Open.wrl,0,random,80,0.9987275004386902
+HLT_Figurine_Open.wrl,0,random,81,0.9988120794296265
+HLT_Figurine_Open.wrl,0,random,82,0.9988914132118225
+HLT_Figurine_Open.wrl,0,random,83,0.9989666938781738
+HLT_Figurine_Open.wrl,0,random,84,0.9990378022193909
+HLT_Figurine_Open.wrl,0,random,85,0.9991061091423035
+HLT_Figurine_Open.wrl,0,random,86,0.9991711378097534
+HLT_Figurine_Open.wrl,0,random,87,0.9992322325706482
+HLT_Figurine_Open.wrl,0,random,88,0.9992910623550415
+HLT_Figurine_Open.wrl,0,random,89,0.9993459582328796
+HLT_Figurine_Open.wrl,0,random,90,0.9993985891342163
+HLT_Figurine_Open.wrl,0,random,91,0.9994468092918396
+HLT_Figurine_Open.wrl,0,random,92,0.9994922280311584
+HLT_Figurine_Open.wrl,0,random,93,0.9995368123054504
+HLT_Figurine_Open.wrl,0,random,94,0.9995774030685425
+HLT_Figurine_Open.wrl,0,random,95,0.9996160864830017
+HLT_Figurine_Open.wrl,0,random,96,0.9996504187583923
+HLT_Figurine_Open.wrl,0,random,97,0.999682605266571
+HLT_Figurine_Open.wrl,0,random,98,0.9997139573097229
+HLT_Figurine_Open.wrl,0,random,99,0.9997415542602539
+HLT_Figurine_Open.wrl,0,random,100,0.9997678399085999
+HLT_Figurine_Open.wrl,0,random,101,0.999791145324707
+HLT_Figurine_Open.wrl,0,random,102,0.9998124837875366
+HLT_Figurine_Open.wrl,0,random,103,0.999833345413208
+HLT_Figurine_Open.wrl,0,random,104,0.9998518228530884
+HLT_Figurine_Open.wrl,0,random,105,0.9998696446418762
+HLT_Figurine_Open.wrl,0,random,106,0.9998856782913208
+HLT_Figurine_Open.wrl,0,random,107,0.9998997449874878
+HLT_Figurine_Open.wrl,0,random,108,0.9999127984046936
+HLT_Figurine_Open.wrl,0,random,109,0.9999251365661621
+HLT_Figurine_Open.wrl,0,random,110,0.9999361038208008
+HLT_Figurine_Open.wrl,0,random,111,0.9999460577964783
+HLT_Figurine_Open.wrl,0,random,112,0.9999549388885498
+HLT_Figurine_Open.wrl,0,random,113,0.9999628663063049
+HLT_Figurine_Open.wrl,0,random,114,0.9999693632125854
+HLT_Figurine_Open.wrl,0,random,115,0.9999750256538391
+HLT_Figurine_Open.wrl,0,random,116,0.9999797940254211
+HLT_Figurine_Open.wrl,0,random,117,0.9999836683273315
+HLT_Figurine_Open.wrl,0,random,118,0.9999871253967285
+HLT_Figurine_Open.wrl,0,random,119,0.9999902248382568
+HLT_Figurine_Open.wrl,0,random,120,0.9999927878379822
+HLT_Figurine_Open.wrl,0,random,121,0.9999947547912598
+HLT_Figurine_Open.wrl,0,random,122,0.9999962449073792
+HLT_Figurine_Open.wrl,0,random,123,0.9999975562095642
+HLT_Figurine_Open.wrl,0,random,124,0.9999988079071045
+HLT_Figurine_Open.wrl,0,random,125,0.9999996423721313
+HLT_Figurine_Open.wrl,0,random,126,1.000000238418579
+HLT_Figurine_Open.wrl,0,random,127,1.0000005960464478
+HLT_Figurine_Open.wrl,0,random,128,1.0000007152557373
+NEGII_Frida open full front.wrl,0,trained,1,0.8404160141944885
+NEGII_Frida open full front.wrl,0,trained,2,0.9383044838905334
+NEGII_Frida open full front.wrl,0,trained,3,0.9677750468254089
+NEGII_Frida open full front.wrl,0,trained,4,0.9803217649459839
+NEGII_Frida open full front.wrl,0,trained,5,0.9851748943328857
+NEGII_Frida open full front.wrl,0,trained,6,0.9887022376060486
+NEGII_Frida open full front.wrl,0,trained,7,0.9906893968582153
+NEGII_Frida open full front.wrl,0,trained,8,0.9923108816146851
+NEGII_Frida open full front.wrl,0,trained,9,0.9937208890914917
+NEGII_Frida open full front.wrl,0,trained,10,0.9946659207344055
+NEGII_Frida open full front.wrl,0,trained,11,0.995395839214325
+NEGII_Frida open full front.wrl,0,trained,12,0.9959919452667236
+NEGII_Frida open full front.wrl,0,trained,13,0.9964641332626343
+NEGII_Frida open full front.wrl,0,trained,14,0.9968888759613037
+NEGII_Frida open full front.wrl,0,trained,15,0.9972174763679504
+NEGII_Frida open full front.wrl,0,trained,16,0.99750155210495
+NEGII_Frida open full front.wrl,0,trained,17,0.99777752161026
+NEGII_Frida open full front.wrl,0,trained,18,0.9979625940322876
+NEGII_Frida open full front.wrl,0,trained,19,0.9981426000595093
+NEGII_Frida open full front.wrl,0,trained,20,0.9983047842979431
+NEGII_Frida open full front.wrl,0,trained,21,0.9984439611434937
+NEGII_Frida open full front.wrl,0,trained,22,0.998561441898346
+NEGII_Frida open full front.wrl,0,trained,23,0.9986783862113953
+NEGII_Frida open full front.wrl,0,trained,24,0.9987809658050537
+NEGII_Frida open full front.wrl,0,trained,25,0.9988781809806824
+NEGII_Frida open full front.wrl,0,trained,26,0.9989622831344604
+NEGII_Frida open full front.wrl,0,trained,27,0.9990344047546387
+NEGII_Frida open full front.wrl,0,trained,28,0.9991025328636169
+NEGII_Frida open full front.wrl,0,trained,29,0.9991629123687744
+NEGII_Frida open full front.wrl,0,trained,30,0.9992182850837708
+NEGII_Frida open full front.wrl,0,trained,31,0.9992663860321045
+NEGII_Frida open full front.wrl,0,trained,32,0.9993126392364502
+NEGII_Frida open full front.wrl,0,trained,33,0.9993569850921631
+NEGII_Frida open full front.wrl,0,trained,34,0.9993969798088074
+NEGII_Frida open full front.wrl,0,trained,35,0.9994346499443054
+NEGII_Frida open full front.wrl,0,trained,36,0.9994701743125916
+NEGII_Frida open full front.wrl,0,trained,37,0.999502956867218
+NEGII_Frida open full front.wrl,0,trained,38,0.9995332360267639
+NEGII_Frida open full front.wrl,0,trained,39,0.9995606541633606
+NEGII_Frida open full front.wrl,0,trained,40,0.9995871782302856
+NEGII_Frida open full front.wrl,0,trained,41,0.9996100068092346
+NEGII_Frida open full front.wrl,0,trained,42,0.9996321797370911
+NEGII_Frida open full front.wrl,0,trained,43,0.9996521472930908
+NEGII_Frida open full front.wrl,0,trained,44,0.9996713995933533
+NEGII_Frida open full front.wrl,0,trained,45,0.9996892213821411
+NEGII_Frida open full front.wrl,0,trained,46,0.9997068047523499
+NEGII_Frida open full front.wrl,0,trained,47,0.9997233748435974
+NEGII_Frida open full front.wrl,0,trained,48,0.9997385740280151
+NEGII_Frida open full front.wrl,0,trained,49,0.9997532963752747
+NEGII_Frida open full front.wrl,0,trained,50,0.9997671246528625
+NEGII_Frida open full front.wrl,0,trained,51,0.9997801780700684
+NEGII_Frida open full front.wrl,0,trained,52,0.9997922778129578
+NEGII_Frida open full front.wrl,0,trained,53,0.9998033046722412
+NEGII_Frida open full front.wrl,0,trained,54,0.999813973903656
+NEGII_Frida open full front.wrl,0,trained,55,0.9998241066932678
+NEGII_Frida open full front.wrl,0,trained,56,0.9998335242271423
+NEGII_Frida open full front.wrl,0,trained,57,0.9998424053192139
+NEGII_Frida open full front.wrl,0,trained,58,0.999850869178772
+NEGII_Frida open full front.wrl,0,trained,59,0.9998589754104614
+NEGII_Frida open full front.wrl,0,trained,60,0.9998665452003479
+NEGII_Frida open full front.wrl,0,trained,61,0.9998738765716553
+NEGII_Frida open full front.wrl,0,trained,62,0.9998809695243835
+NEGII_Frida open full front.wrl,0,trained,63,0.9998874068260193
+NEGII_Frida open full front.wrl,0,trained,64,0.9998935461044312
+NEGII_Frida open full front.wrl,0,trained,65,0.9998994469642639
+NEGII_Frida open full front.wrl,0,trained,66,0.9999050498008728
+NEGII_Frida open full front.wrl,0,trained,67,0.9999104738235474
+NEGII_Frida open full front.wrl,0,trained,68,0.9999151229858398
+NEGII_Frida open full front.wrl,0,trained,69,0.9999196529388428
+NEGII_Frida open full front.wrl,0,trained,70,0.9999240040779114
+NEGII_Frida open full front.wrl,0,trained,71,0.9999282956123352
+NEGII_Frida open full front.wrl,0,trained,72,0.9999323487281799
+NEGII_Frida open full front.wrl,0,trained,73,0.9999361038208008
+NEGII_Frida open full front.wrl,0,trained,74,0.9999396204948425
+NEGII_Frida open full front.wrl,0,trained,75,0.9999430775642395
+NEGII_Frida open full front.wrl,0,trained,76,0.9999463558197021
+NEGII_Frida open full front.wrl,0,trained,77,0.9999494552612305
+NEGII_Frida open full front.wrl,0,trained,78,0.9999523758888245
+NEGII_Frida open full front.wrl,0,trained,79,0.9999551773071289
+NEGII_Frida open full front.wrl,0,trained,80,0.999957799911499
+NEGII_Frida open full front.wrl,0,trained,81,0.9999602437019348
+NEGII_Frida open full front.wrl,0,trained,82,0.999962568283081
+NEGII_Frida open full front.wrl,0,trained,83,0.9999648928642273
+NEGII_Frida open full front.wrl,0,trained,84,0.9999669194221497
+NEGII_Frida open full front.wrl,0,trained,85,0.9999688267707825
+NEGII_Frida open full front.wrl,0,trained,86,0.9999706745147705
+NEGII_Frida open full front.wrl,0,trained,87,0.9999725222587585
+NEGII_Frida open full front.wrl,0,trained,88,0.999974250793457
+NEGII_Frida open full front.wrl,0,trained,89,0.9999759197235107
+NEGII_Frida open full front.wrl,0,trained,90,0.9999774694442749
+NEGII_Frida open full front.wrl,0,trained,91,0.9999788999557495
+NEGII_Frida open full front.wrl,0,trained,92,0.9999803304672241
+NEGII_Frida open full front.wrl,0,trained,93,0.999981701374054
+NEGII_Frida open full front.wrl,0,trained,94,0.9999829530715942
+NEGII_Frida open full front.wrl,0,trained,95,0.9999841451644897
+NEGII_Frida open full front.wrl,0,trained,96,0.9999852180480957
+NEGII_Frida open full front.wrl,0,trained,97,0.9999862313270569
+NEGII_Frida open full front.wrl,0,trained,98,0.9999872446060181
+NEGII_Frida open full front.wrl,0,trained,99,0.9999881982803345
+NEGII_Frida open full front.wrl,0,trained,100,0.9999890327453613
+NEGII_Frida open full front.wrl,0,trained,101,0.999989926815033
+NEGII_Frida open full front.wrl,0,trained,102,0.999990701675415
+NEGII_Frida open full front.wrl,0,trained,103,0.9999914765357971
+NEGII_Frida open full front.wrl,0,trained,104,0.9999921321868896
+NEGII_Frida open full front.wrl,0,trained,105,0.999992847442627
+NEGII_Frida open full front.wrl,0,trained,106,0.9999935030937195
+NEGII_Frida open full front.wrl,0,trained,107,0.9999940991401672
+NEGII_Frida open full front.wrl,0,trained,108,0.999994695186615
+NEGII_Frida open full front.wrl,0,trained,109,0.999995231628418
+NEGII_Frida open full front.wrl,0,trained,110,0.999995768070221
+NEGII_Frida open full front.wrl,0,trained,111,0.9999962449073792
+NEGII_Frida open full front.wrl,0,trained,112,0.9999966025352478
+NEGII_Frida open full front.wrl,0,trained,113,0.9999970197677612
+NEGII_Frida open full front.wrl,0,trained,114,0.9999973177909851
+NEGII_Frida open full front.wrl,0,trained,115,0.9999975562095642
+NEGII_Frida open full front.wrl,0,trained,116,0.9999978542327881
+NEGII_Frida open full front.wrl,0,trained,117,0.999998152256012
+NEGII_Frida open full front.wrl,0,trained,118,0.9999984502792358
+NEGII_Frida open full front.wrl,0,trained,119,0.9999986290931702
+NEGII_Frida open full front.wrl,0,trained,120,0.9999988675117493
+NEGII_Frida open full front.wrl,0,trained,121,0.9999990463256836
+NEGII_Frida open full front.wrl,0,trained,122,0.9999992251396179
+NEGII_Frida open full front.wrl,0,trained,123,0.9999994039535522
+NEGII_Frida open full front.wrl,0,trained,124,0.9999995231628418
+NEGII_Frida open full front.wrl,0,trained,125,0.9999996423721313
+NEGII_Frida open full front.wrl,0,trained,126,0.9999997019767761
+NEGII_Frida open full front.wrl,0,trained,127,0.9999998211860657
+NEGII_Frida open full front.wrl,0,trained,128,0.9999998807907104
+NEGII_Frida open full front.wrl,0,random,1,0.9496544599533081
+NEGII_Frida open full front.wrl,0,random,2,0.9621418714523315
+NEGII_Frida open full front.wrl,0,random,3,0.9721194505691528
+NEGII_Frida open full front.wrl,0,random,4,0.9786204695701599
+NEGII_Frida open full front.wrl,0,random,5,0.9828397035598755
+NEGII_Frida open full front.wrl,0,random,6,0.9855799674987793
+NEGII_Frida open full front.wrl,0,random,7,0.9877172112464905
+NEGII_Frida open full front.wrl,0,random,8,0.989045262336731
+NEGII_Frida open full front.wrl,0,random,9,0.9900780320167542
+NEGII_Frida open full front.wrl,0,random,10,0.9909728765487671
+NEGII_Frida open full front.wrl,0,random,11,0.9917137622833252
+NEGII_Frida open full front.wrl,0,random,12,0.9923738837242126
+NEGII_Frida open full front.wrl,0,random,13,0.9929487109184265
+NEGII_Frida open full front.wrl,0,random,14,0.993445634841919
+NEGII_Frida open full front.wrl,0,random,15,0.9939079284667969
+NEGII_Frida open full front.wrl,0,random,16,0.9943045377731323
+NEGII_Frida open full front.wrl,0,random,17,0.9946659803390503
+NEGII_Frida open full front.wrl,0,random,18,0.9949623346328735
+NEGII_Frida open full front.wrl,0,random,19,0.9952424168586731
+NEGII_Frida open full front.wrl,0,random,20,0.995505154132843
+NEGII_Frida open full front.wrl,0,random,21,0.9957594275474548
+NEGII_Frida open full front.wrl,0,random,22,0.9959834218025208
+NEGII_Frida open full front.wrl,0,random,23,0.9961881041526794
+NEGII_Frida open full front.wrl,0,random,24,0.9963898658752441
+NEGII_Frida open full front.wrl,0,random,25,0.9965726733207703
+NEGII_Frida open full front.wrl,0,random,26,0.9967484474182129
+NEGII_Frida open full front.wrl,0,random,27,0.9969072937965393
+NEGII_Frida open full front.wrl,0,random,28,0.9970605969429016
+NEGII_Frida open full front.wrl,0,random,29,0.9972118735313416
+NEGII_Frida open full front.wrl,0,random,30,0.9973517060279846
+NEGII_Frida open full front.wrl,0,random,31,0.9974806904792786
+NEGII_Frida open full front.wrl,0,random,32,0.9975976347923279
+NEGII_Frida open full front.wrl,0,random,33,0.997708261013031
+NEGII_Frida open full front.wrl,0,random,34,0.9978090524673462
+NEGII_Frida open full front.wrl,0,random,35,0.9979045391082764
+NEGII_Frida open full front.wrl,0,random,36,0.9979961514472961
+NEGII_Frida open full front.wrl,0,random,37,0.9980857372283936
+NEGII_Frida open full front.wrl,0,random,38,0.998170018196106
+NEGII_Frida open full front.wrl,0,random,39,0.998247504234314
+NEGII_Frida open full front.wrl,0,random,40,0.9983246326446533
+NEGII_Frida open full front.wrl,0,random,41,0.9983968734741211
+NEGII_Frida open full front.wrl,0,random,42,0.9984657764434814
+NEGII_Frida open full front.wrl,0,random,43,0.9985315203666687
+NEGII_Frida open full front.wrl,0,random,44,0.9985962510108948
+NEGII_Frida open full front.wrl,0,random,45,0.9986594915390015
+NEGII_Frida open full front.wrl,0,random,46,0.9987172484397888
+NEGII_Frida open full front.wrl,0,random,47,0.9987725019454956
+NEGII_Frida open full front.wrl,0,random,48,0.998825192451477
+NEGII_Frida open full front.wrl,0,random,49,0.9988743662834167
+NEGII_Frida open full front.wrl,0,random,50,0.9989223480224609
+NEGII_Frida open full front.wrl,0,random,51,0.9989680051803589
+NEGII_Frida open full front.wrl,0,random,52,0.9990118145942688
+NEGII_Frida open full front.wrl,0,random,53,0.9990527033805847
+NEGII_Frida open full front.wrl,0,random,54,0.9990914463996887
+NEGII_Frida open full front.wrl,0,random,55,0.9991292357444763
+NEGII_Frida open full front.wrl,0,random,56,0.9991647005081177
+NEGII_Frida open full front.wrl,0,random,57,0.9991997480392456
+NEGII_Frida open full front.wrl,0,random,58,0.9992318153381348
+NEGII_Frida open full front.wrl,0,random,59,0.999263346195221
+NEGII_Frida open full front.wrl,0,random,60,0.9992944598197937
+NEGII_Frida open full front.wrl,0,random,61,0.9993243217468262
+NEGII_Frida open full front.wrl,0,random,62,0.9993520379066467
+NEGII_Frida open full front.wrl,0,random,63,0.9993788599967957
+NEGII_Frida open full front.wrl,0,random,64,0.9994046092033386
+NEGII_Frida open full front.wrl,0,random,65,0.9994291663169861
+NEGII_Frida open full front.wrl,0,random,66,0.9994533061981201
+NEGII_Frida open full front.wrl,0,random,67,0.9994770884513855
+NEGII_Frida open full front.wrl,0,random,68,0.9994995594024658
+NEGII_Frida open full front.wrl,0,random,69,0.9995210766792297
+NEGII_Frida open full front.wrl,0,random,70,0.9995412826538086
+NEGII_Frida open full front.wrl,0,random,71,0.999561071395874
+NEGII_Frida open full front.wrl,0,random,72,0.9995796084403992
+NEGII_Frida open full front.wrl,0,random,73,0.9995972514152527
+NEGII_Frida open full front.wrl,0,random,74,0.9996143579483032
+NEGII_Frida open full front.wrl,0,random,75,0.9996311664581299
+NEGII_Frida open full front.wrl,0,random,76,0.9996473789215088
+NEGII_Frida open full front.wrl,0,random,77,0.9996631741523743
+NEGII_Frida open full front.wrl,0,random,78,0.9996786713600159
+NEGII_Frida open full front.wrl,0,random,79,0.9996932744979858
+NEGII_Frida open full front.wrl,0,random,80,0.9997076988220215
+NEGII_Frida open full front.wrl,0,random,81,0.999721109867096
+NEGII_Frida open full front.wrl,0,random,82,0.9997342228889465
+NEGII_Frida open full front.wrl,0,random,83,0.9997467994689941
+NEGII_Frida open full front.wrl,0,random,84,0.9997590184211731
+NEGII_Frida open full front.wrl,0,random,85,0.9997708797454834
+NEGII_Frida open full front.wrl,0,random,86,0.9997820258140564
+NEGII_Frida open full front.wrl,0,random,87,0.9997926354408264
+NEGII_Frida open full front.wrl,0,random,88,0.9998029470443726
+NEGII_Frida open full front.wrl,0,random,89,0.9998128414154053
+NEGII_Frida open full front.wrl,0,random,90,0.999822735786438
+NEGII_Frida open full front.wrl,0,random,91,0.9998317956924438
+NEGII_Frida open full front.wrl,0,random,92,0.9998406171798706
+NEGII_Frida open full front.wrl,0,random,93,0.9998491406440735
+NEGII_Frida open full front.wrl,0,random,94,0.9998573064804077
+NEGII_Frida open full front.wrl,0,random,95,0.9998652935028076
+NEGII_Frida open full front.wrl,0,random,96,0.9998731017112732
+NEGII_Frida open full front.wrl,0,random,97,0.9998802542686462
+NEGII_Frida open full front.wrl,0,random,98,0.9998873472213745
+NEGII_Frida open full front.wrl,0,random,99,0.9998941421508789
+NEGII_Frida open full front.wrl,0,random,100,0.999900758266449
+NEGII_Frida open full front.wrl,0,random,101,0.9999072551727295
+NEGII_Frida open full front.wrl,0,random,102,0.9999132752418518
+NEGII_Frida open full front.wrl,0,random,103,0.999919056892395
+NEGII_Frida open full front.wrl,0,random,104,0.9999243021011353
+NEGII_Frida open full front.wrl,0,random,105,0.9999294281005859
+NEGII_Frida open full front.wrl,0,random,106,0.9999344348907471
+NEGII_Frida open full front.wrl,0,random,107,0.9999392032623291
+NEGII_Frida open full front.wrl,0,random,108,0.9999438524246216
+NEGII_Frida open full front.wrl,0,random,109,0.9999483823776245
+NEGII_Frida open full front.wrl,0,random,110,0.9999526143074036
+NEGII_Frida open full front.wrl,0,random,111,0.9999567866325378
+NEGII_Frida open full front.wrl,0,random,112,0.9999606609344482
+NEGII_Frida open full front.wrl,0,random,113,0.9999644160270691
+NEGII_Frida open full front.wrl,0,random,114,0.9999680519104004
+NEGII_Frida open full front.wrl,0,random,115,0.9999716281890869
+NEGII_Frida open full front.wrl,0,random,116,0.9999746680259705
+NEGII_Frida open full front.wrl,0,random,117,0.9999776482582092
+NEGII_Frida open full front.wrl,0,random,118,0.9999804496765137
+NEGII_Frida open full front.wrl,0,random,119,0.9999832510948181
+NEGII_Frida open full front.wrl,0,random,120,0.9999858736991882
+NEGII_Frida open full front.wrl,0,random,121,0.9999883770942688
+NEGII_Frida open full front.wrl,0,random,122,0.9999907612800598
+NEGII_Frida open full front.wrl,0,random,123,0.9999927878379822
+NEGII_Frida open full front.wrl,0,random,124,0.9999947547912598
+NEGII_Frida open full front.wrl,0,random,125,0.9999964237213135
+NEGII_Frida open full front.wrl,0,random,126,0.9999979734420776
+NEGII_Frida open full front.wrl,0,random,127,0.9999991655349731
+NEGII_Frida open full front.wrl,0,random,128,1.0000001192092896
+A0047_Open_nose.wrl,1,trained,1,0.6097622513771057
+A0047_Open_nose.wrl,1,trained,2,0.8326539397239685
+A0047_Open_nose.wrl,1,trained,3,0.9033263325691223
+A0047_Open_nose.wrl,1,trained,4,0.9485706686973572
+A0047_Open_nose.wrl,1,trained,5,0.9643009901046753
+A0047_Open_nose.wrl,1,trained,6,0.9732000231742859
+A0047_Open_nose.wrl,1,trained,7,0.9796164631843567
+A0047_Open_nose.wrl,1,trained,8,0.984856903553009
+A0047_Open_nose.wrl,1,trained,9,0.9892675876617432
+A0047_Open_nose.wrl,1,trained,10,0.991519570350647
+A0047_Open_nose.wrl,1,trained,11,0.9930512309074402
+A0047_Open_nose.wrl,1,trained,12,0.9943248629570007
+A0047_Open_nose.wrl,1,trained,13,0.9951810836791992
+A0047_Open_nose.wrl,1,trained,14,0.9958919286727905
+A0047_Open_nose.wrl,1,trained,15,0.9964409470558167
+A0047_Open_nose.wrl,1,trained,16,0.9968563914299011
+A0047_Open_nose.wrl,1,trained,17,0.9972634315490723
+A0047_Open_nose.wrl,1,trained,18,0.9975972175598145
+A0047_Open_nose.wrl,1,trained,19,0.9979243874549866
+A0047_Open_nose.wrl,1,trained,20,0.998201847076416
+A0047_Open_nose.wrl,1,trained,21,0.9984449744224548
+A0047_Open_nose.wrl,1,trained,22,0.9986208081245422
+A0047_Open_nose.wrl,1,trained,23,0.998762309551239
+A0047_Open_nose.wrl,1,trained,24,0.998890221118927
+A0047_Open_nose.wrl,1,trained,25,0.9990013241767883
+A0047_Open_nose.wrl,1,trained,26,0.9990941286087036
+A0047_Open_nose.wrl,1,trained,27,0.9991775751113892
+A0047_Open_nose.wrl,1,trained,28,0.9992533326148987
+A0047_Open_nose.wrl,1,trained,29,0.9993213415145874
+A0047_Open_nose.wrl,1,trained,30,0.9993809461593628
+A0047_Open_nose.wrl,1,trained,31,0.999439001083374
+A0047_Open_nose.wrl,1,trained,32,0.9994900226593018
+A0047_Open_nose.wrl,1,trained,33,0.9995361566543579
+A0047_Open_nose.wrl,1,trained,34,0.9995779395103455
+A0047_Open_nose.wrl,1,trained,35,0.9996154308319092
+A0047_Open_nose.wrl,1,trained,36,0.9996469020843506
+A0047_Open_nose.wrl,1,trained,37,0.9996759295463562
+A0047_Open_nose.wrl,1,trained,38,0.9997027516365051
+A0047_Open_nose.wrl,1,trained,39,0.9997276067733765
+A0047_Open_nose.wrl,1,trained,40,0.9997509717941284
+A0047_Open_nose.wrl,1,trained,41,0.9997696280479431
+A0047_Open_nose.wrl,1,trained,42,0.9997878670692444
+A0047_Open_nose.wrl,1,trained,43,0.9998043179512024
+A0047_Open_nose.wrl,1,trained,44,0.9998199343681335
+A0047_Open_nose.wrl,1,trained,45,0.9998347163200378
+A0047_Open_nose.wrl,1,trained,46,0.9998482465744019
+A0047_Open_nose.wrl,1,trained,47,0.9998608231544495
+A0047_Open_nose.wrl,1,trained,48,0.9998720288276672
+A0047_Open_nose.wrl,1,trained,49,0.9998828768730164
+A0047_Open_nose.wrl,1,trained,50,0.9998928904533386
+A0047_Open_nose.wrl,1,trained,51,0.9999015927314758
+A0047_Open_nose.wrl,1,trained,52,0.9999099373817444
+A0047_Open_nose.wrl,1,trained,53,0.9999180436134338
+A0047_Open_nose.wrl,1,trained,54,0.9999257326126099
+A0047_Open_nose.wrl,1,trained,55,0.9999321103096008
+A0047_Open_nose.wrl,1,trained,56,0.9999381303787231
+A0047_Open_nose.wrl,1,trained,57,0.9999437928199768
+A0047_Open_nose.wrl,1,trained,58,0.9999489188194275
+A0047_Open_nose.wrl,1,trained,59,0.9999539852142334
+A0047_Open_nose.wrl,1,trained,60,0.999958336353302
+A0047_Open_nose.wrl,1,trained,61,0.9999625086784363
+A0047_Open_nose.wrl,1,trained,62,0.9999663233757019
+A0047_Open_nose.wrl,1,trained,63,0.9999697804450989
+A0047_Open_nose.wrl,1,trained,64,0.9999728798866272
+A0047_Open_nose.wrl,1,trained,65,0.9999756217002869
+A0047_Open_nose.wrl,1,trained,66,0.9999780058860779
+A0047_Open_nose.wrl,1,trained,67,0.9999803900718689
+A0047_Open_nose.wrl,1,trained,68,0.9999825954437256
+A0047_Open_nose.wrl,1,trained,69,0.9999845623970032
+A0047_Open_nose.wrl,1,trained,70,0.9999863505363464
+A0047_Open_nose.wrl,1,trained,71,0.9999880194664001
+A0047_Open_nose.wrl,1,trained,72,0.9999895095825195
+A0047_Open_nose.wrl,1,trained,73,0.9999909996986389
+A0047_Open_nose.wrl,1,trained,74,0.9999923706054688
+A0047_Open_nose.wrl,1,trained,75,0.9999935626983643
+A0047_Open_nose.wrl,1,trained,76,0.9999946355819702
+A0047_Open_nose.wrl,1,trained,77,0.9999956488609314
+A0047_Open_nose.wrl,1,trained,78,0.999996542930603
+A0047_Open_nose.wrl,1,trained,79,0.9999974370002747
+A0047_Open_nose.wrl,1,trained,80,0.9999980926513672
+A0047_Open_nose.wrl,1,trained,81,0.9999986886978149
+A0047_Open_nose.wrl,1,trained,82,0.9999992251396179
+A0047_Open_nose.wrl,1,trained,83,0.9999995231628418
+A0047_Open_nose.wrl,1,trained,84,0.9999998211860657
+A0047_Open_nose.wrl,1,trained,85,1.0
+A0047_Open_nose.wrl,1,trained,86,1.0
+A0047_Open_nose.wrl,1,random,1,0.7178117036819458
+A0047_Open_nose.wrl,1,random,2,0.7752005457878113
+A0047_Open_nose.wrl,1,random,3,0.8099972605705261
+A0047_Open_nose.wrl,1,random,4,0.8266686201095581
+A0047_Open_nose.wrl,1,random,5,0.8406721949577332
+A0047_Open_nose.wrl,1,random,6,0.8541688323020935
+A0047_Open_nose.wrl,1,random,7,0.8655659556388855
+A0047_Open_nose.wrl,1,random,8,0.8751317858695984
+A0047_Open_nose.wrl,1,random,9,0.8840780854225159
+A0047_Open_nose.wrl,1,random,10,0.8921722769737244
+A0047_Open_nose.wrl,1,random,11,0.8997074961662292
+A0047_Open_nose.wrl,1,random,12,0.9067502617835999
+A0047_Open_nose.wrl,1,random,13,0.9125097393989563
+A0047_Open_nose.wrl,1,random,14,0.9179274439811707
+A0047_Open_nose.wrl,1,random,15,0.9228382706642151
+A0047_Open_nose.wrl,1,random,16,0.9274981021881104
+A0047_Open_nose.wrl,1,random,17,0.9313615560531616
+A0047_Open_nose.wrl,1,random,18,0.9350345730781555
+A0047_Open_nose.wrl,1,random,19,0.9384404420852661
+A0047_Open_nose.wrl,1,random,20,0.9417613744735718
+A0047_Open_nose.wrl,1,random,21,0.9448583126068115
+A0047_Open_nose.wrl,1,random,22,0.9478604793548584
+A0047_Open_nose.wrl,1,random,23,0.950579047203064
+A0047_Open_nose.wrl,1,random,24,0.9531686902046204
+A0047_Open_nose.wrl,1,random,25,0.9557439684867859
+A0047_Open_nose.wrl,1,random,26,0.9581524133682251
+A0047_Open_nose.wrl,1,random,27,0.960460901260376
+A0047_Open_nose.wrl,1,random,28,0.9626904726028442
+A0047_Open_nose.wrl,1,random,29,0.9647788405418396
+A0047_Open_nose.wrl,1,random,30,0.9667349457740784
+A0047_Open_nose.wrl,1,random,31,0.9685676693916321
+A0047_Open_nose.wrl,1,random,32,0.9702789783477783
+A0047_Open_nose.wrl,1,random,33,0.9718926548957825
+A0047_Open_nose.wrl,1,random,34,0.9734534621238708
+A0047_Open_nose.wrl,1,random,35,0.9749365448951721
+A0047_Open_nose.wrl,1,random,36,0.9763695597648621
+A0047_Open_nose.wrl,1,random,37,0.9777311086654663
+A0047_Open_nose.wrl,1,random,38,0.9789966344833374
+A0047_Open_nose.wrl,1,random,39,0.9802172780036926
+A0047_Open_nose.wrl,1,random,40,0.9813736081123352
+A0047_Open_nose.wrl,1,random,41,0.9824915528297424
+A0047_Open_nose.wrl,1,random,42,0.983548104763031
+A0047_Open_nose.wrl,1,random,43,0.9845671653747559
+A0047_Open_nose.wrl,1,random,44,0.9855312705039978
+A0047_Open_nose.wrl,1,random,45,0.9864504933357239
+A0047_Open_nose.wrl,1,random,46,0.9873036742210388
+A0047_Open_nose.wrl,1,random,47,0.9880962371826172
+A0047_Open_nose.wrl,1,random,48,0.9888872504234314
+A0047_Open_nose.wrl,1,random,49,0.9896442890167236
+A0047_Open_nose.wrl,1,random,50,0.9903509020805359
+A0047_Open_nose.wrl,1,random,51,0.9910244345664978
+A0047_Open_nose.wrl,1,random,52,0.9916654229164124
+A0047_Open_nose.wrl,1,random,53,0.9922578930854797
+A0047_Open_nose.wrl,1,random,54,0.9928116202354431
+A0047_Open_nose.wrl,1,random,55,0.9933492541313171
+A0047_Open_nose.wrl,1,random,56,0.9938410520553589
+A0047_Open_nose.wrl,1,random,57,0.9943151473999023
+A0047_Open_nose.wrl,1,random,58,0.9947623014450073
+A0047_Open_nose.wrl,1,random,59,0.9951763153076172
+A0047_Open_nose.wrl,1,random,60,0.9955800771713257
+A0047_Open_nose.wrl,1,random,61,0.9959655404090881
+A0047_Open_nose.wrl,1,random,62,0.9963311553001404
+A0047_Open_nose.wrl,1,random,63,0.996691882610321
+A0047_Open_nose.wrl,1,random,64,0.9969963431358337
+A0047_Open_nose.wrl,1,random,65,0.9972822666168213
+A0047_Open_nose.wrl,1,random,66,0.9975560307502747
+A0047_Open_nose.wrl,1,random,67,0.9977944493293762
+A0047_Open_nose.wrl,1,random,68,0.9980176091194153
+A0047_Open_nose.wrl,1,random,69,0.9982142448425293
+A0047_Open_nose.wrl,1,random,70,0.9984068274497986
+A0047_Open_nose.wrl,1,random,71,0.9985947608947754
+A0047_Open_nose.wrl,1,random,72,0.998772919178009
+A0047_Open_nose.wrl,1,random,73,0.9989388585090637
+A0047_Open_nose.wrl,1,random,74,0.9990889430046082
+A0047_Open_nose.wrl,1,random,75,0.999224841594696
+A0047_Open_nose.wrl,1,random,76,0.9993500113487244
+A0047_Open_nose.wrl,1,random,77,0.9994686245918274
+A0047_Open_nose.wrl,1,random,78,0.999564528465271
+A0047_Open_nose.wrl,1,random,79,0.999647855758667
+A0047_Open_nose.wrl,1,random,80,0.9997248649597168
+A0047_Open_nose.wrl,1,random,81,0.9997944235801697
+A0047_Open_nose.wrl,1,random,82,0.9998564124107361
+A0047_Open_nose.wrl,1,random,83,0.9999130368232727
+A0047_Open_nose.wrl,1,random,84,0.9999596476554871
+A0047_Open_nose.wrl,1,random,85,1.0000001192092896
+A0047_Open_nose.wrl,1,random,86,1.0000001192092896
+HLT_Figurine_Open.wrl,1,trained,1,0.8113991022109985
+HLT_Figurine_Open.wrl,1,trained,2,0.9540790915489197
+HLT_Figurine_Open.wrl,1,trained,3,0.9662117958068848
+HLT_Figurine_Open.wrl,1,trained,4,0.9765110015869141
+HLT_Figurine_Open.wrl,1,trained,5,0.9833142161369324
+HLT_Figurine_Open.wrl,1,trained,6,0.9887917637825012
+HLT_Figurine_Open.wrl,1,trained,7,0.9910950660705566
+HLT_Figurine_Open.wrl,1,trained,8,0.99278724193573
+HLT_Figurine_Open.wrl,1,trained,9,0.9939317107200623
+HLT_Figurine_Open.wrl,1,trained,10,0.9950358271598816
+HLT_Figurine_Open.wrl,1,trained,11,0.9957374334335327
+HLT_Figurine_Open.wrl,1,trained,12,0.9964138269424438
+HLT_Figurine_Open.wrl,1,trained,13,0.9969504475593567
+HLT_Figurine_Open.wrl,1,trained,14,0.9973146319389343
+HLT_Figurine_Open.wrl,1,trained,15,0.9976551532745361
+HLT_Figurine_Open.wrl,1,trained,16,0.9979004263877869
+HLT_Figurine_Open.wrl,1,trained,17,0.9981098771095276
+HLT_Figurine_Open.wrl,1,trained,18,0.9983075261116028
+HLT_Figurine_Open.wrl,1,trained,19,0.9984831809997559
+HLT_Figurine_Open.wrl,1,trained,20,0.9986264705657959
+HLT_Figurine_Open.wrl,1,trained,21,0.9987478256225586
+HLT_Figurine_Open.wrl,1,trained,22,0.998856782913208
+HLT_Figurine_Open.wrl,1,trained,23,0.9989514350891113
+HLT_Figurine_Open.wrl,1,trained,24,0.9990386962890625
+HLT_Figurine_Open.wrl,1,trained,25,0.9991154670715332
+HLT_Figurine_Open.wrl,1,trained,26,0.9991847276687622
+HLT_Figurine_Open.wrl,1,trained,27,0.9992520213127136
+HLT_Figurine_Open.wrl,1,trained,28,0.9993125200271606
+HLT_Figurine_Open.wrl,1,trained,29,0.999367356300354
+HLT_Figurine_Open.wrl,1,trained,30,0.9994162321090698
+HLT_Figurine_Open.wrl,1,trained,31,0.999461829662323
+HLT_Figurine_Open.wrl,1,trained,32,0.9995018839836121
+HLT_Figurine_Open.wrl,1,trained,33,0.9995363354682922
+HLT_Figurine_Open.wrl,1,trained,34,0.9995660185813904
+HLT_Figurine_Open.wrl,1,trained,35,0.999594509601593
+HLT_Figurine_Open.wrl,1,trained,36,0.9996200203895569
+HLT_Figurine_Open.wrl,1,trained,37,0.9996438026428223
+HLT_Figurine_Open.wrl,1,trained,38,0.9996663928031921
+HLT_Figurine_Open.wrl,1,trained,39,0.9996888041496277
+HLT_Figurine_Open.wrl,1,trained,40,0.9997080564498901
+HLT_Figurine_Open.wrl,1,trained,41,0.999725878238678
+HLT_Figurine_Open.wrl,1,trained,42,0.9997430443763733
+HLT_Figurine_Open.wrl,1,trained,43,0.9997593760490417
+HLT_Figurine_Open.wrl,1,trained,44,0.9997749924659729
+HLT_Figurine_Open.wrl,1,trained,45,0.9997884035110474
+HLT_Figurine_Open.wrl,1,trained,46,0.9998013377189636
+HLT_Figurine_Open.wrl,1,trained,47,0.9998140931129456
+HLT_Figurine_Open.wrl,1,trained,48,0.9998257160186768
+HLT_Figurine_Open.wrl,1,trained,49,0.9998361468315125
+HLT_Figurine_Open.wrl,1,trained,50,0.9998462200164795
+HLT_Figurine_Open.wrl,1,trained,51,0.9998559355735779
+HLT_Figurine_Open.wrl,1,trained,52,0.9998646974563599
+HLT_Figurine_Open.wrl,1,trained,53,0.9998729228973389
+HLT_Figurine_Open.wrl,1,trained,54,0.9998805522918701
+HLT_Figurine_Open.wrl,1,trained,55,0.9998874068260193
+HLT_Figurine_Open.wrl,1,trained,56,0.999893844127655
+HLT_Figurine_Open.wrl,1,trained,57,0.9999001622200012
+HLT_Figurine_Open.wrl,1,trained,58,0.9999061822891235
+HLT_Figurine_Open.wrl,1,trained,59,0.999911904335022
+HLT_Figurine_Open.wrl,1,trained,60,0.9999169707298279
+HLT_Figurine_Open.wrl,1,trained,61,0.9999219179153442
+HLT_Figurine_Open.wrl,1,trained,62,0.9999266266822815
+HLT_Figurine_Open.wrl,1,trained,63,0.9999310970306396
+HLT_Figurine_Open.wrl,1,trained,64,0.9999353289604187
+HLT_Figurine_Open.wrl,1,trained,65,0.9999393820762634
+HLT_Figurine_Open.wrl,1,trained,66,0.9999431371688843
+HLT_Figurine_Open.wrl,1,trained,67,0.9999465942382812
+HLT_Figurine_Open.wrl,1,trained,68,0.9999499917030334
+HLT_Figurine_Open.wrl,1,trained,69,0.9999531507492065
+HLT_Figurine_Open.wrl,1,trained,70,0.9999563694000244
+HLT_Figurine_Open.wrl,1,trained,71,0.9999592900276184
+HLT_Figurine_Open.wrl,1,trained,72,0.9999620914459229
+HLT_Figurine_Open.wrl,1,trained,73,0.9999645948410034
+HLT_Figurine_Open.wrl,1,trained,74,0.9999668598175049
+HLT_Figurine_Open.wrl,1,trained,75,0.9999690055847168
+HLT_Figurine_Open.wrl,1,trained,76,0.9999710917472839
+HLT_Figurine_Open.wrl,1,trained,77,0.9999731779098511
+HLT_Figurine_Open.wrl,1,trained,78,0.9999749660491943
+HLT_Figurine_Open.wrl,1,trained,79,0.9999767541885376
+HLT_Figurine_Open.wrl,1,trained,80,0.9999784231185913
+HLT_Figurine_Open.wrl,1,trained,81,0.9999800324440002
+HLT_Figurine_Open.wrl,1,trained,82,0.9999814033508301
+HLT_Figurine_Open.wrl,1,trained,83,0.9999828338623047
+HLT_Figurine_Open.wrl,1,trained,84,0.9999840259552002
+HLT_Figurine_Open.wrl,1,trained,85,0.9999852776527405
+HLT_Figurine_Open.wrl,1,trained,86,0.9999864101409912
+HLT_Figurine_Open.wrl,1,trained,87,0.9999875426292419
+HLT_Figurine_Open.wrl,1,trained,88,0.9999885559082031
+HLT_Figurine_Open.wrl,1,trained,89,0.9999895095825195
+HLT_Figurine_Open.wrl,1,trained,90,0.9999903440475464
+HLT_Figurine_Open.wrl,1,trained,91,0.9999911785125732
+HLT_Figurine_Open.wrl,1,trained,92,0.9999919533729553
+HLT_Figurine_Open.wrl,1,trained,93,0.9999926090240479
+HLT_Figurine_Open.wrl,1,trained,94,0.9999932646751404
+HLT_Figurine_Open.wrl,1,trained,95,0.9999939203262329
+HLT_Figurine_Open.wrl,1,trained,96,0.9999944567680359
+HLT_Figurine_Open.wrl,1,trained,97,0.9999950528144836
+HLT_Figurine_Open.wrl,1,trained,98,0.9999955892562866
+HLT_Figurine_Open.wrl,1,trained,99,0.9999960660934448
+HLT_Figurine_Open.wrl,1,trained,100,0.999996542930603
+HLT_Figurine_Open.wrl,1,trained,101,0.9999969005584717
+HLT_Figurine_Open.wrl,1,trained,102,0.9999972581863403
+HLT_Figurine_Open.wrl,1,trained,103,0.9999975562095642
+HLT_Figurine_Open.wrl,1,trained,104,0.9999978542327881
+HLT_Figurine_Open.wrl,1,trained,105,0.999998152256012
+HLT_Figurine_Open.wrl,1,trained,106,0.9999983906745911
+HLT_Figurine_Open.wrl,1,trained,107,0.9999985694885254
+HLT_Figurine_Open.wrl,1,trained,108,0.9999988079071045
+HLT_Figurine_Open.wrl,1,trained,109,0.9999989867210388
+HLT_Figurine_Open.wrl,1,trained,110,0.9999991655349731
+HLT_Figurine_Open.wrl,1,trained,111,0.9999993443489075
+HLT_Figurine_Open.wrl,1,trained,112,0.999999463558197
+HLT_Figurine_Open.wrl,1,trained,113,0.9999995231628418
+HLT_Figurine_Open.wrl,1,trained,114,0.9999996423721313
+HLT_Figurine_Open.wrl,1,trained,115,0.9999997019767761
+HLT_Figurine_Open.wrl,1,trained,116,0.9999998211860657
+HLT_Figurine_Open.wrl,1,trained,117,0.9999998807907104
+HLT_Figurine_Open.wrl,1,trained,118,1.0
+HLT_Figurine_Open.wrl,1,trained,119,1.0
+HLT_Figurine_Open.wrl,1,trained,120,1.0
+HLT_Figurine_Open.wrl,1,trained,121,1.0
+HLT_Figurine_Open.wrl,1,trained,122,1.0
+HLT_Figurine_Open.wrl,1,trained,123,1.0
+HLT_Figurine_Open.wrl,1,trained,124,1.0
+HLT_Figurine_Open.wrl,1,trained,125,1.0
+HLT_Figurine_Open.wrl,1,trained,126,1.0
+HLT_Figurine_Open.wrl,1,trained,127,1.0
+HLT_Figurine_Open.wrl,1,trained,128,1.0
+HLT_Figurine_Open.wrl,1,random,1,0.6114854216575623
+HLT_Figurine_Open.wrl,1,random,2,0.7389810085296631
+HLT_Figurine_Open.wrl,1,random,3,0.8184759616851807
+HLT_Figurine_Open.wrl,1,random,4,0.8577320575714111
+HLT_Figurine_Open.wrl,1,random,5,0.8849180340766907
+HLT_Figurine_Open.wrl,1,random,6,0.9016711115837097
+HLT_Figurine_Open.wrl,1,random,7,0.912163496017456
+HLT_Figurine_Open.wrl,1,random,8,0.9219787120819092
+HLT_Figurine_Open.wrl,1,random,9,0.9304628968238831
+HLT_Figurine_Open.wrl,1,random,10,0.9369741678237915
+HLT_Figurine_Open.wrl,1,random,11,0.9422293901443481
+HLT_Figurine_Open.wrl,1,random,12,0.9472178220748901
+HLT_Figurine_Open.wrl,1,random,13,0.9516668319702148
+HLT_Figurine_Open.wrl,1,random,14,0.9555454850196838
+HLT_Figurine_Open.wrl,1,random,15,0.9588186144828796
+HLT_Figurine_Open.wrl,1,random,16,0.9613602161407471
+HLT_Figurine_Open.wrl,1,random,17,0.963781476020813
+HLT_Figurine_Open.wrl,1,random,18,0.9659779071807861
+HLT_Figurine_Open.wrl,1,random,19,0.9681121110916138
+HLT_Figurine_Open.wrl,1,random,20,0.9700928926467896
+HLT_Figurine_Open.wrl,1,random,21,0.9718679785728455
+HLT_Figurine_Open.wrl,1,random,22,0.973487377166748
+HLT_Figurine_Open.wrl,1,random,23,0.9750342965126038
+HLT_Figurine_Open.wrl,1,random,24,0.9764312505722046
+HLT_Figurine_Open.wrl,1,random,25,0.9776137471199036
+HLT_Figurine_Open.wrl,1,random,26,0.9787654876708984
+HLT_Figurine_Open.wrl,1,random,27,0.9798410534858704
+HLT_Figurine_Open.wrl,1,random,28,0.9807994365692139
+HLT_Figurine_Open.wrl,1,random,29,0.9817367196083069
+HLT_Figurine_Open.wrl,1,random,30,0.9826247692108154
+HLT_Figurine_Open.wrl,1,random,31,0.9834758639335632
+HLT_Figurine_Open.wrl,1,random,32,0.9842818379402161
+HLT_Figurine_Open.wrl,1,random,33,0.9850408434867859
+HLT_Figurine_Open.wrl,1,random,34,0.9857637286186218
+HLT_Figurine_Open.wrl,1,random,35,0.9864597320556641
+HLT_Figurine_Open.wrl,1,random,36,0.9871239066123962
+HLT_Figurine_Open.wrl,1,random,37,0.987754225730896
+HLT_Figurine_Open.wrl,1,random,38,0.9883251786231995
+HLT_Figurine_Open.wrl,1,random,39,0.9888789653778076
+HLT_Figurine_Open.wrl,1,random,40,0.9894117712974548
+HLT_Figurine_Open.wrl,1,random,41,0.9899187088012695
+HLT_Figurine_Open.wrl,1,random,42,0.9903988838195801
+HLT_Figurine_Open.wrl,1,random,43,0.990872323513031
+HLT_Figurine_Open.wrl,1,random,44,0.9913030862808228
+HLT_Figurine_Open.wrl,1,random,45,0.9917067289352417
+HLT_Figurine_Open.wrl,1,random,46,0.9920977354049683
+HLT_Figurine_Open.wrl,1,random,47,0.9924678206443787
+HLT_Figurine_Open.wrl,1,random,48,0.9928234219551086
+HLT_Figurine_Open.wrl,1,random,49,0.993156373500824
+HLT_Figurine_Open.wrl,1,random,50,0.9934827089309692
+HLT_Figurine_Open.wrl,1,random,51,0.993800938129425
+HLT_Figurine_Open.wrl,1,random,52,0.9941018223762512
+HLT_Figurine_Open.wrl,1,random,53,0.9943848848342896
+HLT_Figurine_Open.wrl,1,random,54,0.9946438074111938
+HLT_Figurine_Open.wrl,1,random,55,0.9948935508728027
+HLT_Figurine_Open.wrl,1,random,56,0.9951367378234863
+HLT_Figurine_Open.wrl,1,random,57,0.9953710436820984
+HLT_Figurine_Open.wrl,1,random,58,0.9955996870994568
+HLT_Figurine_Open.wrl,1,random,59,0.9958193898200989
+HLT_Figurine_Open.wrl,1,random,60,0.9960347414016724
+HLT_Figurine_Open.wrl,1,random,61,0.9962354898452759
+HLT_Figurine_Open.wrl,1,random,62,0.9964309334754944
+HLT_Figurine_Open.wrl,1,random,63,0.9966127872467041
+HLT_Figurine_Open.wrl,1,random,64,0.9967864155769348
+HLT_Figurine_Open.wrl,1,random,65,0.9969552755355835
+HLT_Figurine_Open.wrl,1,random,66,0.9971175193786621
+HLT_Figurine_Open.wrl,1,random,67,0.9972776174545288
+HLT_Figurine_Open.wrl,1,random,68,0.9974241852760315
+HLT_Figurine_Open.wrl,1,random,69,0.9975659847259521
+HLT_Figurine_Open.wrl,1,random,70,0.9976997375488281
+HLT_Figurine_Open.wrl,1,random,71,0.9978320002555847
+HLT_Figurine_Open.wrl,1,random,72,0.9979557991027832
+HLT_Figurine_Open.wrl,1,random,73,0.9980767965316772
+HLT_Figurine_Open.wrl,1,random,74,0.9981944561004639
+HLT_Figurine_Open.wrl,1,random,75,0.9983031749725342
+HLT_Figurine_Open.wrl,1,random,76,0.9984079003334045
+HLT_Figurine_Open.wrl,1,random,77,0.9985061883926392
+HLT_Figurine_Open.wrl,1,random,78,0.9985970854759216
+HLT_Figurine_Open.wrl,1,random,79,0.9986826777458191
+HLT_Figurine_Open.wrl,1,random,80,0.998763918876648
+HLT_Figurine_Open.wrl,1,random,81,0.9988430142402649
+HLT_Figurine_Open.wrl,1,random,82,0.9989184737205505
+HLT_Figurine_Open.wrl,1,random,83,0.9989856481552124
+HLT_Figurine_Open.wrl,1,random,84,0.9990491271018982
+HLT_Figurine_Open.wrl,1,random,85,0.9991114139556885
+HLT_Figurine_Open.wrl,1,random,86,0.9991711974143982
+HLT_Figurine_Open.wrl,1,random,87,0.9992300271987915
+HLT_Figurine_Open.wrl,1,random,88,0.9992853999137878
+HLT_Figurine_Open.wrl,1,random,89,0.9993386268615723
+HLT_Figurine_Open.wrl,1,random,90,0.999387264251709
+HLT_Figurine_Open.wrl,1,random,91,0.9994341135025024
+HLT_Figurine_Open.wrl,1,random,92,0.9994786977767944
+HLT_Figurine_Open.wrl,1,random,93,0.9995215535163879
+HLT_Figurine_Open.wrl,1,random,94,0.9995604753494263
+HLT_Figurine_Open.wrl,1,random,95,0.9995972514152527
+HLT_Figurine_Open.wrl,1,random,96,0.9996321797370911
+HLT_Figurine_Open.wrl,1,random,97,0.999666154384613
+HLT_Figurine_Open.wrl,1,random,98,0.9996973872184753
+HLT_Figurine_Open.wrl,1,random,99,0.9997255802154541
+HLT_Figurine_Open.wrl,1,random,100,0.9997528195381165
+HLT_Figurine_Open.wrl,1,random,101,0.9997774958610535
+HLT_Figurine_Open.wrl,1,random,102,0.9998009204864502
+HLT_Figurine_Open.wrl,1,random,103,0.999823272228241
+HLT_Figurine_Open.wrl,1,random,104,0.9998421669006348
+HLT_Figurine_Open.wrl,1,random,105,0.9998598694801331
+HLT_Figurine_Open.wrl,1,random,106,0.9998757243156433
+HLT_Figurine_Open.wrl,1,random,107,0.9998908042907715
+HLT_Figurine_Open.wrl,1,random,108,0.9999043345451355
+HLT_Figurine_Open.wrl,1,random,109,0.9999168515205383
+HLT_Figurine_Open.wrl,1,random,110,0.9999272227287292
+HLT_Figurine_Open.wrl,1,random,111,0.9999368190765381
+HLT_Figurine_Open.wrl,1,random,112,0.9999456405639648
+HLT_Figurine_Open.wrl,1,random,113,0.9999537467956543
+HLT_Figurine_Open.wrl,1,random,114,0.9999611377716064
+HLT_Figurine_Open.wrl,1,random,115,0.9999672770500183
+HLT_Figurine_Open.wrl,1,random,116,0.9999727010726929
+HLT_Figurine_Open.wrl,1,random,117,0.9999776482582092
+HLT_Figurine_Open.wrl,1,random,118,0.9999819397926331
+HLT_Figurine_Open.wrl,1,random,119,0.9999858736991882
+HLT_Figurine_Open.wrl,1,random,120,0.9999895691871643
+HLT_Figurine_Open.wrl,1,random,121,0.9999924302101135
+HLT_Figurine_Open.wrl,1,random,122,0.9999946355819702
+HLT_Figurine_Open.wrl,1,random,123,0.9999963045120239
+HLT_Figurine_Open.wrl,1,random,124,0.9999979138374329
+HLT_Figurine_Open.wrl,1,random,125,0.9999991059303284
+HLT_Figurine_Open.wrl,1,random,126,0.9999997615814209
+HLT_Figurine_Open.wrl,1,random,127,1.0000001192092896
+HLT_Figurine_Open.wrl,1,random,128,1.000000238418579
+NEGII_Frida open full front.wrl,1,trained,1,0.748199462890625
+NEGII_Frida open full front.wrl,1,trained,2,0.8742105960845947
+NEGII_Frida open full front.wrl,1,trained,3,0.9700284600257874
+NEGII_Frida open full front.wrl,1,trained,4,0.9786478877067566
+NEGII_Frida open full front.wrl,1,trained,5,0.9840070605278015
+NEGII_Frida open full front.wrl,1,trained,6,0.988024115562439
+NEGII_Frida open full front.wrl,1,trained,7,0.9909141659736633
+NEGII_Frida open full front.wrl,1,trained,8,0.9925100207328796
+NEGII_Frida open full front.wrl,1,trained,9,0.9939168691635132
+NEGII_Frida open full front.wrl,1,trained,10,0.9948328137397766
+NEGII_Frida open full front.wrl,1,trained,11,0.9957081079483032
+NEGII_Frida open full front.wrl,1,trained,12,0.9961585402488708
+NEGII_Frida open full front.wrl,1,trained,13,0.9965923428535461
+NEGII_Frida open full front.wrl,1,trained,14,0.9969589710235596
+NEGII_Frida open full front.wrl,1,trained,15,0.997252345085144
+NEGII_Frida open full front.wrl,1,trained,16,0.9975239038467407
+NEGII_Frida open full front.wrl,1,trained,17,0.9977529048919678
+NEGII_Frida open full front.wrl,1,trained,18,0.9979283809661865
+NEGII_Frida open full front.wrl,1,trained,19,0.9980912208557129
+NEGII_Frida open full front.wrl,1,trained,20,0.9982337951660156
+NEGII_Frida open full front.wrl,1,trained,21,0.9983724355697632
+NEGII_Frida open full front.wrl,1,trained,22,0.9985020756721497
+NEGII_Frida open full front.wrl,1,trained,23,0.998607873916626
+NEGII_Frida open full front.wrl,1,trained,24,0.9987070560455322
+NEGII_Frida open full front.wrl,1,trained,25,0.9987915754318237
+NEGII_Frida open full front.wrl,1,trained,26,0.9988746643066406
+NEGII_Frida open full front.wrl,1,trained,27,0.9989563822746277
+NEGII_Frida open full front.wrl,1,trained,28,0.9990253448486328
+NEGII_Frida open full front.wrl,1,trained,29,0.9990881085395813
+NEGII_Frida open full front.wrl,1,trained,30,0.9991487264633179
+NEGII_Frida open full front.wrl,1,trained,31,0.9992054104804993
+NEGII_Frida open full front.wrl,1,trained,32,0.9992514848709106
+NEGII_Frida open full front.wrl,1,trained,33,0.9992964267730713
+NEGII_Frida open full front.wrl,1,trained,34,0.9993387460708618
+NEGII_Frida open full front.wrl,1,trained,35,0.9993770122528076
+NEGII_Frida open full front.wrl,1,trained,36,0.9994109272956848
+NEGII_Frida open full front.wrl,1,trained,37,0.9994432330131531
+NEGII_Frida open full front.wrl,1,trained,38,0.9994749426841736
+NEGII_Frida open full front.wrl,1,trained,39,0.9995034337043762
+NEGII_Frida open full front.wrl,1,trained,40,0.9995294809341431
+NEGII_Frida open full front.wrl,1,trained,41,0.999555230140686
+NEGII_Frida open full front.wrl,1,trained,42,0.9995771646499634
+NEGII_Frida open full front.wrl,1,trained,43,0.9995984435081482
+NEGII_Frida open full front.wrl,1,trained,44,0.9996187090873718
+NEGII_Frida open full front.wrl,1,trained,45,0.9996381998062134
+NEGII_Frida open full front.wrl,1,trained,46,0.9996572136878967
+NEGII_Frida open full front.wrl,1,trained,47,0.9996755123138428
+NEGII_Frida open full front.wrl,1,trained,48,0.9996923804283142
+NEGII_Frida open full front.wrl,1,trained,49,0.9997088313102722
+NEGII_Frida open full front.wrl,1,trained,50,0.9997235536575317
+NEGII_Frida open full front.wrl,1,trained,51,0.9997373819351196
+NEGII_Frida open full front.wrl,1,trained,52,0.9997502565383911
+NEGII_Frida open full front.wrl,1,trained,53,0.9997623562812805
+NEGII_Frida open full front.wrl,1,trained,54,0.9997740983963013
+NEGII_Frida open full front.wrl,1,trained,55,0.9997850060462952
+NEGII_Frida open full front.wrl,1,trained,56,0.9997954368591309
+NEGII_Frida open full front.wrl,1,trained,57,0.9998055100440979
+NEGII_Frida open full front.wrl,1,trained,58,0.9998151063919067
+NEGII_Frida open full front.wrl,1,trained,59,0.9998239278793335
+NEGII_Frida open full front.wrl,1,trained,60,0.9998325109481812
+NEGII_Frida open full front.wrl,1,trained,61,0.9998406171798706
+NEGII_Frida open full front.wrl,1,trained,62,0.999848484992981
+NEGII_Frida open full front.wrl,1,trained,63,0.9998560547828674
+NEGII_Frida open full front.wrl,1,trained,64,0.9998634457588196
+NEGII_Frida open full front.wrl,1,trained,65,0.999870240688324
+NEGII_Frida open full front.wrl,1,trained,66,0.9998766183853149
+NEGII_Frida open full front.wrl,1,trained,67,0.9998829364776611
+NEGII_Frida open full front.wrl,1,trained,68,0.9998883605003357
+NEGII_Frida open full front.wrl,1,trained,69,0.9998936653137207
+NEGII_Frida open full front.wrl,1,trained,70,0.9998987317085266
+NEGII_Frida open full front.wrl,1,trained,71,0.9999036192893982
+NEGII_Frida open full front.wrl,1,trained,72,0.9999081492424011
+NEGII_Frida open full front.wrl,1,trained,73,0.9999126195907593
+NEGII_Frida open full front.wrl,1,trained,74,0.9999169111251831
+NEGII_Frida open full front.wrl,1,trained,75,0.9999209046363831
+NEGII_Frida open full front.wrl,1,trained,76,0.9999247789382935
+NEGII_Frida open full front.wrl,1,trained,77,0.9999285340309143
+NEGII_Frida open full front.wrl,1,trained,78,0.9999321103096008
+NEGII_Frida open full front.wrl,1,trained,79,0.9999354481697083
+NEGII_Frida open full front.wrl,1,trained,80,0.9999386668205261
+NEGII_Frida open full front.wrl,1,trained,81,0.9999418258666992
+NEGII_Frida open full front.wrl,1,trained,82,0.9999447464942932
+NEGII_Frida open full front.wrl,1,trained,83,0.9999476075172424
+NEGII_Frida open full front.wrl,1,trained,84,0.9999502897262573
+NEGII_Frida open full front.wrl,1,trained,85,0.9999529123306274
+NEGII_Frida open full front.wrl,1,trained,86,0.999955415725708
+NEGII_Frida open full front.wrl,1,trained,87,0.9999578595161438
+NEGII_Frida open full front.wrl,1,trained,88,0.9999601244926453
+NEGII_Frida open full front.wrl,1,trained,89,0.9999622106552124
+NEGII_Frida open full front.wrl,1,trained,90,0.9999642372131348
+NEGII_Frida open full front.wrl,1,trained,91,0.9999660849571228
+NEGII_Frida open full front.wrl,1,trained,92,0.9999679923057556
+NEGII_Frida open full front.wrl,1,trained,93,0.9999697804450989
+NEGII_Frida open full front.wrl,1,trained,94,0.9999715685844421
+NEGII_Frida open full front.wrl,1,trained,95,0.9999732375144958
+NEGII_Frida open full front.wrl,1,trained,96,0.99997478723526
+NEGII_Frida open full front.wrl,1,trained,97,0.9999763369560242
+NEGII_Frida open full front.wrl,1,trained,98,0.9999778270721436
+NEGII_Frida open full front.wrl,1,trained,99,0.9999791979789734
+NEGII_Frida open full front.wrl,1,trained,100,0.9999804496765137
+NEGII_Frida open full front.wrl,1,trained,101,0.999981701374054
+NEGII_Frida open full front.wrl,1,trained,102,0.9999828338623047
+NEGII_Frida open full front.wrl,1,trained,103,0.9999839663505554
+NEGII_Frida open full front.wrl,1,trained,104,0.9999851584434509
+NEGII_Frida open full front.wrl,1,trained,105,0.9999861717224121
+NEGII_Frida open full front.wrl,1,trained,106,0.9999872446060181
+NEGII_Frida open full front.wrl,1,trained,107,0.9999881982803345
+NEGII_Frida open full front.wrl,1,trained,108,0.9999890923500061
+NEGII_Frida open full front.wrl,1,trained,109,0.999989926815033
+NEGII_Frida open full front.wrl,1,trained,110,0.9999908208847046
+NEGII_Frida open full front.wrl,1,trained,111,0.9999916553497314
+NEGII_Frida open full front.wrl,1,trained,112,0.9999923706054688
+NEGII_Frida open full front.wrl,1,trained,113,0.999993085861206
+NEGII_Frida open full front.wrl,1,trained,114,0.9999937415122986
+NEGII_Frida open full front.wrl,1,trained,115,0.9999943375587463
+NEGII_Frida open full front.wrl,1,trained,116,0.9999949932098389
+NEGII_Frida open full front.wrl,1,trained,117,0.9999955892562866
+NEGII_Frida open full front.wrl,1,trained,118,0.9999961256980896
+NEGII_Frida open full front.wrl,1,trained,119,0.9999966621398926
+NEGII_Frida open full front.wrl,1,trained,120,0.999997079372406
+NEGII_Frida open full front.wrl,1,trained,121,0.9999974966049194
+NEGII_Frida open full front.wrl,1,trained,122,0.9999979138374329
+NEGII_Frida open full front.wrl,1,trained,123,0.9999983310699463
+NEGII_Frida open full front.wrl,1,trained,124,0.9999986290931702
+NEGII_Frida open full front.wrl,1,trained,125,0.999998927116394
+NEGII_Frida open full front.wrl,1,trained,126,0.9999992847442627
+NEGII_Frida open full front.wrl,1,trained,127,0.9999995827674866
+NEGII_Frida open full front.wrl,1,trained,128,0.9999997615814209
+NEGII_Frida open full front.wrl,1,random,1,0.9086197018623352
+NEGII_Frida open full front.wrl,1,random,2,0.9499472975730896
+NEGII_Frida open full front.wrl,1,random,3,0.961193323135376
+NEGII_Frida open full front.wrl,1,random,4,0.9693261981010437
+NEGII_Frida open full front.wrl,1,random,5,0.9746063947677612
+NEGII_Frida open full front.wrl,1,random,6,0.9788267612457275
+NEGII_Frida open full front.wrl,1,random,7,0.9818347692489624
+NEGII_Frida open full front.wrl,1,random,8,0.984300434589386
+NEGII_Frida open full front.wrl,1,random,9,0.9859449863433838
+NEGII_Frida open full front.wrl,1,random,10,0.9871697425842285
+NEGII_Frida open full front.wrl,1,random,11,0.9882712960243225
+NEGII_Frida open full front.wrl,1,random,12,0.9893337488174438
+NEGII_Frida open full front.wrl,1,random,13,0.9901084899902344
+NEGII_Frida open full front.wrl,1,random,14,0.9908201098442078
+NEGII_Frida open full front.wrl,1,random,15,0.9913734793663025
+NEGII_Frida open full front.wrl,1,random,16,0.9918592572212219
+NEGII_Frida open full front.wrl,1,random,17,0.9923399686813354
+NEGII_Frida open full front.wrl,1,random,18,0.9927934408187866
+NEGII_Frida open full front.wrl,1,random,19,0.9932080507278442
+NEGII_Frida open full front.wrl,1,random,20,0.9935871362686157
+NEGII_Frida open full front.wrl,1,random,21,0.9939559102058411
+NEGII_Frida open full front.wrl,1,random,22,0.9943014979362488
+NEGII_Frida open full front.wrl,1,random,23,0.9946301579475403
+NEGII_Frida open full front.wrl,1,random,24,0.9949226379394531
+NEGII_Frida open full front.wrl,1,random,25,0.9951865673065186
+NEGII_Frida open full front.wrl,1,random,26,0.9954373240470886
+NEGII_Frida open full front.wrl,1,random,27,0.995668888092041
+NEGII_Frida open full front.wrl,1,random,28,0.9958948493003845
+NEGII_Frida open full front.wrl,1,random,29,0.9961180686950684
+NEGII_Frida open full front.wrl,1,random,30,0.9963098168373108
+NEGII_Frida open full front.wrl,1,random,31,0.9964749813079834
+NEGII_Frida open full front.wrl,1,random,32,0.9966385960578918
+NEGII_Frida open full front.wrl,1,random,33,0.9967974424362183
+NEGII_Frida open full front.wrl,1,random,34,0.9969394207000732
+NEGII_Frida open full front.wrl,1,random,35,0.9970762133598328
+NEGII_Frida open full front.wrl,1,random,36,0.9972039461135864
+NEGII_Frida open full front.wrl,1,random,37,0.9973258972167969
+NEGII_Frida open full front.wrl,1,random,38,0.997443437576294
+NEGII_Frida open full front.wrl,1,random,39,0.9975541830062866
+NEGII_Frida open full front.wrl,1,random,40,0.9976571798324585
+NEGII_Frida open full front.wrl,1,random,41,0.9977561831474304
+NEGII_Frida open full front.wrl,1,random,42,0.9978521466255188
+NEGII_Frida open full front.wrl,1,random,43,0.9979422092437744
+NEGII_Frida open full front.wrl,1,random,44,0.9980285167694092
+NEGII_Frida open full front.wrl,1,random,45,0.9981110095977783
+NEGII_Frida open full front.wrl,1,random,46,0.9981924295425415
+NEGII_Frida open full front.wrl,1,random,47,0.9982703328132629
+NEGII_Frida open full front.wrl,1,random,48,0.9983446002006531
+NEGII_Frida open full front.wrl,1,random,49,0.9984174966812134
+NEGII_Frida open full front.wrl,1,random,50,0.9984845519065857
+NEGII_Frida open full front.wrl,1,random,51,0.9985506534576416
+NEGII_Frida open full front.wrl,1,random,52,0.9986093640327454
+NEGII_Frida open full front.wrl,1,random,53,0.9986677169799805
+NEGII_Frida open full front.wrl,1,random,54,0.9987240433692932
+NEGII_Frida open full front.wrl,1,random,55,0.9987766146659851
+NEGII_Frida open full front.wrl,1,random,56,0.9988273978233337
+NEGII_Frida open full front.wrl,1,random,57,0.9988759756088257
+NEGII_Frida open full front.wrl,1,random,58,0.9989233613014221
+NEGII_Frida open full front.wrl,1,random,59,0.9989692568778992
+NEGII_Frida open full front.wrl,1,random,60,0.9990115165710449
+NEGII_Frida open full front.wrl,1,random,61,0.9990525841712952
+NEGII_Frida open full front.wrl,1,random,62,0.999092698097229
+NEGII_Frida open full front.wrl,1,random,63,0.9991303086280823
+NEGII_Frida open full front.wrl,1,random,64,0.9991670846939087
+NEGII_Frida open full front.wrl,1,random,65,0.9992029666900635
+NEGII_Frida open full front.wrl,1,random,66,0.9992365837097168
+NEGII_Frida open full front.wrl,1,random,67,0.9992691874504089
+NEGII_Frida open full front.wrl,1,random,68,0.9993005990982056
+NEGII_Frida open full front.wrl,1,random,69,0.9993301033973694
+NEGII_Frida open full front.wrl,1,random,70,0.9993589520454407
+NEGII_Frida open full front.wrl,1,random,71,0.9993872046470642
+NEGII_Frida open full front.wrl,1,random,72,0.9994148015975952
+NEGII_Frida open full front.wrl,1,random,73,0.9994404911994934
+NEGII_Frida open full front.wrl,1,random,74,0.9994657635688782
+NEGII_Frida open full front.wrl,1,random,75,0.999489426612854
+NEGII_Frida open full front.wrl,1,random,76,0.9995124936103821
+NEGII_Frida open full front.wrl,1,random,77,0.999535083770752
+NEGII_Frida open full front.wrl,1,random,78,0.999556303024292
+NEGII_Frida open full front.wrl,1,random,79,0.9995762705802917
+NEGII_Frida open full front.wrl,1,random,80,0.9995953440666199
+NEGII_Frida open full front.wrl,1,random,81,0.999613881111145
+NEGII_Frida open full front.wrl,1,random,82,0.9996318817138672
+NEGII_Frida open full front.wrl,1,random,83,0.9996494054794312
+NEGII_Frida open full front.wrl,1,random,84,0.999666154384613
+NEGII_Frida open full front.wrl,1,random,85,0.9996829032897949
+NEGII_Frida open full front.wrl,1,random,86,0.9996986985206604
+NEGII_Frida open full front.wrl,1,random,87,0.9997137784957886
+NEGII_Frida open full front.wrl,1,random,88,0.9997282028198242
+NEGII_Frida open full front.wrl,1,random,89,0.9997418522834778
+NEGII_Frida open full front.wrl,1,random,90,0.9997547268867493
+NEGII_Frida open full front.wrl,1,random,91,0.999767541885376
+NEGII_Frida open full front.wrl,1,random,92,0.9997802376747131
+NEGII_Frida open full front.wrl,1,random,93,0.999792218208313
+NEGII_Frida open full front.wrl,1,random,94,0.999803900718689
+NEGII_Frida open full front.wrl,1,random,95,0.9998148679733276
+NEGII_Frida open full front.wrl,1,random,96,0.9998255968093872
+NEGII_Frida open full front.wrl,1,random,97,0.999835729598999
+NEGII_Frida open full front.wrl,1,random,98,0.999845564365387
+NEGII_Frida open full front.wrl,1,random,99,0.9998549818992615
+NEGII_Frida open full front.wrl,1,random,100,0.999863862991333
+NEGII_Frida open full front.wrl,1,random,101,0.9998725056648254
+NEGII_Frida open full front.wrl,1,random,102,0.9998806118965149
+NEGII_Frida open full front.wrl,1,random,103,0.9998883605003357
+NEGII_Frida open full front.wrl,1,random,104,0.9998959302902222
+NEGII_Frida open full front.wrl,1,random,105,0.9999032020568848
+NEGII_Frida open full front.wrl,1,random,106,0.9999102354049683
+NEGII_Frida open full front.wrl,1,random,107,0.9999169707298279
+NEGII_Frida open full front.wrl,1,random,108,0.9999234080314636
+NEGII_Frida open full front.wrl,1,random,109,0.9999296069145203
+NEGII_Frida open full front.wrl,1,random,110,0.9999356269836426
+NEGII_Frida open full front.wrl,1,random,111,0.9999414086341858
+NEGII_Frida open full front.wrl,1,random,112,0.9999469518661499
+NEGII_Frida open full front.wrl,1,random,113,0.9999523758888245
+NEGII_Frida open full front.wrl,1,random,114,0.9999573230743408
+NEGII_Frida open full front.wrl,1,random,115,0.9999620318412781
+NEGII_Frida open full front.wrl,1,random,116,0.999966561794281
+NEGII_Frida open full front.wrl,1,random,117,0.999970555305481
+NEGII_Frida open full front.wrl,1,random,118,0.9999744892120361
+NEGII_Frida open full front.wrl,1,random,119,0.9999783039093018
+NEGII_Frida open full front.wrl,1,random,120,0.9999818801879883
+NEGII_Frida open full front.wrl,1,random,121,0.9999853372573853
+NEGII_Frida open full front.wrl,1,random,122,0.9999883770942688
+NEGII_Frida open full front.wrl,1,random,123,0.9999909996986389
+NEGII_Frida open full front.wrl,1,random,124,0.9999934434890747
+NEGII_Frida open full front.wrl,1,random,125,0.9999957084655762
+NEGII_Frida open full front.wrl,1,random,126,0.9999977946281433
+NEGII_Frida open full front.wrl,1,random,127,0.9999991655349731
+NEGII_Frida open full front.wrl,1,random,128,1.0000004768371582
+A0047_Open_nose.wrl,2,trained,1,0.8745318055152893
+A0047_Open_nose.wrl,2,trained,2,0.9181731939315796
+A0047_Open_nose.wrl,2,trained,3,0.946105420589447
+A0047_Open_nose.wrl,2,trained,4,0.9687327146530151
+A0047_Open_nose.wrl,2,trained,5,0.9812001585960388
+A0047_Open_nose.wrl,2,trained,6,0.987876832485199
+A0047_Open_nose.wrl,2,trained,7,0.9909502267837524
+A0047_Open_nose.wrl,2,trained,8,0.9930477142333984
+A0047_Open_nose.wrl,2,trained,9,0.9943820238113403
+A0047_Open_nose.wrl,2,trained,10,0.9953777194023132
+A0047_Open_nose.wrl,2,trained,11,0.9961468577384949
+A0047_Open_nose.wrl,2,trained,12,0.9966711401939392
+A0047_Open_nose.wrl,2,trained,13,0.9971536993980408
+A0047_Open_nose.wrl,2,trained,14,0.9975175261497498
+A0047_Open_nose.wrl,2,trained,15,0.9978398680686951
+A0047_Open_nose.wrl,2,trained,16,0.9981010556221008
+A0047_Open_nose.wrl,2,trained,17,0.9983389973640442
+A0047_Open_nose.wrl,2,trained,18,0.9985337853431702
+A0047_Open_nose.wrl,2,trained,19,0.9987031817436218
+A0047_Open_nose.wrl,2,trained,20,0.9988576173782349
+A0047_Open_nose.wrl,2,trained,21,0.9989773035049438
+A0047_Open_nose.wrl,2,trained,22,0.9990767240524292
+A0047_Open_nose.wrl,2,trained,23,0.9991644024848938
+A0047_Open_nose.wrl,2,trained,24,0.9992435574531555
+A0047_Open_nose.wrl,2,trained,25,0.9993133544921875
+A0047_Open_nose.wrl,2,trained,26,0.9993784427642822
+A0047_Open_nose.wrl,2,trained,27,0.9994413256645203
+A0047_Open_nose.wrl,2,trained,28,0.9994902610778809
+A0047_Open_nose.wrl,2,trained,29,0.9995325207710266
+A0047_Open_nose.wrl,2,trained,30,0.9995715618133545
+A0047_Open_nose.wrl,2,trained,31,0.9996069073677063
+A0047_Open_nose.wrl,2,trained,32,0.9996392726898193
+A0047_Open_nose.wrl,2,trained,33,0.9996672868728638
+A0047_Open_nose.wrl,2,trained,34,0.9996950030326843
+A0047_Open_nose.wrl,2,trained,35,0.9997187256813049
+A0047_Open_nose.wrl,2,trained,36,0.9997405409812927
+A0047_Open_nose.wrl,2,trained,37,0.9997616410255432
+A0047_Open_nose.wrl,2,trained,38,0.9997807145118713
+A0047_Open_nose.wrl,2,trained,39,0.9997982382774353
+A0047_Open_nose.wrl,2,trained,40,0.999815046787262
+A0047_Open_nose.wrl,2,trained,41,0.9998301267623901
+A0047_Open_nose.wrl,2,trained,42,0.9998436570167542
+A0047_Open_nose.wrl,2,trained,43,0.9998562335968018
+A0047_Open_nose.wrl,2,trained,44,0.9998683929443359
+A0047_Open_nose.wrl,2,trained,45,0.999879777431488
+A0047_Open_nose.wrl,2,trained,46,0.9998898506164551
+A0047_Open_nose.wrl,2,trained,47,0.9998990297317505
+A0047_Open_nose.wrl,2,trained,48,0.9999071359634399
+A0047_Open_nose.wrl,2,trained,49,0.999914824962616
+A0047_Open_nose.wrl,2,trained,50,0.999921977519989
+A0047_Open_nose.wrl,2,trained,51,0.9999285936355591
+A0047_Open_nose.wrl,2,trained,52,0.9999346137046814
+A0047_Open_nose.wrl,2,trained,53,0.999940037727356
+A0047_Open_nose.wrl,2,trained,54,0.9999451637268066
+A0047_Open_nose.wrl,2,trained,55,0.9999501705169678
+A0047_Open_nose.wrl,2,trained,56,0.9999545812606812
+A0047_Open_nose.wrl,2,trained,57,0.9999587535858154
+A0047_Open_nose.wrl,2,trained,58,0.9999623894691467
+A0047_Open_nose.wrl,2,trained,59,0.999965488910675
+A0047_Open_nose.wrl,2,trained,60,0.999968409538269
+A0047_Open_nose.wrl,2,trained,61,0.9999712705612183
+A0047_Open_nose.wrl,2,trained,62,0.9999738931655884
+A0047_Open_nose.wrl,2,trained,63,0.9999762773513794
+A0047_Open_nose.wrl,2,trained,64,0.9999786615371704
+A0047_Open_nose.wrl,2,trained,65,0.9999808073043823
+A0047_Open_nose.wrl,2,trained,66,0.9999828338623047
+A0047_Open_nose.wrl,2,trained,67,0.9999848008155823
+A0047_Open_nose.wrl,2,trained,68,0.9999865889549255
+A0047_Open_nose.wrl,2,trained,69,0.999988317489624
+A0047_Open_nose.wrl,2,trained,70,0.9999898076057434
+A0047_Open_nose.wrl,2,trained,71,0.9999910593032837
+A0047_Open_nose.wrl,2,trained,72,0.9999921917915344
+A0047_Open_nose.wrl,2,trained,73,0.9999933242797852
+A0047_Open_nose.wrl,2,trained,74,0.9999943375587463
+A0047_Open_nose.wrl,2,trained,75,0.999995231628418
+A0047_Open_nose.wrl,2,trained,76,0.9999961256980896
+A0047_Open_nose.wrl,2,trained,77,0.9999968409538269
+A0047_Open_nose.wrl,2,trained,78,0.9999973773956299
+A0047_Open_nose.wrl,2,trained,79,0.9999979734420776
+A0047_Open_nose.wrl,2,trained,80,0.9999983906745911
+A0047_Open_nose.wrl,2,trained,81,0.9999987483024597
+A0047_Open_nose.wrl,2,trained,82,0.9999991059303284
+A0047_Open_nose.wrl,2,trained,83,0.9999993443489075
+A0047_Open_nose.wrl,2,trained,84,0.9999995231628418
+A0047_Open_nose.wrl,2,trained,85,0.9999996423721313
+A0047_Open_nose.wrl,2,trained,86,0.9999996423721313
+A0047_Open_nose.wrl,2,random,1,0.398258239030838
+A0047_Open_nose.wrl,2,random,2,0.5533368587493896
+A0047_Open_nose.wrl,2,random,3,0.6129612922668457
+A0047_Open_nose.wrl,2,random,4,0.6481696963310242
+A0047_Open_nose.wrl,2,random,5,0.6767470836639404
+A0047_Open_nose.wrl,2,random,6,0.701667070388794
+A0047_Open_nose.wrl,2,random,7,0.7258415818214417
+A0047_Open_nose.wrl,2,random,8,0.7467352747917175
+A0047_Open_nose.wrl,2,random,9,0.7640140056610107
+A0047_Open_nose.wrl,2,random,10,0.7799904346466064
+A0047_Open_nose.wrl,2,random,11,0.7946272492408752
+A0047_Open_nose.wrl,2,random,12,0.8070138096809387
+A0047_Open_nose.wrl,2,random,13,0.818950891494751
+A0047_Open_nose.wrl,2,random,14,0.8294793367385864
+A0047_Open_nose.wrl,2,random,15,0.8398628830909729
+A0047_Open_nose.wrl,2,random,16,0.8487880229949951
+A0047_Open_nose.wrl,2,random,17,0.8569371104240417
+A0047_Open_nose.wrl,2,random,18,0.864558756351471
+A0047_Open_nose.wrl,2,random,19,0.8716849684715271
+A0047_Open_nose.wrl,2,random,20,0.8783681392669678
+A0047_Open_nose.wrl,2,random,21,0.8845828771591187
+A0047_Open_nose.wrl,2,random,22,0.8904587626457214
+A0047_Open_nose.wrl,2,random,23,0.8963028788566589
+A0047_Open_nose.wrl,2,random,24,0.9019153118133545
+A0047_Open_nose.wrl,2,random,25,0.9073835015296936
+A0047_Open_nose.wrl,2,random,26,0.9124860763549805
+A0047_Open_nose.wrl,2,random,27,0.9173121452331543
+A0047_Open_nose.wrl,2,random,28,0.9218186736106873
+A0047_Open_nose.wrl,2,random,29,0.9259914755821228
+A0047_Open_nose.wrl,2,random,30,0.9301252365112305
+A0047_Open_nose.wrl,2,random,31,0.9341267943382263
+A0047_Open_nose.wrl,2,random,32,0.9378925561904907
+A0047_Open_nose.wrl,2,random,33,0.941502571105957
+A0047_Open_nose.wrl,2,random,34,0.9450020790100098
+A0047_Open_nose.wrl,2,random,35,0.9482508301734924
+A0047_Open_nose.wrl,2,random,36,0.9513338804244995
+A0047_Open_nose.wrl,2,random,37,0.9541711807250977
+A0047_Open_nose.wrl,2,random,38,0.9568714499473572
+A0047_Open_nose.wrl,2,random,39,0.9594526886940002
+A0047_Open_nose.wrl,2,random,40,0.9618898630142212
+A0047_Open_nose.wrl,2,random,41,0.9642485976219177
+A0047_Open_nose.wrl,2,random,42,0.9665023684501648
+A0047_Open_nose.wrl,2,random,43,0.9686064720153809
+A0047_Open_nose.wrl,2,random,44,0.9705556631088257
+A0047_Open_nose.wrl,2,random,45,0.972483217716217
+A0047_Open_nose.wrl,2,random,46,0.9742865562438965
+A0047_Open_nose.wrl,2,random,47,0.9759947657585144
+A0047_Open_nose.wrl,2,random,48,0.9775294065475464
+A0047_Open_nose.wrl,2,random,49,0.9790396094322205
+A0047_Open_nose.wrl,2,random,50,0.9805033802986145
+A0047_Open_nose.wrl,2,random,51,0.9818822145462036
+A0047_Open_nose.wrl,2,random,52,0.9830869436264038
+A0047_Open_nose.wrl,2,random,53,0.9842615127563477
+A0047_Open_nose.wrl,2,random,54,0.9853873252868652
+A0047_Open_nose.wrl,2,random,55,0.9864434003829956
+A0047_Open_nose.wrl,2,random,56,0.9874621033668518
+A0047_Open_nose.wrl,2,random,57,0.9884251952171326
+A0047_Open_nose.wrl,2,random,58,0.9893665313720703
+A0047_Open_nose.wrl,2,random,59,0.9902863502502441
+A0047_Open_nose.wrl,2,random,60,0.9911417961120605
+A0047_Open_nose.wrl,2,random,61,0.9918725490570068
+A0047_Open_nose.wrl,2,random,62,0.9925784468650818
+A0047_Open_nose.wrl,2,random,63,0.9932392835617065
+A0047_Open_nose.wrl,2,random,64,0.9938521981239319
+A0047_Open_nose.wrl,2,random,65,0.994425356388092
+A0047_Open_nose.wrl,2,random,66,0.9949864149093628
+A0047_Open_nose.wrl,2,random,67,0.9954952001571655
+A0047_Open_nose.wrl,2,random,68,0.9959821701049805
+A0047_Open_nose.wrl,2,random,69,0.9964151978492737
+A0047_Open_nose.wrl,2,random,70,0.9968221187591553
+A0047_Open_nose.wrl,2,random,71,0.9972048997879028
+A0047_Open_nose.wrl,2,random,72,0.9975494146347046
+A0047_Open_nose.wrl,2,random,73,0.9978607892990112
+A0047_Open_nose.wrl,2,random,74,0.9981483817100525
+A0047_Open_nose.wrl,2,random,75,0.9984105229377747
+A0047_Open_nose.wrl,2,random,76,0.9986591339111328
+A0047_Open_nose.wrl,2,random,77,0.9989007115364075
+A0047_Open_nose.wrl,2,random,78,0.9991047978401184
+A0047_Open_nose.wrl,2,random,79,0.9992851614952087
+A0047_Open_nose.wrl,2,random,80,0.999441921710968
+A0047_Open_nose.wrl,2,random,81,0.9995965957641602
+A0047_Open_nose.wrl,2,random,82,0.9997284412384033
+A0047_Open_nose.wrl,2,random,83,0.9998341798782349
+A0047_Open_nose.wrl,2,random,84,0.9999291896820068
+A0047_Open_nose.wrl,2,random,85,1.0000001192092896
+A0047_Open_nose.wrl,2,random,86,1.0000001192092896
+HLT_Figurine_Open.wrl,2,trained,1,0.8515021800994873
+HLT_Figurine_Open.wrl,2,trained,2,0.936904788017273
+HLT_Figurine_Open.wrl,2,trained,3,0.9623166918754578
+HLT_Figurine_Open.wrl,2,trained,4,0.9704614877700806
+HLT_Figurine_Open.wrl,2,trained,5,0.9775767922401428
+HLT_Figurine_Open.wrl,2,trained,6,0.982172429561615
+HLT_Figurine_Open.wrl,2,trained,7,0.9862839579582214
+HLT_Figurine_Open.wrl,2,trained,8,0.9889214038848877
+HLT_Figurine_Open.wrl,2,trained,9,0.9909829497337341
+HLT_Figurine_Open.wrl,2,trained,10,0.9926331639289856
+HLT_Figurine_Open.wrl,2,trained,11,0.9939054250717163
+HLT_Figurine_Open.wrl,2,trained,12,0.9947678446769714
+HLT_Figurine_Open.wrl,2,trained,13,0.9954268336296082
+HLT_Figurine_Open.wrl,2,trained,14,0.9959644675254822
+HLT_Figurine_Open.wrl,2,trained,15,0.9964600801467896
+HLT_Figurine_Open.wrl,2,trained,16,0.9968418478965759
+HLT_Figurine_Open.wrl,2,trained,17,0.9971745610237122
+HLT_Figurine_Open.wrl,2,trained,18,0.9974220395088196
+HLT_Figurine_Open.wrl,2,trained,19,0.9976625442504883
+HLT_Figurine_Open.wrl,2,trained,20,0.9978734254837036
+HLT_Figurine_Open.wrl,2,trained,21,0.9980511665344238
+HLT_Figurine_Open.wrl,2,trained,22,0.9982065558433533
+HLT_Figurine_Open.wrl,2,trained,23,0.9983552694320679
+HLT_Figurine_Open.wrl,2,trained,24,0.9984859228134155
+HLT_Figurine_Open.wrl,2,trained,25,0.9986107349395752
+HLT_Figurine_Open.wrl,2,trained,26,0.9987218379974365
+HLT_Figurine_Open.wrl,2,trained,27,0.9988248348236084
+HLT_Figurine_Open.wrl,2,trained,28,0.9989186525344849
+HLT_Figurine_Open.wrl,2,trained,29,0.9990037083625793
+HLT_Figurine_Open.wrl,2,trained,30,0.9990745186805725
+HLT_Figurine_Open.wrl,2,trained,31,0.9991344213485718
+HLT_Figurine_Open.wrl,2,trained,32,0.9991924166679382
+HLT_Figurine_Open.wrl,2,trained,33,0.9992465376853943
+HLT_Figurine_Open.wrl,2,trained,34,0.9992979764938354
+HLT_Figurine_Open.wrl,2,trained,35,0.999340832233429
+HLT_Figurine_Open.wrl,2,trained,36,0.9993810057640076
+HLT_Figurine_Open.wrl,2,trained,37,0.9994180202484131
+HLT_Figurine_Open.wrl,2,trained,38,0.999453604221344
+HLT_Figurine_Open.wrl,2,trained,39,0.9994858503341675
+HLT_Figurine_Open.wrl,2,trained,40,0.9995179176330566
+HLT_Figurine_Open.wrl,2,trained,41,0.99954754114151
+HLT_Figurine_Open.wrl,2,trained,42,0.9995735287666321
+HLT_Figurine_Open.wrl,2,trained,43,0.9995983839035034
+HLT_Figurine_Open.wrl,2,trained,44,0.999622106552124
+HLT_Figurine_Open.wrl,2,trained,45,0.9996435642242432
+HLT_Figurine_Open.wrl,2,trained,46,0.9996641278266907
+HLT_Figurine_Open.wrl,2,trained,47,0.9996836185455322
+HLT_Figurine_Open.wrl,2,trained,48,0.9997022151947021
+HLT_Figurine_Open.wrl,2,trained,49,0.9997194409370422
+HLT_Figurine_Open.wrl,2,trained,50,0.999735951423645
+HLT_Figurine_Open.wrl,2,trained,51,0.9997514486312866
+HLT_Figurine_Open.wrl,2,trained,52,0.9997656345367432
+HLT_Figurine_Open.wrl,2,trained,53,0.999779462814331
+HLT_Figurine_Open.wrl,2,trained,54,0.9997926354408264
+HLT_Figurine_Open.wrl,2,trained,55,0.9998056888580322
+HLT_Figurine_Open.wrl,2,trained,56,0.9998174905776978
+HLT_Figurine_Open.wrl,2,trained,57,0.9998284578323364
+HLT_Figurine_Open.wrl,2,trained,58,0.9998384118080139
+HLT_Figurine_Open.wrl,2,trained,59,0.9998478889465332
+HLT_Figurine_Open.wrl,2,trained,60,0.9998573064804077
+HLT_Figurine_Open.wrl,2,trained,61,0.9998658299446106
+HLT_Figurine_Open.wrl,2,trained,62,0.9998741149902344
+HLT_Figurine_Open.wrl,2,trained,63,0.9998819231987
+HLT_Figurine_Open.wrl,2,trained,64,0.9998889565467834
+HLT_Figurine_Open.wrl,2,trained,65,0.9998953938484192
+HLT_Figurine_Open.wrl,2,trained,66,0.9999016523361206
+HLT_Figurine_Open.wrl,2,trained,67,0.9999077320098877
+HLT_Figurine_Open.wrl,2,trained,68,0.9999136328697205
+HLT_Figurine_Open.wrl,2,trained,69,0.9999189376831055
+HLT_Figurine_Open.wrl,2,trained,70,0.9999240040779114
+HLT_Figurine_Open.wrl,2,trained,71,0.9999287724494934
+HLT_Figurine_Open.wrl,2,trained,72,0.9999333620071411
+HLT_Figurine_Open.wrl,2,trained,73,0.9999377727508545
+HLT_Figurine_Open.wrl,2,trained,74,0.9999420046806335
+HLT_Figurine_Open.wrl,2,trained,75,0.9999460577964783
+HLT_Figurine_Open.wrl,2,trained,76,0.9999497532844543
+HLT_Figurine_Open.wrl,2,trained,77,0.9999531507492065
+HLT_Figurine_Open.wrl,2,trained,78,0.9999561309814453
+HLT_Figurine_Open.wrl,2,trained,79,0.9999590516090393
+HLT_Figurine_Open.wrl,2,trained,80,0.999961793422699
+HLT_Figurine_Open.wrl,2,trained,81,0.9999645352363586
+HLT_Figurine_Open.wrl,2,trained,82,0.9999669790267944
+HLT_Figurine_Open.wrl,2,trained,83,0.9999693036079407
+HLT_Figurine_Open.wrl,2,trained,84,0.9999715685844421
+HLT_Figurine_Open.wrl,2,trained,85,0.999973714351654
+HLT_Figurine_Open.wrl,2,trained,86,0.9999756813049316
+HLT_Figurine_Open.wrl,2,trained,87,0.9999775886535645
+HLT_Figurine_Open.wrl,2,trained,88,0.9999793767929077
+HLT_Figurine_Open.wrl,2,trained,89,0.9999809265136719
+HLT_Figurine_Open.wrl,2,trained,90,0.9999824166297913
+HLT_Figurine_Open.wrl,2,trained,91,0.9999838471412659
+HLT_Figurine_Open.wrl,2,trained,92,0.9999851584434509
+HLT_Figurine_Open.wrl,2,trained,93,0.9999864101409912
+HLT_Figurine_Open.wrl,2,trained,94,0.9999876618385315
+HLT_Figurine_Open.wrl,2,trained,95,0.999988853931427
+HLT_Figurine_Open.wrl,2,trained,96,0.999989926815033
+HLT_Figurine_Open.wrl,2,trained,97,0.9999909996986389
+HLT_Figurine_Open.wrl,2,trained,98,0.9999918341636658
+HLT_Figurine_Open.wrl,2,trained,99,0.9999926686286926
+HLT_Figurine_Open.wrl,2,trained,100,0.9999934434890747
+HLT_Figurine_Open.wrl,2,trained,101,0.9999940991401672
+HLT_Figurine_Open.wrl,2,trained,102,0.9999947547912598
+HLT_Figurine_Open.wrl,2,trained,103,0.9999953508377075
+HLT_Figurine_Open.wrl,2,trained,104,0.9999959468841553
+HLT_Figurine_Open.wrl,2,trained,105,0.9999964833259583
+HLT_Figurine_Open.wrl,2,trained,106,0.9999970197677612
+HLT_Figurine_Open.wrl,2,trained,107,0.9999974370002747
+HLT_Figurine_Open.wrl,2,trained,108,0.9999977350234985
+HLT_Figurine_Open.wrl,2,trained,109,0.9999980926513672
+HLT_Figurine_Open.wrl,2,trained,110,0.9999983310699463
+HLT_Figurine_Open.wrl,2,trained,111,0.9999985694885254
+HLT_Figurine_Open.wrl,2,trained,112,0.9999988079071045
+HLT_Figurine_Open.wrl,2,trained,113,0.9999989867210388
+HLT_Figurine_Open.wrl,2,trained,114,0.9999991655349731
+HLT_Figurine_Open.wrl,2,trained,115,0.9999993443489075
+HLT_Figurine_Open.wrl,2,trained,116,0.9999995231628418
+HLT_Figurine_Open.wrl,2,trained,117,0.9999995827674866
+HLT_Figurine_Open.wrl,2,trained,118,0.9999996423721313
+HLT_Figurine_Open.wrl,2,trained,119,0.9999997615814209
+HLT_Figurine_Open.wrl,2,trained,120,0.9999998211860657
+HLT_Figurine_Open.wrl,2,trained,121,0.9999998211860657
+HLT_Figurine_Open.wrl,2,trained,122,0.9999998211860657
+HLT_Figurine_Open.wrl,2,trained,123,0.9999998211860657
+HLT_Figurine_Open.wrl,2,trained,124,0.9999998211860657
+HLT_Figurine_Open.wrl,2,trained,125,0.9999998211860657
+HLT_Figurine_Open.wrl,2,trained,126,0.9999998211860657
+HLT_Figurine_Open.wrl,2,trained,127,0.9999998211860657
+HLT_Figurine_Open.wrl,2,trained,128,0.9999998211860657
+HLT_Figurine_Open.wrl,2,random,1,0.4779621660709381
+HLT_Figurine_Open.wrl,2,random,2,0.6291435956954956
+HLT_Figurine_Open.wrl,2,random,3,0.7437528371810913
+HLT_Figurine_Open.wrl,2,random,4,0.7999522686004639
+HLT_Figurine_Open.wrl,2,random,5,0.8337165117263794
+HLT_Figurine_Open.wrl,2,random,6,0.8578928112983704
+HLT_Figurine_Open.wrl,2,random,7,0.873384416103363
+HLT_Figurine_Open.wrl,2,random,8,0.8862552046775818
+HLT_Figurine_Open.wrl,2,random,9,0.8973381519317627
+HLT_Figurine_Open.wrl,2,random,10,0.905804455280304
+HLT_Figurine_Open.wrl,2,random,11,0.9138526916503906
+HLT_Figurine_Open.wrl,2,random,12,0.9203826785087585
+HLT_Figurine_Open.wrl,2,random,13,0.925806999206543
+HLT_Figurine_Open.wrl,2,random,14,0.9309684634208679
+HLT_Figurine_Open.wrl,2,random,15,0.9357450604438782
+HLT_Figurine_Open.wrl,2,random,16,0.9401403665542603
+HLT_Figurine_Open.wrl,2,random,17,0.9443539977073669
+HLT_Figurine_Open.wrl,2,random,18,0.9482391476631165
+HLT_Figurine_Open.wrl,2,random,19,0.9516986608505249
+HLT_Figurine_Open.wrl,2,random,20,0.9548103213310242
+HLT_Figurine_Open.wrl,2,random,21,0.9574573040008545
+HLT_Figurine_Open.wrl,2,random,22,0.9599363803863525
+HLT_Figurine_Open.wrl,2,random,23,0.9621915221214294
+HLT_Figurine_Open.wrl,2,random,24,0.9643146395683289
+HLT_Figurine_Open.wrl,2,random,25,0.966180145740509
+HLT_Figurine_Open.wrl,2,random,26,0.967845618724823
+HLT_Figurine_Open.wrl,2,random,27,0.9694621562957764
+HLT_Figurine_Open.wrl,2,random,28,0.9710020422935486
+HLT_Figurine_Open.wrl,2,random,29,0.9724153280258179
+HLT_Figurine_Open.wrl,2,random,30,0.973797082901001
+HLT_Figurine_Open.wrl,2,random,31,0.9751266837120056
+HLT_Figurine_Open.wrl,2,random,32,0.9762482047080994
+HLT_Figurine_Open.wrl,2,random,33,0.9773399233818054
+HLT_Figurine_Open.wrl,2,random,34,0.9783795475959778
+HLT_Figurine_Open.wrl,2,random,35,0.9793951511383057
+HLT_Figurine_Open.wrl,2,random,36,0.9803422689437866
+HLT_Figurine_Open.wrl,2,random,37,0.9812672138214111
+HLT_Figurine_Open.wrl,2,random,38,0.9821469187736511
+HLT_Figurine_Open.wrl,2,random,39,0.9829877018928528
+HLT_Figurine_Open.wrl,2,random,40,0.9838087558746338
+HLT_Figurine_Open.wrl,2,random,41,0.9845527410507202
+HLT_Figurine_Open.wrl,2,random,42,0.9852240085601807
+HLT_Figurine_Open.wrl,2,random,43,0.9858730435371399
+HLT_Figurine_Open.wrl,2,random,44,0.9865077137947083
+HLT_Figurine_Open.wrl,2,random,45,0.9870908856391907
+HLT_Figurine_Open.wrl,2,random,46,0.9876706004142761
+HLT_Figurine_Open.wrl,2,random,47,0.9882363080978394
+HLT_Figurine_Open.wrl,2,random,48,0.9887574315071106
+HLT_Figurine_Open.wrl,2,random,49,0.9892670512199402
+HLT_Figurine_Open.wrl,2,random,50,0.9897634983062744
+HLT_Figurine_Open.wrl,2,random,51,0.9902514815330505
+HLT_Figurine_Open.wrl,2,random,52,0.9907044172286987
+HLT_Figurine_Open.wrl,2,random,53,0.9911515116691589
+HLT_Figurine_Open.wrl,2,random,54,0.9915758967399597
+HLT_Figurine_Open.wrl,2,random,55,0.9919926524162292
+HLT_Figurine_Open.wrl,2,random,56,0.992375910282135
+HLT_Figurine_Open.wrl,2,random,57,0.9927405714988708
+HLT_Figurine_Open.wrl,2,random,58,0.9931014776229858
+HLT_Figurine_Open.wrl,2,random,59,0.9934486150741577
+HLT_Figurine_Open.wrl,2,random,60,0.9937865138053894
+HLT_Figurine_Open.wrl,2,random,61,0.9941083192825317
+HLT_Figurine_Open.wrl,2,random,62,0.9944124817848206
+HLT_Figurine_Open.wrl,2,random,63,0.994700014591217
+HLT_Figurine_Open.wrl,2,random,64,0.9949724078178406
+HLT_Figurine_Open.wrl,2,random,65,0.9952290654182434
+HLT_Figurine_Open.wrl,2,random,66,0.9954795241355896
+HLT_Figurine_Open.wrl,2,random,67,0.9957208037376404
+HLT_Figurine_Open.wrl,2,random,68,0.9959452152252197
+HLT_Figurine_Open.wrl,2,random,69,0.9961639642715454
+HLT_Figurine_Open.wrl,2,random,70,0.9963639974594116
+HLT_Figurine_Open.wrl,2,random,71,0.9965628385543823
+HLT_Figurine_Open.wrl,2,random,72,0.9967491030693054
+HLT_Figurine_Open.wrl,2,random,73,0.9969325661659241
+HLT_Figurine_Open.wrl,2,random,74,0.9971123337745667
+HLT_Figurine_Open.wrl,2,random,75,0.9972840547561646
+HLT_Figurine_Open.wrl,2,random,76,0.9974438548088074
+HLT_Figurine_Open.wrl,2,random,77,0.9975942969322205
+HLT_Figurine_Open.wrl,2,random,78,0.9977415800094604
+HLT_Figurine_Open.wrl,2,random,79,0.9978761076927185
+HLT_Figurine_Open.wrl,2,random,80,0.9980030655860901
+HLT_Figurine_Open.wrl,2,random,81,0.9981263279914856
+HLT_Figurine_Open.wrl,2,random,82,0.998245358467102
+HLT_Figurine_Open.wrl,2,random,83,0.9983586668968201
+HLT_Figurine_Open.wrl,2,random,84,0.9984652996063232
+HLT_Figurine_Open.wrl,2,random,85,0.9985659718513489
+HLT_Figurine_Open.wrl,2,random,86,0.9986599087715149
+HLT_Figurine_Open.wrl,2,random,87,0.9987505674362183
+HLT_Figurine_Open.wrl,2,random,88,0.9988371729850769
+HLT_Figurine_Open.wrl,2,random,89,0.9989181160926819
+HLT_Figurine_Open.wrl,2,random,90,0.9989960789680481
+HLT_Figurine_Open.wrl,2,random,91,0.9990696907043457
+HLT_Figurine_Open.wrl,2,random,92,0.9991414546966553
+HLT_Figurine_Open.wrl,2,random,93,0.9992128610610962
+HLT_Figurine_Open.wrl,2,random,94,0.9992788434028625
+HLT_Figurine_Open.wrl,2,random,95,0.9993416666984558
+HLT_Figurine_Open.wrl,2,random,96,0.9993995428085327
+HLT_Figurine_Open.wrl,2,random,97,0.9994521737098694
+HLT_Figurine_Open.wrl,2,random,98,0.9995031356811523
+HLT_Figurine_Open.wrl,2,random,99,0.9995508790016174
+HLT_Figurine_Open.wrl,2,random,100,0.9995980262756348
+HLT_Figurine_Open.wrl,2,random,101,0.9996394515037537
+HLT_Figurine_Open.wrl,2,random,102,0.99968022108078
+HLT_Figurine_Open.wrl,2,random,103,0.9997149705886841
+HLT_Figurine_Open.wrl,2,random,104,0.9997480511665344
+HLT_Figurine_Open.wrl,2,random,105,0.9997779130935669
+HLT_Figurine_Open.wrl,2,random,106,0.9998067617416382
+HLT_Figurine_Open.wrl,2,random,107,0.9998314380645752
+HLT_Figurine_Open.wrl,2,random,108,0.9998527765274048
+HLT_Figurine_Open.wrl,2,random,109,0.999873697757721
+HLT_Figurine_Open.wrl,2,random,110,0.9998908638954163
+HLT_Figurine_Open.wrl,2,random,111,0.999905526638031
+HLT_Figurine_Open.wrl,2,random,112,0.9999193549156189
+HLT_Figurine_Open.wrl,2,random,113,0.9999323487281799
+HLT_Figurine_Open.wrl,2,random,114,0.9999438524246216
+HLT_Figurine_Open.wrl,2,random,115,0.999954879283905
+HLT_Figurine_Open.wrl,2,random,116,0.9999634027481079
+HLT_Figurine_Open.wrl,2,random,117,0.9999707937240601
+HLT_Figurine_Open.wrl,2,random,118,0.999976634979248
+HLT_Figurine_Open.wrl,2,random,119,0.9999822974205017
+HLT_Figurine_Open.wrl,2,random,120,0.9999872446060181
+HLT_Figurine_Open.wrl,2,random,121,0.9999906420707703
+HLT_Figurine_Open.wrl,2,random,122,0.9999935626983643
+HLT_Figurine_Open.wrl,2,random,123,0.9999957084655762
+HLT_Figurine_Open.wrl,2,random,124,0.9999974966049194
+HLT_Figurine_Open.wrl,2,random,125,0.9999987483024597
+HLT_Figurine_Open.wrl,2,random,126,0.9999993443489075
+HLT_Figurine_Open.wrl,2,random,127,0.9999999403953552
+HLT_Figurine_Open.wrl,2,random,128,1.000000238418579
+NEGII_Frida open full front.wrl,2,trained,1,0.9689854383468628
+NEGII_Frida open full front.wrl,2,trained,2,0.9856796264648438
+NEGII_Frida open full front.wrl,2,trained,3,0.99154132604599
+NEGII_Frida open full front.wrl,2,trained,4,0.9945637583732605
+NEGII_Frida open full front.wrl,2,trained,5,0.9961774349212646
+NEGII_Frida open full front.wrl,2,trained,6,0.9971102476119995
+NEGII_Frida open full front.wrl,2,trained,7,0.9976549744606018
+NEGII_Frida open full front.wrl,2,trained,8,0.9981551170349121
+NEGII_Frida open full front.wrl,2,trained,9,0.9984273314476013
+NEGII_Frida open full front.wrl,2,trained,10,0.998640775680542
+NEGII_Frida open full front.wrl,2,trained,11,0.9988237023353577
+NEGII_Frida open full front.wrl,2,trained,12,0.998967170715332
+NEGII_Frida open full front.wrl,2,trained,13,0.999094545841217
+NEGII_Frida open full front.wrl,2,trained,14,0.9991843104362488
+NEGII_Frida open full front.wrl,2,trained,15,0.9992700219154358
+NEGII_Frida open full front.wrl,2,trained,16,0.9993430376052856
+NEGII_Frida open full front.wrl,2,trained,17,0.9994009733200073
+NEGII_Frida open full front.wrl,2,trained,18,0.9994525909423828
+NEGII_Frida open full front.wrl,2,trained,19,0.9994969964027405
+NEGII_Frida open full front.wrl,2,trained,20,0.9995346665382385
+NEGII_Frida open full front.wrl,2,trained,21,0.9995699524879456
+NEGII_Frida open full front.wrl,2,trained,22,0.9995987415313721
+NEGII_Frida open full front.wrl,2,trained,23,0.9996271133422852
+NEGII_Frida open full front.wrl,2,trained,24,0.9996527433395386
+NEGII_Frida open full front.wrl,2,trained,25,0.9996753931045532
+NEGII_Frida open full front.wrl,2,trained,26,0.9996978640556335
+NEGII_Frida open full front.wrl,2,trained,27,0.9997181296348572
+NEGII_Frida open full front.wrl,2,trained,28,0.9997376203536987
+NEGII_Frida open full front.wrl,2,trained,29,0.9997559189796448
+NEGII_Frida open full front.wrl,2,trained,30,0.9997726082801819
+NEGII_Frida open full front.wrl,2,trained,31,0.9997876882553101
+NEGII_Frida open full front.wrl,2,trained,32,0.9998005628585815
+NEGII_Frida open full front.wrl,2,trained,33,0.9998127222061157
+NEGII_Frida open full front.wrl,2,trained,34,0.9998244047164917
+NEGII_Frida open full front.wrl,2,trained,35,0.999835729598999
+NEGII_Frida open full front.wrl,2,trained,36,0.9998453259468079
+NEGII_Frida open full front.wrl,2,trained,37,0.9998541474342346
+NEGII_Frida open full front.wrl,2,trained,38,0.9998626708984375
+NEGII_Frida open full front.wrl,2,trained,39,0.9998705983161926
+NEGII_Frida open full front.wrl,2,trained,40,0.9998775720596313
+NEGII_Frida open full front.wrl,2,trained,41,0.9998844265937805
+NEGII_Frida open full front.wrl,2,trained,42,0.9998910427093506
+NEGII_Frida open full front.wrl,2,trained,43,0.9998973608016968
+NEGII_Frida open full front.wrl,2,trained,44,0.9999033212661743
+NEGII_Frida open full front.wrl,2,trained,45,0.9999088644981384
+NEGII_Frida open full front.wrl,2,trained,46,0.9999140501022339
+NEGII_Frida open full front.wrl,2,trained,47,0.9999187588691711
+NEGII_Frida open full front.wrl,2,trained,48,0.9999232292175293
+NEGII_Frida open full front.wrl,2,trained,49,0.9999274015426636
+NEGII_Frida open full front.wrl,2,trained,50,0.9999315142631531
+NEGII_Frida open full front.wrl,2,trained,51,0.9999352693557739
+NEGII_Frida open full front.wrl,2,trained,52,0.9999388456344604
+NEGII_Frida open full front.wrl,2,trained,53,0.9999421238899231
+NEGII_Frida open full front.wrl,2,trained,54,0.9999451041221619
+NEGII_Frida open full front.wrl,2,trained,55,0.9999480247497559
+NEGII_Frida open full front.wrl,2,trained,56,0.9999507665634155
+NEGII_Frida open full front.wrl,2,trained,57,0.9999533295631409
+NEGII_Frida open full front.wrl,2,trained,58,0.9999558329582214
+NEGII_Frida open full front.wrl,2,trained,59,0.9999582171440125
+NEGII_Frida open full front.wrl,2,trained,60,0.9999603033065796
+NEGII_Frida open full front.wrl,2,trained,61,0.999962329864502
+NEGII_Frida open full front.wrl,2,trained,62,0.9999642372131348
+NEGII_Frida open full front.wrl,2,trained,63,0.9999660849571228
+NEGII_Frida open full front.wrl,2,trained,64,0.9999678730964661
+NEGII_Frida open full front.wrl,2,trained,65,0.9999695420265198
+NEGII_Frida open full front.wrl,2,trained,66,0.9999710917472839
+NEGII_Frida open full front.wrl,2,trained,67,0.9999725818634033
+NEGII_Frida open full front.wrl,2,trained,68,0.9999740123748779
+NEGII_Frida open full front.wrl,2,trained,69,0.9999754428863525
+NEGII_Frida open full front.wrl,2,trained,70,0.9999767541885376
+NEGII_Frida open full front.wrl,2,trained,71,0.9999780654907227
+NEGII_Frida open full front.wrl,2,trained,72,0.9999791979789734
+NEGII_Frida open full front.wrl,2,trained,73,0.9999803900718689
+NEGII_Frida open full front.wrl,2,trained,74,0.9999814629554749
+NEGII_Frida open full front.wrl,2,trained,75,0.9999825358390808
+NEGII_Frida open full front.wrl,2,trained,76,0.9999834895133972
+NEGII_Frida open full front.wrl,2,trained,77,0.9999844431877136
+NEGII_Frida open full front.wrl,2,trained,78,0.9999852180480957
+NEGII_Frida open full front.wrl,2,trained,79,0.9999860525131226
+NEGII_Frida open full front.wrl,2,trained,80,0.9999868869781494
+NEGII_Frida open full front.wrl,2,trained,81,0.9999876022338867
+NEGII_Frida open full front.wrl,2,trained,82,0.999988317489624
+NEGII_Frida open full front.wrl,2,trained,83,0.9999890327453613
+NEGII_Frida open full front.wrl,2,trained,84,0.9999896287918091
+NEGII_Frida open full front.wrl,2,trained,85,0.9999902248382568
+NEGII_Frida open full front.wrl,2,trained,86,0.9999907612800598
+NEGII_Frida open full front.wrl,2,trained,87,0.9999913573265076
+NEGII_Frida open full front.wrl,2,trained,88,0.9999919533729553
+NEGII_Frida open full front.wrl,2,trained,89,0.9999924302101135
+NEGII_Frida open full front.wrl,2,trained,90,0.9999929070472717
+NEGII_Frida open full front.wrl,2,trained,91,0.9999933838844299
+NEGII_Frida open full front.wrl,2,trained,92,0.9999938607215881
+NEGII_Frida open full front.wrl,2,trained,93,0.9999943375587463
+NEGII_Frida open full front.wrl,2,trained,94,0.999994695186615
+NEGII_Frida open full front.wrl,2,trained,95,0.9999950528144836
+NEGII_Frida open full front.wrl,2,trained,96,0.9999954104423523
+NEGII_Frida open full front.wrl,2,trained,97,0.999995768070221
+NEGII_Frida open full front.wrl,2,trained,98,0.9999961256980896
+NEGII_Frida open full front.wrl,2,trained,99,0.9999964833259583
+NEGII_Frida open full front.wrl,2,trained,100,0.9999968409538269
+NEGII_Frida open full front.wrl,2,trained,101,0.9999970197677612
+NEGII_Frida open full front.wrl,2,trained,102,0.9999972581863403
+NEGII_Frida open full front.wrl,2,trained,103,0.9999974966049194
+NEGII_Frida open full front.wrl,2,trained,104,0.9999977350234985
+NEGII_Frida open full front.wrl,2,trained,105,0.9999979734420776
+NEGII_Frida open full front.wrl,2,trained,106,0.9999982118606567
+NEGII_Frida open full front.wrl,2,trained,107,0.9999984502792358
+NEGII_Frida open full front.wrl,2,trained,108,0.9999986886978149
+NEGII_Frida open full front.wrl,2,trained,109,0.9999988079071045
+NEGII_Frida open full front.wrl,2,trained,110,0.999998927116394
+NEGII_Frida open full front.wrl,2,trained,111,0.9999990463256836
+NEGII_Frida open full front.wrl,2,trained,112,0.9999991655349731
+NEGII_Frida open full front.wrl,2,trained,113,0.9999992847442627
+NEGII_Frida open full front.wrl,2,trained,114,0.9999994039535522
+NEGII_Frida open full front.wrl,2,trained,115,0.9999995231628418
+NEGII_Frida open full front.wrl,2,trained,116,0.9999996423721313
+NEGII_Frida open full front.wrl,2,trained,117,0.9999997615814209
+NEGII_Frida open full front.wrl,2,trained,118,0.9999997615814209
+NEGII_Frida open full front.wrl,2,trained,119,0.9999997615814209
+NEGII_Frida open full front.wrl,2,trained,120,0.9999997615814209
+NEGII_Frida open full front.wrl,2,trained,121,0.9999997615814209
+NEGII_Frida open full front.wrl,2,trained,122,0.9999997615814209
+NEGII_Frida open full front.wrl,2,trained,123,0.9999997615814209
+NEGII_Frida open full front.wrl,2,trained,124,0.9999997615814209
+NEGII_Frida open full front.wrl,2,trained,125,0.9999997615814209
+NEGII_Frida open full front.wrl,2,trained,126,0.9999997615814209
+NEGII_Frida open full front.wrl,2,trained,127,0.9999997615814209
+NEGII_Frida open full front.wrl,2,trained,128,0.9999997615814209
+NEGII_Frida open full front.wrl,2,random,1,0.9627231359481812
+NEGII_Frida open full front.wrl,2,random,2,0.9721044301986694
+NEGII_Frida open full front.wrl,2,random,3,0.9779637455940247
+NEGII_Frida open full front.wrl,2,random,4,0.9834317564964294
+NEGII_Frida open full front.wrl,2,random,5,0.9866894483566284
+NEGII_Frida open full front.wrl,2,random,6,0.989067018032074
+NEGII_Frida open full front.wrl,2,random,7,0.9904879331588745
+NEGII_Frida open full front.wrl,2,random,8,0.9915196895599365
+NEGII_Frida open full front.wrl,2,random,9,0.9924187660217285
+NEGII_Frida open full front.wrl,2,random,10,0.9932880997657776
+NEGII_Frida open full front.wrl,2,random,11,0.9940013289451599
+NEGII_Frida open full front.wrl,2,random,12,0.9945201873779297
+NEGII_Frida open full front.wrl,2,random,13,0.9949199557304382
+NEGII_Frida open full front.wrl,2,random,14,0.9952939748764038
+NEGII_Frida open full front.wrl,2,random,15,0.995613694190979
+NEGII_Frida open full front.wrl,2,random,16,0.9958916902542114
+NEGII_Frida open full front.wrl,2,random,17,0.9961587190628052
+NEGII_Frida open full front.wrl,2,random,18,0.9963910579681396
+NEGII_Frida open full front.wrl,2,random,19,0.9966187477111816
+NEGII_Frida open full front.wrl,2,random,20,0.9968331456184387
+NEGII_Frida open full front.wrl,2,random,21,0.9970250725746155
+NEGII_Frida open full front.wrl,2,random,22,0.9972034692764282
+NEGII_Frida open full front.wrl,2,random,23,0.9973484873771667
+NEGII_Frida open full front.wrl,2,random,24,0.9974884390830994
+NEGII_Frida open full front.wrl,2,random,25,0.9976208209991455
+NEGII_Frida open full front.wrl,2,random,26,0.9977452158927917
+NEGII_Frida open full front.wrl,2,random,27,0.9978595972061157
+NEGII_Frida open full front.wrl,2,random,28,0.9979605674743652
+NEGII_Frida open full front.wrl,2,random,29,0.9980595707893372
+NEGII_Frida open full front.wrl,2,random,30,0.9981504082679749
+NEGII_Frida open full front.wrl,2,random,31,0.9982388019561768
+NEGII_Frida open full front.wrl,2,random,32,0.998325526714325
+NEGII_Frida open full front.wrl,2,random,33,0.9984034895896912
+NEGII_Frida open full front.wrl,2,random,34,0.998477041721344
+NEGII_Frida open full front.wrl,2,random,35,0.99854576587677
+NEGII_Frida open full front.wrl,2,random,36,0.9986110925674438
+NEGII_Frida open full front.wrl,2,random,37,0.9986739158630371
+NEGII_Frida open full front.wrl,2,random,38,0.9987348914146423
+NEGII_Frida open full front.wrl,2,random,39,0.998791515827179
+NEGII_Frida open full front.wrl,2,random,40,0.998845636844635
+NEGII_Frida open full front.wrl,2,random,41,0.9988958835601807
+NEGII_Frida open full front.wrl,2,random,42,0.9989434480667114
+NEGII_Frida open full front.wrl,2,random,43,0.9989870190620422
+NEGII_Frida open full front.wrl,2,random,44,0.9990301728248596
+NEGII_Frida open full front.wrl,2,random,45,0.9990700483322144
+NEGII_Frida open full front.wrl,2,random,46,0.9991093873977661
+NEGII_Frida open full front.wrl,2,random,47,0.9991478323936462
+NEGII_Frida open full front.wrl,2,random,48,0.9991834163665771
+NEGII_Frida open full front.wrl,2,random,49,0.9992187023162842
+NEGII_Frida open full front.wrl,2,random,50,0.9992526769638062
+NEGII_Frida open full front.wrl,2,random,51,0.9992845058441162
+NEGII_Frida open full front.wrl,2,random,52,0.9993147850036621
+NEGII_Frida open full front.wrl,2,random,53,0.9993442296981812
+NEGII_Frida open full front.wrl,2,random,54,0.9993712902069092
+NEGII_Frida open full front.wrl,2,random,55,0.999397873878479
+NEGII_Frida open full front.wrl,2,random,56,0.9994235634803772
+NEGII_Frida open full front.wrl,2,random,57,0.9994490742683411
+NEGII_Frida open full front.wrl,2,random,58,0.9994716048240662
+NEGII_Frida open full front.wrl,2,random,59,0.9994932413101196
+NEGII_Frida open full front.wrl,2,random,60,0.9995148777961731
+NEGII_Frida open full front.wrl,2,random,61,0.9995347857475281
+NEGII_Frida open full front.wrl,2,random,62,0.9995540976524353
+NEGII_Frida open full front.wrl,2,random,63,0.9995719790458679
+NEGII_Frida open full front.wrl,2,random,64,0.9995894432067871
+NEGII_Frida open full front.wrl,2,random,65,0.9996066689491272
+NEGII_Frida open full front.wrl,2,random,66,0.9996228218078613
+NEGII_Frida open full front.wrl,2,random,67,0.9996384382247925
+NEGII_Frida open full front.wrl,2,random,68,0.9996535181999207
+NEGII_Frida open full front.wrl,2,random,69,0.9996682405471802
+NEGII_Frida open full front.wrl,2,random,70,0.9996824264526367
+NEGII_Frida open full front.wrl,2,random,71,0.9996961355209351
+NEGII_Frida open full front.wrl,2,random,72,0.9997095465660095
+NEGII_Frida open full front.wrl,2,random,73,0.9997227191925049
+NEGII_Frida open full front.wrl,2,random,74,0.9997349381446838
+NEGII_Frida open full front.wrl,2,random,75,0.9997468590736389
+NEGII_Frida open full front.wrl,2,random,76,0.9997584223747253
+NEGII_Frida open full front.wrl,2,random,77,0.9997696280479431
+NEGII_Frida open full front.wrl,2,random,78,0.9997800588607788
+NEGII_Frida open full front.wrl,2,random,79,0.9997901916503906
+NEGII_Frida open full front.wrl,2,random,80,0.9998000860214233
+NEGII_Frida open full front.wrl,2,random,81,0.9998095035552979
+NEGII_Frida open full front.wrl,2,random,82,0.9998185634613037
+NEGII_Frida open full front.wrl,2,random,83,0.9998272657394409
+NEGII_Frida open full front.wrl,2,random,84,0.9998354911804199
+NEGII_Frida open full front.wrl,2,random,85,0.9998435974121094
+NEGII_Frida open full front.wrl,2,random,86,0.999851644039154
+NEGII_Frida open full front.wrl,2,random,87,0.9998589754104614
+NEGII_Frida open full front.wrl,2,random,88,0.9998661279678345
+NEGII_Frida open full front.wrl,2,random,89,0.9998729825019836
+NEGII_Frida open full front.wrl,2,random,90,0.9998797178268433
+NEGII_Frida open full front.wrl,2,random,91,0.9998860359191895
+NEGII_Frida open full front.wrl,2,random,92,0.9998921155929565
+NEGII_Frida open full front.wrl,2,random,93,0.9998980164527893
+NEGII_Frida open full front.wrl,2,random,94,0.9999035000801086
+NEGII_Frida open full front.wrl,2,random,95,0.9999089241027832
+NEGII_Frida open full front.wrl,2,random,96,0.9999141097068787
+NEGII_Frida open full front.wrl,2,random,97,0.9999191164970398
+NEGII_Frida open full front.wrl,2,random,98,0.999923825263977
+NEGII_Frida open full front.wrl,2,random,99,0.9999284744262695
+NEGII_Frida open full front.wrl,2,random,100,0.9999328255653381
+NEGII_Frida open full front.wrl,2,random,101,0.9999371767044067
+NEGII_Frida open full front.wrl,2,random,102,0.9999412894248962
+NEGII_Frida open full front.wrl,2,random,103,0.999945342540741
+NEGII_Frida open full front.wrl,2,random,104,0.9999492764472961
+NEGII_Frida open full front.wrl,2,random,105,0.9999529123306274
+NEGII_Frida open full front.wrl,2,random,106,0.9999563694000244
+NEGII_Frida open full front.wrl,2,random,107,0.9999597668647766
+NEGII_Frida open full front.wrl,2,random,108,0.9999629855155945
+NEGII_Frida open full front.wrl,2,random,109,0.9999660849571228
+NEGII_Frida open full front.wrl,2,random,110,0.999968945980072
+NEGII_Frida open full front.wrl,2,random,111,0.9999718070030212
+NEGII_Frida open full front.wrl,2,random,112,0.9999744296073914
+NEGII_Frida open full front.wrl,2,random,113,0.9999770522117615
+NEGII_Frida open full front.wrl,2,random,114,0.9999794363975525
+NEGII_Frida open full front.wrl,2,random,115,0.9999817609786987
+NEGII_Frida open full front.wrl,2,random,116,0.9999839663505554
+NEGII_Frida open full front.wrl,2,random,117,0.9999859929084778
+NEGII_Frida open full front.wrl,2,random,118,0.9999878406524658
+NEGII_Frida open full front.wrl,2,random,119,0.9999896883964539
+NEGII_Frida open full front.wrl,2,random,120,0.9999912977218628
+NEGII_Frida open full front.wrl,2,random,121,0.9999929070472717
+NEGII_Frida open full front.wrl,2,random,122,0.9999943375587463
+NEGII_Frida open full front.wrl,2,random,123,0.9999955892562866
+NEGII_Frida open full front.wrl,2,random,124,0.9999969005584717
+NEGII_Frida open full front.wrl,2,random,125,0.9999980330467224
+NEGII_Frida open full front.wrl,2,random,126,0.999998927116394
+NEGII_Frida open full front.wrl,2,random,127,0.9999996423721313
+NEGII_Frida open full front.wrl,2,random,128,1.0000003576278687

@@ -95,5 +95,5 @@ Outputs in `--out`: `config.json` (arguments, hyperparameters, seeds, git
 commit, library versions), one CSV per experiment (one row per test model x
 seed x variant x segment), `figures/`, `RESULTS.md`. Trained checkpoints go to
 `results/models/` and crest-label caches to `results/cache/` (both git-ignored).
-A full run takes roughly an hour on an Apple-silicon laptop. Runs on `mps`
+A full run (E0-E5, three seeds) takes about 30-35 minutes on an Apple-silicon laptop. Runs on `mps`
 are not bit-reproducible; on `cpu` a seed reproduces a run exactly.

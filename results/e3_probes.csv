@@ -1,0 +1,973 @@
+test_model,seed,encoder,block,n_features,target,metric,score,pearson_r,regularisation
+A0047_Open_nose.wrl,0,trained,1,32,relief_at_centre,R2,-4.530243667968447,0.6072182452000972,10.0
+A0047_Open_nose.wrl,0,trained,1,32,relief_at_centre,R2_z,-0.08100978888088517,0.12096388852566471,1000.0
+A0047_Open_nose.wrl,0,trained,1,32,curvature_at_centre,R2,-1.350088052954844,0.0019771707576602955,1000.0
+A0047_Open_nose.wrl,0,trained,1,32,curvature_at_centre,R2_z,-0.07202449120138366,-0.09711785735335152,1000.0
+A0047_Open_nose.wrl,0,trained,1,32,geometric_depth,R2,-9.75970681989108,0.07149072062516372,100.0
+A0047_Open_nose.wrl,0,trained,1,32,geometric_depth,R2_z,-0.005986238381672004,0.10771892514620304,1000.0
+A0047_Open_nose.wrl,0,trained,1,32,lateral_offset_of_hand_line,R2,-0.04844896451606728,-0.3113750575707942,1000.0
+A0047_Open_nose.wrl,0,trained,1,32,lateral_offset_of_hand_line,R2_z,-0.05342791554589299,-0.30837223096896804,1000.0
+A0047_Open_nose.wrl,0,trained,1,32,departure,AUROC,0.568814749780509,,0.1
+A0047_Open_nose.wrl,0,trained,2,32,relief_at_centre,R2,-6.23454572683973,0.4024356980030456,10.0
+A0047_Open_nose.wrl,0,trained,2,32,relief_at_centre,R2_z,0.03562482776499032,0.3740338470550735,1000.0
+A0047_Open_nose.wrl,0,trained,2,32,curvature_at_centre,R2,-1.569960598955992,0.14054257300744225,1000.0
+A0047_Open_nose.wrl,0,trained,2,32,curvature_at_centre,R2_z,-0.06005752107059803,0.12386645727241043,1000.0
+A0047_Open_nose.wrl,0,trained,2,32,geometric_depth,R2,-11.343219129607782,0.09689307391929743,100.0
+A0047_Open_nose.wrl,0,trained,2,32,geometric_depth,R2_z,-0.0995664373756473,0.16610755571956057,1000.0
+A0047_Open_nose.wrl,0,trained,2,32,lateral_offset_of_hand_line,R2,-0.040785268981759604,-0.277128145063579,1000.0
+A0047_Open_nose.wrl,0,trained,2,32,lateral_offset_of_hand_line,R2_z,-0.047414923633640305,-0.2742330144074081,1000.0
+A0047_Open_nose.wrl,0,trained,2,32,departure,AUROC,0.6183669885864793,,10.0
+A0047_Open_nose.wrl,0,trained,3,64,relief_at_centre,R2,-4.7666655434868845,0.235084518821767,100.0
+A0047_Open_nose.wrl,0,trained,3,64,relief_at_centre,R2_z,-0.4774985719197946,-0.25806386341880555,1000.0
+A0047_Open_nose.wrl,0,trained,3,64,curvature_at_centre,R2,-0.9695382496559268,0.04497432041450753,1000.0
+A0047_Open_nose.wrl,0,trained,3,64,curvature_at_centre,R2_z,-0.14050946580325174,-0.0644852548026436,1000.0
+A0047_Open_nose.wrl,0,trained,3,64,geometric_depth,R2,-6.104859622336125,0.08612248423307307,100.0
+A0047_Open_nose.wrl,0,trained,3,64,geometric_depth,R2_z,-0.2855176198916356,0.020972276817958335,1000.0
+A0047_Open_nose.wrl,0,trained,3,64,lateral_offset_of_hand_line,R2,-0.07088668037774326,0.12672938609620288,1000.0
+A0047_Open_nose.wrl,0,trained,3,64,lateral_offset_of_hand_line,R2_z,-0.093271124636914,0.12981675376273313,1000.0
+A0047_Open_nose.wrl,0,trained,3,64,departure,AUROC,0.7037050043898156,,0.01
+A0047_Open_nose.wrl,0,trained,4,64,relief_at_centre,R2,-5.826173142828613,0.6101136927513466,0.1
+A0047_Open_nose.wrl,0,trained,4,64,relief_at_centre,R2_z,-0.1428098357208405,0.05578831601373215,1000.0
+A0047_Open_nose.wrl,0,trained,4,64,curvature_at_centre,R2,-0.4173216713699459,0.24068611217246577,1000.0
+A0047_Open_nose.wrl,0,trained,4,64,curvature_at_centre,R2_z,0.030383612639826696,0.2839170239959503,1000.0
+A0047_Open_nose.wrl,0,trained,4,64,geometric_depth,R2,-7.9634823986145395,0.03801746899524347,1000.0
+A0047_Open_nose.wrl,0,trained,4,64,geometric_depth,R2_z,-0.14286079635675164,0.05521984132423365,1000.0
+A0047_Open_nose.wrl,0,trained,4,64,lateral_offset_of_hand_line,R2,-0.21803666623533946,-0.17107830539040214,1000.0
+A0047_Open_nose.wrl,0,trained,4,64,lateral_offset_of_hand_line,R2_z,-0.23815858947789947,-0.17111418373219575,1000.0
+A0047_Open_nose.wrl,0,trained,4,64,departure,AUROC,0.637190517998244,,0.01
+A0047_Open_nose.wrl,0,trained,5,128,relief_at_centre,R2,-1.6173803267107658,0.5611818605652898,1.0
+A0047_Open_nose.wrl,0,trained,5,128,relief_at_centre,R2_z,-0.6337464948106484,0.07048444793753422,1000.0
+A0047_Open_nose.wrl,0,trained,5,128,curvature_at_centre,R2,-0.11732856844197737,0.14872487923847436,1000.0
+A0047_Open_nose.wrl,0,trained,5,128,curvature_at_centre,R2_z,-0.040330931221197464,6.316815555777157e-05,1000.0
+A0047_Open_nose.wrl,0,trained,5,128,geometric_depth,R2,-8.75084472699804,-0.026100909117996705,1000.0
+A0047_Open_nose.wrl,0,trained,5,128,geometric_depth,R2_z,-0.43958213286358183,-0.04082555844058108,1000.0
+A0047_Open_nose.wrl,0,trained,5,128,lateral_offset_of_hand_line,R2,-0.7229199213118516,0.11073404492908283,1000.0
+A0047_Open_nose.wrl,0,trained,5,128,lateral_offset_of_hand_line,R2_z,-0.8536053969403818,0.11116095876246679,1000.0
+A0047_Open_nose.wrl,0,trained,5,128,departure,AUROC,0.5634064969271291,,10.0
+A0047_Open_nose.wrl,0,trained,6,128,relief_at_centre,R2,-10.310324004091022,0.5099022630197615,10.0
+A0047_Open_nose.wrl,0,trained,6,128,relief_at_centre,R2_z,-0.07129048916114189,0.47641785427086447,1000.0
+A0047_Open_nose.wrl,0,trained,6,128,curvature_at_centre,R2,-0.6845022925001119,0.18797077391593306,100.0
+A0047_Open_nose.wrl,0,trained,6,128,curvature_at_centre,R2_z,-0.053784192294951794,0.22344674979254428,1000.0
+A0047_Open_nose.wrl,0,trained,6,128,geometric_depth,R2,-3.8258049274025376,-0.04246812562586993,1000.0
+A0047_Open_nose.wrl,0,trained,6,128,geometric_depth,R2_z,-0.08911738191871388,0.003155483852058844,1000.0
+A0047_Open_nose.wrl,0,trained,6,128,lateral_offset_of_hand_line,R2,-0.2500712562080005,-0.08998255398574892,1000.0
+A0047_Open_nose.wrl,0,trained,6,128,lateral_offset_of_hand_line,R2_z,-0.28424417281438874,-0.08994671722159855,1000.0
+A0047_Open_nose.wrl,0,trained,6,128,departure,AUROC,0.6007374890254609,,10.0
+A0047_Open_nose.wrl,0,random,1,32,relief_at_centre,R2,-5.6643943323557515,0.5778028014226149,10.0
+A0047_Open_nose.wrl,0,random,1,32,relief_at_centre,R2_z,-0.07280724304238051,0.10943706935590448,1000.0
+A0047_Open_nose.wrl,0,random,1,32,curvature_at_centre,R2,-1.5577495802627932,0.017710676262444693,1000.0
+A0047_Open_nose.wrl,0,random,1,32,curvature_at_centre,R2_z,-0.07604227953023912,-0.06356241965259869,1000.0
+A0047_Open_nose.wrl,0,random,1,32,geometric_depth,R2,-10.498350024948687,0.09200726213049608,100.0
+A0047_Open_nose.wrl,0,random,1,32,geometric_depth,R2_z,-0.0363345375389581,0.13036316311391682,1000.0
+A0047_Open_nose.wrl,0,random,1,32,lateral_offset_of_hand_line,R2,-0.05171096236689854,-0.3393568676953935,1000.0
+A0047_Open_nose.wrl,0,random,1,32,lateral_offset_of_hand_line,R2_z,-0.05735398965368965,-0.3372689146179683,1000.0
+A0047_Open_nose.wrl,0,random,1,32,departure,AUROC,0.5968042142230027,,0.1
+A0047_Open_nose.wrl,0,random,2,32,relief_at_centre,R2,-2.255532793135646,0.43494994141783994,10.0
+A0047_Open_nose.wrl,0,random,2,32,relief_at_centre,R2_z,-0.010357703379308747,0.15634105037730361,1000.0
+A0047_Open_nose.wrl,0,random,2,32,curvature_at_centre,R2,-0.9820518653495665,0.04789196147759384,1000.0
+A0047_Open_nose.wrl,0,random,2,32,curvature_at_centre,R2_z,-0.018928412134002315,0.05111708740585259,1000.0
+A0047_Open_nose.wrl,0,random,2,32,geometric_depth,R2,-7.447066556857072,0.020633595337682924,100.0
+A0047_Open_nose.wrl,0,random,2,32,geometric_depth,R2_z,-0.14784392292223236,0.0758309445685219,1000.0
+A0047_Open_nose.wrl,0,random,2,32,lateral_offset_of_hand_line,R2,-0.1340590162731905,-0.32627565985127804,1000.0
+A0047_Open_nose.wrl,0,random,2,32,lateral_offset_of_hand_line,R2_z,-0.15199537601530166,-0.3240746418304094,1000.0
+A0047_Open_nose.wrl,0,random,2,32,departure,AUROC,0.5647410008779631,,0.1
+A0047_Open_nose.wrl,0,random,3,64,relief_at_centre,R2,-31.63492913905349,-0.2662322560072733,0.01
+A0047_Open_nose.wrl,0,random,3,64,relief_at_centre,R2_z,-0.16262205399080232,-0.08451551789627093,1000.0
+A0047_Open_nose.wrl,0,random,3,64,curvature_at_centre,R2,-0.5396206445689213,-0.03249602839172057,1000.0
+A0047_Open_nose.wrl,0,random,3,64,curvature_at_centre,R2_z,-0.1763074325136771,-0.15239466646771876,1000.0
+A0047_Open_nose.wrl,0,random,3,64,geometric_depth,R2,-14.413922006942373,0.043458708533728005,100.0
+A0047_Open_nose.wrl,0,random,3,64,geometric_depth,R2_z,-0.19652488209700314,0.08280140431924485,1000.0
+A0047_Open_nose.wrl,0,random,3,64,lateral_offset_of_hand_line,R2,-0.08397793872993642,-0.17937087259278725,1000.0
+A0047_Open_nose.wrl,0,random,3,64,lateral_offset_of_hand_line,R2_z,-0.10201271765011732,-0.17402658478619557,1000.0
+A0047_Open_nose.wrl,0,random,3,64,departure,AUROC,0.4559789288849868,,10.0
+A0047_Open_nose.wrl,0,random,4,64,relief_at_centre,R2,-7.208762809683382,0.40126499636185675,1000.0
+A0047_Open_nose.wrl,0,random,4,64,relief_at_centre,R2_z,-0.13375153142179563,0.042844701967819816,1000.0
+A0047_Open_nose.wrl,0,random,4,64,curvature_at_centre,R2,-0.3065857054659693,0.017884972997750097,1000.0
+A0047_Open_nose.wrl,0,random,4,64,curvature_at_centre,R2_z,-0.095226597668715,-0.06479186425795183,1000.0
+A0047_Open_nose.wrl,0,random,4,64,geometric_depth,R2,-4.924326833552042,0.06614538793077747,100.0
+A0047_Open_nose.wrl,0,random,4,64,geometric_depth,R2_z,-0.09201023606962067,0.12253068878614455,1000.0
+A0047_Open_nose.wrl,0,random,4,64,lateral_offset_of_hand_line,R2,-0.02653195473003822,0.08266867014568166,1000.0
+A0047_Open_nose.wrl,0,random,4,64,lateral_offset_of_hand_line,R2_z,-0.03794540801194546,0.08038361867222689,1000.0
+A0047_Open_nose.wrl,0,random,4,64,departure,AUROC,0.6492010535557506,,0.01
+A0047_Open_nose.wrl,0,random,5,128,relief_at_centre,R2,-1.296995184491311,0.514854084036029,1.0
+A0047_Open_nose.wrl,0,random,5,128,relief_at_centre,R2_z,-0.28357528144116295,0.33618679614006425,1000.0
+A0047_Open_nose.wrl,0,random,5,128,curvature_at_centre,R2,-0.20948039863874568,0.03498969706150155,1000.0
+A0047_Open_nose.wrl,0,random,5,128,curvature_at_centre,R2_z,-0.1789703623288541,-0.019401671804414364,1000.0
+A0047_Open_nose.wrl,0,random,5,128,geometric_depth,R2,-5.070167690690968,0.109220624019727,1000.0
+A0047_Open_nose.wrl,0,random,5,128,geometric_depth,R2_z,-0.3057576876224175,0.1021270466499062,1000.0
+A0047_Open_nose.wrl,0,random,5,128,lateral_offset_of_hand_line,R2,-0.10585933282206805,-0.16101193569974934,1000.0
+A0047_Open_nose.wrl,0,random,5,128,lateral_offset_of_hand_line,R2_z,-0.12163128930266875,-0.16088991413088702,1000.0
+A0047_Open_nose.wrl,0,random,5,128,departure,AUROC,0.5933625987708515,,0.01
+A0047_Open_nose.wrl,0,random,6,128,relief_at_centre,R2,-2.5272108356485568,0.529026335017965,10.0
+A0047_Open_nose.wrl,0,random,6,128,relief_at_centre,R2_z,-0.5735266261744667,-0.01634675199692239,1000.0
+A0047_Open_nose.wrl,0,random,6,128,curvature_at_centre,R2,-0.2829976667909384,0.17855332158644827,100.0
+A0047_Open_nose.wrl,0,random,6,128,curvature_at_centre,R2_z,-0.06475089653036226,0.012781461100283307,1000.0
+A0047_Open_nose.wrl,0,random,6,128,geometric_depth,R2,-1.9545646621744308,0.14504823867164598,0.01
+A0047_Open_nose.wrl,0,random,6,128,geometric_depth,R2_z,-0.10021789991623908,0.06261034484107265,1000.0
+A0047_Open_nose.wrl,0,random,6,128,lateral_offset_of_hand_line,R2,-0.08713081978059445,-0.11750741547656499,1000.0
+A0047_Open_nose.wrl,0,random,6,128,lateral_offset_of_hand_line,R2_z,-0.0994950544793527,-0.118316683214461,1000.0
+A0047_Open_nose.wrl,0,random,6,128,departure,AUROC,0.5070412642669008,,0.01
+HLT_Figurine_Open.wrl,0,trained,1,32,relief_at_centre,R2,-18.964932554219022,0.3336825305628385,100.0
+HLT_Figurine_Open.wrl,0,trained,1,32,relief_at_centre,R2_z,-1.8945557348711155,0.2911724957533957,1000.0
+HLT_Figurine_Open.wrl,0,trained,1,32,curvature_at_centre,R2,-1.6902368047869656,-0.06665781572096514,1000.0
+HLT_Figurine_Open.wrl,0,trained,1,32,curvature_at_centre,R2_z,-0.09618118500343775,-0.12389923805401756,1000.0
+HLT_Figurine_Open.wrl,0,trained,1,32,geometric_depth,R2,-9.050979036958264,0.02471127488651214,1000.0
+HLT_Figurine_Open.wrl,0,trained,1,32,geometric_depth,R2_z,-0.254042954086797,-0.12710633972841864,1000.0
+HLT_Figurine_Open.wrl,0,trained,1,32,lateral_offset_of_hand_line,R2,-0.13693498511521796,-0.3711548648658244,1000.0
+HLT_Figurine_Open.wrl,0,trained,1,32,lateral_offset_of_hand_line,R2_z,-0.16726938003710967,-0.3533167280310504,1000.0
+HLT_Figurine_Open.wrl,0,trained,1,32,departure,AUROC,0.48909550917141054,,10.0
+HLT_Figurine_Open.wrl,0,trained,2,32,relief_at_centre,R2,-3.371513517261091,0.6101285222130586,100.0
+HLT_Figurine_Open.wrl,0,trained,2,32,relief_at_centre,R2_z,-1.6885974507846035,0.017717383283345052,1000.0
+HLT_Figurine_Open.wrl,0,trained,2,32,curvature_at_centre,R2,-1.605134592137393,0.16465755806856144,1000.0
+HLT_Figurine_Open.wrl,0,trained,2,32,curvature_at_centre,R2_z,-0.09576280400089643,0.09890108139570376,1000.0
+HLT_Figurine_Open.wrl,0,trained,2,32,geometric_depth,R2,-9.629979815687323,-0.18567891182401022,1000.0
+HLT_Figurine_Open.wrl,0,trained,2,32,geometric_depth,R2_z,-0.09478219685056266,-0.413211167504811,1000.0
+HLT_Figurine_Open.wrl,0,trained,2,32,lateral_offset_of_hand_line,R2,-0.07893850253880297,-0.4224351910840836,1000.0
+HLT_Figurine_Open.wrl,0,trained,2,32,lateral_offset_of_hand_line,R2_z,-0.06308327733217367,-0.44289782886545026,1000.0
+HLT_Figurine_Open.wrl,0,trained,2,32,departure,AUROC,0.5558127767235925,,1.0
+HLT_Figurine_Open.wrl,0,trained,3,64,relief_at_centre,R2,-20.182858757080552,0.23119102290269766,1000.0
+HLT_Figurine_Open.wrl,0,trained,3,64,relief_at_centre,R2_z,-2.113839863636895,0.22144252649699947,1000.0
+HLT_Figurine_Open.wrl,0,trained,3,64,curvature_at_centre,R2,-1.6929135918431717,0.035499431954931576,1000.0
+HLT_Figurine_Open.wrl,0,trained,3,64,curvature_at_centre,R2_z,-0.04623837968128863,0.06125999926314084,1000.0
+HLT_Figurine_Open.wrl,0,trained,3,64,geometric_depth,R2,-11.267018344814979,-0.38956536846929424,1000.0
+HLT_Figurine_Open.wrl,0,trained,3,64,geometric_depth,R2_z,-0.17775230866527014,-0.41562328498037043,1000.0
+HLT_Figurine_Open.wrl,0,trained,3,64,lateral_offset_of_hand_line,R2,-0.1276321635077713,-0.2376404587129269,1000.0
+HLT_Figurine_Open.wrl,0,trained,3,64,lateral_offset_of_hand_line,R2_z,-0.10732231848303853,-0.2420207594396628,1000.0
+HLT_Figurine_Open.wrl,0,trained,3,64,departure,AUROC,0.5614294750158126,,1.0
+HLT_Figurine_Open.wrl,0,trained,4,64,relief_at_centre,R2,-16.208580578882565,0.6091684762545364,1000.0
+HLT_Figurine_Open.wrl,0,trained,4,64,relief_at_centre,R2_z,-4.554056442798278,0.5148504956297583,1000.0
+HLT_Figurine_Open.wrl,0,trained,4,64,curvature_at_centre,R2,-2.9832905607785514,-0.1433791731350627,10.0
+HLT_Figurine_Open.wrl,0,trained,4,64,curvature_at_centre,R2_z,-0.03244722112040521,0.048919111015534054,1000.0
+HLT_Figurine_Open.wrl,0,trained,4,64,geometric_depth,R2,-11.04478187576364,-0.006933835863601591,1000.0
+HLT_Figurine_Open.wrl,0,trained,4,64,geometric_depth,R2_z,-0.022301212112339597,-0.0040013155878920815,1000.0
+HLT_Figurine_Open.wrl,0,trained,4,64,lateral_offset_of_hand_line,R2,-0.10550850849796967,-0.2599142017980992,1000.0
+HLT_Figurine_Open.wrl,0,trained,4,64,lateral_offset_of_hand_line,R2_z,-0.0824432281694738,-0.2651066245078282,1000.0
+HLT_Figurine_Open.wrl,0,trained,4,64,departure,AUROC,0.5067678684376976,,10.0
+HLT_Figurine_Open.wrl,0,trained,5,128,relief_at_centre,R2,-6.931513873670516,0.46606375831075825,100.0
+HLT_Figurine_Open.wrl,0,trained,5,128,relief_at_centre,R2_z,-3.67596353455502,0.2973920407978029,1000.0
+HLT_Figurine_Open.wrl,0,trained,5,128,curvature_at_centre,R2,-2.7084854271552126,-0.1383255666388521,1000.0
+HLT_Figurine_Open.wrl,0,trained,5,128,curvature_at_centre,R2_z,-0.862515705833274,-0.15559459289428407,1000.0
+HLT_Figurine_Open.wrl,0,trained,5,128,geometric_depth,R2,-9.527580001135934,0.07191732887350205,1000.0
+HLT_Figurine_Open.wrl,0,trained,5,128,geometric_depth,R2_z,-0.2155584665541248,0.018756207538369835,1000.0
+HLT_Figurine_Open.wrl,0,trained,5,128,lateral_offset_of_hand_line,R2,-0.23065727045751006,-0.5544502923005595,1000.0
+HLT_Figurine_Open.wrl,0,trained,5,128,lateral_offset_of_hand_line,R2_z,-0.2248755586811566,-0.5693170440197993,1000.0
+HLT_Figurine_Open.wrl,0,trained,5,128,departure,AUROC,0.47981024667931693,,0.01
+HLT_Figurine_Open.wrl,0,trained,6,128,relief_at_centre,R2,-57.38477226552848,-0.5478411153077833,1000.0
+HLT_Figurine_Open.wrl,0,trained,6,128,relief_at_centre,R2_z,-1.4343656545012702,-0.19496328396768695,1000.0
+HLT_Figurine_Open.wrl,0,trained,6,128,curvature_at_centre,R2,-2.3561879269134507,0.02369843094818977,1000.0
+HLT_Figurine_Open.wrl,0,trained,6,128,curvature_at_centre,R2_z,-0.2097141637457014,0.13499311574311376,1000.0
+HLT_Figurine_Open.wrl,0,trained,6,128,geometric_depth,R2,-11.215437593871854,-0.2148500523359346,1000.0
+HLT_Figurine_Open.wrl,0,trained,6,128,geometric_depth,R2_z,-0.04850132097459392,-0.2792823913186746,1000.0
+HLT_Figurine_Open.wrl,0,trained,6,128,lateral_offset_of_hand_line,R2,-0.20161537299076682,-0.5228112689426675,1000.0
+HLT_Figurine_Open.wrl,0,trained,6,128,lateral_offset_of_hand_line,R2_z,-0.22496000700615237,-0.5119664333593845,1000.0
+HLT_Figurine_Open.wrl,0,trained,6,128,departure,AUROC,0.6275521821631878,,1.0
+HLT_Figurine_Open.wrl,0,random,1,32,relief_at_centre,R2,-19.38090202452064,0.07441132366042141,10.0
+HLT_Figurine_Open.wrl,0,random,1,32,relief_at_centre,R2_z,-2.9429628724794776,0.21288176385288624,100.0
+HLT_Figurine_Open.wrl,0,random,1,32,curvature_at_centre,R2,-1.754547348548173,-0.03430419038085997,1000.0
+HLT_Figurine_Open.wrl,0,random,1,32,curvature_at_centre,R2_z,-0.12527447439831318,-0.09281101053913984,1000.0
+HLT_Figurine_Open.wrl,0,random,1,32,geometric_depth,R2,-9.007124374035348,0.030914353290920658,1000.0
+HLT_Figurine_Open.wrl,0,random,1,32,geometric_depth,R2_z,-0.26921475742153644,-0.12701530399432073,1000.0
+HLT_Figurine_Open.wrl,0,random,1,32,lateral_offset_of_hand_line,R2,-0.10486240185573648,-0.2648186593656991,1000.0
+HLT_Figurine_Open.wrl,0,random,1,32,lateral_offset_of_hand_line,R2_z,-0.13176360996263692,-0.2530995729218508,1000.0
+HLT_Figurine_Open.wrl,0,random,1,32,departure,AUROC,0.5727008222643897,,10.0
+HLT_Figurine_Open.wrl,0,random,2,32,relief_at_centre,R2,-12.870629321213704,0.5057250260299181,1000.0
+HLT_Figurine_Open.wrl,0,random,2,32,relief_at_centre,R2_z,-2.3322758054466957,0.24528491558255283,1000.0
+HLT_Figurine_Open.wrl,0,random,2,32,curvature_at_centre,R2,-1.9090800658737002,-0.07362130870848091,1000.0
+HLT_Figurine_Open.wrl,0,random,2,32,curvature_at_centre,R2_z,-0.11640464337890366,-0.12031002158057316,1000.0
+HLT_Figurine_Open.wrl,0,random,2,32,geometric_depth,R2,-10.564002993646419,-0.5025290049730862,1000.0
+HLT_Figurine_Open.wrl,0,random,2,32,geometric_depth,R2_z,-0.1359360930713751,-0.5162106107209006,1000.0
+HLT_Figurine_Open.wrl,0,random,2,32,lateral_offset_of_hand_line,R2,-0.17225183503565944,-0.25355943028738975,1000.0
+HLT_Figurine_Open.wrl,0,random,2,32,lateral_offset_of_hand_line,R2_z,-0.13303549612384002,-0.2570462742017409,1000.0
+HLT_Figurine_Open.wrl,0,random,2,32,departure,AUROC,0.7161290322580645,,1.0
+HLT_Figurine_Open.wrl,0,random,3,64,relief_at_centre,R2,-24.39313197403395,0.2222114864980266,1000.0
+HLT_Figurine_Open.wrl,0,random,3,64,relief_at_centre,R2_z,-1.9355666283837962,0.09034807503011583,1000.0
+HLT_Figurine_Open.wrl,0,random,3,64,curvature_at_centre,R2,-1.4073175505562179,-0.010046853604677016,100.0
+HLT_Figurine_Open.wrl,0,random,3,64,curvature_at_centre,R2_z,-0.10636747751774167,-0.08416921890343096,1000.0
+HLT_Figurine_Open.wrl,0,random,3,64,geometric_depth,R2,-11.289269464440578,-0.15812397265792225,1000.0
+HLT_Figurine_Open.wrl,0,random,3,64,geometric_depth,R2_z,-1.198769701637814,-0.3189015066831031,100.0
+HLT_Figurine_Open.wrl,0,random,3,64,lateral_offset_of_hand_line,R2,-0.0563966147888737,-0.27024356071755246,1000.0
+HLT_Figurine_Open.wrl,0,random,3,64,lateral_offset_of_hand_line,R2_z,-0.0570266674471791,-0.27243302663519187,1000.0
+HLT_Figurine_Open.wrl,0,random,3,64,departure,AUROC,0.3604174573055029,,0.01
+HLT_Figurine_Open.wrl,0,random,4,64,relief_at_centre,R2,-50.31659543693638,-0.3974117886309424,1000.0
+HLT_Figurine_Open.wrl,0,random,4,64,relief_at_centre,R2_z,-0.4899469025701815,-0.19497403659119186,1000.0
+HLT_Figurine_Open.wrl,0,random,4,64,curvature_at_centre,R2,-1.3831950248342935,-0.010456695318860964,1000.0
+HLT_Figurine_Open.wrl,0,random,4,64,curvature_at_centre,R2_z,-0.01627721250444769,-0.006787127922489227,1000.0
+HLT_Figurine_Open.wrl,0,random,4,64,geometric_depth,R2,-12.886353302062187,-0.3274667832658789,1000.0
+HLT_Figurine_Open.wrl,0,random,4,64,geometric_depth,R2_z,-0.6051727741135111,-0.3574191455509753,1000.0
+HLT_Figurine_Open.wrl,0,random,4,64,lateral_offset_of_hand_line,R2,-0.08390819275718409,-0.12758569277203666,1000.0
+HLT_Figurine_Open.wrl,0,random,4,64,lateral_offset_of_hand_line,R2_z,-0.09120862989430623,-0.12530624459563514,1000.0
+HLT_Figurine_Open.wrl,0,random,4,64,departure,AUROC,0.4860847564832384,,10.0
+HLT_Figurine_Open.wrl,0,random,5,128,relief_at_centre,R2,-11.94952433184008,0.6498105960606101,1000.0
+HLT_Figurine_Open.wrl,0,random,5,128,relief_at_centre,R2_z,-3.747314074334783,0.3684416478517215,10.0
+HLT_Figurine_Open.wrl,0,random,5,128,curvature_at_centre,R2,-1.9814997026876786,-0.13692635673643397,1000.0
+HLT_Figurine_Open.wrl,0,random,5,128,curvature_at_centre,R2_z,-0.34091870159663484,-0.13685960472593145,1000.0
+HLT_Figurine_Open.wrl,0,random,5,128,geometric_depth,R2,-6.021820664359834,0.33346540958830173,1000.0
+HLT_Figurine_Open.wrl,0,random,5,128,geometric_depth,R2_z,-2.244631915885229,0.29949197218063117,1000.0
+HLT_Figurine_Open.wrl,0,random,5,128,lateral_offset_of_hand_line,R2,-1.1114720110922063,-0.41564491095759576,1000.0
+HLT_Figurine_Open.wrl,0,random,5,128,lateral_offset_of_hand_line,R2_z,-1.039751623690237,-0.40832080492770667,1000.0
+HLT_Figurine_Open.wrl,0,random,5,128,departure,AUROC,0.36497153700189755,,0.01
+HLT_Figurine_Open.wrl,0,random,6,128,relief_at_centre,R2,-43.48158369479246,-0.22378255903243477,1000.0
+HLT_Figurine_Open.wrl,0,random,6,128,relief_at_centre,R2_z,-1.3859836774496266,-0.240875339376145,1000.0
+HLT_Figurine_Open.wrl,0,random,6,128,curvature_at_centre,R2,-1.1193123243791585,-0.3636719971359161,100.0
+HLT_Figurine_Open.wrl,0,random,6,128,curvature_at_centre,R2_z,-0.7266856918882689,-0.16678756568883213,1000.0
+HLT_Figurine_Open.wrl,0,random,6,128,geometric_depth,R2,-17.05712057221363,-0.3199202285639543,1000.0
+HLT_Figurine_Open.wrl,0,random,6,128,geometric_depth,R2_z,-2.5092899236146855,-0.3022225488561356,1000.0
+HLT_Figurine_Open.wrl,0,random,6,128,lateral_offset_of_hand_line,R2,-0.6230436451213597,-0.2538021528014652,1000.0
+HLT_Figurine_Open.wrl,0,random,6,128,lateral_offset_of_hand_line,R2_z,-0.5568156147182193,-0.2533131399305336,1000.0
+HLT_Figurine_Open.wrl,0,random,6,128,departure,AUROC,0.45763440860215054,,0.01
+NEGII_Frida open full front.wrl,0,trained,1,32,relief_at_centre,R2,-4.670755774085511,-0.5957500450765674,10.0
+NEGII_Frida open full front.wrl,0,trained,1,32,relief_at_centre,R2_z,-0.4716917115792225,-0.37360613714895385,1000.0
+NEGII_Frida open full front.wrl,0,trained,1,32,curvature_at_centre,R2,-14.106926609006313,-0.22076716383543238,1000.0
+NEGII_Frida open full front.wrl,0,trained,1,32,curvature_at_centre,R2_z,-0.12405968701178427,-0.2308247129659662,1000.0
+NEGII_Frida open full front.wrl,0,trained,1,32,geometric_depth,R2,-470.4674179334223,0.023668242217508892,10.0
+NEGII_Frida open full front.wrl,0,trained,1,32,geometric_depth,R2_z,-6.409873929589784,0.08621218632083356,1000.0
+NEGII_Frida open full front.wrl,0,trained,1,32,lateral_offset_of_hand_line,R2,-0.2302902510034015,-0.07555506279640921,1000.0
+NEGII_Frida open full front.wrl,0,trained,1,32,lateral_offset_of_hand_line,R2_z,-0.2323006050295331,-0.07362197032427276,1000.0
+NEGII_Frida open full front.wrl,0,trained,1,32,departure,AUROC,0.46504451038575667,,10.0
+NEGII_Frida open full front.wrl,0,trained,2,32,relief_at_centre,R2,-12.821415049622814,-0.8474344482822126,100.0
+NEGII_Frida open full front.wrl,0,trained,2,32,relief_at_centre,R2_z,-0.24146163841956692,-0.1401405711847671,1000.0
+NEGII_Frida open full front.wrl,0,trained,2,32,curvature_at_centre,R2,-2.996881648842765,-0.23896608658361285,1000.0
+NEGII_Frida open full front.wrl,0,trained,2,32,curvature_at_centre,R2_z,-1.2993176873470134,-0.14880650372852017,1000.0
+NEGII_Frida open full front.wrl,0,trained,2,32,geometric_depth,R2,-194.50678400573335,0.08468419076793056,1000.0
+NEGII_Frida open full front.wrl,0,trained,2,32,geometric_depth,R2_z,-43.02228777766333,0.077318458710657,1000.0
+NEGII_Frida open full front.wrl,0,trained,2,32,lateral_offset_of_hand_line,R2,-27.281103759451305,-0.027189312217720057,1000.0
+NEGII_Frida open full front.wrl,0,trained,2,32,lateral_offset_of_hand_line,R2_z,-27.377858439761745,-0.027067734299619915,1000.0
+NEGII_Frida open full front.wrl,0,trained,2,32,departure,AUROC,0.3702202092769014,,10.0
+NEGII_Frida open full front.wrl,0,trained,3,64,relief_at_centre,R2,-1.3093572990575062,0.8659765770698712,100.0
+NEGII_Frida open full front.wrl,0,trained,3,64,relief_at_centre,R2_z,-0.35787168059892727,0.4139395627288557,1000.0
+NEGII_Frida open full front.wrl,0,trained,3,64,curvature_at_centre,R2,-2.805980358186284,-0.2561840072174649,1000.0
+NEGII_Frida open full front.wrl,0,trained,3,64,curvature_at_centre,R2_z,-0.4734149453934804,0.02895918105944849,1000.0
+NEGII_Frida open full front.wrl,0,trained,3,64,geometric_depth,R2,-17.02097679677864,0.07501925766433436,1000.0
+NEGII_Frida open full front.wrl,0,trained,3,64,geometric_depth,R2_z,-13.975281556928993,0.060542892406826095,1000.0
+NEGII_Frida open full front.wrl,0,trained,3,64,lateral_offset_of_hand_line,R2,-0.6415116287890568,-0.045386408070272256,1000.0
+NEGII_Frida open full front.wrl,0,trained,3,64,lateral_offset_of_hand_line,R2_z,-0.6047346869237178,-0.046633610543169036,1000.0
+NEGII_Frida open full front.wrl,0,trained,3,64,departure,AUROC,0.5236920193659222,,10.0
+NEGII_Frida open full front.wrl,0,trained,4,64,relief_at_centre,R2,-8.05138182311784,-0.8193281110129973,10.0
+NEGII_Frida open full front.wrl,0,trained,4,64,relief_at_centre,R2_z,-2.7333323511957244,-0.9132887832424771,1000.0
+NEGII_Frida open full front.wrl,0,trained,4,64,curvature_at_centre,R2,-4.841292065304985,-0.22968276444592747,1000.0
+NEGII_Frida open full front.wrl,0,trained,4,64,curvature_at_centre,R2_z,-1.5898769017713041,-0.12537587325085278,1000.0
+NEGII_Frida open full front.wrl,0,trained,4,64,geometric_depth,R2,-15.975391248467975,0.01600216658027036,1000.0
+NEGII_Frida open full front.wrl,0,trained,4,64,geometric_depth,R2_z,-7.313550381725312,0.07016360837142988,1000.0
+NEGII_Frida open full front.wrl,0,trained,4,64,lateral_offset_of_hand_line,R2,-5.018760502050653,-0.06604121863010241,1000.0
+NEGII_Frida open full front.wrl,0,trained,4,64,lateral_offset_of_hand_line,R2_z,-4.899185419132255,-0.06681204966523117,1000.0
+NEGII_Frida open full front.wrl,0,trained,4,64,departure,AUROC,0.31999375292831483,,1.0
+NEGII_Frida open full front.wrl,0,trained,5,128,relief_at_centre,R2,-4.621324223995837,-0.6278654139209617,10.0
+NEGII_Frida open full front.wrl,0,trained,5,128,relief_at_centre,R2_z,-4.664815128157911,-0.9037866246197722,1000.0
+NEGII_Frida open full front.wrl,0,trained,5,128,curvature_at_centre,R2,-2.7028473939867705,-0.23440447932240654,1000.0
+NEGII_Frida open full front.wrl,0,trained,5,128,curvature_at_centre,R2_z,-0.5526156749958611,-0.08034045374677065,1000.0
+NEGII_Frida open full front.wrl,0,trained,5,128,geometric_depth,R2,-5.3845887285365555,0.06739640345627936,1000.0
+NEGII_Frida open full front.wrl,0,trained,5,128,geometric_depth,R2_z,-7.131028207717847,0.08505388606069346,1000.0
+NEGII_Frida open full front.wrl,0,trained,5,128,lateral_offset_of_hand_line,R2,-5.1299668318815925,-0.07570118981226648,1000.0
+NEGII_Frida open full front.wrl,0,trained,5,128,lateral_offset_of_hand_line,R2_z,-5.069496336313284,-0.07593631476208382,1000.0
+NEGII_Frida open full front.wrl,0,trained,5,128,departure,AUROC,0.3464438544432297,,10.0
+NEGII_Frida open full front.wrl,0,trained,6,128,relief_at_centre,R2,-7.2684540640592985,-0.7017370617185384,0.1
+NEGII_Frida open full front.wrl,0,trained,6,128,relief_at_centre,R2_z,-0.7485156146114111,-0.30435286500330355,1000.0
+NEGII_Frida open full front.wrl,0,trained,6,128,curvature_at_centre,R2,-2.3556327331753297,-0.22232540642693666,1000.0
+NEGII_Frida open full front.wrl,0,trained,6,128,curvature_at_centre,R2_z,-1.1563563042986673,-0.14498331907615047,1000.0
+NEGII_Frida open full front.wrl,0,trained,6,128,geometric_depth,R2,-5.192084574724967,0.15022858142598192,1000.0
+NEGII_Frida open full front.wrl,0,trained,6,128,geometric_depth,R2_z,-0.6006654243919982,0.12157135297427651,1000.0
+NEGII_Frida open full front.wrl,0,trained,6,128,lateral_offset_of_hand_line,R2,-2.142736855624223,-0.07298783473000332,1000.0
+NEGII_Frida open full front.wrl,0,trained,6,128,lateral_offset_of_hand_line,R2_z,-2.1449137086200345,-0.07404554388083007,1000.0
+NEGII_Frida open full front.wrl,0,trained,6,128,departure,AUROC,0.3354677494924254,,10.0
+NEGII_Frida open full front.wrl,0,random,1,32,relief_at_centre,R2,-6.202833624426164,-0.8282044517262419,1.0
+NEGII_Frida open full front.wrl,0,random,1,32,relief_at_centre,R2_z,-0.7504177162092067,-0.6383963441810513,1000.0
+NEGII_Frida open full front.wrl,0,random,1,32,curvature_at_centre,R2,-12.666230570506,-0.21706433396583222,1000.0
+NEGII_Frida open full front.wrl,0,random,1,32,curvature_at_centre,R2_z,-0.13723938677433845,-0.14658388542802347,1000.0
+NEGII_Frida open full front.wrl,0,random,1,32,geometric_depth,R2,-574.7019329269053,0.05582954856791428,1.0
+NEGII_Frida open full front.wrl,0,random,1,32,geometric_depth,R2_z,-8.564104681876046,0.10283443813924739,1000.0
+NEGII_Frida open full front.wrl,0,random,1,32,lateral_offset_of_hand_line,R2,-0.18379456439970188,-0.07509972852120515,1000.0
+NEGII_Frida open full front.wrl,0,random,1,32,lateral_offset_of_hand_line,R2_z,-0.17334102297470433,-0.0742300144969133,1000.0
+NEGII_Frida open full front.wrl,0,random,1,32,departure,AUROC,0.5205622364516633,,10.0
+NEGII_Frida open full front.wrl,0,random,2,32,relief_at_centre,R2,-1.1622097350707485,0.885025883990783,100.0
+NEGII_Frida open full front.wrl,0,random,2,32,relief_at_centre,R2_z,-15.591926244226105,-0.8921523142100648,1000.0
+NEGII_Frida open full front.wrl,0,random,2,32,curvature_at_centre,R2,-54.13945808045636,-0.19457079873933866,1000.0
+NEGII_Frida open full front.wrl,0,random,2,32,curvature_at_centre,R2_z,-5.181005282808917,-0.16563010569971878,1000.0
+NEGII_Frida open full front.wrl,0,random,2,32,geometric_depth,R2,-48.61138693016199,0.04537763011595695,1000.0
+NEGII_Frida open full front.wrl,0,random,2,32,geometric_depth,R2_z,-104.19745015637231,0.07542976112232228,1000.0
+NEGII_Frida open full front.wrl,0,random,2,32,lateral_offset_of_hand_line,R2,-0.6390013514021422,-0.06403530953708249,1000.0
+NEGII_Frida open full front.wrl,0,random,2,32,lateral_offset_of_hand_line,R2_z,-0.8036169027961888,-0.06286896391606248,1000.0
+NEGII_Frida open full front.wrl,0,random,2,32,departure,AUROC,0.344001249414337,,10.0
+NEGII_Frida open full front.wrl,0,random,3,64,relief_at_centre,R2,-0.5152556587337696,0.7941635054313761,10.0
+NEGII_Frida open full front.wrl,0,random,3,64,relief_at_centre,R2_z,-1.750071864356832,-0.48035955256050156,1000.0
+NEGII_Frida open full front.wrl,0,random,3,64,curvature_at_centre,R2,-16.285960505734113,-0.21087648641442558,1000.0
+NEGII_Frida open full front.wrl,0,random,3,64,curvature_at_centre,R2_z,-0.738107531507725,0.02688090635695929,1000.0
+NEGII_Frida open full front.wrl,0,random,3,64,geometric_depth,R2,-141.87537848981705,0.0792215815828825,10.0
+NEGII_Frida open full front.wrl,0,random,3,64,geometric_depth,R2_z,-59.29827161429158,0.08423458243116083,1000.0
+NEGII_Frida open full front.wrl,0,random,3,64,lateral_offset_of_hand_line,R2,-2.644660397809487,-0.07627630823810401,1000.0
+NEGII_Frida open full front.wrl,0,random,3,64,lateral_offset_of_hand_line,R2_z,-2.4048608813173775,-0.07741775384017086,1000.0
+NEGII_Frida open full front.wrl,0,random,3,64,departure,AUROC,0.5949773543651413,,10.0
+NEGII_Frida open full front.wrl,0,random,4,64,relief_at_centre,R2,0.3115238103513489,0.8921148572768812,0.01
+NEGII_Frida open full front.wrl,0,random,4,64,relief_at_centre,R2_z,-0.6808512887217473,-0.3915203578418859,1000.0
+NEGII_Frida open full front.wrl,0,random,4,64,curvature_at_centre,R2,-24.09463578501204,-0.14171297678941183,1000.0
+NEGII_Frida open full front.wrl,0,random,4,64,curvature_at_centre,R2_z,-2.8351523077572125,-0.06425376470183775,1000.0
+NEGII_Frida open full front.wrl,0,random,4,64,geometric_depth,R2,-529.7794272504203,0.06868652910508867,0.01
+NEGII_Frida open full front.wrl,0,random,4,64,geometric_depth,R2_z,-82.96509383754267,0.08987916278357089,1000.0
+NEGII_Frida open full front.wrl,0,random,4,64,lateral_offset_of_hand_line,R2,-2.8090239806347435,-0.0324056634812246,1000.0
+NEGII_Frida open full front.wrl,0,random,4,64,lateral_offset_of_hand_line,R2_z,-2.3268144027711295,-0.03481573187207007,1000.0
+NEGII_Frida open full front.wrl,0,random,4,64,departure,AUROC,0.49212556614087144,,10.0
+NEGII_Frida open full front.wrl,0,random,5,128,relief_at_centre,R2,-1.3707470553626306,0.3729660151693369,0.01
+NEGII_Frida open full front.wrl,0,random,5,128,relief_at_centre,R2_z,-2.6045807228897964,-0.48527549366454875,1000.0
+NEGII_Frida open full front.wrl,0,random,5,128,curvature_at_centre,R2,-128.73490007477744,-0.18378607265082583,1000.0
+NEGII_Frida open full front.wrl,0,random,5,128,curvature_at_centre,R2_z,-22.473345992365324,-0.16444505291832012,1000.0
+NEGII_Frida open full front.wrl,0,random,5,128,geometric_depth,R2,-125.68066620085771,0.15224297367687717,10.0
+NEGII_Frida open full front.wrl,0,random,5,128,geometric_depth,R2_z,-176.12837723199215,0.10318888615542433,1000.0
+NEGII_Frida open full front.wrl,0,random,5,128,lateral_offset_of_hand_line,R2,-2.441453607520884,-0.08395322359040083,1000.0
+NEGII_Frida open full front.wrl,0,random,5,128,lateral_offset_of_hand_line,R2_z,-2.3084817225712246,-0.08386768871562474,1000.0
+NEGII_Frida open full front.wrl,0,random,5,128,departure,AUROC,0.35610807434015307,,10.0
+NEGII_Frida open full front.wrl,0,random,6,128,relief_at_centre,R2,0.3835298283263039,0.9009100378000322,0.01
+NEGII_Frida open full front.wrl,0,random,6,128,relief_at_centre,R2_z,-8.465043772412402,-0.8538783107314138,1000.0
+NEGII_Frida open full front.wrl,0,random,6,128,curvature_at_centre,R2,-29.319702578158637,-0.17100866786756277,1000.0
+NEGII_Frida open full front.wrl,0,random,6,128,curvature_at_centre,R2_z,-0.7135454998473203,0.07547614746719697,1000.0
+NEGII_Frida open full front.wrl,0,random,6,128,geometric_depth,R2,-227.13807838952835,0.1327036809482601,0.01
+NEGII_Frida open full front.wrl,0,random,6,128,geometric_depth,R2_z,-178.72360786568154,0.10437678407308235,1000.0
+NEGII_Frida open full front.wrl,0,random,6,128,lateral_offset_of_hand_line,R2,-15.790081137871411,0.01510282110283594,1000.0
+NEGII_Frida open full front.wrl,0,random,6,128,lateral_offset_of_hand_line,R2_z,-13.918679790733998,0.0156988601145792,1000.0
+NEGII_Frida open full front.wrl,0,random,6,128,departure,AUROC,0.37081992815867565,,0.1
+A0047_Open_nose.wrl,1,trained,1,32,relief_at_centre,R2,-8.689490830442448,0.5678530838048769,10.0
+A0047_Open_nose.wrl,1,trained,1,32,relief_at_centre,R2_z,-0.08008986130849371,0.06978410932304134,1000.0
+A0047_Open_nose.wrl,1,trained,1,32,curvature_at_centre,R2,-1.8229155971010953,0.014714404885566985,1000.0
+A0047_Open_nose.wrl,1,trained,1,32,curvature_at_centre,R2_z,-0.13705840757332544,0.010457681570599063,1000.0
+A0047_Open_nose.wrl,1,trained,1,32,geometric_depth,R2,-11.226838295936869,0.10033238545000535,100.0
+A0047_Open_nose.wrl,1,trained,1,32,geometric_depth,R2_z,-0.11891105832437843,0.2454139588307372,1000.0
+A0047_Open_nose.wrl,1,trained,1,32,lateral_offset_of_hand_line,R2,-0.03280477994234454,-0.20403091783768076,1000.0
+A0047_Open_nose.wrl,1,trained,1,32,lateral_offset_of_hand_line,R2_z,-0.024898183896188808,-0.20252417887735508,1000.0
+A0047_Open_nose.wrl,1,trained,1,32,departure,AUROC,0.5245654082528534,,0.1
+A0047_Open_nose.wrl,1,trained,2,32,relief_at_centre,R2,-5.939276399362227,0.652004698949226,1.0
+A0047_Open_nose.wrl,1,trained,2,32,relief_at_centre,R2_z,-0.9472962481128548,-0.5370484335467635,1000.0
+A0047_Open_nose.wrl,1,trained,2,32,curvature_at_centre,R2,-1.2014980179916948,0.03032097321383685,100.0
+A0047_Open_nose.wrl,1,trained,2,32,curvature_at_centre,R2_z,-0.018560039678019447,0.010531376144881846,1000.0
+A0047_Open_nose.wrl,1,trained,2,32,geometric_depth,R2,-3.4584404956703754,0.13160449590641157,10.0
+A0047_Open_nose.wrl,1,trained,2,32,geometric_depth,R2_z,-0.1533580062644151,0.25431635949318854,1000.0
+A0047_Open_nose.wrl,1,trained,2,32,lateral_offset_of_hand_line,R2,-0.09045796347812751,-0.1810943430358421,1000.0
+A0047_Open_nose.wrl,1,trained,2,32,lateral_offset_of_hand_line,R2_z,-0.07621756575436867,-0.18067409131737308,1000.0
+A0047_Open_nose.wrl,1,trained,2,32,departure,AUROC,0.5164179104477612,,1.0
+A0047_Open_nose.wrl,1,trained,3,64,relief_at_centre,R2,-3.8492508369957097,0.6547591961099134,1.0
+A0047_Open_nose.wrl,1,trained,3,64,relief_at_centre,R2_z,-0.14042340831859002,-0.13836341314490716,1000.0
+A0047_Open_nose.wrl,1,trained,3,64,curvature_at_centre,R2,-2.202879080076227,0.02694922913898799,100.0
+A0047_Open_nose.wrl,1,trained,3,64,curvature_at_centre,R2_z,-0.08378404342292489,0.19662928583272457,1000.0
+A0047_Open_nose.wrl,1,trained,3,64,geometric_depth,R2,-4.0899124363887776,0.21167346365148176,1.0
+A0047_Open_nose.wrl,1,trained,3,64,geometric_depth,R2_z,-0.02090498047874334,0.26284787221345224,1000.0
+A0047_Open_nose.wrl,1,trained,3,64,lateral_offset_of_hand_line,R2,-0.27182187190112717,-0.14089979404170197,1000.0
+A0047_Open_nose.wrl,1,trained,3,64,lateral_offset_of_hand_line,R2_z,-0.2397418336504129,-0.14094172512822503,1000.0
+A0047_Open_nose.wrl,1,trained,3,64,departure,AUROC,0.5791747146619842,,0.1
+A0047_Open_nose.wrl,1,trained,4,64,relief_at_centre,R2,-4.8217737326254735,0.6363645273119557,1.0
+A0047_Open_nose.wrl,1,trained,4,64,relief_at_centre,R2_z,-0.13183589492082448,-0.03734103260009826,1000.0
+A0047_Open_nose.wrl,1,trained,4,64,curvature_at_centre,R2,-0.956375300280786,0.11027462010389763,1000.0
+A0047_Open_nose.wrl,1,trained,4,64,curvature_at_centre,R2_z,-0.008820069366519911,0.09142817239234696,1000.0
+A0047_Open_nose.wrl,1,trained,4,64,geometric_depth,R2,-5.122215069429321,0.23533888453431204,10.0
+A0047_Open_nose.wrl,1,trained,4,64,geometric_depth,R2_z,-0.014077098488789463,0.2892481172950568,1000.0
+A0047_Open_nose.wrl,1,trained,4,64,lateral_offset_of_hand_line,R2,-0.19839178783877598,0.03892307032870265,1000.0
+A0047_Open_nose.wrl,1,trained,4,64,lateral_offset_of_hand_line,R2_z,-0.17126246789865363,0.03907196356342356,1000.0
+A0047_Open_nose.wrl,1,trained,4,64,departure,AUROC,0.535206321334504,,0.01
+A0047_Open_nose.wrl,1,trained,5,128,relief_at_centre,R2,-18.474534176817404,0.3532693446258107,100.0
+A0047_Open_nose.wrl,1,trained,5,128,relief_at_centre,R2_z,-0.603281219911781,-0.4671031879606987,1000.0
+A0047_Open_nose.wrl,1,trained,5,128,curvature_at_centre,R2,-1.2507055992776834,0.15430231239564995,1000.0
+A0047_Open_nose.wrl,1,trained,5,128,curvature_at_centre,R2_z,-0.09421573418523677,0.03832754563400936,1000.0
+A0047_Open_nose.wrl,1,trained,5,128,geometric_depth,R2,-3.8395832711037468,0.10459186921768071,10.0
+A0047_Open_nose.wrl,1,trained,5,128,geometric_depth,R2_z,0.001411742466879029,0.2631118385319087,1000.0
+A0047_Open_nose.wrl,1,trained,5,128,lateral_offset_of_hand_line,R2,-0.6728240201910274,-0.0393454950665045,1000.0
+A0047_Open_nose.wrl,1,trained,5,128,lateral_offset_of_hand_line,R2_z,-0.6292956883751661,-0.039251283144135056,1000.0
+A0047_Open_nose.wrl,1,trained,5,128,departure,AUROC,0.4987181738366988,,0.01
+A0047_Open_nose.wrl,1,trained,6,128,relief_at_centre,R2,-12.541982489013296,-0.4271090313725281,1.0
+A0047_Open_nose.wrl,1,trained,6,128,relief_at_centre,R2_z,-0.03884902990632422,-0.0543398747013571,1000.0
+A0047_Open_nose.wrl,1,trained,6,128,curvature_at_centre,R2,-1.0408010278426456,0.294454756856979,1000.0
+A0047_Open_nose.wrl,1,trained,6,128,curvature_at_centre,R2_z,-0.019070101635711767,0.060424654265025975,1000.0
+A0047_Open_nose.wrl,1,trained,6,128,geometric_depth,R2,-9.072985294597999,-0.11564384445810713,1.0
+A0047_Open_nose.wrl,1,trained,6,128,geometric_depth,R2_z,-0.015047326512432013,0.18568833657013084,1000.0
+A0047_Open_nose.wrl,1,trained,6,128,lateral_offset_of_hand_line,R2,-0.4385621531593946,0.04684903031545815,1000.0
+A0047_Open_nose.wrl,1,trained,6,128,lateral_offset_of_hand_line,R2_z,-0.3977729072477145,0.04706588551567122,1000.0
+A0047_Open_nose.wrl,1,trained,6,128,departure,AUROC,0.42366988586479365,,10.0
+A0047_Open_nose.wrl,1,random,1,32,relief_at_centre,R2,-3.8169127168983072,-0.3565338590936424,10.0
+A0047_Open_nose.wrl,1,random,1,32,relief_at_centre,R2_z,-0.21854556733671715,-0.11752296421082718,1000.0
+A0047_Open_nose.wrl,1,random,1,32,curvature_at_centre,R2,-1.4984919538166208,0.03138620048796173,1000.0
+A0047_Open_nose.wrl,1,random,1,32,curvature_at_centre,R2_z,-0.11826940980279499,0.027939797342846392,1000.0
+A0047_Open_nose.wrl,1,random,1,32,geometric_depth,R2,-2.1853185639315558,-0.0232679118493991,10.0
+A0047_Open_nose.wrl,1,random,1,32,geometric_depth,R2_z,-0.09587961281815405,0.21502816986205672,1000.0
+A0047_Open_nose.wrl,1,random,1,32,lateral_offset_of_hand_line,R2,-0.04108509194944299,-0.21917807850692428,1000.0
+A0047_Open_nose.wrl,1,random,1,32,lateral_offset_of_hand_line,R2_z,-0.03406300401763729,-0.2179319957987122,1000.0
+A0047_Open_nose.wrl,1,random,1,32,departure,AUROC,0.6081123792800702,,0.01
+A0047_Open_nose.wrl,1,random,2,32,relief_at_centre,R2,-1.9185345028335057,0.5538405340014191,10.0
+A0047_Open_nose.wrl,1,random,2,32,relief_at_centre,R2_z,-0.3470066248407815,-0.19708531609530713,1000.0
+A0047_Open_nose.wrl,1,random,2,32,curvature_at_centre,R2,-0.9683899164698073,0.15168280118344146,100.0
+A0047_Open_nose.wrl,1,random,2,32,curvature_at_centre,R2_z,-0.1136077837395999,0.13767577473433418,1000.0
+A0047_Open_nose.wrl,1,random,2,32,geometric_depth,R2,-9.186117519933612,0.023556853036904125,100.0
+A0047_Open_nose.wrl,1,random,2,32,geometric_depth,R2_z,-0.4225946199865678,0.08715532881842002,1000.0
+A0047_Open_nose.wrl,1,random,2,32,lateral_offset_of_hand_line,R2,-0.04535646557281803,-0.14384849654446016,1000.0
+A0047_Open_nose.wrl,1,random,2,32,lateral_offset_of_hand_line,R2_z,-0.04906190731867066,-0.14284979574844128,1000.0
+A0047_Open_nose.wrl,1,random,2,32,departure,AUROC,0.5078841088674275,,0.1
+A0047_Open_nose.wrl,1,random,3,64,relief_at_centre,R2,-1.5616394113745207,0.3861567458092089,100.0
+A0047_Open_nose.wrl,1,random,3,64,relief_at_centre,R2_z,-0.7628169108400749,-0.43648267018161707,1000.0
+A0047_Open_nose.wrl,1,random,3,64,curvature_at_centre,R2,-0.33585682707005593,0.07828692530168523,100.0
+A0047_Open_nose.wrl,1,random,3,64,curvature_at_centre,R2_z,-0.169576962886947,0.09241683545921102,1000.0
+A0047_Open_nose.wrl,1,random,3,64,geometric_depth,R2,-6.072166871422151,0.12229157666362461,100.0
+A0047_Open_nose.wrl,1,random,3,64,geometric_depth,R2_z,-0.4053483966335081,0.12466063689819136,1000.0
+A0047_Open_nose.wrl,1,random,3,64,lateral_offset_of_hand_line,R2,-0.08168067415644309,-0.10616099784041393,1000.0
+A0047_Open_nose.wrl,1,random,3,64,lateral_offset_of_hand_line,R2_z,-0.07427471459239898,-0.10498515652127441,1000.0
+A0047_Open_nose.wrl,1,random,3,64,departure,AUROC,0.6018612818261633,,0.01
+A0047_Open_nose.wrl,1,random,4,64,relief_at_centre,R2,-2.3918491072789996,0.3638827763491864,0.1
+A0047_Open_nose.wrl,1,random,4,64,relief_at_centre,R2_z,-0.476079058397636,-0.4006847433652437,1000.0
+A0047_Open_nose.wrl,1,random,4,64,curvature_at_centre,R2,-0.7231831128927382,0.11481434932528839,100.0
+A0047_Open_nose.wrl,1,random,4,64,curvature_at_centre,R2_z,-0.2269324392124239,0.12519339670161772,1000.0
+A0047_Open_nose.wrl,1,random,4,64,geometric_depth,R2,-5.506277034601512,0.08390656719002759,1.0
+A0047_Open_nose.wrl,1,random,4,64,geometric_depth,R2_z,-0.5794033005518984,0.10878921482288552,1000.0
+A0047_Open_nose.wrl,1,random,4,64,lateral_offset_of_hand_line,R2,-0.009476183856528486,0.06550480038894449,1000.0
+A0047_Open_nose.wrl,1,random,4,64,lateral_offset_of_hand_line,R2_z,-0.007232938817379964,0.06708722794797503,1000.0
+A0047_Open_nose.wrl,1,random,4,64,departure,AUROC,0.5306409130816506,,10.0
+A0047_Open_nose.wrl,1,random,5,128,relief_at_centre,R2,-4.805444619003344,0.3974022057551114,0.01
+A0047_Open_nose.wrl,1,random,5,128,relief_at_centre,R2_z,-0.8437510719879837,-0.5031897153729299,1000.0
+A0047_Open_nose.wrl,1,random,5,128,curvature_at_centre,R2,-0.5342560110578325,0.0363202599199118,100.0
+A0047_Open_nose.wrl,1,random,5,128,curvature_at_centre,R2_z,-0.11851510843160096,0.033637583008808696,1000.0
+A0047_Open_nose.wrl,1,random,5,128,geometric_depth,R2,-7.634990369315879,0.07114551217294723,1000.0
+A0047_Open_nose.wrl,1,random,5,128,geometric_depth,R2_z,-0.9226610038153911,0.08175813825554297,1000.0
+A0047_Open_nose.wrl,1,random,5,128,lateral_offset_of_hand_line,R2,-0.2174437715357993,-0.1746945022755006,1000.0
+A0047_Open_nose.wrl,1,random,5,128,lateral_offset_of_hand_line,R2_z,-0.19639505978717486,-0.17428688464531727,1000.0
+A0047_Open_nose.wrl,1,random,5,128,departure,AUROC,0.6046356453028973,,0.1
+A0047_Open_nose.wrl,1,random,6,128,relief_at_centre,R2,-3.6242607125968886,0.10666505997600113,0.01
+A0047_Open_nose.wrl,1,random,6,128,relief_at_centre,R2_z,-0.43944593213285366,-0.1465473876371455,1000.0
+A0047_Open_nose.wrl,1,random,6,128,curvature_at_centre,R2,-0.7594734426196812,0.33957544480634905,100.0
+A0047_Open_nose.wrl,1,random,6,128,curvature_at_centre,R2_z,-0.10469832228916887,0.3533157995868525,1000.0
+A0047_Open_nose.wrl,1,random,6,128,geometric_depth,R2,-10.016922907543671,0.10892477892029336,0.01
+A0047_Open_nose.wrl,1,random,6,128,geometric_depth,R2_z,-0.9199041527615239,0.03954351662834921,1000.0
+A0047_Open_nose.wrl,1,random,6,128,lateral_offset_of_hand_line,R2,-0.0960917898209348,-0.10548313067042764,1000.0
+A0047_Open_nose.wrl,1,random,6,128,lateral_offset_of_hand_line,R2_z,-0.0944480320685901,-0.10564774164969266,1000.0
+A0047_Open_nose.wrl,1,random,6,128,departure,AUROC,0.5452853380158034,,1.0
+HLT_Figurine_Open.wrl,1,trained,1,32,relief_at_centre,R2,-12.899535211894959,0.4313980058792957,100.0
+HLT_Figurine_Open.wrl,1,trained,1,32,relief_at_centre,R2_z,-0.7085990296401283,-0.17275611484037665,1000.0
+HLT_Figurine_Open.wrl,1,trained,1,32,curvature_at_centre,R2,-1.518994878816779,0.05158006258448335,1000.0
+HLT_Figurine_Open.wrl,1,trained,1,32,curvature_at_centre,R2_z,-0.11388280922194771,-0.0339501096523905,1000.0
+HLT_Figurine_Open.wrl,1,trained,1,32,geometric_depth,R2,-8.812154780432305,0.09696298469662615,1000.0
+HLT_Figurine_Open.wrl,1,trained,1,32,geometric_depth,R2_z,-0.21570268227542,-0.1357642636333486,1000.0
+HLT_Figurine_Open.wrl,1,trained,1,32,lateral_offset_of_hand_line,R2,-0.06095873759760839,-0.1781283796595891,1000.0
+HLT_Figurine_Open.wrl,1,trained,1,32,lateral_offset_of_hand_line,R2_z,-0.07381767456206445,-0.16885337513070267,1000.0
+HLT_Figurine_Open.wrl,1,trained,1,32,departure,AUROC,0.456280834914611,,10.0
+HLT_Figurine_Open.wrl,1,trained,2,32,relief_at_centre,R2,-12.478684665918756,0.6259702289744123,1000.0
+HLT_Figurine_Open.wrl,1,trained,2,32,relief_at_centre,R2_z,-1.916126810177952,0.3735337402800149,1000.0
+HLT_Figurine_Open.wrl,1,trained,2,32,curvature_at_centre,R2,-1.3095941399851911,0.04929227756273923,100.0
+HLT_Figurine_Open.wrl,1,trained,2,32,curvature_at_centre,R2_z,-0.15379347699782153,-0.08759872693171461,1000.0
+HLT_Figurine_Open.wrl,1,trained,2,32,geometric_depth,R2,-8.856382189183044,-0.09249842306739123,1000.0
+HLT_Figurine_Open.wrl,1,trained,2,32,geometric_depth,R2_z,-0.44726647358622684,-0.26413885317331914,1000.0
+HLT_Figurine_Open.wrl,1,trained,2,32,lateral_offset_of_hand_line,R2,-0.10158270138762782,-0.13292720487942072,1000.0
+HLT_Figurine_Open.wrl,1,trained,2,32,lateral_offset_of_hand_line,R2_z,-0.10588339221203236,-0.12729795138821998,1000.0
+HLT_Figurine_Open.wrl,1,trained,2,32,departure,AUROC,0.3955850727387729,,0.1
+HLT_Figurine_Open.wrl,1,trained,3,64,relief_at_centre,R2,-18.020717519339133,0.4721107178914843,1000.0
+HLT_Figurine_Open.wrl,1,trained,3,64,relief_at_centre,R2_z,-2.903642764134799,0.355440144338631,1000.0
+HLT_Figurine_Open.wrl,1,trained,3,64,curvature_at_centre,R2,-1.8535218299101381,-0.13074009029781197,1000.0
+HLT_Figurine_Open.wrl,1,trained,3,64,curvature_at_centre,R2_z,-0.0567797336579301,-0.08670482342687148,1000.0
+HLT_Figurine_Open.wrl,1,trained,3,64,geometric_depth,R2,-8.320625095683633,0.1982357612167899,1000.0
+HLT_Figurine_Open.wrl,1,trained,3,64,geometric_depth,R2_z,-0.9053349789125604,0.07803647006947514,1000.0
+HLT_Figurine_Open.wrl,1,trained,3,64,lateral_offset_of_hand_line,R2,-0.27895939815889914,-0.29663683873564783,1000.0
+HLT_Figurine_Open.wrl,1,trained,3,64,lateral_offset_of_hand_line,R2_z,-0.2687168790977861,-0.29831399828162036,1000.0
+HLT_Figurine_Open.wrl,1,trained,3,64,departure,AUROC,0.43157495256166983,,0.1
+HLT_Figurine_Open.wrl,1,trained,4,64,relief_at_centre,R2,-36.26292969354611,-0.46754107304138876,1000.0
+HLT_Figurine_Open.wrl,1,trained,4,64,relief_at_centre,R2_z,-1.7904321361382962,-0.09979381752063,1000.0
+HLT_Figurine_Open.wrl,1,trained,4,64,curvature_at_centre,R2,-2.017230145925726,-0.14729701501859555,1000.0
+HLT_Figurine_Open.wrl,1,trained,4,64,curvature_at_centre,R2_z,-0.1103991029673852,-0.11467003067214057,1000.0
+HLT_Figurine_Open.wrl,1,trained,4,64,geometric_depth,R2,-8.976953547817125,-0.00033783559293580384,1000.0
+HLT_Figurine_Open.wrl,1,trained,4,64,geometric_depth,R2_z,-0.5408125613434562,-0.04830574024760476,1000.0
+HLT_Figurine_Open.wrl,1,trained,4,64,lateral_offset_of_hand_line,R2,-0.08051967633630208,-0.31957645215968605,1000.0
+HLT_Figurine_Open.wrl,1,trained,4,64,lateral_offset_of_hand_line,R2_z,-0.07887340336030157,-0.3177526146428988,1000.0
+HLT_Figurine_Open.wrl,1,trained,4,64,departure,AUROC,0.58,,0.1
+HLT_Figurine_Open.wrl,1,trained,5,128,relief_at_centre,R2,-28.476380715749656,-0.45875399866963756,1000.0
+HLT_Figurine_Open.wrl,1,trained,5,128,relief_at_centre,R2_z,-2.245614333343478,-0.3203034316997692,1000.0
+HLT_Figurine_Open.wrl,1,trained,5,128,curvature_at_centre,R2,-2.095709074077358,-0.01741279231364227,1000.0
+HLT_Figurine_Open.wrl,1,trained,5,128,curvature_at_centre,R2_z,-0.15402354407863195,-0.011244034921717655,1000.0
+HLT_Figurine_Open.wrl,1,trained,5,128,geometric_depth,R2,-7.713346002352337,-0.13858843434328497,1000.0
+HLT_Figurine_Open.wrl,1,trained,5,128,geometric_depth,R2_z,-1.3268397046752525,-0.21876918875146484,1000.0
+HLT_Figurine_Open.wrl,1,trained,5,128,lateral_offset_of_hand_line,R2,-0.10431341428661,-0.3919743397850417,1000.0
+HLT_Figurine_Open.wrl,1,trained,5,128,lateral_offset_of_hand_line,R2_z,-0.1031987282696134,-0.3957341711424334,1000.0
+HLT_Figurine_Open.wrl,1,trained,5,128,departure,AUROC,0.5140417457305502,,0.1
+HLT_Figurine_Open.wrl,1,trained,6,128,relief_at_centre,R2,-36.03004739474782,-0.48060564145994494,1000.0
+HLT_Figurine_Open.wrl,1,trained,6,128,relief_at_centre,R2_z,-2.840739045302301,-0.30287784919189936,1000.0
+HLT_Figurine_Open.wrl,1,trained,6,128,curvature_at_centre,R2,-2.3492083637693693,0.08589215869947915,1000.0
+HLT_Figurine_Open.wrl,1,trained,6,128,curvature_at_centre,R2_z,-0.23927771694141464,0.11687797425927882,1000.0
+HLT_Figurine_Open.wrl,1,trained,6,128,geometric_depth,R2,-8.312500779231888,-0.10278820511323518,1000.0
+HLT_Figurine_Open.wrl,1,trained,6,128,geometric_depth,R2_z,-1.0289380168709465,-0.26202747890491634,1000.0
+HLT_Figurine_Open.wrl,1,trained,6,128,lateral_offset_of_hand_line,R2,-0.06960996619498672,-0.4170899089972399,1000.0
+HLT_Figurine_Open.wrl,1,trained,6,128,lateral_offset_of_hand_line,R2_z,-0.06626338455596814,-0.42768949051193494,1000.0
+HLT_Figurine_Open.wrl,1,trained,6,128,departure,AUROC,0.4737507906388362,,0.1
+HLT_Figurine_Open.wrl,1,random,1,32,relief_at_centre,R2,-14.914180484276681,0.42306820338074513,100.0
+HLT_Figurine_Open.wrl,1,random,1,32,relief_at_centre,R2_z,-1.2913793114748584,-0.004691040524046553,1000.0
+HLT_Figurine_Open.wrl,1,random,1,32,curvature_at_centre,R2,-1.6012060726582997,0.01435141010961808,1000.0
+HLT_Figurine_Open.wrl,1,random,1,32,curvature_at_centre,R2_z,-0.1089362361464461,-0.039688947580625356,1000.0
+HLT_Figurine_Open.wrl,1,random,1,32,geometric_depth,R2,-8.82480278276504,-0.08534468093224558,1000.0
+HLT_Figurine_Open.wrl,1,random,1,32,geometric_depth,R2_z,-0.31971193268398834,-0.30886839136788186,1000.0
+HLT_Figurine_Open.wrl,1,random,1,32,lateral_offset_of_hand_line,R2,-0.028474047879707864,-0.14002151996355852,1000.0
+HLT_Figurine_Open.wrl,1,random,1,32,lateral_offset_of_hand_line,R2_z,-0.03429303691041574,-0.11576279828460273,1000.0
+HLT_Figurine_Open.wrl,1,random,1,32,departure,AUROC,0.6331562302340291,,10.0
+HLT_Figurine_Open.wrl,1,random,2,32,relief_at_centre,R2,-30.354778739809934,0.3848026067210385,1000.0
+HLT_Figurine_Open.wrl,1,random,2,32,relief_at_centre,R2_z,-1.1483772485879276,-0.043251786930227736,1000.0
+HLT_Figurine_Open.wrl,1,random,2,32,curvature_at_centre,R2,-1.7548306452086972,0.018759959328643626,1000.0
+HLT_Figurine_Open.wrl,1,random,2,32,curvature_at_centre,R2_z,-0.07200140375103525,-0.004143057629164149,1000.0
+HLT_Figurine_Open.wrl,1,random,2,32,geometric_depth,R2,-9.588499065948143,-0.008134550766007352,1000.0
+HLT_Figurine_Open.wrl,1,random,2,32,geometric_depth,R2_z,-0.22402369737620753,-0.1411171519568878,1000.0
+HLT_Figurine_Open.wrl,1,random,2,32,lateral_offset_of_hand_line,R2,-0.1676435849116864,-0.14569464147965946,1000.0
+HLT_Figurine_Open.wrl,1,random,2,32,lateral_offset_of_hand_line,R2_z,-0.17334765392219698,-0.14678158283921844,1000.0
+HLT_Figurine_Open.wrl,1,random,2,32,departure,AUROC,0.5497912713472486,,0.01
+HLT_Figurine_Open.wrl,1,random,3,64,relief_at_centre,R2,-25.64024933457468,0.4827799085437362,1000.0
+HLT_Figurine_Open.wrl,1,random,3,64,relief_at_centre,R2_z,-1.4623237536696365,0.033603407397360854,1000.0
+HLT_Figurine_Open.wrl,1,random,3,64,curvature_at_centre,R2,-1.7342859108533446,-0.017452278585132455,1000.0
+HLT_Figurine_Open.wrl,1,random,3,64,curvature_at_centre,R2_z,-0.08763594892123328,-0.03486198452437137,1000.0
+HLT_Figurine_Open.wrl,1,random,3,64,geometric_depth,R2,-8.291479920505617,0.1913796723918288,1000.0
+HLT_Figurine_Open.wrl,1,random,3,64,geometric_depth,R2_z,-0.7172378463819742,0.043390182149369155,1000.0
+HLT_Figurine_Open.wrl,1,random,3,64,lateral_offset_of_hand_line,R2,-0.7058581851496273,-0.18511491022254614,1000.0
+HLT_Figurine_Open.wrl,1,random,3,64,lateral_offset_of_hand_line,R2_z,-0.7068065974978206,-0.1847477117739404,1000.0
+HLT_Figurine_Open.wrl,1,random,3,64,departure,AUROC,0.4209487666034155,,0.01
+HLT_Figurine_Open.wrl,1,random,4,64,relief_at_centre,R2,-39.979434517951454,0.5307013148763438,1000.0
+HLT_Figurine_Open.wrl,1,random,4,64,relief_at_centre,R2_z,-0.7058844128649111,0.3359157848345,1000.0
+HLT_Figurine_Open.wrl,1,random,4,64,curvature_at_centre,R2,-1.1702916221765904,-0.04336830850658156,100.0
+HLT_Figurine_Open.wrl,1,random,4,64,curvature_at_centre,R2_z,-0.10759471800436393,-0.12840210553494397,1000.0
+HLT_Figurine_Open.wrl,1,random,4,64,geometric_depth,R2,-11.678857330822614,0.06867464667753322,1000.0
+HLT_Figurine_Open.wrl,1,random,4,64,geometric_depth,R2_z,-0.08478294631985173,-0.03749949870928281,1000.0
+HLT_Figurine_Open.wrl,1,random,4,64,lateral_offset_of_hand_line,R2,-0.8706548521533122,-0.33140026247245924,1000.0
+HLT_Figurine_Open.wrl,1,random,4,64,lateral_offset_of_hand_line,R2_z,-0.8674825245236879,-0.33418990261705345,1000.0
+HLT_Figurine_Open.wrl,1,random,4,64,departure,AUROC,0.49029728020240354,,1.0
+HLT_Figurine_Open.wrl,1,random,5,128,relief_at_centre,R2,-33.66048726730809,0.18281303513199937,0.1
+HLT_Figurine_Open.wrl,1,random,5,128,relief_at_centre,R2_z,-5.982532611515161,0.3397694783705893,10.0
+HLT_Figurine_Open.wrl,1,random,5,128,curvature_at_centre,R2,-4.205370557973223,-0.11543743887292769,100.0
+HLT_Figurine_Open.wrl,1,random,5,128,curvature_at_centre,R2_z,-0.9122737934765643,-0.16439073884023828,1000.0
+HLT_Figurine_Open.wrl,1,random,5,128,geometric_depth,R2,-11.579649880543261,-0.3040721650860561,1000.0
+HLT_Figurine_Open.wrl,1,random,5,128,geometric_depth,R2_z,-0.19513252074753984,-0.3292108648072594,1000.0
+HLT_Figurine_Open.wrl,1,random,5,128,lateral_offset_of_hand_line,R2,-0.050269099569470566,-0.01490339603667956,1000.0
+HLT_Figurine_Open.wrl,1,random,5,128,lateral_offset_of_hand_line,R2_z,-0.04721558395389125,-0.008008210909216327,1000.0
+HLT_Figurine_Open.wrl,1,random,5,128,departure,AUROC,0.7343327008222644,,0.01
+HLT_Figurine_Open.wrl,1,random,6,128,relief_at_centre,R2,-38.68468147283385,-0.0292551144681136,1000.0
+HLT_Figurine_Open.wrl,1,random,6,128,relief_at_centre,R2_z,-1.9618763503699883,0.3917777948592418,1000.0
+HLT_Figurine_Open.wrl,1,random,6,128,curvature_at_centre,R2,-2.0891431648886285,-0.04922743093091954,1000.0
+HLT_Figurine_Open.wrl,1,random,6,128,curvature_at_centre,R2_z,-0.18232615877522385,0.006030907935886724,1000.0
+HLT_Figurine_Open.wrl,1,random,6,128,geometric_depth,R2,-11.660556623768148,-0.29478562521291135,1000.0
+HLT_Figurine_Open.wrl,1,random,6,128,geometric_depth,R2_z,-0.1904558737841886,-0.2809491986415805,1000.0
+HLT_Figurine_Open.wrl,1,random,6,128,lateral_offset_of_hand_line,R2,-0.30526297719427276,-0.17532081397487004,1000.0
+HLT_Figurine_Open.wrl,1,random,6,128,lateral_offset_of_hand_line,R2_z,-0.2988031086520406,-0.17676010713575613,1000.0
+HLT_Figurine_Open.wrl,1,random,6,128,departure,AUROC,0.7029728020240354,,0.01
+NEGII_Frida open full front.wrl,1,trained,1,32,relief_at_centre,R2,-4.268998234340186,-0.1948208988609543,10.0
+NEGII_Frida open full front.wrl,1,trained,1,32,relief_at_centre,R2_z,-0.7050509251571513,0.18836481053370657,1000.0
+NEGII_Frida open full front.wrl,1,trained,1,32,curvature_at_centre,R2,-18.223799848452053,-0.22446212447454272,1000.0
+NEGII_Frida open full front.wrl,1,trained,1,32,curvature_at_centre,R2_z,-1.4594631271261997,-0.17718530104051083,1000.0
+NEGII_Frida open full front.wrl,1,trained,1,32,geometric_depth,R2,-331.01257286638906,0.019612451937903157,10.0
+NEGII_Frida open full front.wrl,1,trained,1,32,geometric_depth,R2_z,-6.770272101865563,0.0705828571378176,1000.0
+NEGII_Frida open full front.wrl,1,trained,1,32,lateral_offset_of_hand_line,R2,-5.490360932085692,-0.024484588862558377,1000.0
+NEGII_Frida open full front.wrl,1,trained,1,32,lateral_offset_of_hand_line,R2_z,-5.035809719555465,-0.02483606538331544,1000.0
+NEGII_Frida open full front.wrl,1,trained,1,32,departure,AUROC,0.32973918475714514,,0.01
+NEGII_Frida open full front.wrl,1,trained,2,32,relief_at_centre,R2,-0.2196074540758728,0.9035371853984175,100.0
+NEGII_Frida open full front.wrl,1,trained,2,32,relief_at_centre,R2_z,-1.9623059019169662,-0.6558265190876529,1000.0
+NEGII_Frida open full front.wrl,1,trained,2,32,curvature_at_centre,R2,-1.617865633132301,-0.18016723501383136,1000.0
+NEGII_Frida open full front.wrl,1,trained,2,32,curvature_at_centre,R2_z,-0.029880272289942944,0.2760905370108382,1000.0
+NEGII_Frida open full front.wrl,1,trained,2,32,geometric_depth,R2,-113.47122156106498,0.036251103116862984,0.01
+NEGII_Frida open full front.wrl,1,trained,2,32,geometric_depth,R2_z,-5.767995196217123,0.0495725928454996,1000.0
+NEGII_Frida open full front.wrl,1,trained,2,32,lateral_offset_of_hand_line,R2,-24.985413181450685,-0.02794178517324185,1000.0
+NEGII_Frida open full front.wrl,1,trained,2,32,lateral_offset_of_hand_line,R2_z,-24.107551291875854,-0.028092945838613447,1000.0
+NEGII_Frida open full front.wrl,1,trained,2,32,departure,AUROC,0.7436451663282835,,10.0
+NEGII_Frida open full front.wrl,1,trained,3,64,relief_at_centre,R2,-0.3051756935928882,0.8426203334046058,1000.0
+NEGII_Frida open full front.wrl,1,trained,3,64,relief_at_centre,R2_z,-11.006565938778937,-0.7068971163424962,100.0
+NEGII_Frida open full front.wrl,1,trained,3,64,curvature_at_centre,R2,-9.581035999771398,-0.21213268911825175,1000.0
+NEGII_Frida open full front.wrl,1,trained,3,64,curvature_at_centre,R2_z,-2.0352841535505077,-0.14136549492180447,1000.0
+NEGII_Frida open full front.wrl,1,trained,3,64,geometric_depth,R2,-8.00781576680478,0.18672861810413652,1000.0
+NEGII_Frida open full front.wrl,1,trained,3,64,geometric_depth,R2_z,-15.993382477733423,0.07589781310617286,1000.0
+NEGII_Frida open full front.wrl,1,trained,3,64,lateral_offset_of_hand_line,R2,-1.741646293583822,-0.16348333274392096,1000.0
+NEGII_Frida open full front.wrl,1,trained,3,64,lateral_offset_of_hand_line,R2_z,-1.5150595313174242,-0.16787741832463648,1000.0
+NEGII_Frida open full front.wrl,1,trained,3,64,departure,AUROC,0.8357082617523036,,0.1
+NEGII_Frida open full front.wrl,1,trained,4,64,relief_at_centre,R2,-3.1945930940301155,-0.40107768271213534,1000.0
+NEGII_Frida open full front.wrl,1,trained,4,64,relief_at_centre,R2_z,-6.7671108121757575,-0.5015831066408134,10.0
+NEGII_Frida open full front.wrl,1,trained,4,64,curvature_at_centre,R2,-1.9713900850905821,0.13388230821329886,1000.0
+NEGII_Frida open full front.wrl,1,trained,4,64,curvature_at_centre,R2_z,-0.315526055637404,0.1290408370242542,1000.0
+NEGII_Frida open full front.wrl,1,trained,4,64,geometric_depth,R2,-1399.5928128905687,0.06077849415999121,0.01
+NEGII_Frida open full front.wrl,1,trained,4,64,geometric_depth,R2_z,-23.22152673104965,0.06005014586749357,1000.0
+NEGII_Frida open full front.wrl,1,trained,4,64,lateral_offset_of_hand_line,R2,-1.4125530751028035,-0.12095657767445867,1000.0
+NEGII_Frida open full front.wrl,1,trained,4,64,lateral_offset_of_hand_line,R2_z,-1.4822820087874118,-0.1210001513951421,1000.0
+NEGII_Frida open full front.wrl,1,trained,4,64,departure,AUROC,0.750173356239263,,10.0
+NEGII_Frida open full front.wrl,1,trained,5,128,relief_at_centre,R2,-9.450756155982589,-0.8449014649689176,0.01
+NEGII_Frida open full front.wrl,1,trained,5,128,relief_at_centre,R2_z,-4.637008802617118,-0.8676196342057114,1000.0
+NEGII_Frida open full front.wrl,1,trained,5,128,curvature_at_centre,R2,-5.956910087111945,-0.21632928370783566,1000.0
+NEGII_Frida open full front.wrl,1,trained,5,128,curvature_at_centre,R2_z,-3.606757407274035,-0.1867860149974234,1000.0
+NEGII_Frida open full front.wrl,1,trained,5,128,geometric_depth,R2,-71.17155968657825,0.09965073489531606,1000.0
+NEGII_Frida open full front.wrl,1,trained,5,128,geometric_depth,R2_z,-22.61537740602362,0.04454658227566231,1000.0
+NEGII_Frida open full front.wrl,1,trained,5,128,lateral_offset_of_hand_line,R2,-3.0639166924507286,-0.08657273944192363,1000.0
+NEGII_Frida open full front.wrl,1,trained,5,128,lateral_offset_of_hand_line,R2_z,-3.2613102577456177,-0.08609802511777656,1000.0
+NEGII_Frida open full front.wrl,1,trained,5,128,departure,AUROC,0.46803685772294235,,0.1
+NEGII_Frida open full front.wrl,1,trained,6,128,relief_at_centre,R2,-15.97162081270011,-0.872277182002924,0.1
+NEGII_Frida open full front.wrl,1,trained,6,128,relief_at_centre,R2_z,-0.5081236638010338,-0.3982191423126693,1000.0
+NEGII_Frida open full front.wrl,1,trained,6,128,curvature_at_centre,R2,-20.715694812844603,0.229574759942602,100.0
+NEGII_Frida open full front.wrl,1,trained,6,128,curvature_at_centre,R2_z,-1.448663937046395,0.26544629501860134,10.0
+NEGII_Frida open full front.wrl,1,trained,6,128,geometric_depth,R2,-1186.588875393052,0.06265948371778235,0.01
+NEGII_Frida open full front.wrl,1,trained,6,128,geometric_depth,R2_z,-7.555781747365645,0.05026678150617812,1000.0
+NEGII_Frida open full front.wrl,1,trained,6,128,lateral_offset_of_hand_line,R2,-3.8066323146355243,-0.07615904712053526,1000.0
+NEGII_Frida open full front.wrl,1,trained,6,128,lateral_offset_of_hand_line,R2_z,-3.8636363908192184,-0.07684626765310888,1000.0
+NEGII_Frida open full front.wrl,1,trained,6,128,departure,AUROC,0.7826143995002344,,1.0
+NEGII_Frida open full front.wrl,1,random,1,32,relief_at_centre,R2,-5.902106579251463,-0.585013138954304,10.0
+NEGII_Frida open full front.wrl,1,random,1,32,relief_at_centre,R2_z,-0.7467127588061755,-0.4976076158183131,1000.0
+NEGII_Frida open full front.wrl,1,random,1,32,curvature_at_centre,R2,-15.62153972873676,-0.2211741082141632,1000.0
+NEGII_Frida open full front.wrl,1,random,1,32,curvature_at_centre,R2_z,-0.962196066624079,-0.1475716072723712,1000.0
+NEGII_Frida open full front.wrl,1,random,1,32,geometric_depth,R2,-478.1449979893521,0.028159317713227824,10.0
+NEGII_Frida open full front.wrl,1,random,1,32,geometric_depth,R2_z,-6.0131419872943095,0.06938593318338764,1000.0
+NEGII_Frida open full front.wrl,1,random,1,32,lateral_offset_of_hand_line,R2,-3.678462067799284,-0.02950617973759521,1000.0
+NEGII_Frida open full front.wrl,1,random,1,32,lateral_offset_of_hand_line,R2_z,-3.2987767314265595,-0.03027402269467101,1000.0
+NEGII_Frida open full front.wrl,1,random,1,32,departure,AUROC,0.33051382164610343,,0.01
+NEGII_Frida open full front.wrl,1,random,2,32,relief_at_centre,R2,-13.763637669390757,-0.8715035432159729,10.0
+NEGII_Frida open full front.wrl,1,random,2,32,relief_at_centre,R2_z,-13.501686027507365,-0.6217152350332512,1.0
+NEGII_Frida open full front.wrl,1,random,2,32,curvature_at_centre,R2,-1.8444162252260323,-0.18621459499633225,100.0
+NEGII_Frida open full front.wrl,1,random,2,32,curvature_at_centre,R2_z,-0.050305675378715886,0.14263867348101306,1000.0
+NEGII_Frida open full front.wrl,1,random,2,32,geometric_depth,R2,-1195.993613310647,0.04655750626257354,10.0
+NEGII_Frida open full front.wrl,1,random,2,32,geometric_depth,R2_z,-54.01548428336669,0.05859961558919065,1000.0
+NEGII_Frida open full front.wrl,1,random,2,32,lateral_offset_of_hand_line,R2,-13.613501320995264,-0.03370334089288469,1000.0
+NEGII_Frida open full front.wrl,1,random,2,32,lateral_offset_of_hand_line,R2_z,-12.683009627173515,-0.03436018889618946,1000.0
+NEGII_Frida open full front.wrl,1,random,2,32,departure,AUROC,0.7565641105731689,,10.0
+NEGII_Frida open full front.wrl,1,random,3,64,relief_at_centre,R2,-4.832905082927656,-0.5838143016640552,10.0
+NEGII_Frida open full front.wrl,1,random,3,64,relief_at_centre,R2_z,-40.40187973893017,-0.8955525476595646,1000.0
+NEGII_Frida open full front.wrl,1,random,3,64,curvature_at_centre,R2,-0.8056973743408047,-0.0725796466093278,1000.0
+NEGII_Frida open full front.wrl,1,random,3,64,curvature_at_centre,R2_z,-0.7257881821450807,-0.10191139003865272,1000.0
+NEGII_Frida open full front.wrl,1,random,3,64,geometric_depth,R2,-309.4389014200838,0.1380542153824232,1.0
+NEGII_Frida open full front.wrl,1,random,3,64,geometric_depth,R2_z,-107.77123087097088,0.07237547970790602,1000.0
+NEGII_Frida open full front.wrl,1,random,3,64,lateral_offset_of_hand_line,R2,-2.0105577509913832,-0.09948337228291103,1000.0
+NEGII_Frida open full front.wrl,1,random,3,64,lateral_offset_of_hand_line,R2_z,-1.7567713539193148,-0.10183325811059009,1000.0
+NEGII_Frida open full front.wrl,1,random,3,64,departure,AUROC,0.682923629548649,,10.0
+NEGII_Frida open full front.wrl,1,random,4,64,relief_at_centre,R2,0.7380479108428777,0.9202751056758803,10.0
+NEGII_Frida open full front.wrl,1,random,4,64,relief_at_centre,R2_z,-12.050661843107164,-0.7851857696153017,1000.0
+NEGII_Frida open full front.wrl,1,random,4,64,curvature_at_centre,R2,-98.46348782186463,-0.23750323772056592,1000.0
+NEGII_Frida open full front.wrl,1,random,4,64,curvature_at_centre,R2_z,-16.15967678920464,-0.21710948688588183,1000.0
+NEGII_Frida open full front.wrl,1,random,4,64,geometric_depth,R2,-146.80602366147835,0.07362643588631765,10.0
+NEGII_Frida open full front.wrl,1,random,4,64,geometric_depth,R2_z,-30.515985899603336,0.045971638392700194,1000.0
+NEGII_Frida open full front.wrl,1,random,4,64,lateral_offset_of_hand_line,R2,-7.303547974227337,-0.10200140130164581,1000.0
+NEGII_Frida open full front.wrl,1,random,4,64,lateral_offset_of_hand_line,R2_z,-6.6666686827466215,-0.10550737872115695,1000.0
+NEGII_Frida open full front.wrl,1,random,4,64,departure,AUROC,0.7724379197251288,,10.0
+NEGII_Frida open full front.wrl,1,random,5,128,relief_at_centre,R2,-5.730202341846177,0.9236571716829839,0.01
+NEGII_Frida open full front.wrl,1,random,5,128,relief_at_centre,R2_z,-5.720834835130444,-0.6945566130816477,1000.0
+NEGII_Frida open full front.wrl,1,random,5,128,curvature_at_centre,R2,-201.06035058378978,-0.21304350516142478,1000.0
+NEGII_Frida open full front.wrl,1,random,5,128,curvature_at_centre,R2_z,-29.416426551982884,-0.19406726419376197,1000.0
+NEGII_Frida open full front.wrl,1,random,5,128,geometric_depth,R2,-26.833855104865652,0.11037071854819273,0.01
+NEGII_Frida open full front.wrl,1,random,5,128,geometric_depth,R2_z,-21.78376304920622,0.05069374082781361,1000.0
+NEGII_Frida open full front.wrl,1,random,5,128,lateral_offset_of_hand_line,R2,-77.64416585459458,-0.04462560160975146,1000.0
+NEGII_Frida open full front.wrl,1,random,5,128,lateral_offset_of_hand_line,R2_z,-74.77095419214255,-0.04497646079732493,1000.0
+NEGII_Frida open full front.wrl,1,random,5,128,departure,AUROC,0.34118382008433545,,10.0
+NEGII_Frida open full front.wrl,1,random,6,128,relief_at_centre,R2,0.012615660720809663,0.9197187700738688,10.0
+NEGII_Frida open full front.wrl,1,random,6,128,relief_at_centre,R2_z,-2.4192597188097458,-0.6789377834302086,1000.0
+NEGII_Frida open full front.wrl,1,random,6,128,curvature_at_centre,R2,-291.82988242376825,-0.21526070349712265,100.0
+NEGII_Frida open full front.wrl,1,random,6,128,curvature_at_centre,R2_z,-18.99620962091297,-0.19312217549334612,1000.0
+NEGII_Frida open full front.wrl,1,random,6,128,geometric_depth,R2,-17.726425715963675,-0.01670646899071713,1000.0
+NEGII_Frida open full front.wrl,1,random,6,128,geometric_depth,R2_z,-17.09274421149633,0.03358143863283095,1000.0
+NEGII_Frida open full front.wrl,1,random,6,128,lateral_offset_of_hand_line,R2,-16.929857730705276,-0.08737217431973032,1000.0
+NEGII_Frida open full front.wrl,1,random,6,128,lateral_offset_of_hand_line,R2_z,-15.800827772341304,-0.08914236432486206,1000.0
+NEGII_Frida open full front.wrl,1,random,6,128,departure,AUROC,0.7587630798063407,,10.0
+A0047_Open_nose.wrl,2,trained,1,32,relief_at_centre,R2,-8.524681834047403,0.00889557938473444,1.0
+A0047_Open_nose.wrl,2,trained,1,32,relief_at_centre,R2_z,-0.11208453874771318,-0.019640453909555093,1000.0
+A0047_Open_nose.wrl,2,trained,1,32,curvature_at_centre,R2,-1.7774419250521407,0.01120627640766517,1000.0
+A0047_Open_nose.wrl,2,trained,1,32,curvature_at_centre,R2_z,-0.11446017599216951,-0.021991035149577755,1000.0
+A0047_Open_nose.wrl,2,trained,1,32,geometric_depth,R2,-5.005861166541129,0.06037304048907404,10.0
+A0047_Open_nose.wrl,2,trained,1,32,geometric_depth,R2_z,-0.028663941008272964,0.12497782801173699,1000.0
+A0047_Open_nose.wrl,2,trained,1,32,lateral_offset_of_hand_line,R2,-0.04423482328445605,-0.07663115241481507,1000.0
+A0047_Open_nose.wrl,2,trained,1,32,lateral_offset_of_hand_line,R2_z,-0.0412883739858374,-0.07201739389506275,1000.0
+A0047_Open_nose.wrl,2,trained,1,32,departure,AUROC,0.5408955223880597,,1.0
+A0047_Open_nose.wrl,2,trained,2,32,relief_at_centre,R2,-0.7159882717945265,0.5642554284534731,1.0
+A0047_Open_nose.wrl,2,trained,2,32,relief_at_centre,R2_z,-0.20517446778709392,-0.07212905820393765,1000.0
+A0047_Open_nose.wrl,2,trained,2,32,curvature_at_centre,R2,-1.4883108873889874,-0.042744801045183564,1000.0
+A0047_Open_nose.wrl,2,trained,2,32,curvature_at_centre,R2_z,-0.05681824783992018,0.005421232464223352,1000.0
+A0047_Open_nose.wrl,2,trained,2,32,geometric_depth,R2,-4.879210678120024,0.230089209725657,10.0
+A0047_Open_nose.wrl,2,trained,2,32,geometric_depth,R2_z,-0.08387487509283909,0.11996501164279193,1000.0
+A0047_Open_nose.wrl,2,trained,2,32,lateral_offset_of_hand_line,R2,-0.03391770820546958,-0.060796682049106376,1000.0
+A0047_Open_nose.wrl,2,trained,2,32,lateral_offset_of_hand_line,R2_z,-0.031591923625893914,-0.06221756102752289,1000.0
+A0047_Open_nose.wrl,2,trained,2,32,departure,AUROC,0.60270412642669,,0.01
+A0047_Open_nose.wrl,2,trained,3,64,relief_at_centre,R2,-1.1691044271651974,0.6580753732649217,10.0
+A0047_Open_nose.wrl,2,trained,3,64,relief_at_centre,R2_z,-0.7103950783451378,-0.5288548050417866,1000.0
+A0047_Open_nose.wrl,2,trained,3,64,curvature_at_centre,R2,-1.0561291373656108,-0.15699832820148318,100.0
+A0047_Open_nose.wrl,2,trained,3,64,curvature_at_centre,R2_z,-0.05408333644061347,-0.07945647355541165,1000.0
+A0047_Open_nose.wrl,2,trained,3,64,geometric_depth,R2,-2.4449441989286713,0.12002260335359315,100.0
+A0047_Open_nose.wrl,2,trained,3,64,geometric_depth,R2_z,-0.09507497563033818,0.29637832641996303,1000.0
+A0047_Open_nose.wrl,2,trained,3,64,lateral_offset_of_hand_line,R2,-0.050070351218173936,0.1564972199616921,1000.0
+A0047_Open_nose.wrl,2,trained,3,64,lateral_offset_of_hand_line,R2_z,-0.04596840358625509,0.15574616320059922,1000.0
+A0047_Open_nose.wrl,2,trained,3,64,departure,AUROC,0.5543107989464442,,0.1
+A0047_Open_nose.wrl,2,trained,4,64,relief_at_centre,R2,-3.0232067461334164,-0.18898428170524315,1.0
+A0047_Open_nose.wrl,2,trained,4,64,relief_at_centre,R2_z,-1.0776577141947876,-0.5336129868824816,1000.0
+A0047_Open_nose.wrl,2,trained,4,64,curvature_at_centre,R2,-0.47891063639360354,-0.023470110675203357,1000.0
+A0047_Open_nose.wrl,2,trained,4,64,curvature_at_centre,R2_z,-0.08827688998944327,-0.13467956642122075,1000.0
+A0047_Open_nose.wrl,2,trained,4,64,geometric_depth,R2,-7.240622146248333,0.14822870683096864,100.0
+A0047_Open_nose.wrl,2,trained,4,64,geometric_depth,R2_z,-0.27608769073835293,0.14537146729016318,1000.0
+A0047_Open_nose.wrl,2,trained,4,64,lateral_offset_of_hand_line,R2,-0.06514521442342147,0.13328897766436282,1000.0
+A0047_Open_nose.wrl,2,trained,4,64,lateral_offset_of_hand_line,R2_z,-0.06105169962594004,0.1346433109705817,1000.0
+A0047_Open_nose.wrl,2,trained,4,64,departure,AUROC,0.5316593503072871,,10.0
+A0047_Open_nose.wrl,2,trained,5,128,relief_at_centre,R2,-2.2594374347653337,0.23953222702038882,100.0
+A0047_Open_nose.wrl,2,trained,5,128,relief_at_centre,R2_z,-1.1045071111600429,-0.5076903283857797,1000.0
+A0047_Open_nose.wrl,2,trained,5,128,curvature_at_centre,R2,-0.24505525458950417,0.03901689933108313,1000.0
+A0047_Open_nose.wrl,2,trained,5,128,curvature_at_centre,R2_z,-0.08928090343413975,-0.02043902906592474,1000.0
+A0047_Open_nose.wrl,2,trained,5,128,geometric_depth,R2,-3.114929545143343,0.093259056101133,100.0
+A0047_Open_nose.wrl,2,trained,5,128,geometric_depth,R2_z,-0.1854549886460326,0.10961207402027406,1000.0
+A0047_Open_nose.wrl,2,trained,5,128,lateral_offset_of_hand_line,R2,-0.03496584930013191,0.20351835022397358,1000.0
+A0047_Open_nose.wrl,2,trained,5,128,lateral_offset_of_hand_line,R2_z,-0.030698384281536928,0.2052001802310547,1000.0
+A0047_Open_nose.wrl,2,trained,5,128,departure,AUROC,0.5580684811237927,,0.01
+A0047_Open_nose.wrl,2,trained,6,128,relief_at_centre,R2,-2.842595490536348,0.5911413016501781,1.0
+A0047_Open_nose.wrl,2,trained,6,128,relief_at_centre,R2_z,-0.7426803947426774,-0.40065579189601586,1000.0
+A0047_Open_nose.wrl,2,trained,6,128,curvature_at_centre,R2,-0.4943614305799615,0.09002008507024466,1000.0
+A0047_Open_nose.wrl,2,trained,6,128,curvature_at_centre,R2_z,-0.02418231337761312,0.19558107829930585,1000.0
+A0047_Open_nose.wrl,2,trained,6,128,geometric_depth,R2,-7.923450190256487,0.287456080974007,1000.0
+A0047_Open_nose.wrl,2,trained,6,128,geometric_depth,R2_z,-0.07267118644208881,0.06308466151948136,1000.0
+A0047_Open_nose.wrl,2,trained,6,128,lateral_offset_of_hand_line,R2,0.0008085379790381264,0.1844584672483577,1000.0
+A0047_Open_nose.wrl,2,trained,6,128,lateral_offset_of_hand_line,R2_z,0.0029434340311357277,0.18586799880854657,1000.0
+A0047_Open_nose.wrl,2,trained,6,128,departure,AUROC,0.5029675153643547,,10.0
+A0047_Open_nose.wrl,2,random,1,32,relief_at_centre,R2,-7.8970311347602316,-0.2204906623586981,1.0
+A0047_Open_nose.wrl,2,random,1,32,relief_at_centre,R2_z,-0.046311357251736185,0.07441820503466662,1000.0
+A0047_Open_nose.wrl,2,random,1,32,curvature_at_centre,R2,-1.5527666035990277,-0.0051950427764644895,1000.0
+A0047_Open_nose.wrl,2,random,1,32,curvature_at_centre,R2_z,-0.11223148332531996,-0.07310254338396954,1000.0
+A0047_Open_nose.wrl,2,random,1,32,geometric_depth,R2,-8.801303141447532,0.08337307683406656,100.0
+A0047_Open_nose.wrl,2,random,1,32,geometric_depth,R2_z,-0.050936517714550655,0.1678927915992492,1000.0
+A0047_Open_nose.wrl,2,random,1,32,lateral_offset_of_hand_line,R2,-0.03884809776986842,-0.07189828502387302,1000.0
+A0047_Open_nose.wrl,2,random,1,32,lateral_offset_of_hand_line,R2_z,-0.035929560594182064,-0.06767914302026964,1000.0
+A0047_Open_nose.wrl,2,random,1,32,departure,AUROC,0.5752063213345039,,0.1
+A0047_Open_nose.wrl,2,random,2,32,relief_at_centre,R2,-12.863971215002735,0.5221995649277505,0.01
+A0047_Open_nose.wrl,2,random,2,32,relief_at_centre,R2_z,0.051311951751887075,0.36775857368202647,1000.0
+A0047_Open_nose.wrl,2,random,2,32,curvature_at_centre,R2,-1.2817576316903594,-0.017349244365151704,100.0
+A0047_Open_nose.wrl,2,random,2,32,curvature_at_centre,R2_z,-0.036056424892094485,-0.013058293239477983,1000.0
+A0047_Open_nose.wrl,2,random,2,32,geometric_depth,R2,-10.12583395673917,0.12595959199124385,10.0
+A0047_Open_nose.wrl,2,random,2,32,geometric_depth,R2_z,-0.07177387848058903,0.20696818039387116,1000.0
+A0047_Open_nose.wrl,2,random,2,32,lateral_offset_of_hand_line,R2,-0.10450893084278978,-0.1765701394726876,1000.0
+A0047_Open_nose.wrl,2,random,2,32,lateral_offset_of_hand_line,R2_z,-0.10198640963803363,-0.17133365972838874,1000.0
+A0047_Open_nose.wrl,2,random,2,32,departure,AUROC,0.6176294995610184,,0.01
+A0047_Open_nose.wrl,2,random,3,64,relief_at_centre,R2,-2.678959885494032,0.5943685313223299,0.01
+A0047_Open_nose.wrl,2,random,3,64,relief_at_centre,R2_z,-0.2776526335305405,-0.05511360401183965,1000.0
+A0047_Open_nose.wrl,2,random,3,64,curvature_at_centre,R2,-1.3156567953791773,-0.11624161237468925,100.0
+A0047_Open_nose.wrl,2,random,3,64,curvature_at_centre,R2_z,-0.08766990284734555,-0.10405702688326635,1000.0
+A0047_Open_nose.wrl,2,random,3,64,geometric_depth,R2,-4.239205446730941,0.2327168013206399,10.0
+A0047_Open_nose.wrl,2,random,3,64,geometric_depth,R2_z,-0.1946615372248357,0.2909429274344963,1000.0
+A0047_Open_nose.wrl,2,random,3,64,lateral_offset_of_hand_line,R2,-0.07844241215120218,-0.14276933782245813,1000.0
+A0047_Open_nose.wrl,2,random,3,64,lateral_offset_of_hand_line,R2_z,-0.07570557952549417,-0.14163961918960133,1000.0
+A0047_Open_nose.wrl,2,random,3,64,departure,AUROC,0.555820895522388,,0.01
+A0047_Open_nose.wrl,2,random,4,64,relief_at_centre,R2,-6.6316162896106405,0.5566219248964772,10.0
+A0047_Open_nose.wrl,2,random,4,64,relief_at_centre,R2_z,-0.02968951041377199,0.06858391580210182,1000.0
+A0047_Open_nose.wrl,2,random,4,64,curvature_at_centre,R2,-1.1947802287549019,0.0965613101930151,1000.0
+A0047_Open_nose.wrl,2,random,4,64,curvature_at_centre,R2_z,0.007079875490188958,0.20130107204485245,1000.0
+A0047_Open_nose.wrl,2,random,4,64,geometric_depth,R2,-8.804345681024564,0.11912634965901261,100.0
+A0047_Open_nose.wrl,2,random,4,64,geometric_depth,R2_z,-0.05832471867642264,0.13106139571194922,1000.0
+A0047_Open_nose.wrl,2,random,4,64,lateral_offset_of_hand_line,R2,-0.06874795721262261,-0.1147343883280475,1000.0
+A0047_Open_nose.wrl,2,random,4,64,lateral_offset_of_hand_line,R2_z,-0.07004634584670621,-0.1125513121488108,1000.0
+A0047_Open_nose.wrl,2,random,4,64,departure,AUROC,0.5650570676031607,,0.01
+A0047_Open_nose.wrl,2,random,5,128,relief_at_centre,R2,-6.859559985020463,0.03455546408165721,0.01
+A0047_Open_nose.wrl,2,random,5,128,relief_at_centre,R2_z,-0.18677265807198196,-0.10801292570228578,1000.0
+A0047_Open_nose.wrl,2,random,5,128,curvature_at_centre,R2,-0.337370024208657,0.07155491991105525,100.0
+A0047_Open_nose.wrl,2,random,5,128,curvature_at_centre,R2_z,0.016151569613911287,0.16704431569266545,1000.0
+A0047_Open_nose.wrl,2,random,5,128,geometric_depth,R2,-7.917368642442446,0.18845216329707717,1000.0
+A0047_Open_nose.wrl,2,random,5,128,geometric_depth,R2_z,-0.0588938690724683,0.20054895801157638,1000.0
+A0047_Open_nose.wrl,2,random,5,128,lateral_offset_of_hand_line,R2,-0.16940048874274738,-0.30203344082361483,1000.0
+A0047_Open_nose.wrl,2,random,5,128,lateral_offset_of_hand_line,R2_z,-0.1743560213364006,-0.3010250620734421,1000.0
+A0047_Open_nose.wrl,2,random,5,128,departure,AUROC,0.4665144863915715,,1.0
+A0047_Open_nose.wrl,2,random,6,128,relief_at_centre,R2,-6.03229899101863,0.12934784961722665,0.1
+A0047_Open_nose.wrl,2,random,6,128,relief_at_centre,R2_z,-0.2689602531833175,0.0599247727162156,1000.0
+A0047_Open_nose.wrl,2,random,6,128,curvature_at_centre,R2,-0.171189583812821,0.2761647390845677,100.0
+A0047_Open_nose.wrl,2,random,6,128,curvature_at_centre,R2_z,-0.04002723609883585,0.21180899830066402,1000.0
+A0047_Open_nose.wrl,2,random,6,128,geometric_depth,R2,-4.565771859529824,0.2212814734822542,10.0
+A0047_Open_nose.wrl,2,random,6,128,geometric_depth,R2_z,-0.18656998030147331,0.06177279694938431,1000.0
+A0047_Open_nose.wrl,2,random,6,128,lateral_offset_of_hand_line,R2,-0.09288490262584115,-0.11322568943833536,1000.0
+A0047_Open_nose.wrl,2,random,6,128,lateral_offset_of_hand_line,R2_z,-0.09717836102538668,-0.11182627984214567,1000.0
+A0047_Open_nose.wrl,2,random,6,128,departure,AUROC,0.4491659350307287,,0.01
+HLT_Figurine_Open.wrl,2,trained,1,32,relief_at_centre,R2,-17.017863616820634,0.533248038296857,100.0
+HLT_Figurine_Open.wrl,2,trained,1,32,relief_at_centre,R2_z,-0.8848708098504621,-0.11993694721418816,1000.0
+HLT_Figurine_Open.wrl,2,trained,1,32,curvature_at_centre,R2,-1.7428998781819893,-0.08754046951292044,1000.0
+HLT_Figurine_Open.wrl,2,trained,1,32,curvature_at_centre,R2_z,-0.1663882749657466,-0.1251241767081199,1000.0
+HLT_Figurine_Open.wrl,2,trained,1,32,geometric_depth,R2,-9.726365735482975,0.05945533889322778,1000.0
+HLT_Figurine_Open.wrl,2,trained,1,32,geometric_depth,R2_z,-0.18854187180008175,-0.2203383667837328,1000.0
+HLT_Figurine_Open.wrl,2,trained,1,32,lateral_offset_of_hand_line,R2,-0.06557251626543525,-0.21443468760860485,1000.0
+HLT_Figurine_Open.wrl,2,trained,1,32,lateral_offset_of_hand_line,R2_z,-0.06395344710534823,-0.21424154662315234,1000.0
+HLT_Figurine_Open.wrl,2,trained,1,32,departure,AUROC,0.5259329538266919,,10.0
+HLT_Figurine_Open.wrl,2,trained,2,32,relief_at_centre,R2,-12.700290172396738,0.4606999190059454,1000.0
+HLT_Figurine_Open.wrl,2,trained,2,32,relief_at_centre,R2_z,-1.009013897642701,0.008082808549440306,1000.0
+HLT_Figurine_Open.wrl,2,trained,2,32,curvature_at_centre,R2,-1.996884187665915,-0.2020313826229694,1000.0
+HLT_Figurine_Open.wrl,2,trained,2,32,curvature_at_centre,R2_z,-0.3011646947877191,-0.2313224350167768,1000.0
+HLT_Figurine_Open.wrl,2,trained,2,32,geometric_depth,R2,-9.452484426193488,-0.09756379919863524,1000.0
+HLT_Figurine_Open.wrl,2,trained,2,32,geometric_depth,R2_z,-0.3339265246249308,-0.27726761243557646,1000.0
+HLT_Figurine_Open.wrl,2,trained,2,32,lateral_offset_of_hand_line,R2,-0.061445557305156884,-0.049075645697206086,1000.0
+HLT_Figurine_Open.wrl,2,trained,2,32,lateral_offset_of_hand_line,R2_z,-0.058570187840936816,-0.049351032234499465,1000.0
+HLT_Figurine_Open.wrl,2,trained,2,32,departure,AUROC,0.4125743200506009,,1.0
+HLT_Figurine_Open.wrl,2,trained,3,64,relief_at_centre,R2,-22.978671523563055,0.33346191849477297,1000.0
+HLT_Figurine_Open.wrl,2,trained,3,64,relief_at_centre,R2_z,-1.0220922948847164,0.03307351227207823,1000.0
+HLT_Figurine_Open.wrl,2,trained,3,64,curvature_at_centre,R2,-1.6757075024472954,-0.11097885618607,1000.0
+HLT_Figurine_Open.wrl,2,trained,3,64,curvature_at_centre,R2_z,-0.052376375401272934,-0.045681935215983537,1000.0
+HLT_Figurine_Open.wrl,2,trained,3,64,geometric_depth,R2,-10.146014347390068,-0.11725410410905847,1000.0
+HLT_Figurine_Open.wrl,2,trained,3,64,geometric_depth,R2_z,-0.22507723172081429,-0.2828991938423529,1000.0
+HLT_Figurine_Open.wrl,2,trained,3,64,lateral_offset_of_hand_line,R2,-0.28396234367339845,-0.2371054106163596,1000.0
+HLT_Figurine_Open.wrl,2,trained,3,64,lateral_offset_of_hand_line,R2_z,-0.26959368026794306,-0.2409857838704982,1000.0
+HLT_Figurine_Open.wrl,2,trained,3,64,departure,AUROC,0.6073877292852625,,0.1
+HLT_Figurine_Open.wrl,2,trained,4,64,relief_at_centre,R2,-26.548755276238538,0.14069918003083737,1000.0
+HLT_Figurine_Open.wrl,2,trained,4,64,relief_at_centre,R2_z,-0.8613474188189829,-0.2905086471555862,1000.0
+HLT_Figurine_Open.wrl,2,trained,4,64,curvature_at_centre,R2,-2.0093159726148935,-0.027402648730323966,1000.0
+HLT_Figurine_Open.wrl,2,trained,4,64,curvature_at_centre,R2_z,-0.16433660946502116,0.036210263425272,1000.0
+HLT_Figurine_Open.wrl,2,trained,4,64,geometric_depth,R2,-10.536443303056268,0.2556880848803816,1000.0
+HLT_Figurine_Open.wrl,2,trained,4,64,geometric_depth,R2_z,-0.08235784260637291,-0.015210835406942043,1000.0
+HLT_Figurine_Open.wrl,2,trained,4,64,lateral_offset_of_hand_line,R2,-0.1418255222254965,-0.11304219845258977,1000.0
+HLT_Figurine_Open.wrl,2,trained,4,64,lateral_offset_of_hand_line,R2_z,-0.1299467215281409,-0.11273806335791668,1000.0
+HLT_Figurine_Open.wrl,2,trained,4,64,departure,AUROC,0.31357368753953196,,0.01
+HLT_Figurine_Open.wrl,2,trained,5,128,relief_at_centre,R2,-24.465930764996312,0.19230772618456932,1000.0
+HLT_Figurine_Open.wrl,2,trained,5,128,relief_at_centre,R2_z,-0.8617137983853107,0.06854869641133458,1000.0
+HLT_Figurine_Open.wrl,2,trained,5,128,curvature_at_centre,R2,-1.9437508500416159,-0.18556921607468274,1000.0
+HLT_Figurine_Open.wrl,2,trained,5,128,curvature_at_centre,R2_z,-0.17308045818940188,-0.16613915975224944,1000.0
+HLT_Figurine_Open.wrl,2,trained,5,128,geometric_depth,R2,-10.46229698860184,0.09181356826384518,1000.0
+HLT_Figurine_Open.wrl,2,trained,5,128,geometric_depth,R2_z,-0.08854159196478117,-0.02987249785326183,1000.0
+HLT_Figurine_Open.wrl,2,trained,5,128,lateral_offset_of_hand_line,R2,-0.21142627005724557,-0.14309539183556577,1000.0
+HLT_Figurine_Open.wrl,2,trained,5,128,lateral_offset_of_hand_line,R2_z,-0.19180517505849015,-0.14232945058529525,1000.0
+HLT_Figurine_Open.wrl,2,trained,5,128,departure,AUROC,0.263921568627451,,0.1
+HLT_Figurine_Open.wrl,2,trained,6,128,relief_at_centre,R2,-28.576649686876625,0.5210829114213066,1000.0
+HLT_Figurine_Open.wrl,2,trained,6,128,relief_at_centre,R2_z,-0.48291679657997166,0.46608826791041463,1000.0
+HLT_Figurine_Open.wrl,2,trained,6,128,curvature_at_centre,R2,-1.886397491421277,-0.1648561447097432,1000.0
+HLT_Figurine_Open.wrl,2,trained,6,128,curvature_at_centre,R2_z,-0.13344896043616528,-0.16025703210054815,1000.0
+HLT_Figurine_Open.wrl,2,trained,6,128,geometric_depth,R2,-9.564275810644288,0.2841733693770633,1000.0
+HLT_Figurine_Open.wrl,2,trained,6,128,geometric_depth,R2_z,-0.3457037488416346,0.16161525065661075,1000.0
+HLT_Figurine_Open.wrl,2,trained,6,128,lateral_offset_of_hand_line,R2,-0.5287130032388563,-0.0501294673874018,1000.0
+HLT_Figurine_Open.wrl,2,trained,6,128,lateral_offset_of_hand_line,R2_z,-0.49856741262930937,-0.047778705130536725,1000.0
+HLT_Figurine_Open.wrl,2,trained,6,128,departure,AUROC,0.4226944971537002,,10.0
+HLT_Figurine_Open.wrl,2,random,1,32,relief_at_centre,R2,-13.666789859487647,0.5303907881857043,100.0
+HLT_Figurine_Open.wrl,2,random,1,32,relief_at_centre,R2_z,-0.47488115350588656,-0.1854727516219333,1000.0
+HLT_Figurine_Open.wrl,2,random,1,32,curvature_at_centre,R2,-1.906376140060452,-0.10528542272903274,1000.0
+HLT_Figurine_Open.wrl,2,random,1,32,curvature_at_centre,R2_z,-0.321401677455893,-0.1498934371298031,1000.0
+HLT_Figurine_Open.wrl,2,random,1,32,geometric_depth,R2,-9.40628518767957,0.09865854560865482,1000.0
+HLT_Figurine_Open.wrl,2,random,1,32,geometric_depth,R2_z,-0.2161389918136658,-0.22267288266024385,1000.0
+HLT_Figurine_Open.wrl,2,random,1,32,lateral_offset_of_hand_line,R2,0.00393455349854166,0.09003409450476096,1000.0
+HLT_Figurine_Open.wrl,2,random,1,32,lateral_offset_of_hand_line,R2_z,0.004542761972631593,0.10227582979521273,1000.0
+HLT_Figurine_Open.wrl,2,random,1,32,departure,AUROC,0.48586970271979757,,1.0
+HLT_Figurine_Open.wrl,2,random,2,32,relief_at_centre,R2,-1.2800393425104533,0.6031451199254326,1.0
+HLT_Figurine_Open.wrl,2,random,2,32,relief_at_centre,R2_z,-1.6242271820726595,0.1021662545604799,1000.0
+HLT_Figurine_Open.wrl,2,random,2,32,curvature_at_centre,R2,-2.4564257673759347,-0.22370275136674497,1000.0
+HLT_Figurine_Open.wrl,2,random,2,32,curvature_at_centre,R2_z,-0.6584529967643808,-0.28954027934043164,1000.0
+HLT_Figurine_Open.wrl,2,random,2,32,geometric_depth,R2,-10.012288338002106,-0.15303929008175052,1000.0
+HLT_Figurine_Open.wrl,2,random,2,32,geometric_depth,R2_z,-0.29395410296102265,-0.27400129519160343,1000.0
+HLT_Figurine_Open.wrl,2,random,2,32,lateral_offset_of_hand_line,R2,0.00510373887931026,0.11766523381098506,1000.0
+HLT_Figurine_Open.wrl,2,random,2,32,lateral_offset_of_hand_line,R2_z,0.007985714289260759,0.12359340937184624,1000.0
+HLT_Figurine_Open.wrl,2,random,2,32,departure,AUROC,0.4935483870967742,,10.0
+HLT_Figurine_Open.wrl,2,random,3,64,relief_at_centre,R2,-13.85885133945095,0.4840131781702389,1000.0
+HLT_Figurine_Open.wrl,2,random,3,64,relief_at_centre,R2_z,-2.229349607694408,0.04980982319054281,1000.0
+HLT_Figurine_Open.wrl,2,random,3,64,curvature_at_centre,R2,-2.0780841214718624,-0.11426418440424146,1000.0
+HLT_Figurine_Open.wrl,2,random,3,64,curvature_at_centre,R2_z,-0.17648020872024928,-0.09305364293705501,1000.0
+HLT_Figurine_Open.wrl,2,random,3,64,geometric_depth,R2,-8.998247978845725,0.05471945370597436,1000.0
+HLT_Figurine_Open.wrl,2,random,3,64,geometric_depth,R2_z,-0.7970167923249316,-0.08234493291169077,1000.0
+HLT_Figurine_Open.wrl,2,random,3,64,lateral_offset_of_hand_line,R2,-0.0675509888414092,-0.12340289718989884,1000.0
+HLT_Figurine_Open.wrl,2,random,3,64,lateral_offset_of_hand_line,R2_z,-0.062047513777355734,-0.12450880411218276,1000.0
+HLT_Figurine_Open.wrl,2,random,3,64,departure,AUROC,0.4586590765338394,,0.1
+HLT_Figurine_Open.wrl,2,random,4,64,relief_at_centre,R2,-2.83802487051808,0.42296054111783765,100.0
+HLT_Figurine_Open.wrl,2,random,4,64,relief_at_centre,R2_z,-0.44004006775275006,-0.21394954587726706,1000.0
+HLT_Figurine_Open.wrl,2,random,4,64,curvature_at_centre,R2,-2.4253050740333437,0.23601761931092183,1000.0
+HLT_Figurine_Open.wrl,2,random,4,64,curvature_at_centre,R2_z,-0.7430285991198913,0.2647551057045974,1000.0
+HLT_Figurine_Open.wrl,2,random,4,64,geometric_depth,R2,-7.491449625530128,0.03682404129817119,1000.0
+HLT_Figurine_Open.wrl,2,random,4,64,geometric_depth,R2_z,-1.6128241487725767,-0.03070320394233454,1000.0
+HLT_Figurine_Open.wrl,2,random,4,64,lateral_offset_of_hand_line,R2,-0.25373624063128974,-0.153375702039049,1000.0
+HLT_Figurine_Open.wrl,2,random,4,64,lateral_offset_of_hand_line,R2_z,-0.2350200429340068,-0.15174873631572705,1000.0
+HLT_Figurine_Open.wrl,2,random,4,64,departure,AUROC,0.5060468058191019,,0.1
+HLT_Figurine_Open.wrl,2,random,5,128,relief_at_centre,R2,-10.88228308326054,0.4261542619449017,100.0
+HLT_Figurine_Open.wrl,2,random,5,128,relief_at_centre,R2_z,-1.3779525307036455,0.21032231907217006,1000.0
+HLT_Figurine_Open.wrl,2,random,5,128,curvature_at_centre,R2,-2.0833755078937854,-0.06535785576629081,1000.0
+HLT_Figurine_Open.wrl,2,random,5,128,curvature_at_centre,R2_z,-0.1586744160639051,-0.036812413450374226,1000.0
+HLT_Figurine_Open.wrl,2,random,5,128,geometric_depth,R2,-9.664777226698147,-0.2898537855912322,1000.0
+HLT_Figurine_Open.wrl,2,random,5,128,geometric_depth,R2_z,-0.5534718576580386,-0.2876775891387809,1000.0
+HLT_Figurine_Open.wrl,2,random,5,128,lateral_offset_of_hand_line,R2,-0.1303946206306097,-0.24475569568237052,1000.0
+HLT_Figurine_Open.wrl,2,random,5,128,lateral_offset_of_hand_line,R2_z,-0.14063025865226741,-0.24302494256621854,1000.0
+HLT_Figurine_Open.wrl,2,random,5,128,departure,AUROC,0.644427577482606,,0.1
+HLT_Figurine_Open.wrl,2,random,6,128,relief_at_centre,R2,-4.079853949066976,0.4200321579362672,0.1
+HLT_Figurine_Open.wrl,2,random,6,128,relief_at_centre,R2_z,-2.1554500184199408,0.13788612530790867,1000.0
+HLT_Figurine_Open.wrl,2,random,6,128,curvature_at_centre,R2,-2.167767435529169,-0.03815232959782751,1000.0
+HLT_Figurine_Open.wrl,2,random,6,128,curvature_at_centre,R2_z,-0.23891277421199475,-0.015310667289049553,1000.0
+HLT_Figurine_Open.wrl,2,random,6,128,geometric_depth,R2,-8.679953580722097,-0.17845936589314348,1000.0
+HLT_Figurine_Open.wrl,2,random,6,128,geometric_depth,R2_z,-1.1711086433922548,-0.19371374120650067,1000.0
+HLT_Figurine_Open.wrl,2,random,6,128,lateral_offset_of_hand_line,R2,-0.24866504999278982,-0.020934203920422344,1000.0
+HLT_Figurine_Open.wrl,2,random,6,128,lateral_offset_of_hand_line,R2_z,-0.23857864479385427,-0.018709360686738508,1000.0
+HLT_Figurine_Open.wrl,2,random,6,128,departure,AUROC,0.49734345351043646,,0.01
+NEGII_Frida open full front.wrl,2,trained,1,32,relief_at_centre,R2,-3.863969113187479,-0.21759169450680244,10.0
+NEGII_Frida open full front.wrl,2,trained,1,32,relief_at_centre,R2_z,-2.0618900290556934,0.8029940429697288,1000.0
+NEGII_Frida open full front.wrl,2,trained,1,32,curvature_at_centre,R2,-55.0607825002228,-0.21931086276367429,1000.0
+NEGII_Frida open full front.wrl,2,trained,1,32,curvature_at_centre,R2_z,-3.4007978929157954,-0.21660541308268053,1000.0
+NEGII_Frida open full front.wrl,2,trained,1,32,geometric_depth,R2,-385.05405999384334,-0.024358271564079072,1.0
+NEGII_Frida open full front.wrl,2,trained,1,32,geometric_depth,R2_z,-13.481892746592898,0.05707153387401086,1000.0
+NEGII_Frida open full front.wrl,2,trained,1,32,lateral_offset_of_hand_line,R2,-9.803305834993644,-0.02037007100019054,1000.0
+NEGII_Frida open full front.wrl,2,trained,1,32,lateral_offset_of_hand_line,R2_z,-9.288645874513527,-0.020367920886201603,1000.0
+NEGII_Frida open full front.wrl,2,trained,1,32,departure,AUROC,0.3753490551304076,,10.0
+NEGII_Frida open full front.wrl,2,trained,2,32,relief_at_centre,R2,-0.710231671383728,0.8916912034389921,100.0
+NEGII_Frida open full front.wrl,2,trained,2,32,relief_at_centre,R2_z,-0.4476874336361032,-0.32950454037382604,1000.0
+NEGII_Frida open full front.wrl,2,trained,2,32,curvature_at_centre,R2,-10.32978943350699,-0.16214222352385846,100.0
+NEGII_Frida open full front.wrl,2,trained,2,32,curvature_at_centre,R2_z,-0.025874732361442998,0.12265116068502563,1000.0
+NEGII_Frida open full front.wrl,2,trained,2,32,geometric_depth,R2,-24.335470894092666,-0.094814532235817,1000.0
+NEGII_Frida open full front.wrl,2,trained,2,32,geometric_depth,R2_z,-8.947867679371884,0.06912522116975703,1000.0
+NEGII_Frida open full front.wrl,2,trained,2,32,lateral_offset_of_hand_line,R2,-11.617183890284508,-0.023728267669201438,1000.0
+NEGII_Frida open full front.wrl,2,trained,2,32,lateral_offset_of_hand_line,R2_z,-10.974770546196147,-0.023803740997151664,1000.0
+NEGII_Frida open full front.wrl,2,trained,2,32,departure,AUROC,0.7278900515383415,,10.0
+NEGII_Frida open full front.wrl,2,trained,3,64,relief_at_centre,R2,-2.610569506394077,0.7012477048522334,100.0
+NEGII_Frida open full front.wrl,2,trained,3,64,relief_at_centre,R2_z,-0.922970865474785,-0.26822993800613065,1000.0
+NEGII_Frida open full front.wrl,2,trained,3,64,curvature_at_centre,R2,-12.05132184657812,-0.23762210057215122,1000.0
+NEGII_Frida open full front.wrl,2,trained,3,64,curvature_at_centre,R2_z,-0.6978221685447801,-0.2616278258099678,1000.0
+NEGII_Frida open full front.wrl,2,trained,3,64,geometric_depth,R2,-0.5822685272575543,0.2134029089964107,1000.0
+NEGII_Frida open full front.wrl,2,trained,3,64,geometric_depth,R2_z,-23.909759141079245,0.09789227419487193,1000.0
+NEGII_Frida open full front.wrl,2,trained,3,64,lateral_offset_of_hand_line,R2,-25.292136519330377,-0.0039180496353584645,1000.0
+NEGII_Frida open full front.wrl,2,trained,3,64,lateral_offset_of_hand_line,R2_z,-23.87635926714796,-0.0035640426262957933,1000.0
+NEGII_Frida open full front.wrl,2,trained,3,64,departure,AUROC,0.58899265969077,,10.0
+NEGII_Frida open full front.wrl,2,trained,4,64,relief_at_centre,R2,-14.161093350628677,-0.8463451981318891,100.0
+NEGII_Frida open full front.wrl,2,trained,4,64,relief_at_centre,R2_z,-4.624584894491116,-0.8472473487222429,1000.0
+NEGII_Frida open full front.wrl,2,trained,4,64,curvature_at_centre,R2,-1.245167666630409,-0.16750483802968785,1000.0
+NEGII_Frida open full front.wrl,2,trained,4,64,curvature_at_centre,R2_z,-0.367755232210804,-0.26953146187865545,1000.0
+NEGII_Frida open full front.wrl,2,trained,4,64,geometric_depth,R2,-47.42019937097782,0.14777495397143114,1000.0
+NEGII_Frida open full front.wrl,2,trained,4,64,geometric_depth,R2_z,-22.09562661609914,0.10221477643819617,1000.0
+NEGII_Frida open full front.wrl,2,trained,4,64,lateral_offset_of_hand_line,R2,-19.022089719352355,-0.021278425471409887,1000.0
+NEGII_Frida open full front.wrl,2,trained,4,64,lateral_offset_of_hand_line,R2_z,-17.992992499839517,-0.021344591746265015,1000.0
+NEGII_Frida open full front.wrl,2,trained,4,64,departure,AUROC,0.7690457598000937,,10.0
+NEGII_Frida open full front.wrl,2,trained,5,128,relief_at_centre,R2,-11.088228165495087,-0.8564532244129527,0.01
+NEGII_Frida open full front.wrl,2,trained,5,128,relief_at_centre,R2_z,-3.4231245401936894,-0.895855840968739,1000.0
+NEGII_Frida open full front.wrl,2,trained,5,128,curvature_at_centre,R2,-13.157161552561723,-0.2579779060789361,1000.0
+NEGII_Frida open full front.wrl,2,trained,5,128,curvature_at_centre,R2_z,-4.333747866824113,-0.26241164929178135,1000.0
+NEGII_Frida open full front.wrl,2,trained,5,128,geometric_depth,R2,-98.4130902306767,0.09790549070541393,1000.0
+NEGII_Frida open full front.wrl,2,trained,5,128,geometric_depth,R2_z,-39.696339971747605,0.06959273477266628,1000.0
+NEGII_Frida open full front.wrl,2,trained,5,128,lateral_offset_of_hand_line,R2,-14.789556325455926,-0.03495230933304828,1000.0
+NEGII_Frida open full front.wrl,2,trained,5,128,lateral_offset_of_hand_line,R2_z,-13.79550423213248,-0.03520992976715636,1000.0
+NEGII_Frida open full front.wrl,2,trained,5,128,departure,AUROC,0.7953771669529909,,10.0
+NEGII_Frida open full front.wrl,2,trained,6,128,relief_at_centre,R2,-10.52357503155743,-0.8889517286352558,0.1
+NEGII_Frida open full front.wrl,2,trained,6,128,relief_at_centre,R2_z,0.29178709827152705,0.6000602293735784,1000.0
+NEGII_Frida open full front.wrl,2,trained,6,128,curvature_at_centre,R2,-6.323747000648603,-0.1588695635083129,1000.0
+NEGII_Frida open full front.wrl,2,trained,6,128,curvature_at_centre,R2_z,-1.6605707932182305,-0.055718431326300506,1000.0
+NEGII_Frida open full front.wrl,2,trained,6,128,geometric_depth,R2,-91.05874442683255,0.06227153315907834,100.0
+NEGII_Frida open full front.wrl,2,trained,6,128,geometric_depth,R2_z,-5.004818660684693,0.07838226260614747,1000.0
+NEGII_Frida open full front.wrl,2,trained,6,128,lateral_offset_of_hand_line,R2,-0.4153915702327884,-0.0027284810693187504,1000.0
+NEGII_Frida open full front.wrl,2,trained,6,128,lateral_offset_of_hand_line,R2_z,-0.4384145558227457,-0.0025413734411913547,1000.0
+NEGII_Frida open full front.wrl,2,trained,6,128,departure,AUROC,0.3369483054818054,,0.01
+NEGII_Frida open full front.wrl,2,random,1,32,relief_at_centre,R2,-1.8925422900920523,0.7877887469271636,10.0
+NEGII_Frida open full front.wrl,2,random,1,32,relief_at_centre,R2_z,-1.0152651055153963,0.7697175105988141,1000.0
+NEGII_Frida open full front.wrl,2,random,1,32,curvature_at_centre,R2,-41.61786929490372,-0.21880322472426011,1000.0
+NEGII_Frida open full front.wrl,2,random,1,32,curvature_at_centre,R2_z,-0.8496742242484552,-0.2162175457361992,1000.0
+NEGII_Frida open full front.wrl,2,random,1,32,geometric_depth,R2,-356.6677605592721,-0.000719910234204979,10.0
+NEGII_Frida open full front.wrl,2,random,1,32,geometric_depth,R2_z,-8.966848443201831,0.06377863367633431,1000.0
+NEGII_Frida open full front.wrl,2,random,1,32,lateral_offset_of_hand_line,R2,-7.386901795161828,-0.02275932875823418,1000.0
+NEGII_Frida open full front.wrl,2,random,1,32,lateral_offset_of_hand_line,R2_z,-6.989093702952061,-0.022725285955329622,1000.0
+NEGII_Frida open full front.wrl,2,random,1,32,departure,AUROC,0.3777104482273934,,10.0
+NEGII_Frida open full front.wrl,2,random,2,32,relief_at_centre,R2,-11.80192178620566,-0.8421675792684238,0.01
+NEGII_Frida open full front.wrl,2,random,2,32,relief_at_centre,R2_z,-2.076340798160813,-0.6604604198192895,1000.0
+NEGII_Frida open full front.wrl,2,random,2,32,curvature_at_centre,R2,-14.36683315806129,-0.22719272338017563,1000.0
+NEGII_Frida open full front.wrl,2,random,2,32,curvature_at_centre,R2_z,-0.012313224940093903,0.1884965575267306,1000.0
+NEGII_Frida open full front.wrl,2,random,2,32,geometric_depth,R2,-54.154750778082864,-0.05378799727174935,1000.0
+NEGII_Frida open full front.wrl,2,random,2,32,geometric_depth,R2_z,-9.226487458400937,0.09229532792700451,1000.0
+NEGII_Frida open full front.wrl,2,random,2,32,lateral_offset_of_hand_line,R2,-8.48951878701784,-0.025661393349639898,1000.0
+NEGII_Frida open full front.wrl,2,random,2,32,lateral_offset_of_hand_line,R2_z,-7.977486435101946,-0.025606425094116765,1000.0
+NEGII_Frida open full front.wrl,2,random,2,32,departure,AUROC,0.6881086990473216,,10.0
+NEGII_Frida open full front.wrl,2,random,3,64,relief_at_centre,R2,-7.80268579414758,-0.7452979666982399,0.1
+NEGII_Frida open full front.wrl,2,random,3,64,relief_at_centre,R2_z,-4.485226370505469,-0.7891923078692593,1000.0
+NEGII_Frida open full front.wrl,2,random,3,64,curvature_at_centre,R2,-18.059670240178857,-0.19480804784083577,1000.0
+NEGII_Frida open full front.wrl,2,random,3,64,curvature_at_centre,R2_z,-0.13351401542798036,0.08699971135627212,1000.0
+NEGII_Frida open full front.wrl,2,random,3,64,geometric_depth,R2,-1.721010245424666,-0.013614968744017351,1000.0
+NEGII_Frida open full front.wrl,2,random,3,64,geometric_depth,R2_z,-59.84309858333701,0.08127816539905185,1000.0
+NEGII_Frida open full front.wrl,2,random,3,64,lateral_offset_of_hand_line,R2,-26.52449789068621,-0.02918883539557973,1000.0
+NEGII_Frida open full front.wrl,2,random,3,64,lateral_offset_of_hand_line,R2_z,-25.019848993499245,-0.02933533691514508,1000.0
+NEGII_Frida open full front.wrl,2,random,3,64,departure,AUROC,0.7290145244416679,,10.0
+NEGII_Frida open full front.wrl,2,random,4,64,relief_at_centre,R2,-6.82704454675662,-0.7529027330101655,100.0
+NEGII_Frida open full front.wrl,2,random,4,64,relief_at_centre,R2_z,-71.96354694669012,-0.8785901007274717,0.01
+NEGII_Frida open full front.wrl,2,random,4,64,curvature_at_centre,R2,-26.87982520718007,-0.2367197263792332,1000.0
+NEGII_Frida open full front.wrl,2,random,4,64,curvature_at_centre,R2_z,-2.0985343272207695,-0.12389759788926803,1000.0
+NEGII_Frida open full front.wrl,2,random,4,64,geometric_depth,R2,-39.54839592977979,0.11899654426924487,1000.0
+NEGII_Frida open full front.wrl,2,random,4,64,geometric_depth,R2_z,-107.71094700783568,0.08075191152463386,1000.0
+NEGII_Frida open full front.wrl,2,random,4,64,lateral_offset_of_hand_line,R2,-2.676863936619235,-0.051791146644033774,1000.0
+NEGII_Frida open full front.wrl,2,random,4,64,lateral_offset_of_hand_line,R2_z,-2.342187321086183,-0.05239084945604224,1000.0
+NEGII_Frida open full front.wrl,2,random,4,64,departure,AUROC,0.7103232859597064,,10.0
+NEGII_Frida open full front.wrl,2,random,5,128,relief_at_centre,R2,-0.5200065066483968,0.6978890232211413,100.0
+NEGII_Frida open full front.wrl,2,random,5,128,relief_at_centre,R2_z,-17.49836877744035,-0.8493862304849975,1000.0
+NEGII_Frida open full front.wrl,2,random,5,128,curvature_at_centre,R2,-13.68074532267201,-0.2696331861733649,1000.0
+NEGII_Frida open full front.wrl,2,random,5,128,curvature_at_centre,R2_z,-0.6081764315386267,-0.11590216010313298,1000.0
+NEGII_Frida open full front.wrl,2,random,5,128,geometric_depth,R2,-327.2967120650227,0.07573578906033157,100.0
+NEGII_Frida open full front.wrl,2,random,5,128,geometric_depth,R2_z,-153.94305191431977,0.07814169871626074,1000.0
+NEGII_Frida open full front.wrl,2,random,5,128,lateral_offset_of_hand_line,R2,-3.4766599518351926,-0.015493793318037123,1000.0
+NEGII_Frida open full front.wrl,2,random,5,128,lateral_offset_of_hand_line,R2_z,-3.026297272352849,-0.014797002465355794,1000.0
+NEGII_Frida open full front.wrl,2,random,5,128,departure,AUROC,0.6996407933781039,,10.0
+NEGII_Frida open full front.wrl,2,random,6,128,relief_at_centre,R2,0.5590238636987057,0.8641527618241506,1.0
+NEGII_Frida open full front.wrl,2,random,6,128,relief_at_centre,R2_z,-18.435147770375593,-0.8639745403840182,1000.0
+NEGII_Frida open full front.wrl,2,random,6,128,curvature_at_centre,R2,-169.2164512478265,-0.17158314502401043,100.0
+NEGII_Frida open full front.wrl,2,random,6,128,curvature_at_centre,R2_z,-1.2449116522403454,-0.08577263065933585,1000.0
+NEGII_Frida open full front.wrl,2,random,6,128,geometric_depth,R2,-278.45434114525466,0.07806357192997282,0.01
+NEGII_Frida open full front.wrl,2,random,6,128,geometric_depth,R2_z,-262.10659991825554,0.08254848713253184,100.0
+NEGII_Frida open full front.wrl,2,random,6,128,lateral_offset_of_hand_line,R2,-1.5634731727129134,0.0009047292953367741,1000.0
+NEGII_Frida open full front.wrl,2,random,6,128,lateral_offset_of_hand_line,R2_z,-1.3352972449700315,0.0009188398250817725,1000.0
+NEGII_Frida open full front.wrl,2,random,6,128,departure,AUROC,0.7561205684835233,,1.0

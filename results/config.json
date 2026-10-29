@@ -1,0 +1,75 @@
+{
+  "command": "/Users/roeyz/Documents/Cut3D_python/archcut3d/ml/experiments.py --data /Users/roeyz/Documents/wrl files/Models for Roey 15_04_2026 --out results --seeds 3 --experiments E5b",
+  "experiments": [
+    "E0",
+    "E0b",
+    "E1",
+    "E2",
+    "E3",
+    "E5",
+    "E4",
+    "E5b"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "quick": false,
+  "device": "mps",
+  "epochs": 150,
+  "patience": 20,
+  "optimizer": {
+    "name": "Adam",
+    "lr": 0.001,
+    "batch_size": 64
+  },
+  "loss": {
+    "stop_weight": 0.2
+  },
+  "patch": {
+    "patch_mm": 2.0,
+    "out_res": 48,
+    "step_mm": 0.3
+  },
+  "samples": {
+    "n_jitter": 4,
+    "jitter_pos_mm": 0.25,
+    "jitter_deg": 15.0,
+    "end_overshoot": 2
+  },
+  "geometric_tracer": {
+    "half_width_mm": 0.5
+  },
+  "departure": {
+    "offset_mm": 0.1,
+    "depth_percentile": 10.0,
+    "depth_threshold": 0.005868235260248193
+  },
+  "models": [
+    "A0047_Open_nose.wrl",
+    "HLT_Figurine_Open.wrl",
+    "NEGII_Frida open full front.wrl"
+  ],
+  "test_groups": [
+    0,
+    1,
+    2
+  ],
+  "excluded_machine_generated": [
+    "Hatzor Seal Open.label.npz"
+  ],
+  "git": {
+    "commit": "cc51ad3f13fbdee0489a6e9206d5064dc7e85e0e",
+    "dirty": false
+  },
+  "torch": "2.14.0",
+  "numpy": "2.4.4",
+  "python": "3.12.13",
+  "platform": "macOS-15.7.7-arm64-arm-64bit",
+  "wall_time_s": 2074.2,
+  "commands": [
+    "/Users/roeyz/Documents/Cut3D_python/archcut3d/ml/experiments.py --data /Users/roeyz/Documents/wrl files/Models for Roey 15_04_2026 --out results --seeds 3 --experiments E0,E0b,E1,E2,E3,E4,E5",
+    "/Users/roeyz/Documents/Cut3D_python/archcut3d/ml/experiments.py --data /Users/roeyz/Documents/wrl files/Models for Roey 15_04_2026 --out results --seeds 3 --experiments E5b"
+  ]
+}

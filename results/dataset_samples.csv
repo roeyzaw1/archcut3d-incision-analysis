@@ -1,0 +1,5 @@
+model,samples,clean,jittered,past_the_end,stop_1,stop_base_rate
+A0047_Open_nose.wrl,438,86,344,8,18,0.04109589010477066
+HLT_Figurine_Open.wrl,674,134,536,4,9,0.013353115878999233
+NEGII_Frida open full front.wrl,1816,360,1440,16,36,0.019823787733912468
+all,2928,580,2320,28,63,0.02151639387011528
