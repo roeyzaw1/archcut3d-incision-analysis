@@ -128,7 +128,14 @@ def leave_one_group_out_split(samples: TracerSamples, val_group: int):
     return train_idx, val_idx
 
 
-def group_balanced_sampler(groups: np.ndarray, indices: np.ndarray) -> WeightedRandomSampler:
+def _generator(seed):
+    g = torch.Generator()
+    if seed is not None:
+        g.manual_seed(int(seed))
+    return g
+
+
+def group_balanced_sampler(groups: np.ndarray, indices: np.ndarray, seed=None) -> WeightedRandomSampler:
     """A WeightedRandomSampler over `indices` that gives every group
     (source model) equal expected representation per epoch, regardless of
     how many samples it actually contributed -- counters e.g. one densely-
@@ -138,11 +145,13 @@ def group_balanced_sampler(groups: np.ndarray, indices: np.ndarray) -> WeightedR
     count_of = dict(zip(unique.tolist(), counts.tolist()))
     weights = np.array([1.0 / count_of[gi] for gi in g], dtype=np.float64)
     return WeightedRandomSampler(weights=torch.from_numpy(weights),
-                                 num_samples=len(indices), replacement=True)
+                                 num_samples=len(indices), replacement=True,
+                                 generator=_generator(seed))
 
 
 def make_dataloaders(samples: TracerSamples, stats: NormStats, val_group: int,
-                     batch_size: int = 64, balance_groups: bool = True, num_workers: int = 0):
+                     batch_size: int = 64, balance_groups: bool = True, num_workers: int = 0,
+                     seed=None):
     """Leave-one-model-out train/val DataLoaders."""
     train_idx, val_idx = leave_one_group_out_split(samples, val_group)
     if len(train_idx) == 0 or len(val_idx) == 0:
@@ -153,10 +162,11 @@ def make_dataloaders(samples: TracerSamples, stats: NormStats, val_group: int,
     val_ds = TracerTorchDataset(samples, stats, val_idx)
 
     if balance_groups:
-        sampler = group_balanced_sampler(samples.groups, train_idx)
+        sampler = group_balanced_sampler(samples.groups, train_idx, seed=seed)
         train_loader = DataLoader(train_ds, batch_size=batch_size, sampler=sampler, num_workers=num_workers)
     else:
-        train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+        train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_workers,
+                                  generator=_generator(seed))
     val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
     return train_loader, val_loader
 
@@ -190,17 +200,19 @@ def nested_split(samples: TracerSamples, test_group: int) -> NestedSplit:
 
 
 def make_nested_dataloaders(samples: TracerSamples, stats: NormStats, split: NestedSplit,
-                            batch_size: int = 64, balance_groups: bool = True, num_workers: int = 0):
+                            batch_size: int = 64, balance_groups: bool = True, num_workers: int = 0,
+                            seed=None):
     """Train / validation / test DataLoaders for a NestedSplit."""
     train_ds = TracerTorchDataset(samples, stats, split.train_idx)
     val_ds = TracerTorchDataset(samples, stats, split.val_idx)
     test_ds = TracerTorchDataset(samples, stats, split.test_idx)
 
     if balance_groups:
-        sampler = group_balanced_sampler(samples.groups, split.train_idx)
+        sampler = group_balanced_sampler(samples.groups, split.train_idx, seed=seed)
         train_loader = DataLoader(train_ds, batch_size=batch_size, sampler=sampler, num_workers=num_workers)
     else:
-        train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+        train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_workers,
+                                  generator=_generator(seed))
     val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
     test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
     return train_loader, val_loader, test_loader

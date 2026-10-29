@@ -28,7 +28,7 @@ def _subset(samples: TracerSamples, idx: np.ndarray) -> TracerSamples:
         patches=samples.patches[idx], masks=samples.masks[idx],
         steps=samples.steps[idx], stops=samples.stops[idx],
         groups=samples.groups[idx], meta=[samples.meta[i] for i in idx],
-        group_names=samples.group_names,
+        group_names=samples.group_names, seed=samples.seed,
     )
 
 
@@ -134,14 +134,12 @@ def train_one_split(samples: TracerSamples, test_group: int, epochs: int = 150, 
                     verbose: bool = True) -> FoldResult:
     """Train on the training models, early-stop on the validation model, and
     report metrics on the held-out test model (see module docstring)."""
-    torch.manual_seed(seed)
-    np.random.seed(seed)
-
     split = nested_split(samples, test_group)
     stats = compute_norm_stats(_subset(samples, split.train_idx))   # fit on train only
     train_loader, val_loader, test_loader = make_nested_dataloaders(
-        samples, stats, split, batch_size=batch_size)
+        samples, stats, split, batch_size=batch_size, seed=seed)
 
+    torch.manual_seed(seed)          # weight init and dropout masks
     net = TracerNet().to(device)
     opt = torch.optim.Adam(net.parameters(), lr=lr)
 

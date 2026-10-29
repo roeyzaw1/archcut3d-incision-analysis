@@ -13,7 +13,7 @@ def _examples():
 
 
 def test_groups_index_distinct_source_files():
-    ds = make_dataset(_examples(), n_jitter=0, end_overshoot=0, rng=0)
+    ds = make_dataset(_examples(), n_jitter=0, end_overshoot=0, seed=0)
     assert ds.group_names == ["A.wrl", "B.wrl"]
     assert sorted(set(ds.groups.tolist())) == [0, 1]
     for g, meta in zip(ds.groups, ds.meta):
@@ -21,14 +21,14 @@ def test_groups_index_distinct_source_files():
 
 
 def test_two_label_files_of_one_scan_share_a_group():
-    ds = make_dataset(_examples(), n_jitter=0, end_overshoot=0, rng=0)
+    ds = make_dataset(_examples(), n_jitter=0, end_overshoot=0, seed=0)
     a_groups = {g for g, m in zip(ds.groups, ds.meta) if m["source_file"] == "A.wrl"}
     assert a_groups == {0}
 
 
 def test_group_ids_do_not_depend_on_input_order():
-    ds1 = make_dataset(_examples(), n_jitter=0, end_overshoot=0, rng=0)
-    ds2 = make_dataset(list(reversed(_examples())), n_jitter=0, end_overshoot=0, rng=0)
+    ds1 = make_dataset(_examples(), n_jitter=0, end_overshoot=0, seed=0)
+    ds2 = make_dataset(list(reversed(_examples())), n_jitter=0, end_overshoot=0, seed=0)
     assert ds1.group_names == ds2.group_names
     for ds in (ds1, ds2):
         assert all(ds.group_names[g] == m["source_file"] for g, m in zip(ds.groups, ds.meta))
@@ -40,7 +40,7 @@ def _three_model_dataset():
     exs = [FakeExample("A.wrl", [straight_trace(60, 40, 100)]),
            FakeExample("B.wrl", [straight_trace(100, 40, 140)]),
            FakeExample("C.wrl", [straight_trace(140, 40, 180)])]
-    return make_dataset(exs, n_jitter=1, end_overshoot=0, rng=0)
+    return make_dataset(exs, n_jitter=1, end_overshoot=0, seed=0)
 
 
 def test_nested_split_is_disjoint_and_cyclic():
@@ -61,7 +61,7 @@ def test_nested_split_needs_three_models():
     import pytest
     from archcut3d.ml.torch_data import nested_split
     exs = [FakeExample(f"{n}.wrl", [straight_trace(r)]) for n, r in (("A", 60), ("B", 100))]
-    ds = make_dataset(exs, n_jitter=0, end_overshoot=0, rng=0)
+    ds = make_dataset(exs, n_jitter=0, end_overshoot=0, seed=0)
     with pytest.raises(ValueError):
         nested_split(ds, 0)
 
@@ -70,7 +70,7 @@ def test_same_source_file_never_on_both_sides():
     from archcut3d.ml.torch_data import nested_split
     exs = [FakeExample("A.wrl", [straight_trace(60)]), FakeExample("A.wrl", [straight_trace(80)]),
            FakeExample("B.wrl", [straight_trace(100)]), FakeExample("C.wrl", [straight_trace(140)])]
-    ds = make_dataset(exs, n_jitter=0, end_overshoot=0, rng=0)
+    ds = make_dataset(exs, n_jitter=0, end_overshoot=0, seed=0)
     for test_group in range(3):
         sp = nested_split(ds, test_group)
         names = lambda idx: {ds.meta[i]["source_file"] for i in idx}

@@ -270,6 +270,7 @@ class TracerSamples:
     groups: np.ndarray       # (N,) int        index into group_names (scanned model) for splitting
     meta: list               # length N: dicts {source_file, trace, point, jitter}
     group_names: list = field(default_factory=list)   # distinct source_file values, sorted; group g = group_names[g]
+    seed: object = None      # int seed the jitter draws came from (None if unseeded or a Generator was passed)
 
     def __len__(self):
         return len(self.stops)
@@ -286,7 +287,7 @@ def make_samples(example: "LabeledExample",
                  jitter_deg: float = 15.0,
                  end_overshoot: int = 2,
                  min_trace_pts: int = 4,
-                 rng=None) -> TracerSamples:
+                 seed=None) -> TracerSamples:
     """Generate tracer training tuples from one LabeledExample.
 
     n_jitter        : extra perturbed copies per anchor (0 = clean only)
@@ -294,8 +295,9 @@ def make_samples(example: "LabeledExample",
     jitter_deg      : max heading rotation, degrees
     end_overshoot   : how many step_mm past each endpoint to add stop=1 anchors
     min_trace_pts   : skip resampled traces shorter than this
+    seed            : int or numpy Generator for the jitter draws
     """
-    rng = np.random.default_rng(rng)
+    rng = np.random.default_rng(seed)
     px = example.pixel_size
     step_px = step_mm / px
     pos_jit_px = jitter_pos_mm / px
@@ -360,7 +362,7 @@ def make_samples(example: "LabeledExample",
     )
 
 
-def make_dataset(examples, rng=None, **kw) -> TracerSamples:
+def make_dataset(examples, seed=None, **kw) -> TracerSamples:
     """make_samples over several LabeledExamples, concatenated.
 
     `groups` indexes distinct scanned models (`source_file`), not label
@@ -368,10 +370,10 @@ def make_dataset(examples, rng=None, **kw) -> TracerSamples:
     group-based split can never put the same model on both sides. Group ids
     follow the sorted order of distinct `source_file` values, so they do not
     depend on the order of `examples`."""
-    rng = np.random.default_rng(rng)
+    rng = np.random.default_rng(seed)
     names = sorted({e.source_file for e in examples})
     group_of = {name: g for g, name in enumerate(names)}
-    parts = [make_samples(e, examples_group=group_of[e.source_file], rng=rng, **kw) for e in examples]
+    parts = [make_samples(e, examples_group=group_of[e.source_file], seed=rng, **kw) for e in examples]
     parts = [p for p in parts if len(p)]
     if not parts:
         raise ValueError("no usable traces in the given examples")
@@ -383,4 +385,5 @@ def make_dataset(examples, rng=None, **kw) -> TracerSamples:
         groups=np.concatenate([p.groups for p in parts]),
         meta=[m for p in parts for m in p.meta],
         group_names=names,
+        seed=seed if isinstance(seed, (int, np.integer)) else None,
     )
