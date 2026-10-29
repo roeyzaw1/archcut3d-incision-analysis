@@ -4,3 +4,4 @@ __pycache__/
 .DS_Store
 _grid_previews/
 *.label.npz
+results/models/

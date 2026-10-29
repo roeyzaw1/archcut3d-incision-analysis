@@ -81,6 +81,32 @@ def load_models(data_dir: str, exclude=(), include_machine: bool = False):
     return used, rows
 
 
+def save_fold(path: str, fold, variant: str, test_model: str):
+    """Checkpoint of a trained fold: weights plus what is needed to rebuild
+    the policy (normalisation statistics, channels, groups)."""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    torch.save({"state_dict": {k: v.cpu() for k, v in fold.net.state_dict().items()},
+                "stats": fold.stats.to_dict(), "keep_channels": tuple(fold.keep_channels),
+                "freeze_encoder": fold.freeze_encoder, "seed": fold.seed, "variant": variant,
+                "test_model": test_model, "val_group": fold.val_group, "train_groups": fold.train_groups},
+               path)
+
+
+def load_fold(path: str, device: str = "cpu"):
+    """Inverse of save_fold: returns (net in eval mode, NormStats, metadata dict)."""
+    from .model import TracerNet
+    from .torch_data import NormStats
+    ck = torch.load(path, map_location=device, weights_only=False)
+    net = TracerNet()
+    net.load_state_dict(ck["state_dict"])
+    return net.to(device).eval(), NormStats.from_dict(ck["stats"]), ck
+
+
+def fold_path(out: str, variant: str, test_model: str, seed: int) -> str:
+    safe = os.path.splitext(test_model)[0].replace(" ", "_")
+    return os.path.join(out, "models", f"{variant}__{safe}__seed{seed}.pt")
+
+
 def pick_device(arg: str) -> str:
     if arg != "auto":
         return arg
@@ -136,7 +162,6 @@ class Context:
         self.depth_thr = label_departures(list(self.tables.values()), offset_mm=args.departure_offset_mm)
         self.rows = {}            # experiment -> list of row dicts
         self.paths = {}           # (variant, model) -> predicted paths (first seed)
-        self.folds = {}           # (variant, model, seed) -> FoldResult
         self._datasets = {}
 
     def dataset(self, seed):
@@ -196,7 +221,7 @@ def run_trained(ctx: Context, experiment: str, variant: str, **train_kw):
             extra["val_model"] = ds.group_names[fold.val_group]
             extra["train_models"] = ";".join(ds.group_names[x] for x in fold.train_groups)
             ctx.rows.setdefault(experiment, []).extend(segment_rows(experiment, variant, name, seed, seg, extra))
-            ctx.folds[(variant, name, seed)] = fold
+            save_fold(fold_path(ctx.out, variant, name, seed), fold, variant, name)
             if seed == ctx.seeds[0]:
                 ctx.paths[(variant, name)] = paths
             print(f"  [{experiment}/{variant}] test={name[:20]:20s} seed={seed}  epochs={len(fold.history):3d}  "

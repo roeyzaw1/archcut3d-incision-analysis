@@ -149,3 +149,20 @@ def test_frozen_encoder_does_not_change_but_heads_do():
             assert torch.equal(init[k], sd[k].cpu()), k
     assert any(not torch.equal(init[k], sd[k].cpu()) for k in init if k.startswith(("step_head", "stop_head")))
     assert res.freeze_encoder
+
+
+def test_fold_checkpoint_round_trips(tmp_path):
+    import torch
+    from archcut3d.ml.experiments import fold_path, load_fold, save_fold
+    from archcut3d.ml.train import train_one_split
+    ds = _three_model_dataset()
+    fold = train_one_split(ds, test_group=0, epochs=2, patience=99, batch_size=16, verbose=False, seed=3)
+    path = fold_path(str(tmp_path), "tracernet", "A model.wrl", 3)
+    save_fold(path, fold, "tracernet", "A model.wrl")
+    net, stats, meta = load_fold(path)
+    assert stats == fold.stats and meta["seed"] == 3 and meta["test_model"] == "A model.wrl"
+    x = torch.randn(2, 4, 48, 48)
+    fold.net.eval()
+    with torch.no_grad():
+        a, b = fold.net(x.to(next(fold.net.parameters()).device)), net(x)
+    assert torch.allclose(a[0].cpu(), b[0], atol=1e-6)
