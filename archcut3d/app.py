@@ -36,8 +36,6 @@ from PyQt5.QtGui import QIcon
 from .resources import resource_path
 from .wrl_io import read_wrl
 from .positioning import compute_initial_orientation, compute_normal_alignment_axis_angle, rodrigues_matrix
-from .slicing import compute_slice_path, compute_slices
-from .slice_viewer import SliceViewerDialog
 from .grid_2d import rasterize_to_grid
 from .label_tool import LabelToolDialog
 from .crest_lines import detect_crest_lines, crest_lines_as_polylines
@@ -84,11 +82,6 @@ class _CameraInteractorStyle(vtk.vtkInteractorStyleTrackballCamera):
                 self.window.extend_selected_crest_line()   # Shift = grow the line
             else:
                 self.window.select_trace_at_current_position()
-            return
-        if self.window.try_select_marker_at_current_position():
-            return  # clicked an existing point marker -> just highlight it in the table
-        if getattr(self.window, 'point_select_mode', False):
-            self.window.pick_point_at_current_position()
             return
         if self.GetInteractor().GetShiftKey():
             self.StartPan()
@@ -145,16 +138,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.grid_bounds = None
         self.last_dir = ''
 
-        self.point_select_mode = False
-        self.selected_points = []       # list of (x, y, z) numpy arrays, in click order
-        self.point_marker_actors = []   # matching vtkActor per selected point
-
-        self.point1_row = None          # row index into selected_points, slicing endpoint 1
-        self.point2_row = None          # row index into selected_points, slicing endpoint 2
-        self.slice_path = None          # (numSlices, 3) path from compute_slice_path
-        self.slices = None              # list of (K, 2) arrays from compute_slices
-        self.slice_visualization_actors = []
-        self.slice_viewer_dialog = None
         self.label_tool_dialog = None   # experimental: 2.5D grid labeling tool
 
         # experimental: trace incision centerlines directly on the 3D model
@@ -177,7 +160,6 @@ class MainWindow(QtWidgets.QMainWindow):
         labelAction.triggered.connect(self.open_label_tool)
 
         self._build_rotation_toolbar()
-        self._build_points_dock()
         self._build_trace_dock()
 
         self.statusBar().addWidget(QtWidgets.QLabel(
@@ -237,103 +219,6 @@ class MainWindow(QtWidgets.QMainWindow):
         loadPositionButton.setToolTip("Load a previously saved .position.json file and apply its rotation")
         loadPositionButton.clicked.connect(self.load_position)
         self.rotation_toolbar.addWidget(loadPositionButton)
-
-    def _build_points_dock(self):
-        """Select Points panel: click points on the model, numbered in click
-        order (harutot.m's selectpoints_button_Callback / uitable2). Slicing
-        between two chosen point numbers is a later step -- this is just
-        picking and keeping track of points for now."""
-        dock = QtWidgets.QDockWidget("Select Points", self)
-        dock.setFeatures(QtWidgets.QDockWidget.DockWidgetMovable | QtWidgets.QDockWidget.DockWidgetFloatable)
-        self.points_dock = dock
-
-        panel = QtWidgets.QWidget()
-        layout = QtWidgets.QVBoxLayout(panel)
-
-        self.selectPointsButton = QtWidgets.QPushButton("Select Points")
-        self.selectPointsButton.setCheckable(True)
-        self.selectPointsButton.setToolTip("While enabled, click on the model to add a numbered point")
-        self.selectPointsButton.toggled.connect(self.toggle_point_select_mode)
-        layout.addWidget(self.selectPointsButton)
-
-        self.points_table = QtWidgets.QTableWidget(0, 4)
-        self.points_table.setHorizontalHeaderLabels(["#", "X", "Y", "Z"])
-        self.points_table.horizontalHeader().setStretchLastSection(True)
-        self.points_table.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
-        self.points_table.itemSelectionChanged.connect(self.on_points_table_selection_changed)
-        layout.addWidget(self.points_table)
-
-        deleteButton = QtWidgets.QPushButton("Delete Selected")
-        deleteButton.clicked.connect(self.delete_selected_point)
-        layout.addWidget(deleteButton)
-
-        clearButton = QtWidgets.QPushButton("Clear All")
-        clearButton.clicked.connect(self.clear_selected_points)
-        layout.addWidget(clearButton)
-
-        saveButton = QtWidgets.QPushButton("Save Points")
-        saveButton.clicked.connect(self.save_points)
-        layout.addWidget(saveButton)
-
-        loadButton = QtWidgets.QPushButton("Load Points")
-        loadButton.clicked.connect(self.load_points)
-        layout.addWidget(loadButton)
-
-        separator = QtWidgets.QFrame()
-        separator.setFrameShape(QtWidgets.QFrame.HLine)
-        layout.addWidget(separator)
-
-        endpointsRow = QtWidgets.QHBoxLayout()
-        self.point1Label = QtWidgets.QLabel("Point 1: —")
-        self.point2Label = QtWidgets.QLabel("Point 2: —")
-        endpointsRow.addWidget(self.point1Label)
-        endpointsRow.addWidget(self.point2Label)
-        layout.addLayout(endpointsRow)
-
-        setButtonsRow = QtWidgets.QHBoxLayout()
-        setPoint1Button = QtWidgets.QPushButton("Set as Point 1")
-        setPoint1Button.setToolTip("Use the selected table row as the first slicing endpoint")
-        setPoint1Button.clicked.connect(self.set_as_point1)
-        setPoint2Button = QtWidgets.QPushButton("Set as Point 2")
-        setPoint2Button.setToolTip("Use the selected table row as the second slicing endpoint")
-        setPoint2Button.clicked.connect(self.set_as_point2)
-        setButtonsRow.addWidget(setPoint1Button)
-        setButtonsRow.addWidget(setPoint2Button)
-        layout.addLayout(setButtonsRow)
-
-        toleranceRow = QtWidgets.QHBoxLayout()
-        toleranceRow.addWidget(QtWidgets.QLabel("Tolerance (mm):"))
-        self.toleranceInput = QtWidgets.QLineEdit("1")
-        toleranceRow.addWidget(self.toleranceInput)
-        toleranceRow.addWidget(QtWidgets.QLabel("Width (mm):"))
-        self.widthInput = QtWidgets.QLineEdit("1")
-        toleranceRow.addWidget(self.widthInput)
-        layout.addLayout(toleranceRow)
-
-        pathModeRow = QtWidgets.QHBoxLayout()
-        self.straightPathRadio = QtWidgets.QRadioButton("Straight line")
-        self.straightPathRadio.setToolTip("Path stays on a fixed line between the two points; only height follows the surface.")
-        self.straightPathRadio.setChecked(True)
-        self.minimaPathRadio = QtWidgets.QRadioButton("Follow minima")
-        self.minimaPathRadio.setToolTip("Path can wander sideways to track the lowest point in each band -- can zigzag on a noisy real surface.")
-        pathModeRow.addWidget(self.straightPathRadio)
-        pathModeRow.addWidget(self.minimaPathRadio)
-        layout.addLayout(pathModeRow)
-
-        createSlicesButton = QtWidgets.QPushButton("Create Slices")
-        createSlicesButton.setToolTip("Slice the model along the path between Point 1 and Point 2")
-        createSlicesButton.clicked.connect(self.create_slices)
-        layout.addWidget(createSlicesButton)
-
-        self.viewSlicesButton = QtWidgets.QPushButton("View Slices")
-        self.viewSlicesButton.setToolTip("Page through each slice's 2-D profile to check the cut")
-        self.viewSlicesButton.setEnabled(False)
-        self.viewSlicesButton.clicked.connect(self.view_slices)
-        layout.addWidget(self.viewSlicesButton)
-
-        dock.setWidget(panel)
-        self.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock)
-        dock.setEnabled(False)
 
     def _build_trace_dock(self):
         """Crest Lines: incision centerlines, either drawn by hand on the 3D
@@ -460,20 +345,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.trace_mode = checked
         self.traceModeButton.setText("Draw Crest Line: ON (click the model)" if checked else "Draw Crest Line")
         if checked:
-            for other in ('selectPointsButton', 'editTraceButton'):
-                btn = getattr(self, other, None)
-                if btn is not None:
-                    btn.setChecked(False)  # mutually exclusive click modes
+            if self.editTraceButton.isChecked():
+                self.editTraceButton.setChecked(False)  # mutually exclusive click modes
             self.statusBar().showMessage("Draw mode ON -- left-click to add points, right-click to finish the line.", 4000)
 
     def toggle_edit_trace_mode(self, checked):
         self.edit_trace_mode = checked
         self.editTraceButton.setText("Edit Crest Lines: ON (click a line)" if checked else "Edit Crest Lines")
         if checked:
-            for other in ('traceModeButton', 'selectPointsButton'):
-                btn = getattr(self, other, None)
-                if btn is not None:
-                    btn.setChecked(False)  # mutually exclusive click modes
+            if self.traceModeButton.isChecked():
+                self.traceModeButton.setChecked(False)  # mutually exclusive click modes
             self.statusBar().showMessage(
                 "Edit mode ON -- left-click a line to select it; Shift+click the model to extend it.", 5000)
         else:
@@ -802,260 +683,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.traceStatusLabel.setText(txt)
         self._update_edit_buttons_enabled()
 
-    def toggle_point_select_mode(self, checked):
-        self.point_select_mode = checked
-        self.selectPointsButton.setText("Select Points: ON (click the model)" if checked else "Select Points")
-        if checked:
-            for other in ('traceModeButton', 'editTraceButton'):
-                btn = getattr(self, other, None)
-                if btn is not None:
-                    btn.setChecked(False)  # mutually exclusive click modes
-            self.statusBar().showMessage("Point-select mode ON -- click on the model to add a point.", 4000)
-
-    def try_select_marker_at_current_position(self):
-        """If the current click landed on an existing point marker, select
-        its row in the table (so the model <-> list correspondence is
-        visible) and report True so the caller doesn't also rotate/add a
-        new point on top of it."""
-        if not self.point_marker_actors:
-            return False
-        click_pos = self.iren.GetEventPosition()
-        picker = vtk.vtkPropPicker()
-        picker.Pick(click_pos[0], click_pos[1], 0, self.ren)
-        hit_actor = picker.GetActor()
-        if hit_actor not in self.point_marker_actors:
-            return False
-        row = self.point_marker_actors.index(hit_actor)
-        self.points_table.selectRow(row)
-        return True
-
-    def on_points_table_selection_changed(self):
-        """Highlight the marker matching the selected table row (blue), and
-        reset all others back to red -- the "vice versa" half of model <-> list."""
-        row = self.points_table.currentRow()
-        for i, marker in enumerate(self.point_marker_actors):
-            if i == row:
-                marker.GetProperty().SetColor(0.1, 0.4, 1.0)
-            else:
-                marker.GetProperty().SetColor(1.0, 0.0, 0.0)
-        self.vtkWidget.GetRenderWindow().Render()
-
-    def pick_point_at_current_position(self):
-        """Click-to-pick: find the actual surface point under the cursor,
-        then snap to the nearest mesh VERTEX by X,Y distance only (Z
-        ignored) -- matching getClosest.m exactly, which is correct here
-        because the model is a single-sided surface viewed from above, so
-        (X,Y) alone unambiguously identifies a vertex."""
-        if self.current_vertices is None:
-            return
-
-        click_pos = self.iren.GetEventPosition()
-        picker = vtk.vtkCellPicker()
-        picker.SetTolerance(0.005)
-        picker.Pick(click_pos[0], click_pos[1], 0, self.ren)
-        if picker.GetActor() is not self.current_actor:
-            # Silent failure was the whole problem last time -- now it's visible.
-            self.statusBar().showMessage(
-                "No point added: that click didn't land on the model. Click directly on the model's surface.", 4000)
-            return
-
-        world_pos = np.array(picker.GetPickPosition())
-        dxdy = self.current_vertices[:, :2] - world_pos[:2]
-        idx = int(np.argmin(np.sum(dxdy ** 2, axis=1)))
-        closest = self.current_vertices[idx]
-
-        self._add_selected_point(closest)
-        self.statusBar().showMessage(f"Point {len(self.selected_points)} added.", 2000)
-
-    def _add_selected_point(self, coord):
-        coord = np.asarray(coord, dtype=np.float64)
-        self.selected_points.append(coord)
-        index = len(self.selected_points)
-
-        radius = 0.0
-        if self.grid_bounds is not None:
-            radius = (self.grid_bounds[1] - self.grid_bounds[0]) * 0.0015
-        radius = max(radius, 1e-3)
-
-        sphere = vtk.vtkSphereSource()
-        sphere.SetCenter(coord)
-        sphere.SetRadius(radius)
-        sphere.SetThetaResolution(16)
-        sphere.SetPhiResolution(16)
-        mapper = vtk.vtkPolyDataMapper()
-        mapper.SetInputConnection(sphere.GetOutputPort())
-        marker = vtk.vtkActor()
-        marker.SetMapper(mapper)
-        marker.GetProperty().SetColor(1.0, 0.0, 0.0)
-        self.ren.AddActor(marker)
-        self.point_marker_actors.append(marker)
-
-        row = self.points_table.rowCount()
-        self.points_table.insertRow(row)
-        self.points_table.setItem(row, 0, QtWidgets.QTableWidgetItem(str(index)))
-        for col, value in enumerate(coord, start=1):
-            self.points_table.setItem(row, col, QtWidgets.QTableWidgetItem(f"{value:.3f}"))
-
-        self.vtkWidget.GetRenderWindow().Render()
-
-    def _renumber_points_table(self):
-        for row in range(self.points_table.rowCount()):
-            self.points_table.setItem(row, 0, QtWidgets.QTableWidgetItem(str(row + 1)))
-
-    def delete_selected_point(self):
-        row = self.points_table.currentRow()
-        if row < 0:
-            return
-        self.ren.RemoveActor(self.point_marker_actors.pop(row))
-        self.selected_points.pop(row)
-        self.points_table.removeRow(row)
-        self._renumber_points_table()
-        self.vtkWidget.GetRenderWindow().Render()
-
-    def clear_selected_points(self):
-        if not self.selected_points:
-            return
-        reply = QtWidgets.QMessageBox.question(
-            self, 'Clear points list', 'Are you sure?',
-            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
-        if reply != QtWidgets.QMessageBox.Yes:
-            return
-        for marker in self.point_marker_actors:
-            self.ren.RemoveActor(marker)
-        self.point_marker_actors = []
-        self.selected_points = []
-        self.points_table.setRowCount(0)
-        self._reset_slicing_endpoints()
-        self.vtkWidget.GetRenderWindow().Render()
-
-    def _default_points_file_path(self):
-        """Adjacent-file convention: model.wrl -> model.points.json."""
-        base, _ext = os.path.splitext(self.current_model_path)
-        return base + '.points.json'
-
-    def save_points(self):
-        if self.current_model_path is None:
-            QtWidgets.QMessageBox.warning(self, 'No Model Loaded', 'Load a model before saving points.')
-            return
-        default_path = self._default_points_file_path()
-        fileName, _ = QtWidgets.QFileDialog.getSaveFileName(
-            self, 'Save Points', default_path, 'Points Files (*.points.json)')
-        if not fileName:
-            return
-        if not fileName.lower().endswith('.json'):
-            fileName += '.points.json'
-
-        with open(fileName, 'w') as f:
-            json.dump({
-                'source_file': os.path.basename(self.current_model_path),
-                'points': [p.tolist() for p in self.selected_points],
-            }, f, indent=2)
-
-    def load_points(self):
-        if self.current_vertices is None:
-            QtWidgets.QMessageBox.warning(self, 'No Model Loaded', 'Load a model before loading points.')
-            return
-        default_path = self._default_points_file_path()
-        fileName, _ = QtWidgets.QFileDialog.getOpenFileName(
-            self, 'Load Points', default_path, 'Points Files (*.points.json);;All JSON (*.json)')
-        if not fileName:
-            return
-
-        try:
-            with open(fileName, 'r') as f:
-                data = json.load(f)
-            points = [np.array(p, dtype=np.float64) for p in data['points']]
-        except (OSError, ValueError, KeyError, json.JSONDecodeError) as e:
-            QtWidgets.QMessageBox.warning(self, 'Load Points Failed', f'Could not read points file:\n{e}')
-            return
-
-        self.clear_selected_points_silent()
-        for point in points:
-            self._add_selected_point(point)
-
-    def clear_selected_points_silent(self):
-        """Like clear_selected_points() but without the confirmation dialog
-        -- used internally before loading a fresh points list."""
-        for marker in self.point_marker_actors:
-            self.ren.RemoveActor(marker)
-        self.point_marker_actors = []
-        self.selected_points = []
-        self.points_table.setRowCount(0)
-        self._reset_slicing_endpoints()
-
-    def _reset_slicing_endpoints(self):
-        self.point1_row = None
-        self.point2_row = None
-        self.point1Label.setText("Point 1: —")
-        self.point2Label.setText("Point 2: —")
-        self._clear_slice_visualization()
-        self.slice_path = None
-        self.slices = None
-        self.viewSlicesButton.setEnabled(False)
-        if self.slice_viewer_dialog is not None:
-            self.slice_viewer_dialog.hide()
-
-    def set_as_point1(self):
-        row = self.points_table.currentRow()
-        if row < 0:
-            QtWidgets.QMessageBox.warning(self, 'No Point Selected', 'Select a row in the points table first.')
-            return
-        self.point1_row = row
-        self.point1Label.setText(f"Point 1: #{row + 1}")
-
-    def set_as_point2(self):
-        row = self.points_table.currentRow()
-        if row < 0:
-            QtWidgets.QMessageBox.warning(self, 'No Point Selected', 'Select a row in the points table first.')
-            return
-        self.point2_row = row
-        self.point2Label.setText(f"Point 2: #{row + 1}")
-
-    def create_slices(self):
-        if self.point1_row is None or self.point2_row is None:
-            QtWidgets.QMessageBox.warning(self, 'Endpoints Not Set', 'Set both Point 1 and Point 2 before slicing.')
-            return
-        if self.point1_row == self.point2_row:
-            QtWidgets.QMessageBox.warning(self, 'Invalid Endpoints', 'Point 1 and Point 2 must be different points.')
-            return
-        try:
-            tolerance = float(self.toleranceInput.text())
-            width = float(self.widthInput.text())
-        except ValueError:
-            QtWidgets.QMessageBox.warning(self, 'Invalid Input', 'Tolerance and width must be numbers.')
-            return
-        if tolerance <= 0 or width <= 0:
-            QtWidgets.QMessageBox.warning(self, 'Invalid Input', 'Tolerance and width must be positive.')
-            return
-
-        c1 = self.selected_points[self.point1_row]
-        c2 = self.selected_points[self.point2_row]
-        tipo = 1 if self.minimaPathRadio.isChecked() else 0
-
-        try:
-            self.slice_path, num_slices = compute_slice_path(self.current_vertices, c1, c2, tolerance, width, tipo=tipo)
-            self.slices = compute_slices(self.current_vertices, self.slice_path, width)
-        except ValueError as e:
-            QtWidgets.QMessageBox.warning(self, 'Slicing Failed', str(e))
-            return
-
-        self._visualize_slice_path(width)
-        self.viewSlicesButton.setEnabled(True)
-        if self.slice_viewer_dialog is not None and self.slice_viewer_dialog.isVisible():
-            self.slice_viewer_dialog.set_slices(self.slices)
-        self.statusBar().showMessage(f"{len(self.slices)} slices created.", 4000)
-
-    def view_slices(self):
-        if not self.slices:
-            return
-        if self.slice_viewer_dialog is None:
-            self.slice_viewer_dialog = SliceViewerDialog(self.slices, self)
-        else:
-            self.slice_viewer_dialog.set_slices(self.slices)
-        self.slice_viewer_dialog.show()
-        self.slice_viewer_dialog.raise_()
-        self.slice_viewer_dialog.activateWindow()
-
     def open_label_tool(self):
         """Experimental: compute the 2.5D grid for the loaded model (from the
         auto-positioned base_vertices, so it's deterministic per file) and
@@ -1102,75 +729,6 @@ class MainWindow(QtWidgets.QMainWindow):
             grid_traces.append(colrow.tolist())
         return grid_traces
 
-    def _clear_slice_visualization(self):
-        for actor in self.slice_visualization_actors:
-            self.ren.RemoveActor(actor)
-        self.slice_visualization_actors = []
-
-    def _visualize_slice_path(self, width):
-        """Draw the path of slice positions over the model (matching
-        MATLAB's plot3 path overlay), plus a perpendicular tick mark at each
-        slice showing the width band -- just enough to visually confirm the
-        slice ran where expected. The 2D per-slice profile view is a later
-        step."""
-        self._clear_slice_visualization()
-
-        path = self.slice_path
-        points = vtk.vtkPoints()
-        for p in path:
-            points.InsertNextPoint(p)
-        lines = vtk.vtkCellArray()
-        line = vtk.vtkPolyLine()
-        line.GetPointIds().SetNumberOfIds(len(path))
-        for i in range(len(path)):
-            line.GetPointIds().SetId(i, i)
-        lines.InsertNextCell(line)
-
-        polydata = vtk.vtkPolyData()
-        polydata.SetPoints(points)
-        polydata.SetLines(lines)
-
-        mapper = vtk.vtkPolyDataMapper()
-        mapper.SetInputData(polydata)
-        path_actor = vtk.vtkActor()
-        path_actor.SetMapper(mapper)
-        path_actor.GetProperty().SetColor(0.0, 0.8, 0.0)
-        path_actor.GetProperty().SetLineWidth(3)
-        self.ren.AddActor(path_actor)
-        self.slice_visualization_actors.append(path_actor)
-
-        # Perpendicular tick marks showing the width band at each slice.
-        tick_points = vtk.vtkPoints()
-        tick_lines = vtk.vtkCellArray()
-        for i in range(len(path) - 1):
-            direction = path[i + 1, :2] - path[i, :2]
-            norm = np.linalg.norm(direction)
-            if norm == 0:
-                continue
-            perp = np.array([-direction[1], direction[0]]) / norm
-            center = path[i]
-            p_start = center + np.array([perp[0], perp[1], 0.0]) * (width / 2)
-            p_end = center - np.array([perp[0], perp[1], 0.0]) * (width / 2)
-            idx0 = tick_points.InsertNextPoint(p_start)
-            idx1 = tick_points.InsertNextPoint(p_end)
-            tick_line = vtk.vtkLine()
-            tick_line.GetPointIds().SetId(0, idx0)
-            tick_line.GetPointIds().SetId(1, idx1)
-            tick_lines.InsertNextCell(tick_line)
-
-        tick_polydata = vtk.vtkPolyData()
-        tick_polydata.SetPoints(tick_points)
-        tick_polydata.SetLines(tick_lines)
-        tick_mapper = vtk.vtkPolyDataMapper()
-        tick_mapper.SetInputData(tick_polydata)
-        tick_actor = vtk.vtkActor()
-        tick_actor.SetMapper(tick_mapper)
-        tick_actor.GetProperty().SetColor(1.0, 0.6, 0.0)
-        self.ren.AddActor(tick_actor)
-        self.slice_visualization_actors.append(tick_actor)
-
-        self.vtkWidget.GetRenderWindow().Render()
-
     def open_file(self):
         fileName, _ = QtWidgets.QFileDialog.getOpenFileName(
             self, 'Select your file', self.last_dir,
@@ -1180,16 +738,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.last_dir = fileName.rsplit('/', 1)[0]
 
         self.ren.RemoveAllViewProps()
-        # RemoveAllViewProps() already dropped the old point-marker actors/slice
-        # visualization from the scene; also clear our own tracking so a new
-        # model starts fresh (points/slices are tied to a specific mesh).
-        self.point_marker_actors = []
-        self.selected_points = []
-        self.points_table.setRowCount(0)
-        self.slice_path = None
-        self.slices = None
-        self.slice_visualization_actors = []
-        self._reset_slicing_endpoints()
+        # RemoveAllViewProps() already dropped the old trace actors from the
+        # scene; also clear our own tracking so a new model starts fresh
+        # (traces are tied to a specific mesh).
         self.traces_3d = []
         self.current_trace_3d = []
         self.trace_3d_actors = []
@@ -1237,7 +788,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.grid_bounds = self._compute_fixed_grid_bounds(vertices)
         self.add_grid_axes(self.grid_bounds)
         self.rotation_toolbar.setEnabled(True)
-        self.points_dock.setEnabled(True)
         self.trace_dock.setEnabled(True)
         self.vtkWidget.GetRenderWindow().Render()
 
